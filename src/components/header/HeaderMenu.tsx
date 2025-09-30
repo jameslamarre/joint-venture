@@ -1,0 +1,92 @@
+/* eslint-disable @next/next/no-img-element */
+import type { FC, HTMLProps } from 'react'
+import { Fragment } from 'react'
+import classNames from 'classnames'
+import type { SanityLinkType } from '@studio/lib'
+import { SanityLink } from '@components/sanity'
+import { Btn } from '@components/btns'
+import type { HeaderMenuProps } from './types'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
+export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
+  customOpen = false,
+  setCustomOpen,
+  onOpen,
+  mainMenu,
+  className,
+}) => {
+  const { asPath } = useRouter()
+
+  return (
+    <div className={className}>
+      <Btn
+        className="absolute right-xhalf top-1/2 mt-[2px] transform -translate-y-1/2 text-h4 uppercase leading-none z-header"
+        onClick={() => {
+          setCustomOpen(!customOpen)
+        }}
+        custom={true}
+      >
+        {customOpen ? (
+          <span className="inline-block relative text-white">Close</span>
+        ) : (
+          <span>Menu</span>
+        )}
+      </Btn>
+
+      <div
+        className={classNames(
+          customOpen
+            ? 'opacity-100 pointer-events-all'
+            : 'opacity-0 pointer-events-none',
+          'flex flex-col justify-between fixed w-[100vw] h-[100vh] top-0 right-0 px-xhalf md:px-xdouble pb-ydouble overflow-hidden bg-black text-white text-left transition-opacity'
+        )}
+      >
+        <div
+          className={classNames(
+            customOpen ? 'pointer-events-auto' : '',
+            'flex items-center absolute w-full h-header pointer-events-none'
+          )}
+        >
+          <Link
+            href="/"
+            className="flex items-center relative pointer-events-auto"
+          >
+            <span className="sr-only">Joint Venture</span>
+          </Link>
+        </div>
+
+        <nav className={classNames(customOpen ? 'pointer-events-auto' : '')}>
+          <ul className="flex flex-col justify-center items-center w-full h-[calc(100svh-var(--space-y))] pt-0 outline-none">
+            {mainMenu?.items?.map(({ _key, text, link }) => (
+              <Fragment key={_key}>
+                <li className="w-full py-yhalf">
+                  <SanityLink
+                    className={classNames(
+                      // asPath !== '' &&
+                      //   asPath ===
+                      //     `/${
+                      //       (link as SanityLinkType)?.internalLink?.slug
+                      //         ?.current
+                      //     }`
+                      //   ? 'text-yellow'
+                      //   : '',
+                      'relative top-1 text-h2 uppercase leading-[0.9]'
+                    )}
+                    text={text}
+                    onClick={() => {
+                      setTimeout(() => setCustomOpen(false), 100)
+                    }}
+                    {...(link as SanityLinkType)}
+                  />
+                </li>
+              </Fragment>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  )
+}
+
+export default HeaderMenu

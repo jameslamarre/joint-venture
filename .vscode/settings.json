@@ -1,0 +1,48 @@
+{
+  "cSpell.words": [
+    "buyingtimelinedec",
+    "CDMX",
+    "Firestore",
+    "groq",
+    "hookform",
+    "Hubspot",
+    "hutk",
+    "livechat",
+    "notsure",
+    "Referers",
+    "ROCKETCHAT",
+    "SENDGRID",
+    "serializers",
+    "singlesends",
+    "Timelinedec",
+    "waitlist",
+    "Yanny",
+    "ydouble",
+    "yhalf"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.workingDirectories": [
+    "./src",
+    "./studio"
+  ],
+  "css.validate": false,
+  "scss.validate": false,
+  "stylelint.enable": true,
+  "stylelint.validate": [
+    "css",
+    "postcss",
+    "scss"
+  ],
+  "stylelint.stylelintPath": "node_modules/stylelint/lib",
+  "prettier.enable": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

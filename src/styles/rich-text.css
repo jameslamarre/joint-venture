@@ -1,0 +1,137 @@
+:root {
+  --rich-text-y: 1.2em;
+}
+
+.rich-text > * {
+  margin-top: var(--rich-text-y);
+}
+
+.rich-text > h1,
+.rich-text > h2,
+.rich-text > h3,
+.rich-text > h4 {
+  margin-top: var(--space-y);
+}
+
+.rich-text > h2 + p,
+.rich-text > h3 + p,
+.rich-text > h4 + p {
+  margin-top: var(--space-y-quarter);
+}
+
+.rich-text > ul,
+.rich-text > ol,
+.rich-text > blockquote,
+.rich-text > ul + *,
+.rich-text > ol + *,
+.rich-text > blockquote + * {
+  margin-top: calc(var(--rich-text-y) * 1);
+}
+
+.rich-text > ul,
+.rich-text > ol,
+.rich-text > blockquote {
+  clear: both;
+}
+
+.rich-text > div {
+  margin-bottom: calc(var(--rich-text-y) * 1.333);
+  margin-top: calc(var(--rich-text-y) * 1.333);
+}
+
+.rich-text > *:first-child {
+  @apply mt-0;
+}
+
+.rich-text > div:last-child {
+  @apply mb-0;
+}
+
+.rich-text blockquote,
+.rich-text p {
+  @apply mx-auto;
+}
+
+.rich-text h1 {
+  @apply text-h1;
+}
+
+.rich-text h2 {
+  @apply text-h2;
+}
+
+.rich-text h3 {
+  @apply text-h3;
+}
+
+.rich-text h4 {
+  @apply text-h4;
+}
+
+.rich-text p,
+.rich-text span,
+.rich-text li {
+  @apply text-base;
+}
+
+.rich-text.small p,
+.rich-text.small span,
+.rich-text.small li {
+  @apply text-2xs leading-normal;
+}
+
+.rich-text ul,
+.rich-text ol {
+  @apply mx-auto mb-yquarter;
+}
+
+.rich-text ul {
+  @apply pl-xquarter mt-yquarter;
+}
+
+.rich-text li:has(> .indented) {
+  @apply ml-xquarter;
+}
+
+.rich-text li {
+  @apply border;
+
+  margin-top: calc(-1 * var(--border-size));
+  padding-left: var(--space-x-quarter);
+  padding-bottom: var(--space-y-sm);
+}
+
+.rich-text li:last-of-type {
+  padding-bottom: 0;
+}
+
+.rich-text ul li {
+  position: relative;
+}
+
+.rich-text ul li::before {
+  content: '-';
+  position: absolute;
+  left: 0;
+}
+
+.rich-text li:first-child {
+  margin-top: 0;
+}
+
+.rich-text a {
+  @apply underline-offset-[3px];
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: currentColor;
+}
+
+.rich-text a:focus {
+  box-shadow: none;
+  outline: 0;
+}
+
+.rich-text a:focus-visible {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}

@@ -1,0 +1,72 @@
+import { useEffect, type FC, type ReactNode } from 'react'
+import { useRouter } from 'next/router'
+import { ToastContainer } from 'react-toastify'
+import type { Menus, Page, SiteSettings } from '@gen/sanity-schema'
+import { Head } from '@components/head'
+import { Header } from '@components/header'
+import { Footer } from '@components/footer'
+import { filterDataToSingleItem } from '@studio/lib'
+import { triggerToastPreview } from '@components/toast'
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+type PageData = Page
+
+interface LayoutProps {
+  children?: ReactNode | undefined
+  preview?: boolean
+  data?: PageData[]
+  siteSettings?: SiteSettings | undefined
+}
+
+export const Layout: FC<LayoutProps> = ({
+  children,
+  data,
+  preview = false,
+  siteSettings,
+}) => {
+  const { asPath } = useRouter()
+  const page: PageData = filterDataToSingleItem(data)
+
+  const seoImage =
+    (page as any)?.previewImage || (page as any)?.image || undefined
+
+  useEffect(() => {
+    if (preview)
+      triggerToastPreview({
+        deactivateUrl: `${BASE_URL}/api/exit-preview?path=${asPath}`,
+      })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [asPath])
+
+  return (
+    <>
+      <Head
+        siteTitle={siteSettings?.title || 'Joint Venture'}
+        siteDescription={siteSettings?.description}
+        siteImage={siteSettings?.image}
+        siteKeywords={siteSettings?.siteKeywords}
+        seoTitle={page?.seo?.title}
+        pageType={page?._type}
+        pageTitle={page?.title}
+        pageDescription={page?.seo?.description}
+        pageKeywords={page?.seo?.keywords}
+        pageImage={seoImage}
+        pageUrl={`${BASE_URL}${asPath}`}
+      />
+      <div className="flex flex-col min-h-full">
+        <Header
+          className="flex-initial"
+          mainMenu={siteSettings?.mainMenu as Menus | undefined}
+        />
+
+        <main className="flex-auto pt-page">{children}</main>
+
+        <Footer
+          content={siteSettings?.footerSocials as any}
+          newsletterId={siteSettings?.newsletterId}
+        />
+      </div>
+      <ToastContainer />
+    </>
+  )
+}

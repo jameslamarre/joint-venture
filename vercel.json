@@ -1,0 +1,71 @@
+{
+  "buildCommand": "mkdir gen && npm run generate:sanity && npm run build",
+  "installCommand": "pnpm install:all",
+  "rewrites": [
+    { "source": "/studio/(.*)", "destination": "/studio/index.html" }
+  ],
+  "redirects": [
+    {
+      "source": "/onstage",
+      "destination": "/on-stage",
+      "permanent": true
+    },
+    {
+      "source": "/onscreen",
+      "destination": "/on-screen",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-contact",
+      "destination": "/faq",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-contact-1",
+      "destination": "/faq",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-contact-2",
+      "destination": "/submission-form",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-contact-3",
+      "destination": "/merch",
+      "permanent": true
+    },
+    {
+      "source": "/stagelicense",
+      "destination": "/stage-license-request",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-play-license-request",
+      "destination": "/screen-license-request",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Credentials", "value": "true" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+        }
+      ]
+    }
+  ],
+  "functions": {
+    "src/pages/api/**/*.ts": {
+      "maxDuration": 45
+    }
+  }
+}

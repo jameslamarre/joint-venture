@@ -1,0 +1,26 @@
+:root {
+  --swiper-pagination-bullet-horizontal-gap: 7px;
+  --swiper-pagination-bottom: 2px;
+}
+
+.swiper-pagination {
+  @apply relative h-[10px] mt-yhalf;
+}
+
+.swiper-pagination-bullet {
+  @apply inline-block w-[10px] h-[10px] bg-black hover:opacity-100 rounded-full;
+}
+
+.swiper--white .swiper-pagination-bullet {
+  @apply inline-block w-[10px] h-[10px] bg-white hover:opacity-100 rounded-full;
+}
+
+.swiper-button-disabled {
+  opacity: 0.3;
+}
+
+@screen sm {
+  :root {
+    --swiper-pagination-bullet-horizontal-gap: 10px;
+  }
+}

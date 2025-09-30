@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@gen/*": ["./gen/*"],
+      "@lib/*": ["./lib/*"],
+      "@globals/*": ["../src/globals/*"],
+      "@components/*": ["../src/components/*"],
+      "@/*": ["../*"]
+    }
+  },
+  "include": ["../env.d.ts", "./studio.d.ts", "./**/*", "./*.{js,ts,tsx}"]
+}

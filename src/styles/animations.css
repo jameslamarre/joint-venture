@@ -1,0 +1,7 @@
+.link-zoom .link-zoom__image {
+  transition: transform 0.35s ease-in-out;
+}
+
+.link-zoom:hover .link-zoom__image {
+  transform: scale(1.033);
+}
