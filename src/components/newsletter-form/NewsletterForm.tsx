@@ -53,9 +53,7 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({
 
   if (formSubmitted && !formError) {
     return (
-      <div
-        className={classNames(className, 'font-medium text-yellow text-center')}
-      >
+      <div className={classNames(className, 'font-medium text-center')}>
         Thanks for subscribing!
       </div>
     )
@@ -80,7 +78,7 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({
           />
 
           <button
-            className={`flex justify-between items-center h-input px-[14px] bg-yellow text-black hover:bg-black hover:text-white border-yellow ${
+            className={`flex justify-between items-center h-input px-[14px] ${
               isSubmitting ? 'opacity-50' : ''
             }`}
             type="submit"

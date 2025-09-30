@@ -13,12 +13,7 @@ export const AccordionBlock: FC<AccordionBlockProps> = ({
   className,
 }) => {
   return (
-    <Block
-      className={classNames(
-        className,
-        'min-h-[50svh] bg-yellow text-black px-x lg:px-0'
-      )}
-    >
+    <Block className={classNames(className, 'px-x lg:px-0')}>
       <div className="max-w-wrapsm py-yhalf mx-auto">
         {accordions &&
           accordions.length > 0 &&

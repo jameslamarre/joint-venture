@@ -12,7 +12,7 @@ interface EmbedBlockProps
 
 export const EmbedBlock: FC<EmbedBlockProps> = ({ embed, className }) => {
   return (
-    <Block className={classNames(className, 'relative w-full bg-yellow')}>
+    <Block className={classNames(className, 'w-full')}>
       <div className="w-full max-w-app min-h-[75svh] px-xhalf 2xl:px-0 py-yhalf mt-y mx-auto">
         {embed && (
           <div

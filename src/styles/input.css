@@ -12,7 +12,7 @@ select {
 }
 
 .input {
-  @apply border-yellow px-3 text-2xs font-normal bg-black placeholder:opacity-100 placeholder:text-white w-full rounded-none;
+  @apply px-3 text-2xs font-normal placeholder:opacity-100 w-full rounded-none;
 }
 
 .input:focus {

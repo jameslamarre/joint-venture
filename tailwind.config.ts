@@ -16,15 +16,14 @@ export default {
     extend: {
       backgroundColor: {
         whitesmoke: '#F3F3F3',
-        gray: '#EDEDED',
-        darkgray: '#444',
-        yellow: 'rgb(255, 242, 0)',
-        blue: '#000DFF',
-        red: 'rgb(255, 0, 255)',
+        stone: '#A59F8D',
+        darkgray: '#31383C',
+        yellow: '#CFE806',
+        blue: '#91D2DA',
+        red: '#A90736',
       },
       textColor: {
-        lightgray: '#999999',
-        yellow: 'rgb(255, 242, 0)',
+        black: '#000',
       },
       screens,
       fontFamily: {
@@ -141,20 +140,11 @@ export default {
         '.border-black': {
           border: '1px solid black',
         },
-        '.border-darkgray': {
-          border: `1px solid ${theme('backgroundColor.darkgray')}`,
-        },
-        '.border-yellow': {
-          border: `1px solid ${theme('backgroundColor.yellow')}`,
-        },
         '.border-top': {
           borderTop: '1px solid black',
         },
         '.border-top--white': {
           borderTop: '1px solid white',
-        },
-        '.border-top--yellow': {
-          borderTop: `1px solid ${theme('backgroundColor.yellow')}`,
         },
         '.border-left': {
           borderLeft: '1px solid black',
@@ -176,12 +166,6 @@ export default {
         },
         '.border-bottom--white': {
           borderBottom: '1px solid white',
-        },
-        '.border-bottom--yellow': {
-          borderBottom: `1px solid ${theme('backgroundColor.yellow')}`,
-        },
-        '.border-bottom--gray': {
-          borderBottom: '1px solid #555',
         },
         '.text-h1': {
           fontSize: theme('fontSize.2xl'),
