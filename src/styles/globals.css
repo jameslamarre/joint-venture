@@ -57,20 +57,42 @@
   }
 }
 
-/* @font-face {
-  font-family: 'Media Sans';
-  src: url('../../public/fonts/MediaSansWeb-Light.woff2') format('woff2');
+@font-face {
+  font-family: 'Cardone';
+  src: url('../../public/fonts/205TF-Cardone-Regular.woff2') format('woff2');
   font-weight: 300;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Media Sans';
-  src: url('../../public/fonts/MediaSansWeb-LightItalic.woff2') format('woff2');
+  font-family: 'Cardone';
+  src: url('../../public/fonts/205TF-Cardone-Italic.woff2') format('woff2');
   font-display: swap;
   font-weight: 300;
   font-style: italic;
-} */
+}
+
+@font-face {
+  font-family: 'Cardone';
+  src: url('../../public/fonts/205TF-Cardone-Bold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cardone';
+  src: url('../../public/fonts/205TF-Cardone-BoldItalic.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Monument';
+  src: url('../../public/fonts/PPMonumentExtended-Bold.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 600;
+}
 
 /* stylelint-disable selector-id-pattern */
 html,
@@ -81,9 +103,8 @@ body,
 /* stylelint-enable selector-id-pattern */
 
 body {
-  font-family: theme('fontFamily.sans');
+  font-family: theme('fontFamily.serif');
   font-size: theme('fontSize.base');
-  font-weight: 400;
   min-width: 320px;
   overscroll-behavior-y: none;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;

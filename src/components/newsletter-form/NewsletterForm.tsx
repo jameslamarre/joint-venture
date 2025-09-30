@@ -84,7 +84,7 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({
             type="submit"
             disabled={isSubmitting}
           >
-            <span className="relative inline-block top-[2px] font-sansMedia text-sm text-center">
+            <span className="relative inline-block top-[2px] text-center">
               {isSubmitting ? 'Submitting...' : 'Subscribe'}
             </span>
           </button>

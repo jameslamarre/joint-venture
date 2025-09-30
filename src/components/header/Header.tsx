@@ -41,7 +41,7 @@ export const Header: FC<HeaderProps> = ({ mainMenu, className }) => {
           </Link>
         </div>
 
-        <ul className="hidden lg:flex flex-row gap-8 pointer-events-auto font-sansMedia text-h4">
+        <ul className="hidden lg:flex flex-row gap-x pointer-events-auto">
           {mainMenu?.items?.map(({ _key, text, link }) => (
             <li key={_key} className={classNames('relative text-right')}>
               <SanityLink
