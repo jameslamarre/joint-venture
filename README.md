@@ -1,4 +1,4 @@
-# Tiny Scripted - Spring 2025
+# Joint Venture - Fall 2025
 
 [Next.js](https://nextjs.org) and [Sanity Studio](https://www.sanity.io/studio)
 monorepo. Intended for deployment to [Vercel](https://vercel.com).
