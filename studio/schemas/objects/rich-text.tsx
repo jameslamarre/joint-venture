@@ -3,6 +3,11 @@ import { BiCode } from 'react-icons/bi'
 import { GiButtonFinger } from 'react-icons/gi'
 import { GrImage } from 'react-icons/gr'
 import { RxDividerHorizontal } from 'react-icons/rx'
+import { LuHighlighter } from 'react-icons/lu'
+
+const HighlightDecorator = (props: any) => {
+  return <span style={{ backgroundColor: '#CFE806' }}>{props.children}</span>
+}
 
 export default {
   name: 'richText',
@@ -23,6 +28,12 @@ export default {
         decorators: [
           { title: 'Strong', value: 'strong' },
           { title: 'Emphasis', value: 'em' },
+          {
+            title: 'Highlight',
+            value: 'highlight',
+            icon: LuHighlighter,
+            component: HighlightDecorator,
+          },
         ],
         annotations: [
           {

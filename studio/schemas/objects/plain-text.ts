@@ -6,7 +6,7 @@ export default {
     {
       type: 'block',
       styles: [{ title: 'Normal', value: 'normal' }],
-      lists: [{ title: 'Bullet', value: 'bullet' }],
+      lists: [],
       marks: {
         decorators: [
           { title: 'Strong', value: 'strong' },

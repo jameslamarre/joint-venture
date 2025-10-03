@@ -29,11 +29,7 @@ export const blockTypes: Partial<PortableTextReactComponents['types']> = {
   cta: ({ value }) => {
     return (
       <div className="inline-block relative mt-y z-above">
-        <SanityLink
-          cta={true}
-          color={value.color}
-          {...(value.link as SanityLinkType)}
-        >
+        <SanityLink cta={true} {...(value.link as SanityLinkType)}>
           {value.text}
         </SanityLink>
       </div>
@@ -48,6 +44,9 @@ export const blockMarks: Partial<PortableTextReactComponents['marks']> = {
   link: ({ children, value }) => {
     const text = reactNodeToString(children)
     return <SanityLink {...{ ...value, text }} />
+  },
+  highlight: ({ children }) => {
+    return <span className="highlight">{children}</span>
   },
   anchor: ({ children, value }) => {
     return <span id={value.anchorId}>{children}</span>

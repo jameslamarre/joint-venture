@@ -188,6 +188,12 @@ export default {
           fontFamily: theme('fontFamily.sans'),
           letterSpacing: '0.05em',
         },
+        '.highlight': {
+          position: 'relative',
+          color: theme('colors.black'),
+          backgroundColor: theme('backgroundColor.yellow'),
+          zIndex: 0,
+        },
       })
     },
   ],

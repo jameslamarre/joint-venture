@@ -41,11 +41,7 @@ export const SanityLink: FC<SanityLinkProps> = ({
       onClick={onClick as MouseEventHandler<HTMLAnchorElement> | undefined}
     >
       {cta ? (
-        <Cta
-          color={color as 'black' | 'yellow'}
-          small={smallCta}
-          className={className}
-        >
+        <Cta className={className}>
           {text}
           {children}
         </Cta>

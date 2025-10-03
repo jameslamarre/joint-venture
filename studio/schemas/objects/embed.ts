@@ -22,7 +22,7 @@ export default {
     },
     {
       name: 'poster',
-      type: 'media',
+      type: 'image',
       description: 'Image that displays before the video is fully loaded',
     },
   ],
