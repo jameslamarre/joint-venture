@@ -155,18 +155,32 @@ const TypewriterText = ({
         animate="visible"
         className="flex flex-wrap justify-between gap-x-2 gap-y-3"
       >
-        {wordGroups.map((group, groupIndex) => (
-          <motion.span
-            key={groupIndex}
-            variants={child}
-            className={classNames(
-              'inline text-2xl',
-              group.isHighlight && 'highlight'
-            )}
-          >
-            {group.words.join(' ')}
-          </motion.span>
-        ))}
+        {wordGroups.map((group, groupIndex) => {
+          // Calculate highlight index for staggered animation
+          const highlightIndex = wordGroups
+            .slice(0, groupIndex)
+            .filter(g => g.isHighlight).length
+
+          return (
+            <motion.span
+              key={groupIndex}
+              variants={child}
+              className={classNames(
+                'inline text-2xl',
+                group.isHighlight && 'highlight'
+              )}
+              style={
+                group.isHighlight
+                  ? ({
+                      '--highlight-delay': `${highlightIndex * 0.2 + 1.2}s`,
+                    } as React.CSSProperties)
+                  : undefined
+              }
+            >
+              {group.words.join(' ')}
+            </motion.span>
+          )
+        })}
       </motion.div>
     </AnimatePresence>
   )

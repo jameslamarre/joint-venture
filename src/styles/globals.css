@@ -119,8 +119,8 @@ body {
 
 .highlight {
   position: relative;
-  color: theme('colors.black');
-  background-color: theme('backgroundColor.yellow');
+  /* color: theme('colors.black');
+  background-color: theme('backgroundColor.yellow'); */
   z-index: 0;
 }
 
@@ -129,10 +129,20 @@ body {
   position: absolute;
   top: 0;
   left: -5px;
-  width: 10px;
+  width: 0;
   height: 1em;
   background-color: theme('backgroundColor.yellow');
   z-index: -1;
   transform: skew(-5deg);
   transform-origin: top left;
+  animation: highlightAnim 0.6s var(--highlight-delay, 0s) ease-in-out forwards;
+}
+
+@keyframes highlightAnim {
+  from {
+    width: 0;
+  }
+  to {
+    width: 104%;
+  }
 }
