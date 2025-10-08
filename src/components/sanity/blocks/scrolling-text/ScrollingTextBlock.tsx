@@ -197,7 +197,7 @@ export const ScrollingTextBlock: FC<ScrollingTextBlockProps> = ({
   className,
 }) => {
   return (
-    <Block className={classNames(className, 'w-wrap mx-auto')}>
+    <Block className={classNames(className, 'w-wrap mx-auto mb-page')}>
       <TypewriterText richTextBlocks={text as RichTextType} />
     </Block>
   )

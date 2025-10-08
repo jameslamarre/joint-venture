@@ -22,7 +22,7 @@ export const Header: FC<HeaderProps> = ({
       id="header"
       className={classNames(
         className,
-        'fixed w-full h-header mx-auto top-0 font-sans text-xl text-stone z-header'
+        'fixed w-full h-header mx-auto top-0 font-sans text-xl z-header'
       )}
     >
       <motion.header
@@ -62,7 +62,7 @@ export const Header: FC<HeaderProps> = ({
                 animate={{ maxWidth: 200 }}
                 exit={{ maxWidth: 0 }}
                 transition={{ duration: 0.2, ease: 'easeInOut' }}
-                className="inline-block leading-none overflow-hidden"
+                className="inline-block leading-none text-white overflow-hidden"
               >
                 Menu
               </motion.span>
@@ -73,7 +73,7 @@ export const Header: FC<HeaderProps> = ({
                 animate={{ maxWidth: 200 }}
                 exit={{ maxWidth: 0 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className="inline-block leading-none overflow-hidden"
+                className="inline-block leading-none text-stone overflow-hidden"
               >
                 {currentPage}
               </motion.span>

@@ -25,6 +25,12 @@ export default {
       textColor: {
         black: '#000',
         stone: '#A59F8D',
+        blue: '#91D2DA',
+      },
+      fill: {
+        black: '#000',
+        stone: '#A59F8D',
+        blue: '#91D2DA',
       },
       screens,
       fontFamily: {
