@@ -34,6 +34,11 @@ export default {
       title: 'Projects Block',
     },
     {
+      name: 'scrollingTextBlock',
+      type: 'scrollingTextBlock',
+      title: 'Scrolling Text Block',
+    },
+    {
       name: 'textBlock',
       type: 'textBlock',
       title: 'Text Block',

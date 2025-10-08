@@ -4,7 +4,7 @@ import { SCREENS } from './src/globals'
 const screens = Object.entries(SCREENS).reduce((acc, [key, value]) => {
   acc[key] = `${value}px`
   return acc
-}, {})
+}, {} as Record<string, string>)
 
 export default {
   darkMode: ['class'],
@@ -24,6 +24,7 @@ export default {
       },
       textColor: {
         black: '#000',
+        stone: '#A59F8D',
       },
       screens,
       fontFamily: {
@@ -44,8 +45,8 @@ export default {
         sm: ['15px', '1'],
         md: ['22px', '1.1'],
         lg: ['28px', '1'],
-        xl: ['32px', '1'],
-        '2xl': ['48px', '1'],
+        xl: ['30px', '1'],
+        '2xl': ['32px', '1'],
       },
       letterSpacing: {
         body: '-0.021em',
@@ -119,7 +120,7 @@ export default {
   },
   plugins: [
     require('tailwindcss-animate'),
-    ({ addComponents, theme }) => {
+    ({ addComponents, theme }: { addComponents: any; theme: any }) => {
       addComponents({
         '.container': {
           paddingLeft: theme('spacing.x'),
@@ -187,12 +188,6 @@ export default {
           fontSize: theme('fontSize.sm'),
           fontFamily: theme('fontFamily.sans'),
           letterSpacing: '0.05em',
-        },
-        '.highlight': {
-          position: 'relative',
-          color: theme('colors.black'),
-          backgroundColor: theme('backgroundColor.yellow'),
-          zIndex: 0,
         },
       })
     },

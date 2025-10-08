@@ -15,11 +15,11 @@
   --space-y-sm: 10px;
 
   --space-block: var(--space-y);
-  --space-page: calc(var(--header-height));
+  --space-page: calc(var(--header-height) + var(--space-y-double));
 
   /* container wrap sizes */
   --app: 1280px;
-  --wrap: 768px;
+  --wrap: 550px;
   --wrap-2xs: 400px;
   --wrap-xs: 416px;
   --wrap-sm: 844px;
@@ -47,7 +47,7 @@
 
 @screen md {
   :root {
-    --header-height: calc(var(--space-y) * 2 + 50px);
+    --header-height: 75px;
   }
 }
 
@@ -99,6 +99,7 @@ html,
 body,
 #__next {
   height: 100%;
+  /* overflow: hidden; */
 }
 /* stylelint-enable selector-id-pattern */
 
@@ -107,5 +108,26 @@ body {
   font-size: theme('fontSize.base');
   min-width: 320px;
   overscroll-behavior-y: none;
+  background-color: theme('backgroundColor.stone');
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.highlight {
+  position: relative;
+  color: theme('colors.black');
+  background-color: theme('backgroundColor.yellow');
+  z-index: 0;
+}
+
+.highlight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -5px;
+  width: 10px;
+  height: 1em;
+  background-color: theme('backgroundColor.yellow');
+  z-index: -1;
+  transform: skew(-5deg);
+  transform-origin: top left;
 }

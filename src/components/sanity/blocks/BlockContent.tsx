@@ -10,6 +10,7 @@ import {
   ProjectsBlock,
   EmbedBlock,
   TextAndImageBlock,
+  ScrollingTextBlock,
 } from '.'
 import classNames from 'classnames'
 
@@ -48,6 +49,9 @@ export const BlockContent: FC<SanityBlockElement> = ({
             ),
             projectsBlock: ({ index, value }) => (
               <ProjectsBlock index={index} {...value} />
+            ),
+            scrollingTextBlock: ({ index, value }) => (
+              <ScrollingTextBlock index={index} {...value} />
             ),
             textBlock: ({ index, value }) => (
               <TextBlock index={index} {...value} />

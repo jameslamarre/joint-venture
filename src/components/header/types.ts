@@ -4,6 +4,7 @@ import type { Dispatch, HTMLAttributes, SetStateAction } from 'react'
 export interface HeaderProps
   extends Omit<HTMLAttributes<HTMLElement>, 'property'> {
   mainMenu?: SanityMenu
+  currentPage?: string
 }
 
 export interface HeaderMenuProps extends HeaderProps {

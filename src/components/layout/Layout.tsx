@@ -7,6 +7,7 @@ import { Header } from '@components/header'
 import { Footer } from '@components/footer'
 import { filterDataToSingleItem } from '@studio/lib'
 import { triggerToastPreview } from '@components/toast'
+import LogoContainer from '@components/logo/LogoContainer'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 type PageData = Page
@@ -54,17 +55,19 @@ export const Layout: FC<LayoutProps> = ({
         pageUrl={`${BASE_URL}${asPath}`}
       />
       <div className="flex flex-col min-h-full">
+        {/* <LogoContainer /> */}
         <Header
           className="flex-initial"
+          currentPage={page?.title}
           mainMenu={siteSettings?.mainMenu as Menus | undefined}
         />
 
         <main className="flex-auto pt-page">{children}</main>
 
-        <Footer
+        {/* <Footer
           content={siteSettings?.footerSocials as any}
           newsletterId={siteSettings?.newsletterId}
-        />
+        /> */}
       </div>
       <ToastContainer />
     </>

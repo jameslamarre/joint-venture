@@ -74,6 +74,12 @@
   @apply text-base;
 }
 
+.rich-text.large p,
+.rich-text.large span,
+.rich-text.large li {
+  @apply text-2xl leading-[1.3];
+}
+
 .rich-text.small p,
 .rich-text.small span,
 .rich-text.small li {

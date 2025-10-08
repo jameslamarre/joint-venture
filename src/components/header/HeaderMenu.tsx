@@ -8,6 +8,7 @@ import { Btn } from '@components/btns'
 import type { HeaderMenuProps } from './types'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { IconHamburger } from '@components/icons'
 
 export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
   customOpen = false,
@@ -16,22 +17,37 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
   mainMenu,
   className,
 }) => {
-  const { asPath } = useRouter()
-
   return (
     <div className={className}>
       <Btn
-        className="absolute right-xhalf top-1/2 mt-[2px] transform -translate-y-1/2 text-h4 uppercase leading-none z-header"
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 uppercase z-header"
         onClick={() => {
           setCustomOpen(!customOpen)
         }}
         custom={true}
       >
-        {customOpen ? (
-          <span className="inline-block relative text-white">Close</span>
-        ) : (
-          <span>Menu</span>
-        )}
+        <div className="flex flex-col gap-[6px] w-[37px] h-auto">
+          <span
+            className={classNames(
+              customOpen
+                ? 'rotate-45 translate-x-[1px] -translate-y-[2px]'
+                : '',
+              'w-full h-[5px] bg-stone transform transition-all duration-500 origin-top-left'
+            )}
+          ></span>
+          <span
+            className={classNames(
+              customOpen ? 'opacity-0' : 'opacity-1',
+              'w-full h-[5px] bg-stone transition-opacity duration-300'
+            )}
+          ></span>
+          <span
+            className={classNames(
+              customOpen ? '-rotate-45 translate-x-[1px]' : '',
+              'w-full h-[5px] bg-stone transform transition-all duration-500 origin-bottom-left'
+            )}
+          ></span>
+        </div>
       </Btn>
 
       <div
@@ -39,7 +55,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
           customOpen
             ? 'opacity-100 pointer-events-all'
             : 'opacity-0 pointer-events-none',
-          'flex flex-col justify-between fixed w-[100vw] h-[100vh] top-0 right-0 px-xhalf md:px-xdouble pb-ydouble overflow-hidden bg-black text-white text-left transition-opacity'
+          'flex flex-col justify-between fixed w-[100vw] h-[100vh] top-0 right-0 px-xhalf md:px-xdouble pb-ydouble overflow-hidden bg-red text-white text-left transition-opacity'
         )}
       >
         <div

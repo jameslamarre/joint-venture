@@ -156,13 +156,6 @@ export interface Project extends SanityDocument {
   title?: string;
 
   /**
-   * Project Type — `string`
-   *
-   *
-   */
-  type?: "screen" | "stage";
-
-  /**
    * Slug — `slug`
    *
    *
@@ -182,138 +175,91 @@ export interface Project extends SanityDocument {
   };
 
   /**
-   * Initial Text — `richText`
+   * Trailer — `embed`
    *
    *
    */
-  initialText?: RichText;
+  trailer?: Embed;
 
   /**
-   * More Details — `richText`
+   * Featured — `boolean`
    *
    *
    */
-  moreDetails?: RichText;
+  featured?: boolean;
 
   /**
-   * License Link — `url`
+   * Directed By — `string`
    *
-   * Optional link to the license request form, overrides the default
+   *
    */
-  licenseLink?: string;
+  directedBy?: string;
 
   /**
-   * Script Link — `url`
+   * Written By — `string`
    *
-   * Optional link to the link to script on Heyzine
+   *
    */
-  scriptLink?: string;
+  writtenBy?: string;
 
   /**
-   * Trailer Link — `url`
+   * Produced By — `string`
    *
-   * Optional link to the trailer video for screen projects
+   *
    */
-  trailerLink?: string;
+  producedBy?: string;
 
   /**
-   * Genre — `string`
+   * Starring — `string`
    *
    *
    */
-  genre?:
-    | "drama"
-    | "comedy"
-    | "dramedy"
-    | "dark-comedy"
-    | "romantic-comedy"
-    | "farce"
-    | "satire"
-    | "tragedy"
-    | "mystery"
-    | "thriller"
-    | "horror"
-    | "fantasy"
-    | "magical"
-    | "sci-fi"
-    | "hist-drama"
-    | "poli-drama"
-    | "social-comm"
-    | "period"
-    | "bio"
-    | "musical"
-    | "musical-comedy"
-    | "musical-drama"
-    | "song-cycle"
-    | "rock-musical"
-    | "jukebox-musical"
-    | "experimental-avant-garde"
-    | "absurdist"
-    | "surrealist"
-    | "realism-naturalism"
-    | "expressionist"
-    | "classical-greek-tragedy"
-    | "shakespearean"
-    | "parody-spoof"
-    | "one-person-show"
-    | "devised-ensemble-based"
-    | "dance-theater"
-    | "puppet-theater"
-    | "multimedia"
-    | "faith-based"
-    | "lgbtq"
-    | "ya"
-    | "childrens-theater"
-    | "holiday"
-    | "western"
-    | "mystery"
-    | "family-drama"
-    | "epic"
-    | "adventure"
-    | "war drama"
-    | "myth";
+  starring?: string;
 
   /**
-   * Show Types — `string`
+   * Other Fields — `array`
    *
-   *
+   * Add any other fields you want to display with project details.
    */
-  types?:
-    | "full-length"
-    | "full-length-musical"
-    | "one-act"
-    | "one-act-musical"
-    | "short-play"
-    | "short-musical";
+  otherFields?: Array<
+    SanityKeyed<{
+      _type: "other";
+      /**
+       * Title — `string`
+       *
+       *
+       */
+      title?: string;
+
+      /**
+       * Value — `string`
+       *
+       *
+       */
+      value?: string;
+    }>
+  >;
 
   /**
-   * Intended Audience — `string`
+   * Synopsis — `plainText`
    *
    *
    */
-  audience?:
-    | "all-ages"
-    | "mature"
-    | "college"
-    | "high-school"
-    | "middle-school"
-    | "elementary-school"
-    | "religious-audience"
-    | "disabilities";
+  synopsis?: PlainText;
 
   /**
-   * Cast Size — `number`
+   * CTA — `cta`
    *
    *
    */
-  castSize?: number;
+  cta?: Cta;
 
   /**
-   * Page Length — `number`
+   * SEO — `seo`
    *
-   * Length in number of pages
+   *
    */
-  length?: number;
+  seo?: Seo;
 }
 
 /**
@@ -467,13 +413,6 @@ export type Cta = {
    *
    */
   link?: Link;
-
-  /**
-   * Color — `string`
-   *
-   *
-   */
-  color?: "black" | "yellow";
 };
 
 export type Divider = {
@@ -503,11 +442,16 @@ export type Embed = {
   youtube?: Youtube;
 
   /**
-   * poster — `media`
+   * poster — `image`
    *
    * Image that displays before the video is fully loaded
    */
-  poster?: Media;
+  poster?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
 };
 
 export type Figure = {
@@ -660,6 +604,7 @@ export type BlockContent = Array<
   | SanityKeyed<FiguresBlock>
   | SanityKeyed<MediaBlock>
   | SanityKeyed<ProjectsBlock>
+  | SanityKeyed<ScrollingTextBlock>
   | SanityKeyed<TextBlock>
   | SanityKeyed<TextAndImageBlock>
 >;
@@ -731,18 +676,21 @@ export type MediaBlock = {
 export type ProjectsBlock = {
   _type: "projectsBlock";
   /**
-   * Projects Type — `string`
-   *
-   *
-   */
-  type?: "screen" | "stage";
-
-  /**
    * Projects — `array`
    *
-   * Select the projects to display in this block, projects are automatically alphabetized on the site.
+   *
    */
   projects?: Array<SanityKeyedReference<Project>>;
+};
+
+export type ScrollingTextBlock = {
+  _type: "scrollingTextBlock";
+  /**
+   * Text — `richText`
+   *
+   *
+   */
+  text?: RichText;
 };
 
 export type TextBlock = {
@@ -753,30 +701,6 @@ export type TextBlock = {
    *
    */
   text?: RichText;
-
-  /**
-   * Background Color — `string`
-   *
-   *
-   */
-  backgroundColor?: "black" | "yellow";
-
-  /**
-   * CTAs — `array`
-   *
-   *
-   */
-  ctas?: Array<
-    SanityKeyed<{
-      _type: "ctaItem";
-      /**
-       * CTA — `cta`
-       *
-       *
-       */
-      cta?: Cta;
-    }>
-  >;
 };
 
 export type TextAndImageBlock = {
