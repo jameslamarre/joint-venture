@@ -20,7 +20,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
   return (
     <div className={className}>
       <Btn
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 uppercase z-header"
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 uppercase animate-fadeIn z-header"
         onClick={() => {
           setCustomOpen(!customOpen)
         }}

@@ -5,6 +5,7 @@ export interface HeaderProps
   extends Omit<HTMLAttributes<HTMLElement>, 'property'> {
   mainMenu?: SanityMenu
   currentPage?: string
+  setShowContent?: () => void
 }
 
 export interface HeaderMenuProps extends HeaderProps {

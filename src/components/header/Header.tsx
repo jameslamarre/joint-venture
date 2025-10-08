@@ -5,12 +5,13 @@ import type { HeaderProps } from './types'
 import HeaderMenu from './HeaderMenu'
 import type { Menus as SanityMenu } from '@gen/sanity-schema'
 import Link from 'next/link'
-import { IconHamburger, IconHyphen } from '@components/icons'
+import { IconHyphen } from '@components/icons'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export const Header: FC<HeaderProps> = ({
   mainMenu,
   currentPage,
+  setShowContent,
   className,
 }) => {
   const onOpen = useCallback((open: boolean) => setMenuOpen(open), [])
@@ -24,19 +25,33 @@ export const Header: FC<HeaderProps> = ({
         'fixed w-full h-header mx-auto top-0 font-sans text-xl text-stone z-header'
       )}
     >
-      <header
+      <motion.header
         role="banner"
+        initial={{ y: 391, x: 0 }} // Start from logo hyphen end position
+        animate={{ y: 0, x: 0 }}
+        transition={{
+          duration: 1.2,
+          delay: 0.7, // Start just after logo animation
+          ease: 'easeInOut',
+        }}
+        onAnimationComplete={setShowContent}
         className="flex justify-between items-center relative w-wrap h-[75px] top-y mx-auto text-center"
       >
         <div className="absolute w-wrap left-0 top-0 z-behind">
-          <IconHyphen
-            fill={menuOpen ? 'red' : 'black'}
-            className="w-[190px] h-[76px] transform scale-x-[3.25]"
-          />
+          <motion.div
+            initial={{ scaleX: 3.25 }}
+            animate={{ scaleX: 3.25 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+          >
+            <IconHyphen
+              fill={menuOpen ? 'red' : 'black'}
+              className="w-[190px] h-[76px]"
+            />
+          </motion.div>
         </div>
 
         {/* color swap */}
-        <button className="w-6 h-6 bg-stone rounded-full z-above"></button>
+        <button className="w-6 h-6 rounded-full z-above"></button>
 
         <div className="relative mt-2 mr-8 uppercase z-above">
           <AnimatePresence mode="wait">
@@ -57,7 +72,7 @@ export const Header: FC<HeaderProps> = ({
                 initial={{ maxWidth: 0 }}
                 animate={{ maxWidth: 200 }}
                 exit={{ maxWidth: 0 }}
-                transition={{ duration: 0.2, ease: 'easeInOut' }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
                 className="inline-block leading-none overflow-hidden"
               >
                 {currentPage}
@@ -73,7 +88,7 @@ export const Header: FC<HeaderProps> = ({
           mainMenu={mainMenu as SanityMenu}
           className="inline-block h-auto pointer-events-auto"
         />
-      </header>
+      </motion.header>
     </div>
   )
 }

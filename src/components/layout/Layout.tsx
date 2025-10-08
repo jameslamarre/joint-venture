@@ -1,4 +1,4 @@
-import { useEffect, type FC, type ReactNode } from 'react'
+import { useEffect, useState, type FC, type ReactNode } from 'react'
 import { useRouter } from 'next/router'
 import { ToastContainer } from 'react-toastify'
 import type { Menus, Page, SiteSettings } from '@gen/sanity-schema'
@@ -28,6 +28,9 @@ export const Layout: FC<LayoutProps> = ({
   const { asPath } = useRouter()
   const page: PageData = filterDataToSingleItem(data)
 
+  const [showIntro, setShowIntro] = useState(true)
+  const [showContent, setShowContent] = useState(false)
+
   const seoImage =
     (page as any)?.previewImage || (page as any)?.image || undefined
 
@@ -55,14 +58,18 @@ export const Layout: FC<LayoutProps> = ({
         pageUrl={`${BASE_URL}${asPath}`}
       />
       <div className="flex flex-col min-h-full">
-        {/* <LogoContainer /> */}
-        <Header
-          className="flex-initial"
-          currentPage={page?.title}
-          mainMenu={siteSettings?.mainMenu as Menus | undefined}
-        />
+        {showIntro ? (
+          <LogoContainer setShowIntro={() => setShowIntro(false)} />
+        ) : (
+          <Header
+            className="flex-initial"
+            currentPage={page?.title}
+            setShowContent={() => setShowContent(true)}
+            mainMenu={siteSettings?.mainMenu as Menus | undefined}
+          />
+        )}
 
-        <main className="flex-auto pt-page">{children}</main>
+        {showContent && <main className="flex-auto pt-page">{children}</main>}
 
         {/* <Footer
           content={siteSettings?.footerSocials as any}

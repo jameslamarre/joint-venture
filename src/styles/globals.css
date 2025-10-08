@@ -114,7 +114,7 @@ body {
 
 ::selection {
   background-color: theme('backgroundColor.red');
-  color: theme('colors.black');
+  color: theme('backgroundColor.black');
 }
 
 .highlight {
