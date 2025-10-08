@@ -112,6 +112,11 @@ body {
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
+::selection {
+  background-color: theme('backgroundColor.red');
+  color: theme('colors.black');
+}
+
 .highlight {
   position: relative;
   color: theme('colors.black');
