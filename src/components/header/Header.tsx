@@ -4,7 +4,6 @@ import classNames from 'classnames'
 import type { HeaderProps } from './types'
 import HeaderMenu from './HeaderMenu'
 import type { Menus as SanityMenu } from '@gen/sanity-schema'
-import Link from 'next/link'
 import { IconHyphen } from '@components/icons'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/router'
@@ -79,10 +78,8 @@ export const Header: FC<HeaderProps> = ({
                 animate={{ maxWidth: 200 }}
                 exit={{ maxWidth: 0 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className={classNames(
-                  pageBackground === 'green' ? 'text-yellow' : 'text-black',
-                  'inline-block leading-none overflow-hidden'
-                )}
+                className="inline-block leading-none overflow-hidden"
+                style={{ color: 'var(--theme-text--menu)' }}
               >
                 {currentPage}
               </motion.span>

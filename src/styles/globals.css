@@ -7,7 +7,7 @@
   --space-x-trio: calc(var(--space-x) * 3);
   --space-x-quatro: calc(var(--space-x) * 4);
   --space-x-lg: 2rem;
-  --space-y: 30px;
+  --space-y: 32px;
   --space-y-quarter: calc(var(--space-y) * 0.25);
   --space-y-half: calc(var(--space-y) * 0.5);
   --space-y-double: calc(var(--space-y) * 2);
@@ -43,6 +43,11 @@
   --speed-xslow: 0.8s;
   --speed-snail: 1.25s;
   --speed-block: var(--speed-slow);
+
+  /* theme colors - defaults */
+  --theme-bg: #a59f8d;
+  --theme-text: #000000;
+  --theme-selection: #cfe806;
 }
 
 @screen md {
@@ -53,7 +58,8 @@
 
 @screen lg {
   :root {
-    --space-x: 60px;
+    --space-x: 42px;
+    --space-y: 42px;
   }
 }
 
@@ -108,12 +114,14 @@ body {
   font-size: theme('fontSize.base');
   min-width: 320px;
   overscroll-behavior-y: none;
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 ::selection {
   background-color: theme('backgroundColor.red');
-  color: theme('backgroundColor.black');
+  color: black;
 }
 
 .highlight {
@@ -130,7 +138,7 @@ body {
   left: -5px;
   width: 0;
   height: 1em;
-  background-color: theme('backgroundColor.yellow');
+  background-color: var(--theme-highlight);
   z-index: -1;
   transform: skew(-5deg);
   transform-origin: top left;

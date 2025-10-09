@@ -65,7 +65,7 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({
         onSubmit={handleSubmit}
         className="flex flex-col gap-yquarter w-full h-full pt-1"
       >
-        <label className="block text-2xs">{`Join our TINY mailing list!`}</label>
+        <label className="block text-xs">{`Join our TINY mailing list!`}</label>
 
         <div className="flex">
           <input

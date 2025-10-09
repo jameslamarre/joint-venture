@@ -182,6 +182,13 @@ export interface Project extends SanityDocument {
   };
 
   /**
+   * Initial Color — `string`
+   *
+   * Sets the initial color of the page before any transitions.
+   */
+  initialColor?: "stone" | "green";
+
+  /**
    * Trailer — `embed`
    *
    *

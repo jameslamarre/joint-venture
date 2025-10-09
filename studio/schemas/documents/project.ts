@@ -38,6 +38,20 @@ export default {
       },
     },
     {
+      name: 'initialColor',
+      type: 'string',
+      title: 'Initial Color',
+      description: 'Sets the initial color of the page before any transitions.',
+      options: {
+        list: [
+          { title: 'Stone', value: 'stone' },
+          { title: 'Green', value: 'green' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'green',
+    },
+    {
       name: 'trailer',
       title: 'Trailer',
       type: 'embed',

@@ -23,27 +23,27 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
 
   const positions = [
     [
-      { x: '5%', y: 120 },
-      { x: '40%', y: 250 },
+      { x: '10%', y: 120 },
+      { x: '45%', y: 250 },
       { x: '60%', y: 450 },
-      { x: '35%', y: 600 },
+      { x: '40%', y: 600 },
     ],
     [
-      { x: '50%', y: 120 },
-      { x: '20%', y: 300 },
+      { x: '55%', y: 120 },
+      { x: '25%', y: 300 },
+      { x: '50%', y: 500 },
+      { x: '35%', y: 700 },
+    ],
+    [
+      { x: '25%', y: 100 },
+      { x: '45%', y: 300 },
+      { x: '10%', y: 550 },
       { x: '45%', y: 500 },
-      { x: '30%', y: 700 },
     ],
     [
-      { x: '20%', y: 100 },
-      { x: '40%', y: 300 },
-      { x: '5%', y: 550 },
-      { x: '40%', y: 500 },
-    ],
-    [
-      { x: '10%', y: 250 },
-      { x: '35%', y: 150 },
-      { x: '20%', y: 425 },
+      { x: '15%', y: 250 },
+      { x: '40%', y: 150 },
+      { x: '25%', y: 425 },
       { x: '60%', y: 510 },
     ],
   ]
@@ -90,28 +90,36 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
             className={classNames(
               customOpen
                 ? 'rotate-45 translate-x-[1px] -translate-y-[2px] bg-white'
-                : pageBackground === 'green'
-                ? 'bg-yellow'
-                : 'bg-stone',
+                : '',
               'w-full h-[5px] transform transition-all duration-500 origin-top-left'
             )}
+            style={
+              !customOpen
+                ? { backgroundColor: 'var(--theme-text--menu)' }
+                : undefined
+            }
           ></span>
           <span
             className={classNames(
               customOpen ? 'opacity-0' : 'opacity-1',
-              pageBackground === 'green' ? 'bg-yellow' : 'bg-stone',
               'w-full h-[5px] transition-opacity duration-300'
             )}
+            style={
+              !customOpen
+                ? { backgroundColor: 'var(--theme-text--menu)' }
+                : undefined
+            }
           ></span>
           <span
             className={classNames(
-              customOpen
-                ? '-rotate-45 translate-x-[1px] bg-white'
-                : pageBackground === 'green'
-                ? 'bg-yellow'
-                : 'bg-stone',
+              customOpen ? '-rotate-45 translate-x-[1px] bg-white' : '',
               'w-full h-[5px] transform transition-all duration-500 origin-bottom-left'
             )}
+            style={
+              !customOpen
+                ? { backgroundColor: 'var(--theme-text--menu)' }
+                : undefined
+            }
           ></span>
         </div>
       </Btn>
@@ -142,7 +150,11 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                     top: positions[position][0]?.y || 0,
                   }}
                 >
-                  <Link href="/" className="hover:invert">
+                  <Link
+                    href="/"
+                    onClick={() => setCustomOpen(false)}
+                    className="hover:invert"
+                  >
                     <IconAbout className="w-[184px] lg:w-[285px] h-auto" />
                   </Link>
                 </motion.li>
@@ -155,7 +167,11 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                     top: positions[position][1]?.y || 200,
                   }}
                 >
-                  <Link href="/films" className="group">
+                  <Link
+                    href="/films"
+                    onClick={() => setCustomOpen(false)}
+                    className="group"
+                  >
                     <IconFilms className="w-[177px] lg:w-[273px] h-auto group-hover:[&_.bg]:fill-blue" />
                   </Link>
                 </motion.li>
@@ -168,7 +184,11 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                     top: positions[position][2]?.y || 300,
                   }}
                 >
-                  <Link href="/contact" className="hover:invert">
+                  <Link
+                    href="/contact"
+                    onClick={() => setCustomOpen(false)}
+                    className="hover:invert"
+                  >
                     <IconContact className="w-[269px] lg:w-[416px] h-auto" />
                   </Link>
                 </motion.li>

@@ -83,7 +83,7 @@
 .rich-text.small p,
 .rich-text.small span,
 .rich-text.small li {
-  @apply text-2xs leading-normal;
+  @apply text-xs leading-normal;
 }
 
 .rich-text ul,

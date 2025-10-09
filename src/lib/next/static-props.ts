@@ -1,12 +1,12 @@
 import type { GetStaticPropsContext, GetStaticPropsResult } from 'next'
-import type { SiteSettings, Page } from '@gen/sanity-schema'
+import type { SiteSettings, Page, Project } from '@gen/sanity-schema'
 import { previewClient, getSiteSettingsProps } from '@studio/lib'
 
 export interface PageProps {
   preview: boolean
   slug: string | string[] | null
   siteSettings: SiteSettings | undefined
-  data: Page
+  data: Page | Project
   query: string
 }
 

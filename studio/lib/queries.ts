@@ -78,19 +78,20 @@ export const BODY_QUERY = `
       type,
       slug,
       title,
-      initialText,
-      moreDetails,
       previewImage{
         ${IMAGE_QUERY}
       },
-      licenseLink,
-      trailerLink,
-      scriptLink,
-      genre,
-      types,
-      audience,
-      length,
-      castSize,
+      trailer, 
+      featured, 
+      directedBy,
+      writtenBy,
+      producedBy,
+      starring,
+      otherFields,
+      synopsis,
+      cta{
+        ${CTA_QUERY}
+      },
     }
   },
 `
