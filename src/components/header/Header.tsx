@@ -49,8 +49,11 @@ export const Header: FC<HeaderProps> = ({
             )}
           >
             <IconHyphen
-              fill={menuOpen ? '#A90736' : 'black'}
-              className="w-[190px] h-[76px]"
+              fill={menuOpen ? '#A90736' : ''}
+              className={classNames(
+                'w-[190px] h-[76px]',
+                menuOpen ? '' : 'theme-menu-fill'
+              )}
             />
           </div>
         </div>

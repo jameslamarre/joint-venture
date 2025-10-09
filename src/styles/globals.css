@@ -47,7 +47,9 @@
   /* theme colors - defaults */
   --theme-bg: #a59f8d;
   --theme-text: #000000;
-  --theme-selection: #cfe806;
+  --theme-text--menu: #a59f8d;
+  --theme-menu: #000;
+  --theme-highlight: #cfe806;
 }
 
 @screen md {
@@ -114,14 +116,14 @@ body {
   font-size: theme('fontSize.base');
   min-width: 320px;
   overscroll-behavior-y: none;
-  /* background-color: var(--theme-bg); */
+  background-color: var(--theme-bg);
   color: var(--theme-text);
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 ::selection {
   background-color: theme('backgroundColor.red');
-  color: black;
+  color: var(--theme-text);
 }
 
 .highlight {
@@ -152,4 +154,16 @@ body {
   to {
     width: 104%;
   }
+}
+
+.theme-menu-fill {
+  fill: var(--theme-menu);
+}
+
+.theme-menu-stroke {
+  stroke: var(--theme-menu);
+}
+
+.menu-open-fill {
+  fill: #a90736;
 }

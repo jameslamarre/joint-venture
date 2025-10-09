@@ -9,8 +9,7 @@ import { filterDataToSingleItem } from '@studio/lib'
 import { triggerToastPreview } from '@components/toast'
 import LogoContainer from '@components/logo/LogoContainer'
 import { IconLogo } from '@components/icons'
-import { AnimatePresence, motion } from 'framer-motion'
-import classNames from 'classnames'
+import { motion } from 'framer-motion'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 type PageData = Page | Project
@@ -33,9 +32,9 @@ export const Layout: FC<LayoutProps> = ({
 
   const [showIntro, setShowIntro] = useState(asPath === '/')
   const [showContent, setShowContent] = useState(false)
-  const [currentTheme, setCurrentTheme] = useState<'stone' | 'yellow' | 'blue'>(
-    page?.initialColor || 'stone'
-  )
+  const [currentTheme, setCurrentTheme] = useState<
+    'stone' | 'yellow' | 'blue' | 'dark'
+  >(page?.initialColor || 'stone')
   const [userOverrideTheme, setUserOverrideTheme] = useState<boolean>(false)
 
   const seoImage =
@@ -50,6 +49,8 @@ export const Layout: FC<LayoutProps> = ({
         case 'yellow':
           return 'blue'
         case 'blue':
+          return 'dark'
+        case 'dark':
           return 'stone'
         default:
           return 'stone'
@@ -75,19 +76,29 @@ export const Layout: FC<LayoutProps> = ({
         root.style.setProperty('--theme-bg', '#A59F8D')
         root.style.setProperty('--theme-text', '#000000')
         root.style.setProperty('--theme-text--menu', '#A59F8D')
+        root.style.setProperty('--theme-menu', '#000')
         root.style.setProperty('--theme-highlight', '#CFE806')
         break
       case 'yellow':
         root.style.setProperty('--theme-bg', '#CFE806')
-        root.style.setProperty('--theme-text', '#000000')
+        root.style.setProperty('--theme-text', '#31383C')
         root.style.setProperty('--theme-text--menu', '#CFE806')
-        root.style.setProperty('--theme-highlight', '#fff')
+        root.style.setProperty('--theme-menu', '#31383C')
+        root.style.setProperty('--theme-highlight', '#91D2DA')
         break
       case 'blue':
         root.style.setProperty('--theme-bg', '#91D2DA')
-        root.style.setProperty('--theme-text', '#FFFFFF')
-        root.style.setProperty('--theme-text--menu', '#FFFFFF')
-        root.style.setProperty('--theme-highlight', '#000')
+        root.style.setProperty('--theme-text', '#000')
+        root.style.setProperty('--theme-text--menu', '#91D2DA')
+        root.style.setProperty('--theme-menu', '#000')
+        root.style.setProperty('--theme-highlight', '#FFF')
+        break
+      case 'dark':
+        root.style.setProperty('--theme-bg', '#31383C')
+        root.style.setProperty('--theme-text', '#fff')
+        root.style.setProperty('--theme-text--menu', '#31383C')
+        root.style.setProperty('--theme-menu', '#fff')
+        root.style.setProperty('--theme-highlight', '#A90736')
         break
     }
   }, [currentTheme, page?.initialColor, userOverrideTheme])
@@ -143,7 +154,7 @@ export const Layout: FC<LayoutProps> = ({
               onClick={cycleTheme}
               className="group absolute right-1/2 lg:right-x bottom-x p-2 hover:bg-black rounded-full transform -translate-y-1/2 lg:translate-y-0 z-above"
             >
-              <IconLogo className="w-[114px] h-auto group-hover:[&_path]:fill-white animate-fadeIn" />
+              <IconLogo className="w-[114px] h-auto animate-fadeIn theme-menu-fill group-hover:[&_path]:fill-white" />
             </motion.button>
           </>
         )}
