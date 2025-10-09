@@ -201,7 +201,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                     top: positions[position][3]?.y || 400,
                   }}
                 >
-                  <IconJV className="w-[210px] lg:w-[323px] h-auto hover:invert z-behind" />
+                  <IconJV className="w-[210px] lg:w-[323px] h-auto z-behind" />
                 </motion.li>
               </motion.ul>
             </motion.nav>
