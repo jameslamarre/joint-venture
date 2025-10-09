@@ -71,7 +71,7 @@
 .rich-text p,
 .rich-text span,
 .rich-text li {
-  @apply text-base;
+  @apply text-md;
 }
 
 .rich-text.large p,

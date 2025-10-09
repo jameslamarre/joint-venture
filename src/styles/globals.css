@@ -1,4 +1,12 @@
 :root {
+  /* font sizes */
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-md: 18px;
+  --font-size-lg: 18px;
+  --font-size-xl: 22px;
+  --font-size-2xl: 36px;
+
   /* spacing */
   --space-x: 24px;
   --space-x-quarter: calc(var(--space-x) * 0.25);
@@ -60,6 +68,14 @@
 
 @screen lg {
   :root {
+    /* font sizes */
+    --font-size-xs: 12px;
+    --font-size-sm: 14px;
+    --font-size-md: 24px;
+    --font-size-lg: 30px;
+    --font-size-xl: 32px;
+    --font-size-2xl: 48px;
+
     --space-x: 42px;
     --space-y: 42px;
   }

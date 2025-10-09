@@ -92,7 +92,7 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({
       </form>
 
       {formError && (
-        <div className="text-base text-red mt-yhalf">{formError}</div>
+        <div className="text-sm text-red mt-yhalf">{formError}</div>
       )}
     </div>
   )

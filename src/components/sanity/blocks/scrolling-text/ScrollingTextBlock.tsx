@@ -166,7 +166,7 @@ const TypewriterText = ({
               key={groupIndex}
               variants={child}
               className={classNames(
-                'inline text-2xl',
+                'inline text-xl',
                 group.isHighlight && 'highlight'
               )}
               style={

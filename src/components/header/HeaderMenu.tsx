@@ -11,40 +11,40 @@ import {
   IconJV,
 } from '@components/icons/menu'
 import { AnimatePresence, motion } from 'framer-motion'
+import { isMobile } from 'react-device-detect'
 
 export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
   customOpen = false,
   setCustomOpen,
   onOpen,
-  pageBackground,
   className,
 }) => {
   const position = Math.floor(Math.random() * 4)
 
   const positions = [
     [
-      { x: '10%', y: 120 },
-      { x: '45%', y: 250 },
-      { x: '60%', y: 450 },
-      { x: '40%', y: 600 },
+      { x: isMobile ? '15%' : '25%', y: 120 },
+      { x: isMobile ? '40%' : '50%', y: 230 },
+      { x: isMobile ? '45%' : '57.5%', y: 450 },
+      { x: isMobile ? '30%' : '40%', y: 600 },
     ],
     [
-      { x: '55%', y: 120 },
-      { x: '25%', y: 300 },
-      { x: '50%', y: 500 },
-      { x: '35%', y: 700 },
+      { x: isMobile ? '45%' : '55%', y: 120 },
+      { x: isMobile ? '15%' : '25%', y: 300 },
+      { x: isMobile ? '40%' : '50%', y: 500 },
+      { x: isMobile ? '25%' : '35%', y: 700 },
     ],
     [
-      { x: '25%', y: 100 },
-      { x: '45%', y: 300 },
-      { x: '10%', y: 550 },
-      { x: '45%', y: 500 },
+      { x: isMobile ? '15%' : '25%', y: 100 },
+      { x: isMobile ? '35%' : '45%', y: 300 },
+      { x: isMobile ? '20%' : '30%', y: 570 },
+      { x: isMobile ? '45%' : '57.5%', y: 500 },
     ],
     [
-      { x: '15%', y: 250 },
-      { x: '40%', y: 150 },
-      { x: '25%', y: 425 },
-      { x: '60%', y: 510 },
+      { x: isMobile ? '10%' : '22%', y: 260 },
+      { x: isMobile ? '35%' : '45%', y: 140 },
+      { x: isMobile ? '20%' : '30%', y: 455 },
+      { x: isMobile ? '45%' : '57.5%', y: 570 },
     ],
   ]
 

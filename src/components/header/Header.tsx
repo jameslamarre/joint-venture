@@ -25,7 +25,7 @@ export const Header: FC<HeaderProps> = ({
       id="header"
       className={classNames(
         className,
-        'fixed w-full h-header mx-auto top-0 font-sans text-xl z-header'
+        'fixed w-full h-header mx-auto top-0 font-sans text-xl lg:text-lg z-header'
       )}
     >
       <motion.header
