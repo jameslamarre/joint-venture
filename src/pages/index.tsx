@@ -11,6 +11,7 @@ const HOME_QUERY = groq`
     _id,
     _type,
     title,
+    initialColor,
     seo,
     ${BODY_QUERY}
   }

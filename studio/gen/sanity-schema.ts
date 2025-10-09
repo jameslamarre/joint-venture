@@ -126,6 +126,13 @@ export interface Page extends SanityDocument {
   };
 
   /**
+   * Initial Color — `string`
+   *
+   * Sets the initial color of the page before any transitions.
+   */
+  initialColor?: "stone" | "green";
+
+  /**
    * Body — `blockContent`
    *
    *

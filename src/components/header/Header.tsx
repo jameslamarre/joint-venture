@@ -7,13 +7,16 @@ import type { Menus as SanityMenu } from '@gen/sanity-schema'
 import Link from 'next/link'
 import { IconHyphen } from '@components/icons'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useRouter } from 'next/router'
 
 export const Header: FC<HeaderProps> = ({
   mainMenu,
   currentPage,
+  pageBackground,
   setShowContent,
   className,
 }) => {
+  const { asPath } = useRouter()
   const onOpen = useCallback((open: boolean) => setMenuOpen(open), [])
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -27,7 +30,7 @@ export const Header: FC<HeaderProps> = ({
     >
       <motion.header
         role="banner"
-        initial={{ y: 391, x: 0 }} // Start from logo hyphen end position
+        initial={{ y: asPath === '/' ? 391 : 0, x: 0 }} // Start from logo hyphen end position
         animate={{ y: 0, x: 0 }}
         transition={{
           duration: 1.2,
@@ -38,16 +41,19 @@ export const Header: FC<HeaderProps> = ({
         className="flex justify-between items-center relative w-wrap h-[75px] top-y mx-auto text-center"
       >
         <div className="absolute w-wrap left-0 top-0 z-behind">
-          <motion.div
-            initial={{ scaleX: 3.25 }}
-            animate={{ scaleX: 3.25 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
+          <div
+            className={classNames(
+              menuOpen
+                ? 'scale-x-[4] md:scale-x-[5] lg:scale-x-[8] 2xl:scale-x-[10] scale-y-[13.5] translate-y-[48svh]'
+                : 'scale-x-[3.25]',
+              'relative transition-all duration-500 2xl:duration-700'
+            )}
           >
             <IconHyphen
-              fill={menuOpen ? 'red' : 'black'}
+              fill={menuOpen ? '#A90736' : 'black'}
               className="w-[190px] h-[76px]"
             />
-          </motion.div>
+          </div>
         </div>
 
         {/* color swap */}
@@ -73,7 +79,10 @@ export const Header: FC<HeaderProps> = ({
                 animate={{ maxWidth: 200 }}
                 exit={{ maxWidth: 0 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className="inline-block leading-none text-stone overflow-hidden"
+                className={classNames(
+                  pageBackground === 'green' ? 'text-yellow' : 'text-black',
+                  'inline-block leading-none overflow-hidden'
+                )}
               >
                 {currentPage}
               </motion.span>
@@ -86,6 +95,7 @@ export const Header: FC<HeaderProps> = ({
           setCustomOpen={setMenuOpen}
           onOpen={onOpen}
           mainMenu={mainMenu as SanityMenu}
+          pageBackground={pageBackground}
           className="inline-block h-auto pointer-events-auto"
         />
       </motion.header>

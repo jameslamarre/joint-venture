@@ -8,6 +8,7 @@ import { Footer } from '@components/footer'
 import { filterDataToSingleItem } from '@studio/lib'
 import { triggerToastPreview } from '@components/toast'
 import LogoContainer from '@components/logo/LogoContainer'
+import classNames from 'classnames'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 type PageData = Page
@@ -28,7 +29,7 @@ export const Layout: FC<LayoutProps> = ({
   const { asPath } = useRouter()
   const page: PageData = filterDataToSingleItem(data)
 
-  const [showIntro, setShowIntro] = useState(true)
+  const [showIntro, setShowIntro] = useState(asPath === '/')
   const [showContent, setShowContent] = useState(false)
 
   const seoImage =
@@ -57,13 +58,19 @@ export const Layout: FC<LayoutProps> = ({
         pageImage={seoImage}
         pageUrl={`${BASE_URL}${asPath}`}
       />
-      <div className="flex flex-col min-h-full">
+      <div
+        className={classNames(
+          'flex flex-col min-h-full transition-colors duration-300',
+          page?.initialColor === 'green' ? 'bg-yellow' : 'bg-stone'
+        )}
+      >
         {showIntro ? (
           <LogoContainer setShowIntro={() => setShowIntro(false)} />
         ) : (
           <Header
             className="flex-initial"
             currentPage={page?.title}
+            pageBackground={page?.initialColor}
             setShowContent={() => setShowContent(true)}
             mainMenu={siteSettings?.mainMenu as Menus | undefined}
           />

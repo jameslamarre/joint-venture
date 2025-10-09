@@ -108,7 +108,6 @@ body {
   font-size: theme('fontSize.base');
   min-width: 320px;
   overscroll-behavior-y: none;
-  background-color: theme('backgroundColor.stone');
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 

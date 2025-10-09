@@ -20,6 +20,8 @@ const PAGE_QUERY = groq`
   *[_type == "page" && slug.current == $slug]{
     _id,
     _type,
+    title,
+    initialColor,
     seo,
     ${BODY_QUERY}
   }
