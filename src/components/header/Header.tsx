@@ -18,6 +18,7 @@ export const Header: FC<HeaderProps> = ({
   const { asPath } = useRouter()
   const onOpen = useCallback((open: boolean) => setMenuOpen(open), [])
   const [menuOpen, setMenuOpen] = useState(false)
+  const [delay, setDelay] = useState(0.4)
 
   return (
     <div
@@ -29,12 +30,11 @@ export const Header: FC<HeaderProps> = ({
     >
       <motion.header
         role="banner"
-        initial={{ y: asPath === '/' ? 391 : 0, x: 0 }} // Start from logo hyphen end position
+        initial={{ y: asPath === '/' ? 341 : 0, x: 0 }} // Start from logo hyphen end position
         animate={{ y: 0, x: 0 }}
         transition={{
-          duration: 1.2,
-          delay: 0.7, // Start just after logo animation
-          ease: 'easeInOut',
+          duration: 0.8,
+          ease: [0.465, -0.2, 0.52, 0.285],
         }}
         onAnimationComplete={setShowContent}
         className="flex justify-between items-center relative w-wrap h-[75px] top-y mx-auto text-center"
@@ -80,7 +80,12 @@ export const Header: FC<HeaderProps> = ({
                 initial={{ maxWidth: 0 }}
                 animate={{ maxWidth: 200 }}
                 exit={{ maxWidth: 0 }}
-                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                transition={{
+                  duration: 0.5,
+                  delay: delay,
+                  ease: 'easeInOut',
+                }}
+                onAnimationComplete={() => setDelay(0)}
                 className="inline-block leading-none overflow-hidden"
                 style={{ color: 'var(--theme-text--menu)' }}
               >

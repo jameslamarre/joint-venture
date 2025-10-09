@@ -16,13 +16,19 @@ export const LogoContainer: FC<LogoContainerProps> = ({
   const jointVariants = {
     initial: { x: 0 },
     animate: {
-      x: [0, 350, 700, 1050],
-      opacity: [1, 1, 1, 0],
+      x: [0, 350, 700, 1050, 1400],
+      opacity: [1, 1, 1, 1, 0],
       transition: {
-        delay: 2,
-        duration: 2.6,
-        ease: ['easeIn', 'linear', 'linear', 'easeOut'],
-        times: [0, 0.33, 0.66, 1],
+        delay: 1.6,
+        duration: 2.2,
+        ease: [
+          [0.465, -0.3, 0.52, 0.285],
+          'linear',
+          'linear',
+          'linear',
+          'easeOut',
+        ],
+        times: [0, 0.25, 0.5, 0.75, 1],
       },
     },
   }
@@ -30,13 +36,13 @@ export const LogoContainer: FC<LogoContainerProps> = ({
   const venVariants = {
     initial: { x: 0 },
     animate: {
-      x: [0, 0, -290, -580],
-      opacity: [1, 1, 1, 0],
+      x: [0, 0, -250, -500, -750],
+      opacity: [1, 1, 1, 1, 0],
       transition: {
-        delay: 2,
+        delay: 1.8,
         duration: 2,
-        ease: ['easeIn', 'linear', 'linear', 'easeOut'],
-        times: [0, 0.33, 0.66, 1],
+        ease: ['easeIn', 'linear', 'linear', 'linear', 'easeOut'],
+        times: [0, 0.25, 0.5, 0.75, 1],
       },
     },
   }
@@ -52,9 +58,9 @@ export const LogoContainer: FC<LogoContainerProps> = ({
         'scaleX(3.25) translateX(-160px)', // Center position to match header
       ],
       transition: {
-        delay: 2,
-        duration: 2.5,
-        ease: ['easeIn', 'linear', 'linear', 'easeOut'],
+        delay: 1.7,
+        duration: 2.3,
+        ease: ['easeIn', 'linear', 'linear', 'linear', 'easeOut'],
         times: [0, 0.25, 0.5, 0.75, 1],
       },
     },
@@ -63,13 +69,13 @@ export const LogoContainer: FC<LogoContainerProps> = ({
   const tureVariants = {
     initial: { x: 0 },
     animate: {
-      x: [0, -250, -500, -750],
-      opacity: [1, 1, 1, 0],
+      x: [0, -300, -600, -900, -1200],
+      opacity: [1, 1, 1, 1, 0],
       transition: {
-        delay: 2.2,
-        duration: 2.4,
-        ease: ['easeIn', 'linear', 'linear', 'easeOut'],
-        times: [0, 0.33, 0.66, 1],
+        delay: 2,
+        duration: 2,
+        ease: ['easeIn', 'linear', 'linear', 'linear', 'easeOut'],
+        times: [0, 0.25, 0.5, 0.75, 1],
       },
     },
   }
@@ -79,7 +85,7 @@ export const LogoContainer: FC<LogoContainerProps> = ({
       <div
         className={classNames(
           className,
-          'flex flex-col gap-y w-auto pt-page relative mx-auto'
+          'flex flex-col gap-y w-auto mt-ydouble relative mx-auto'
         )}
       >
         {/* JOINT - Top row */}
@@ -108,7 +114,7 @@ export const LogoContainer: FC<LogoContainerProps> = ({
             onAnimationComplete={setShowIntro}
             className="absolute w-[190px] h-[77px] right-0 ml-[30px] mr-[40px] origin-left"
           >
-            <IconHyphen className="w-full" />
+            <IconHyphen className="w-full theme-menu-fill" />
           </motion.div>
         </div>
 
