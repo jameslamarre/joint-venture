@@ -113,7 +113,7 @@ export const Layout: FC<LayoutProps> = ({
           <>
             <Header
               className="flex-initial"
-              currentPage={page._type === 'project' ? 'Films' : page?.title}
+              currentPage={page?._type === 'project' ? 'Films' : page?.title}
               pageBackground={currentTheme}
               setShowContent={() => setShowContent(true)}
               mainMenu={siteSettings?.mainMenu as Menus | undefined}
