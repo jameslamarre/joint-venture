@@ -114,7 +114,7 @@ body {
   font-size: theme('fontSize.base');
   min-width: 320px;
   overscroll-behavior-y: none;
-  background-color: var(--theme-bg);
+  /* background-color: var(--theme-bg); */
   color: var(--theme-text);
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }

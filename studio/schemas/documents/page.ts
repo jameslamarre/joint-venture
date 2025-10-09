@@ -45,7 +45,7 @@ export default {
       options: {
         list: [
           { title: 'Stone', value: 'stone' },
-          { title: 'Green', value: 'green' },
+          { title: 'Yellow', value: 'yellow' },
         ],
         layout: 'radio',
       },

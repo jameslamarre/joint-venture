@@ -130,7 +130,7 @@ export interface Page extends SanityDocument {
    *
    * Sets the initial color of the page before any transitions.
    */
-  initialColor?: "stone" | "green";
+  initialColor?: "stone" | "yellow";
 
   /**
    * Body — `blockContent`
@@ -186,7 +186,7 @@ export interface Project extends SanityDocument {
    *
    * Sets the initial color of the page before any transitions.
    */
-  initialColor?: "stone" | "green";
+  initialColor?: "stone" | "yellow";
 
   /**
    * Trailer — `embed`

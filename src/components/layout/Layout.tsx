@@ -34,13 +34,15 @@ export const Layout: FC<LayoutProps> = ({
   const [showIntro, setShowIntro] = useState(asPath === '/')
   const [showContent, setShowContent] = useState(false)
   const [currentTheme, setCurrentTheme] = useState<'stone' | 'yellow' | 'blue'>(
-    'stone'
+    page?.initialColor || 'stone'
   )
+  const [userOverrideTheme, setUserOverrideTheme] = useState<boolean>(false)
 
   const seoImage =
     (page as any)?.previewImage || (page as any)?.image || undefined
 
   const cycleTheme = () => {
+    setUserOverrideTheme(true)
     setCurrentTheme(prev => {
       switch (prev) {
         case 'stone':
@@ -58,6 +60,16 @@ export const Layout: FC<LayoutProps> = ({
   // Set CSS custom properties for theme colors
   useEffect(() => {
     const root = document.documentElement
+
+    // Only update theme from page if user hasn't overridden it
+    if (
+      !userOverrideTheme &&
+      page?.initialColor &&
+      page.initialColor !== currentTheme
+    ) {
+      setCurrentTheme(page.initialColor)
+    }
+
     switch (currentTheme) {
       case 'stone':
         root.style.setProperty('--theme-bg', '#A59F8D')
@@ -78,7 +90,12 @@ export const Layout: FC<LayoutProps> = ({
         root.style.setProperty('--theme-highlight', '#000')
         break
     }
-  }, [currentTheme])
+  }, [currentTheme, page?.initialColor, userOverrideTheme])
+
+  // Reset user override when navigating to new page
+  useEffect(() => {
+    setUserOverrideTheme(false)
+  }, [asPath])
 
   useEffect(() => {
     if (preview)
