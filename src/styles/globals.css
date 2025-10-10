@@ -27,7 +27,7 @@
   --space-page: calc(var(--header-height) + var(--space-y));
 
   /* container wrap sizes */
-  --app: 1280px;
+  --app: 1440px;
   --wrap: 340px;
   --wrap-2xs: 400px;
   --wrap-xs: 416px;

@@ -65,7 +65,7 @@ const Project: NextPage<PageProps> = (
 
   return !project?._id.includes('drafts.') || preview ? (
     <PageTransition ref={ref}>
-      <article>
+      <article className="max-w-app mx-auto">
         <div className="flex flex-col gap-yhalf pt-yhalf pb-y px-yhalf">
           {project.previewImage && (
             <SanityImage
@@ -75,7 +75,7 @@ const Project: NextPage<PageProps> = (
                 quality: 85,
                 sizes: '(max-width: 640px) 100vw, (max-width: 1024px) 50vw',
               }}
-              className="relative w-full h-auto object-contain"
+              className="relative aspect-video w-full h-fit object-contain"
             />
           )}
 
