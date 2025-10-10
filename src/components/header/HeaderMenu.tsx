@@ -23,28 +23,28 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
 
   const positions = [
     [
-      { x: isMobile ? '15%' : '25%', y: 120 },
-      { x: isMobile ? '40%' : '50%', y: 230 },
-      { x: isMobile ? '45%' : '57.5%', y: 450 },
-      { x: isMobile ? '30%' : '40%', y: 600 },
+      { x: isMobile ? '5%' : '25%', y: 120 },
+      { x: isMobile ? '25%' : '50%', y: 230 },
+      { x: isMobile ? '30%' : '57.5%', y: 450 },
+      { x: isMobile ? '20%' : '40%', y: 600 },
     ],
     [
-      { x: isMobile ? '45%' : '55%', y: 120 },
-      { x: isMobile ? '15%' : '25%', y: 300 },
-      { x: isMobile ? '40%' : '50%', y: 500 },
-      { x: isMobile ? '25%' : '35%', y: 700 },
+      { x: isMobile ? '35%' : '55%', y: 120 },
+      { x: isMobile ? '5%' : '25%', y: 300 },
+      { x: isMobile ? '30%' : '50%', y: 500 },
+      { x: isMobile ? '15%' : '35%', y: 700 },
     ],
     [
-      { x: isMobile ? '15%' : '25%', y: 100 },
-      { x: isMobile ? '35%' : '45%', y: 300 },
-      { x: isMobile ? '20%' : '30%', y: 570 },
-      { x: isMobile ? '45%' : '57.5%', y: 500 },
+      { x: isMobile ? '5%' : '25%', y: 100 },
+      { x: isMobile ? '25%' : '45%', y: 300 },
+      { x: isMobile ? '10%' : '30%', y: 570 },
+      { x: isMobile ? '35%' : '57.5%', y: 500 },
     ],
     [
-      { x: isMobile ? '10%' : '22%', y: 260 },
-      { x: isMobile ? '35%' : '45%', y: 140 },
-      { x: isMobile ? '20%' : '30%', y: 455 },
-      { x: isMobile ? '45%' : '57.5%', y: 570 },
+      { x: isMobile ? '0' : '22%', y: 260 },
+      { x: isMobile ? '20%' : '45%', y: 140 },
+      { x: isMobile ? '10%' : '30%', y: 455 },
+      { x: isMobile ? '30%' : '57.5%', y: 570 },
     ],
   ]
 
