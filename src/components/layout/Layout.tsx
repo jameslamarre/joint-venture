@@ -147,19 +147,21 @@ export const Layout: FC<LayoutProps> = ({
               mainMenu={siteSettings?.mainMenu as Menus | undefined}
             />
 
-            <motion.button
-              initial={{ rotate: 0 }}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 16, ease: 'linear', repeat: Infinity }}
-              onClick={cycleTheme}
-              className="group absolute right-[calc(50%-40px)] md:right-[calc(50%-57px)] lg:right-x bottom-x p-2 hover:bg-black rounded-full z-above"
-            >
-              <IconLogo className="w-[80px] md:w-[114px] h-auto animate-fadeIn theme-menu-fill group-hover:[&_path]:fill-white" />
-            </motion.button>
+            {page?._type === 'page' && (
+              <motion.button
+                initial={{ rotate: 0 }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 16, ease: 'linear', repeat: Infinity }}
+                onClick={cycleTheme}
+                className="group absolute right-[calc(50%-40px)] md:right-[calc(50%-57px)] lg:right-x bottom-x p-2 hover:bg-black rounded-full z-above"
+              >
+                <IconLogo className="w-[80px] md:w-[114px] h-auto animate-fadeIn theme-menu-fill group-hover:[&_path]:fill-white" />
+              </motion.button>
+            )}
           </>
         )}
 
-        {showContent && <main className="flex-auto pt-page">{children}</main>}
+        {showContent && <main className="flex-auto">{children}</main>}
 
         {/* <Footer
           content={siteSettings?.footerSocials as any}

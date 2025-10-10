@@ -47,11 +47,6 @@
   @apply mb-0;
 }
 
-.rich-text blockquote,
-.rich-text p {
-  @apply mx-auto;
-}
-
 .rich-text h1 {
   @apply text-h1;
 }
@@ -83,7 +78,7 @@
 .rich-text.small p,
 .rich-text.small span,
 .rich-text.small li {
-  @apply text-xs leading-normal;
+  @apply text-base leading-normal;
 }
 
 .rich-text ul,

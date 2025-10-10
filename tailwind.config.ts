@@ -50,6 +50,7 @@ export default {
       fontSize: {
         xs: ['var(--font-size-xs)', '1.3'],
         sm: ['var(--font-size-sm)', '1'],
+        base: ['var(--font-size-base)', '0'],
         md: ['var(--font-size-md)', '1.1'],
         lg: ['var(--font-size-lg)', '1'],
         xl: ['var(--font-size-xl)', '1'],

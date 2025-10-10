@@ -2,6 +2,7 @@
   /* font sizes */
   --font-size-xs: 11px;
   --font-size-sm: 12px;
+  --font-size-base: 14px;
   --font-size-md: 18px;
   --font-size-lg: 18px;
   --font-size-xl: 22px;
@@ -72,13 +73,14 @@
     /* font sizes */
     --font-size-xs: 12px;
     --font-size-sm: 14px;
+    --font-size-base: 16px;
     --font-size-md: 24px;
     --font-size-lg: 30px;
     --font-size-xl: 32px;
     --font-size-2xl: 48px;
 
     --space-x: 42px;
-    --space-y: 42px;
+    --space-y: 26px;
     --space-page: calc(var(--header-height) + var(--space-y-double));
   }
 }
@@ -184,4 +186,17 @@ body {
 
 .menu-open-fill {
   fill: #a90736;
+}
+
+.ruled-lines {
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 1.94em,
+    var(--theme-text, #000) 1.94em,
+    var(--theme-text, #000) 2em
+  );
+  background-size: 100% 2em;
+  background-position: 0 0;
+  line-height: 2;
+  background-attachment: local;
 }

@@ -81,7 +81,7 @@ export const Header: FC<HeaderProps> = ({
               <motion.span
                 key="menu-key"
                 initial={{ maxWidth: 0 }}
-                animate={{ maxWidth: 200 }}
+                animate={{ maxWidth: 210 }}
                 exit={{ maxWidth: 0 }}
                 transition={{ duration: 0.2, ease: 'easeInOut' }}
                 className="inline-block leading-none text-white overflow-hidden"
@@ -92,7 +92,7 @@ export const Header: FC<HeaderProps> = ({
               <motion.span
                 key="page-key"
                 initial={{ maxWidth: 0 }}
-                animate={{ maxWidth: 200 }}
+                animate={{ maxWidth: 210 }}
                 exit={{ maxWidth: 0 }}
                 transition={{
                   duration: 0.5,
