@@ -152,9 +152,9 @@ export const Layout: FC<LayoutProps> = ({
               animate={{ rotate: 360 }}
               transition={{ duration: 16, ease: 'linear', repeat: Infinity }}
               onClick={cycleTheme}
-              className="group absolute right-1/2 lg:right-x bottom-x p-2 hover:bg-black rounded-full transform -translate-y-1/2 lg:translate-y-0 z-above"
+              className="group absolute right-[calc(50%-40px)] md:right-[calc(50%-57px)] lg:right-x bottom-x p-2 hover:bg-black rounded-full z-above"
             >
-              <IconLogo className="w-[114px] h-auto animate-fadeIn theme-menu-fill group-hover:[&_path]:fill-white" />
+              <IconLogo className="w-[80px] md:w-[114px] h-auto animate-fadeIn theme-menu-fill group-hover:[&_path]:fill-white" />
             </motion.button>
           </>
         )}

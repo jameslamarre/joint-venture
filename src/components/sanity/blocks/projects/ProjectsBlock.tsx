@@ -47,7 +47,7 @@ export const ProjectsBlock: FC<ProjectsBlockProps> = ({
       )}
 
       {otherProjects && (
-        <div className="grid grid-cols-2 gap-y">
+        <div className="grid md:grid-cols-2 gap-y">
           {otherProjects.map((project: Project, index) => (
             <Link
               key={index}

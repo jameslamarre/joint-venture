@@ -79,19 +79,19 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
   return (
     <div className={className}>
       <Btn
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 uppercase animate-fadeIn z-header"
+        className="absolute right-xhalf md:right-0 top-1/2 transform -translate-y-1/2 uppercase animate-fadeIn z-header"
         onClick={() => {
           setCustomOpen(!customOpen)
         }}
         custom={true}
       >
-        <div className="flex flex-col gap-[6px] w-[37px] h-auto">
+        <div className="flex flex-col gap-[3px] md:gap-[6px] w-[23px] md:w-[37px] h-auto">
           <span
             className={classNames(
               customOpen
                 ? 'rotate-45 translate-x-[1px] -translate-y-[2px] bg-white'
                 : '',
-              'w-full h-[5px] transform transition-all duration-500 origin-top-left'
+              'w-full h-[3.5px] md:h-[5px] transform transition-all duration-500 origin-top-left'
             )}
             style={
               !customOpen
@@ -102,7 +102,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
           <span
             className={classNames(
               customOpen ? 'opacity-0' : 'opacity-1',
-              'w-full h-[5px] transition-opacity duration-300'
+              'w-full h-[3.5px] md:h-[5px] transition-opacity duration-300'
             )}
             style={
               !customOpen
@@ -113,7 +113,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
           <span
             className={classNames(
               customOpen ? '-rotate-45 translate-x-[1px] bg-white' : '',
-              'w-full h-[5px] transform transition-all duration-500 origin-bottom-left'
+              'w-full h-[3.5px] md:h-[5px] transform transition-all duration-500 origin-bottom-left'
             )}
             style={
               !customOpen

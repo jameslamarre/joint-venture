@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import { HTMLAttributes, type FC } from 'react'
+import { HTMLAttributes, useEffect, useState, type FC } from 'react'
 import classNames from 'classnames'
-import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { IconJoint, IconVen, IconTure } from '@components/icons/letters'
 import { IconHyphen } from '@components/icons'
-import { isMobile } from 'react-device-detect'
+import { isMobile, isTablet } from 'react-device-detect'
 
 interface LogoContainerProps extends HTMLAttributes<HTMLDivElement> {
   setShowIntro?: () => void
@@ -14,10 +14,29 @@ export const LogoContainer: FC<LogoContainerProps> = ({
   setShowIntro,
   className,
 }) => {
+  const [isMobileSize, setIsMobileSize] = useState(isMobile)
+  const [isTabletSize, setIsTabletSize] = useState(isTablet)
+  const [loaded, setLoaded] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileSize(window.innerWidth < 768) // Adjust breakpoint as needed
+      setIsTabletSize(window.innerWidth >= 768 && window.innerWidth < 1024) // Adjust breakpoint as needed
+      setLoaded(true)
+    }
+
+    window.addEventListener('resize', handleResize)
+    handleResize() // Initial check
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  if (!loaded) return null
+
   const jointVariants = {
     initial: { x: 0 },
     animate: {
-      x: isMobile ? [0, 150, 300, 450, 600] : [0, 350, 700, 1050, 1400],
+      x: isMobileSize ? [0, 150, 300, 450, 600] : [0, 350, 700, 1050, 1400],
       opacity: [1, 1, 1, 1, 0],
       transition: {
         delay: 1.4,
@@ -37,7 +56,7 @@ export const LogoContainer: FC<LogoContainerProps> = ({
   const venVariants = {
     initial: { x: 0 },
     animate: {
-      x: isMobile
+      x: isMobileSize
         ? [0, 0, -112.5, -225, -337.5, -450]
         : [0, 0, -250, -500, -750, -1000],
       opacity: [1, 1, 1, 1, 1, 0],
@@ -53,12 +72,26 @@ export const LogoContainer: FC<LogoContainerProps> = ({
   const hyphenVariants = {
     initial: { transform: 'scaleX(1)' },
     animate: {
-      transform: [
-        'scaleX(1)',
-        'scaleX(3.25) translateX(0)',
-        'scaleX(3.25) translateX(-80px)',
-        'scaleX(3.25) translateX(-160px)', // Center position to match header
-      ],
+      transform: isTabletSize
+        ? [
+            'scaleX(1)',
+            'scaleX(8.25) translateX(0)',
+            'scaleX(8.25) translateX(-27px)',
+            'scaleX(8.25) scaleY(2.25) translateX(-47px)',
+          ]
+        : isMobileSize
+        ? [
+            'scaleX(1)',
+            'scaleX(4.9) translateX(0)',
+            'scaleX(4.9) translateX(-27px)',
+            'scaleX(4.9) scaleY(2.25) translateX(-53px)',
+          ]
+        : [
+            'scaleX(1)',
+            'scaleX(3.25) translateX(0)',
+            'scaleX(3.25) translateX(-80px)',
+            'scaleX(3.25) translateX(-160px)', // Center position to match header
+          ],
       transition: {
         delay: 1.6,
         duration: 1.5,
@@ -71,7 +104,7 @@ export const LogoContainer: FC<LogoContainerProps> = ({
   const tureVariants = {
     initial: { x: 0 },
     animate: {
-      x: isMobile
+      x: isMobileSize
         ? [0, 0, -137.5, -275, -412.5, -550]
         : [0, -240, -480, -720, -960, -1200],
       opacity: [1, 1, 1, 1, 1, 0],
@@ -103,7 +136,7 @@ export const LogoContainer: FC<LogoContainerProps> = ({
         </motion.div>
 
         {/* VEN– - Middle row */}
-        <div className="flex items-center justify-start relative">
+        <div className="flex items-center justify-start relative w-full">
           <motion.div
             variants={venVariants}
             initial="initial"
@@ -116,7 +149,7 @@ export const LogoContainer: FC<LogoContainerProps> = ({
             initial="initial"
             animate="animate"
             onAnimationComplete={setShowIntro}
-            className="absolute w-[74px] lg:w-[190px] h-[30px] right-0 ml-[20px] lg:ml-[30px] mr-[15px] lg:mr-[40px] origin-left"
+            className="absolute w-[74px] lg:w-[190px] h-[30px] lg:h-[76px] right-0 ml-[20px] lg:ml-[30px] mr-[15px] lg:mr-[40px] origin-left"
           >
             <IconHyphen className="w-full theme-menu-fill" />
           </motion.div>
