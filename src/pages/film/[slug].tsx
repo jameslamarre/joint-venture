@@ -137,16 +137,11 @@ const Project: NextPage<PageProps> = (
     }),
   }
 
-  console.log(view)
-
-  // Update view context when project changes
   useEffect(() => {
     if (project.projectList) {
       const position = project.projectList.findIndex(
         p => p.slug.current === router.query.slug
       )
-
-      console.log(view.film, position)
 
       updateView({
         ...view,
