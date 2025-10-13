@@ -41,7 +41,7 @@ export const Header: FC<HeaderProps> = ({
                 ? 465
                 : isMobile
                 ? 374
-                : 341
+                : 308
               : 0,
           x: 0,
         }} // Start from logo hyphen end position

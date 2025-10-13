@@ -12,6 +12,8 @@ export type ViewProps = {
   page?: '' | 'films' | 'contact'
   nextPage?: '' | 'films' | 'contact'
   previousPage?: '' | 'films' | 'contact'
+  isNavigating?: boolean
+  lastNavigationTime?: number
 
   film?: number | null
   previousFilm?: number
@@ -55,5 +57,19 @@ export function ViewProvider({ children }: { children: ReactNode }) {
 
 export function useView() {
   const [{ view }, { updateView }] = useViewContext()
-  return [view, updateView]
+
+  const setNavigating = (isNavigating: boolean) => {
+    updateView((prev: ViewProps) => ({
+      ...prev,
+      isNavigating,
+      lastNavigationTime: isNavigating ? Date.now() : prev?.lastNavigationTime,
+    }))
+  }
+
+  const canNavigate = () => {
+    if (!view?.lastNavigationTime) return true
+    return Date.now() - view.lastNavigationTime > 800 // 0.8 second cooldown
+  }
+
+  return [view, updateView, { setNavigating, canNavigate }]
 }
