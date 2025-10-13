@@ -1,4 +1,10 @@
-import { useEffect, useState, type FC, type ReactNode } from 'react'
+import {
+  useEffect,
+  useState,
+  useCallback,
+  type FC,
+  type ReactNode,
+} from 'react'
 import { useRouter } from 'next/router'
 import { ToastContainer } from 'react-toastify'
 import type { Menus, Page, Project, SiteSettings } from '@gen/sanity-schema'
@@ -10,6 +16,8 @@ import { triggerToastPreview } from '@components/toast'
 import LogoContainer from '@components/logo/LogoContainer'
 import { IconLogo } from '@components/icons'
 import { motion } from 'framer-motion'
+import classNames from 'classnames'
+import { useRef } from 'react'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 type PageData = Page | Project
@@ -21,21 +29,29 @@ interface LayoutProps {
   siteSettings?: SiteSettings | undefined
 }
 
+const PAGE_ORDER = ['', 'films', 'contact']
+
 export const Layout: FC<LayoutProps> = ({
   children,
   data,
   preview = false,
   siteSettings,
 }) => {
-  const { asPath } = useRouter()
+  const { asPath, push } = useRouter()
   const page: PageData = filterDataToSingleItem(data)
 
   const [showIntro, setShowIntro] = useState(asPath === '/')
   const [showContent, setShowContent] = useState(false)
+  const [showIndicator, setShowIndicator] = useState(false)
+  const [direction, setDirection] = useState<'up' | 'down' | null>(null)
   const [currentTheme, setCurrentTheme] = useState<
     'stone' | 'yellow' | 'blue' | 'dark'
   >(page?.initialColor || 'stone')
   const [userOverrideTheme, setUserOverrideTheme] = useState<boolean>(false)
+  const [keyHoldProgress, setKeyHoldProgress] = useState(0)
+
+  const keyHoldTimer = useRef<NodeJS.Timeout | null>(null)
+  const keyProgressInterval = useRef<NodeJS.Timeout | null>(null)
 
   const seoImage =
     (page as any)?.previewImage || (page as any)?.image || undefined
@@ -57,6 +73,78 @@ export const Layout: FC<LayoutProps> = ({
       }
     })
   }
+
+  const getCurrentPageIndex = useCallback(() => {
+    const currentSlug = asPath.substring(1)
+    return PAGE_ORDER.indexOf(currentSlug)
+  }, [asPath])
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      // Only handle on pages, not projects or intro
+      if (showIntro || page?._type !== 'page') return
+
+      if (
+        (e.key === 'ArrowUp' || e.key === 'ArrowDown') &&
+        !keyHoldTimer.current
+      ) {
+        e.preventDefault()
+        const currentIndex = getCurrentPageIndex()
+
+        // Check if navigation is possible
+        const canNavigateDown =
+          e.key === 'ArrowDown' && currentIndex < PAGE_ORDER.length - 1
+        const canNavigateUp = e.key === 'ArrowUp' && currentIndex > 0
+
+        if (canNavigateDown || canNavigateUp) {
+          setDirection(e.key === 'ArrowDown' ? 'down' : 'up')
+          setShowIndicator(true)
+          setKeyHoldProgress(0)
+
+          // Start progress animation
+          keyProgressInterval.current = setInterval(() => {
+            setKeyHoldProgress(prev => {
+              const newProgress = prev + 100 / 8 // 8 intervals over 1 second
+              return Math.min(newProgress, 100)
+            })
+          }, 100)
+
+          // Set timer for navigation
+          keyHoldTimer.current = setTimeout(() => {
+            if (canNavigateDown) {
+              push(`/${PAGE_ORDER[currentIndex + 1]}`)
+            } else if (canNavigateUp) {
+              push(`/${PAGE_ORDER[currentIndex - 1]}`)
+            }
+            setShowIndicator(false)
+            setKeyHoldProgress(0)
+            if (keyProgressInterval.current) {
+              clearInterval(keyProgressInterval.current)
+              keyProgressInterval.current = null
+            }
+            keyHoldTimer.current = null
+          }, 800)
+        }
+      }
+    },
+    [getCurrentPageIndex, push, showIntro, page?._type]
+  )
+
+  const handleKeyUp = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+      // Cancel navigation if key is released early
+      if (keyHoldTimer.current) {
+        clearTimeout(keyHoldTimer.current)
+        keyHoldTimer.current = null
+      }
+      if (keyProgressInterval.current) {
+        clearInterval(keyProgressInterval.current)
+        keyProgressInterval.current = null
+      }
+      setShowIndicator(false)
+      setKeyHoldProgress(0)
+    }
+  }, [])
 
   // Set CSS custom properties for theme colors
   useEffect(() => {
@@ -116,6 +204,21 @@ export const Layout: FC<LayoutProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asPath])
 
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown)
+    document.addEventListener('keyup', handleKeyUp)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.removeEventListener('keyup', handleKeyUp)
+      if (keyHoldTimer.current) {
+        clearTimeout(keyHoldTimer.current)
+      }
+      if (keyProgressInterval.current) {
+        clearInterval(keyProgressInterval.current)
+      }
+    }
+  }, [handleKeyDown, handleKeyUp])
+
   return (
     <>
       <Head
@@ -135,6 +238,63 @@ export const Layout: FC<LayoutProps> = ({
         className="flex flex-col min-h-full transition-colors duration-300"
         style={{ backgroundColor: 'var(--theme-bg)' }}
       >
+        {/* Page Navigation Indicator with Progress */}
+        {showIndicator && page?._type === 'page' && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="fixed h-dvh inset-0 z-above pointer-events-none flex items-center justify-center"
+          >
+            <div
+              className={classNames(
+                direction === 'up' ? 'top-page' : 'bottom-y',
+                'absolute bg-white rounded-full'
+              )}
+            >
+              <div className="relative w-[42px] h-[42px] flex items-center justify-center">
+                <svg
+                  className="absolute inset-0 w-[42px] h-[42px] -rotate-90"
+                  viewBox="2 2 60 60"
+                >
+                  <circle
+                    cx="32"
+                    cy="32"
+                    r="28"
+                    fill="none"
+                    stroke="var(--theme-bg)"
+                    strokeWidth="4"
+                  />
+                  <motion.circle
+                    cx="32"
+                    cy="32"
+                    r="28"
+                    fill="none"
+                    stroke="var(--theme-text)"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    strokeDasharray="175.929"
+                    initial={{ strokeDashoffset: 175.929 }}
+                    animate={{
+                      strokeDashoffset:
+                        175.929 - (175.929 * keyHoldProgress) / 100,
+                    }}
+                    transition={{
+                      duration: 0.1,
+                      ease: 'linear',
+                    }}
+                  />
+                </svg>
+                <div
+                  className="flex items-center justify-center w-8 h-8 text-md z-10"
+                  style={{ color: 'var(--theme-text)' }}
+                >
+                  {direction === 'up' ? '↑' : '↓'}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         {showIntro ? (
           <LogoContainer setShowIntro={() => setShowIntro(false)} />
         ) : (

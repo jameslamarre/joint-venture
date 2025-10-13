@@ -5,12 +5,7 @@ import type { PageProps } from '@lib/next'
 import { getPageStaticProps } from '@lib/next'
 import { BODY_QUERY, filterDataToSingleItem } from '@studio/lib'
 import { BlockContent } from '@components/sanity'
-import {
-  forwardRef,
-  ForwardRefRenderFunction,
-  useEffect,
-  useState,
-} from 'react'
+import { forwardRef, ForwardRefRenderFunction } from 'react'
 import { useRouter } from 'next/router'
 import { AnimatePresence, motion } from 'framer-motion'
 import PageTransition from '@components/transition/PageTransition'
@@ -28,8 +23,6 @@ const HOME_QUERY = groq`
   }
 `
 
-const PAGE_ORDER = ['', 'films', 'contact']
-
 export const getStaticProps: GetStaticProps = context =>
   getPageStaticProps({ ...context, query: HOME_QUERY })
 
@@ -38,29 +31,6 @@ const Page: NextPage<PageProps> = (
   ref: PageRefType
 ) => {
   const page: SanityPage = filterDataToSingleItem(data)
-  const { push } = useRouter()
-
-  const [showIndicator, setShowIndicator] = useState(false)
-
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      setShowIndicator(true)
-      setTimeout(() => {
-        push(`/films`)
-        setShowIndicator(false)
-      }, 200)
-    }
-  }
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   const pageVariants = {
     initial: {
@@ -79,25 +49,7 @@ const Page: NextPage<PageProps> = (
 
   return page?.body && (!page?._id.includes('drafts.') || preview) ? (
     <PageTransition ref={ref}>
-      {/* Swipe Indicator */}
-      {showIndicator && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="fixed h-dvh inset-0 z-above pointer-events-none flex items-center justify-center"
-        >
-          <div className="absolute bottom-y bg-white rounded-full p-4">
-            <div
-              className="flex items-center justify-center w-8 h-8 mb-1 text-2xl"
-              style={{ color: 'var(--theme-text)' }}
-            >
-              ↓
-            </div>
-          </div>
-        </motion.div>
-      )}
-
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         <motion.article
           key="home-page"
           variants={pageVariants}
