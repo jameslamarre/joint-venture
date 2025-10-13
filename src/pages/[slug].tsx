@@ -81,10 +81,10 @@ const Page: NextPage<PageProps> = (
       <AnimatePresence mode="wait">
         <motion.article
           key={asPath}
-          // variants={pageVariants}
-          // initial="initial"
-          // animate="animate"
-          // exit="exit"
+          variants={pageVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
           className="pt-page"
         >
           <BlockContent blocks={page?.body} className="flex flex-col w-full" />
