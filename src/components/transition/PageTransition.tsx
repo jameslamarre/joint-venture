@@ -11,11 +11,11 @@ function PageTransition(
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0 }}
+      initial={{ opacity: 0.95 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      exit={{ opacity: 0.95 }}
       transition={{
-        duration: 0.3,
+        duration: 0.6,
         ease: 'easeInOut',
       }}
     >

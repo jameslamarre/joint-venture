@@ -14,13 +14,24 @@ import {
   CTA_QUERY,
   filterDataToSingleItem,
 } from '@studio/lib'
-import { forwardRef, ForwardRefRenderFunction } from 'react'
+import {
+  forwardRef,
+  ForwardRefRenderFunction,
+  useState,
+  useEffect,
+} from 'react'
 import PageTransition from '@components/transition/PageTransition'
 import { SanityImage } from '@components/sanity'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { IconLogo } from '@components/icons'
+import classNames from 'classnames'
+import { useRouter } from 'next/router'
 
 type PageRefType = React.ForwardedRef<HTMLDivElement>
+
+interface ProjectProps extends SanityProject {
+  projectList: { slug: { current: string }; title: string }[]
+}
 
 const ALL_SLUGS_QUERY = groq`*[_type == "project" && defined(slug.current)][].slug.current`
 const PROJECT_QUERY = groq`
@@ -29,6 +40,12 @@ const PROJECT_QUERY = groq`
     _type,
     title,
     seo,
+    "projectList": *[_type == "page" && slug.current == "films"][0].body[_type == "projectsBlock"][0].projects[]->{
+      _id,
+      _type,
+      slug,
+      title
+    },
     initialColor,
     previewImage,
     trailer, 
@@ -61,74 +78,181 @@ const Project: NextPage<PageProps> = (
   { data, preview }: InferGetStaticPropsType<typeof getStaticProps>,
   ref: PageRefType
 ) => {
-  const project: SanityProject = filterDataToSingleItem(data)
+  const router = useRouter()
+  const project: ProjectProps = filterDataToSingleItem(data)
+
+  const [slideDirection, setSlideDirection] = useState<number | null>(null)
+  const [currentPosition, setCurrentPosition] = useState(() => {
+    if (project.projectList && router.query.slug) {
+      const position = project.projectList.findIndex(
+        p => p.slug.current === router.query.slug
+      )
+      if (position !== -1) {
+        return position
+      }
+    }
+    return 0
+  })
+
+  const moveToProject = (newPosition: number, direction: number) => {
+    if (newPosition >= 0 && newPosition < project.projectList.length) {
+      setSlideDirection(direction)
+      const targetSlug = project.projectList[newPosition].slug.current
+      router.push(`/film/${targetSlug}`)
+    }
+  }
+
+  const goToPrevious = () => {
+    const prevPosition =
+      currentPosition > 0 ? currentPosition - 1 : project.projectList.length - 1
+    moveToProject(prevPosition, -1)
+  }
+
+  const goToNext = () => {
+    const nextPosition =
+      currentPosition < project.projectList.length - 1 ? currentPosition + 1 : 0
+    moveToProject(nextPosition, 1)
+  }
+
+  let fieldLength = 1
+  if (project) {
+    if (project.directedBy) fieldLength++
+    if (project.writtenBy) fieldLength++
+    if (project.producedBy) fieldLength++
+    if (project.starring) fieldLength++
+    if (project.otherFields) fieldLength += project.otherFields.length
+  }
+
+  const contentMotion = {
+    incoming: (dir: number) => ({
+      clipPath: dir > 0 ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)',
+      opacity: 0.8,
+    }),
+    visible: {
+      clipPath: 'inset(0 0 0 0)',
+      opacity: 1,
+    },
+    outgoing: (dir: number) => ({
+      clipPath: dir < 0 ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)',
+      opacity: 0.8,
+    }),
+  }
 
   return !project?._id.includes('drafts.') || preview ? (
     <PageTransition ref={ref}>
       <article className="max-w-app mx-auto">
         <div className="flex flex-col gap-yhalf pt-yhalf pb-y px-yhalf">
-          {project.previewImage && (
-            <SanityImage
-              asset={project.previewImage.asset}
-              props={{
-                alt: 'Project image',
-                quality: 85,
-                sizes: '(max-width: 640px) 100vw, (max-width: 1024px) 50vw',
+          <AnimatePresence custom={slideDirection} mode="wait">
+            <motion.div
+              key={router.query.slug as string}
+              custom={slideDirection}
+              variants={contentMotion}
+              initial="incoming"
+              animate="visible"
+              exit="outgoing"
+              transition={{
+                type: 'tween',
+                duration: 0.6,
+                ease: 'easeInOut',
               }}
-              className="relative aspect-video w-full h-fit object-contain"
-            />
-          )}
+            >
+              {project.previewImage && (
+                <div className="relative">
+                  <SanityImage
+                    asset={project.previewImage.asset}
+                    props={{
+                      alt: 'Project image',
+                      quality: 85,
+                      sizes:
+                        '(max-width: 640px) 100vw, (max-width: 1024px) 50vw',
+                    }}
+                    className="relative aspect-video w-full h-fit object-contain"
+                  />
 
-          <div className="flex items-center gap-0 bg-white border-top border-left md:border-right">
-            <div className="hidden md:flex items-center justify-center order-2 w-[140px] md:w-[210px] h-[-webkit-fill-available] px-xdouble xl:px-0 border-bottom">
-              <div className="p-2 bg-black rounded-full z-above">
-                <IconLogo className="w-[80px] md:w-[114px] h-auto [&_path]:fill-white" />
-              </div>
-            </div>
-            <div className="flex flex-col gap-0 w-full">
-              {project.title && (
-                <div className="px-2 border-right ruled-lines">
-                  <h4 className="inline text-h4 mr-1">Title:</h4>
-                  <p className="inline">{project.title}</p>
-                </div>
-              )}
-              {project.directedBy && (
-                <div className="px-2 border-right ruled-lines">
-                  <h4 className="inline text-h4 mr-1">Directed by:</h4>
-                  <p className="inline">{project.directedBy}</p>
-                </div>
-              )}
-              {project.writtenBy && (
-                <div className="px-2 border-right ruled-lines">
-                  <h4 className="inline text-h4 mr-1">Written by:</h4>
-                  <p className="inline">{project.writtenBy}</p>
-                </div>
-              )}
-              {project.producedBy && (
-                <div className="px-2 border-right ruled-lines">
-                  <h4 className="inline text-h4 mr-1">Produced by:</h4>
-                  <p className="inline">{project.producedBy}</p>
-                </div>
-              )}
-              {project.starring && (
-                <div className="px-2 border-right ruled-lines">
-                  <h4 className="inline text-h4 mr-1">Starring:</h4>
-                  <p className="inline">{project.starring}</p>
-                </div>
-              )}
+                  {/* Navigation Controls */}
+                  <div className="flex justify-between items-center w-full mt-2 mb-y border-top border-bottom">
+                    <button
+                      onClick={goToPrevious}
+                      className="w-full px-xhalf hover:bg-white border-left border-right text-left"
+                    >
+                      <span className="inline-block py-1 leading-none uppercase font-sans">
+                        Previous
+                      </span>
+                    </button>
 
-              {project.otherFields &&
-                project.otherFields.map(other => (
-                  <div
-                    key={other._key}
-                    className="px-2 border-right ruled-lines"
-                  >
-                    <h4 className="inline text-h4 mr-1">{other.title}:</h4>
-                    <p className="inline">{other.value}</p>
+                    <button
+                      onClick={goToNext}
+                      className="w-full px-xhalf hover:bg-white border-right text-right"
+                    >
+                      <span className="inline-block py-1 leading-none uppercase font-sans">
+                        Next
+                      </span>
+                    </button>
                   </div>
-                ))}
-            </div>
-          </div>
+                </div>
+              )}
+
+              <div className="flex items-center gap-0 bg-white border-top border-left md:border-right">
+                <div className="hidden md:flex items-center justify-center order-2 w-[140px] md:w-[210px] h-[-webkit-fill-available] px-xdouble xl:px-0 border-bottom">
+                  <div className="p-2 bg-black rounded-full z-above">
+                    <IconLogo
+                      className={classNames(
+                        fieldLength > 4 ? 'md:w-[114px]' : '',
+                        fieldLength === 4 ? 'md:w-[5.25em]' : '',
+                        fieldLength === 3 ? 'md:w-[4.25em]' : '',
+                        fieldLength === 2 ? 'md:w-[3em]' : '',
+                        fieldLength === 1 ? 'md:w-[2em]' : '',
+                        'h-auto [&_path]:fill-white'
+                      )}
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col gap-0 w-full">
+                  {project.title && (
+                    <div className="px-2 border-right ruled-lines">
+                      <h4 className="inline text-h4 mr-1">Title:</h4>
+                      <p className="inline">{project.title}</p>
+                    </div>
+                  )}
+                  {project.directedBy && (
+                    <div className="px-2 border-right ruled-lines">
+                      <h4 className="inline text-h4 mr-1">Directed by:</h4>
+                      <p className="inline">{project.directedBy}</p>
+                    </div>
+                  )}
+                  {project.writtenBy && (
+                    <div className="px-2 border-right ruled-lines">
+                      <h4 className="inline text-h4 mr-1">Written by:</h4>
+                      <p className="inline">{project.writtenBy}</p>
+                    </div>
+                  )}
+                  {project.producedBy && (
+                    <div className="px-2 border-right ruled-lines">
+                      <h4 className="inline text-h4 mr-1">Produced by:</h4>
+                      <p className="inline">{project.producedBy}</p>
+                    </div>
+                  )}
+                  {project.starring && (
+                    <div className="px-2 border-right ruled-lines">
+                      <h4 className="inline text-h4 mr-1">Starring:</h4>
+                      <p className="inline">{project.starring}</p>
+                    </div>
+                  )}
+
+                  {project.otherFields &&
+                    project.otherFields.map(other => (
+                      <div
+                        key={other._key}
+                        className="px-2 border-right ruled-lines"
+                      >
+                        <h4 className="inline text-h4 mr-1">{other.title}:</h4>
+                        <p className="inline">{other.value}</p>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </article>
     </PageTransition>
