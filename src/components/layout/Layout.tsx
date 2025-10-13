@@ -99,7 +99,6 @@ export const Layout: FC<LayoutProps> = ({
 
   const navigateToPage = useCallback(
     (targetPage: string) => {
-      console.log('navigateToPage', canNavigate)
       if (!canNavigate()) return
 
       setShowIndicator(false)
@@ -303,8 +302,6 @@ export const Layout: FC<LayoutProps> = ({
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asPath])
-
-  console.log(keyHoldProgress)
 
   return (
     <>
