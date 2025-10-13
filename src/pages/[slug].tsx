@@ -15,6 +15,7 @@ import {
   ForwardRefRenderFunction,
   useEffect,
   useState,
+  useCallback,
 } from 'react'
 import PageTransition from '@components/transition/PageTransition'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -56,36 +57,38 @@ const Page: NextPage<PageProps> = (
   const [showIndicator, setShowIndicator] = useState(false)
   const [direction, setDirection] = useState<'up' | 'down' | null>(null)
 
-  const getCurrentPageIndex = () => {
+  const getCurrentPageIndex = useCallback(() => {
     const currentSlug = asPath.substring(1)
     return PAGE_ORDER.indexOf(currentSlug)
-  }
+  }, [asPath])
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    console.log('Key pressed:', e.key)
-    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-      e.preventDefault()
-      const currentIndex = getCurrentPageIndex()
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        e.preventDefault()
+        const currentIndex = getCurrentPageIndex()
 
-      if (e.key === 'ArrowDown' && currentIndex < PAGE_ORDER.length - 1) {
-        // Arrow down - next page
-        setDirection('down')
-        setShowIndicator(true)
-        setTimeout(() => {
-          push(`/${PAGE_ORDER[currentIndex + 1]}`)
-          setShowIndicator(false)
-        }, 200)
-      } else if (e.key === 'ArrowUp' && currentIndex > 0) {
-        // Arrow up - previous page
-        setDirection('up')
-        setShowIndicator(true)
-        setTimeout(() => {
-          push(`/${PAGE_ORDER[currentIndex - 1]}`)
-          setShowIndicator(false)
-        }, 200)
+        if (e.key === 'ArrowDown' && currentIndex < PAGE_ORDER.length - 1) {
+          // Arrow down - next page
+          setDirection('down')
+          setShowIndicator(true)
+          setTimeout(() => {
+            push(`/${PAGE_ORDER[currentIndex + 1]}`)
+            setShowIndicator(false)
+          }, 200)
+        } else if (e.key === 'ArrowUp' && currentIndex > 0) {
+          // Arrow up - previous page
+          setDirection('up')
+          setShowIndicator(true)
+          setTimeout(() => {
+            push(`/${PAGE_ORDER[currentIndex - 1]}`)
+            setShowIndicator(false)
+          }, 200)
+        }
       }
-    }
-  }
+    },
+    [getCurrentPageIndex, push]
+  )
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown)
@@ -93,8 +96,7 @@ const Page: NextPage<PageProps> = (
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [asPath])
+  }, [handleKeyDown])
 
   const pageVariants = {
     initial: {

@@ -42,16 +42,10 @@ const Page: NextPage<PageProps> = (
 
   const [showIndicator, setShowIndicator] = useState(false)
 
-  const handleKeyPressDown = (e: KeyboardEvent) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       setShowIndicator(true)
-    }
-  }
-
-  const handleKeyPressUp = (e: KeyboardEvent) => {
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
       setTimeout(() => {
         push(`/films`)
         setShowIndicator(false)
@@ -60,12 +54,10 @@ const Page: NextPage<PageProps> = (
   }
 
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyPressDown)
-    document.addEventListener('keyup', handleKeyPressUp)
+    document.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      document.removeEventListener('keydown', handleKeyPressDown)
-      document.removeEventListener('keyup', handleKeyPressUp)
+      document.removeEventListener('keydown', handleKeyDown)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
