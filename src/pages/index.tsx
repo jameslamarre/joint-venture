@@ -52,7 +52,6 @@ const Page: NextPage<PageProps> = (
   const handleKeyPressUp = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault()
-      setShowIndicator(false)
       setTimeout(() => {
         push(`/films`)
         setShowIndicator(false)
