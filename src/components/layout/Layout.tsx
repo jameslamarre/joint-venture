@@ -223,13 +223,14 @@ export const Layout: FC<LayoutProps> = ({
 
   // Remove keyboard handlers and add wheel handler
   useEffect(() => {
+    const keyHoldTimerRef = keyHoldTimer.current
+    const keyProgressIntervalRef = keyProgressInterval.current
+    const resetTimerRef = resetTimer.current
+
     document.addEventListener('wheel', handleWheel, { passive: false })
 
     return () => {
       document.removeEventListener('wheel', handleWheel)
-      const keyHoldTimerRef = keyHoldTimer.current
-      const keyProgressIntervalRef = keyProgressInterval.current
-      const resetTimerRef = resetTimer.current
 
       if (keyHoldTimerRef) {
         clearTimeout(keyHoldTimerRef)
