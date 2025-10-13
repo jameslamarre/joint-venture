@@ -48,8 +48,12 @@ export const blockMarks: Partial<PortableTextReactComponents['marks']> = {
   highlight: ({ children }) => {
     return <span className="highlight">{children}</span>
   },
-  anchor: ({ children, value }) => {
-    return <span id={value.anchorId}>{children}</span>
+  alignment: ({ children, value }) => {
+    return (
+      <span style={{ textAlign: value.align }} className="inline-block w-full">
+        {children}
+      </span>
+    )
   },
 }
 

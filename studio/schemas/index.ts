@@ -27,6 +27,7 @@ import projectsBlock from './blocks/projects-block'
 import embedBlock from './blocks/embed-block'
 import textAndImageBlock from './blocks/text-and-image-block'
 import scrollingTextBlock from './blocks/scrolling-text-block'
+import newsletterBlock from './blocks/newsletter-block'
 
 export const schemaTypes = [
   // objects
@@ -55,6 +56,7 @@ export const schemaTypes = [
   embedBlock,
   figuresBlock,
   mediaBlock,
+  newsletterBlock,
   projectsBlock,
   scrollingTextBlock,
   textBlock,

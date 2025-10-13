@@ -49,31 +49,10 @@ export const plainTextField = {
   title: 'Text',
 }
 
-export const urlSubmitField = {
-  name: 'urlSubmit',
-  type: 'string',
-  title: 'URL Submit',
-  descriotion: 'URL to submit form data to minus the form ID/GUID and API key',
-}
-
 export const idField = {
   name: 'audienceId',
   type: 'string',
   title: 'Audience ID/Form GUID',
 }
 
-export const successField = {
-  name: 'successMessage',
-  type: 'richText',
-  title: 'Success Message',
-}
-
 export const topFields = [titleField, slugField]
-export const newsletterFields = [
-  headerField,
-  textField,
-  urlSubmitField,
-  idField,
-  successField,
-]
-export const contactFields = [headerField, textField, idField]

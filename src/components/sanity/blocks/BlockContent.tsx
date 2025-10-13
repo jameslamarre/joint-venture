@@ -11,6 +11,7 @@ import {
   EmbedBlock,
   TextAndImageBlock,
   ScrollingTextBlock,
+  NewsletterBlock,
 } from '.'
 import classNames from 'classnames'
 
@@ -46,6 +47,9 @@ export const BlockContent: FC<SanityBlockElement> = ({
             ),
             mediaBlock: ({ index, value }) => (
               <MediaBlock index={index} {...value} />
+            ),
+            newsletterBlock: ({ index, value }) => (
+              <NewsletterBlock index={index} {...value} />
             ),
             projectsBlock: ({ index, value }) => (
               <ProjectsBlock index={index} {...value} />

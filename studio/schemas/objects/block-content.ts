@@ -4,11 +4,6 @@ export default {
   type: 'array',
   of: [
     {
-      name: 'accordionBlock',
-      type: 'accordionBlock',
-      title: 'Accordion Block',
-    },
-    {
       name: 'dividerBlock',
       type: 'dividerBlock',
       title: 'Divider Block',
@@ -19,14 +14,14 @@ export default {
       title: 'Embed Block',
     },
     {
-      name: 'figuresBlock',
-      type: 'figuresBlock',
-      title: 'Figures Block',
-    },
-    {
       name: 'mediaBlock',
       type: 'mediaBlock',
       title: 'Media Block',
+    },
+    {
+      name: 'newsletterBlock',
+      type: 'newsletterBlock',
+      title: 'Newsletter Block',
     },
     {
       name: 'projectsBlock',

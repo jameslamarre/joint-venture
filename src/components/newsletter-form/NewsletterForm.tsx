@@ -1,13 +1,18 @@
+import { RichText } from '@components/sanity'
+import { TypedObject } from '@portabletext/types'
+import { RichText as RichTextType } from '@studio/gen/sanity-schema'
 import classNames from 'classnames'
 import { useState, type FC } from 'react'
 
 type NewsletterFormProps = {
   newsletterId: string
   className?: string
+  successMessage?: RichTextType
 }
 
 export const NewsletterForm: FC<NewsletterFormProps> = ({
   newsletterId,
+  successMessage,
   className,
 }) => {
   const [email, setEmail] = useState('')
@@ -52,47 +57,37 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({
   }
 
   if (formSubmitted && !formError) {
-    return (
-      <div className={classNames(className, 'font-medium text-center')}>
-        Thanks for subscribing!
-      </div>
-    )
+    return <RichText blocks={successMessage as TypedObject | TypedObject[]} />
   }
 
   return (
-    <div className={classNames(className, '')}>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-yquarter w-full h-full pt-1"
-      >
-        <label className="block text-xs">{`Join our TINY mailing list!`}</label>
-
-        <div className="flex">
+    <div className={classNames(className)}>
+      <form onSubmit={handleSubmit}>
+        <div className="flex flex-col">
           <input
             type="email"
             value={email}
+            name="email"
             onChange={e => setEmail(e.target.value)}
-            placeholder="Email address"
-            className="input flex-1 h-input"
+            placeholder="Enter your email"
+            className="input w-full h-[32px]"
             required
           />
 
           <button
-            className={`flex justify-between items-center h-input px-[14px] ${
-              isSubmitting ? 'opacity-50' : ''
-            }`}
+            className="w-full h-[30px] text-center hover:bg-white border-left border-right border-bottom font-sans text-sm uppercase"
             type="submit"
             disabled={isSubmitting}
           >
-            <span className="relative inline-block top-[2px] text-center">
-              {isSubmitting ? 'Submitting...' : 'Subscribe'}
-            </span>
+            {isSubmitting ? 'Submitting...' : 'Submit'}
           </button>
         </div>
       </form>
 
       {formError && (
-        <div className="text-sm text-red mt-yhalf">{formError}</div>
+        <div className="w-full text-center text-sm font-sans text-red mt-yhalf uppercase">
+          {formError}
+        </div>
       )}
     </div>
   )

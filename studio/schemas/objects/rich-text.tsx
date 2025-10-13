@@ -3,7 +3,7 @@ import { BiCode } from 'react-icons/bi'
 import { GiButtonFinger } from 'react-icons/gi'
 import { GrImage } from 'react-icons/gr'
 import { RxDividerHorizontal } from 'react-icons/rx'
-import { LuHighlighter } from 'react-icons/lu'
+import { LuAlignLeft, LuHighlighter } from 'react-icons/lu'
 
 const HighlightDecorator = (props: any) => {
   return <span style={{ backgroundColor: '#CFE806' }}>{props.children}</span>
@@ -42,15 +42,23 @@ export default {
             type: 'link',
           },
           {
-            name: 'anchor',
-            title: 'Anchor',
+            title: 'Alignment',
+            name: 'alignment',
             type: 'object',
-            icon: () => '#',
+            icon: LuAlignLeft,
             fields: [
               {
-                name: 'anchorId',
-                title: 'Anchor ID',
+                title: 'Align',
+                name: 'align',
                 type: 'string',
+                options: {
+                  list: [
+                    { title: 'Left', value: 'left' },
+                    { title: 'Center', value: 'center' },
+                    { title: 'Right', value: 'right' },
+                  ],
+                  layout: 'radio',
+                },
               },
             ],
           },

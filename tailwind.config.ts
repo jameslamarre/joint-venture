@@ -191,6 +191,7 @@ export default {
           fontSize: theme('fontSize.lg'),
           fontFamily: theme('fontFamily.sans'),
           letterSpacing: '0.05em',
+          textTransform: 'uppercase',
         },
         '.text-h4': {
           fontSize: theme('fontSize.sm'),

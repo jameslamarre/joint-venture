@@ -612,11 +612,10 @@ export type Video = {
 };
 
 export type BlockContent = Array<
-  | SanityKeyed<AccordionBlock>
   | SanityKeyed<DividerBlock>
   | SanityKeyed<EmbedBlock>
-  | SanityKeyed<FiguresBlock>
   | SanityKeyed<MediaBlock>
+  | SanityKeyed<NewsletterBlock>
   | SanityKeyed<ProjectsBlock>
   | SanityKeyed<ScrollingTextBlock>
   | SanityKeyed<TextBlock>
@@ -685,6 +684,37 @@ export type MediaBlock = {
    *
    */
   media?: Media;
+};
+
+export type NewsletterBlock = {
+  _type: "newsletterBlock";
+  /**
+   * Header — `string`
+   *
+   *
+   */
+  header?: string;
+
+  /**
+   * URL Submit — `string`
+   *
+   *
+   */
+  urlSubmit?: string;
+
+  /**
+   * Audience ID/Form GUID — `string`
+   *
+   *
+   */
+  audienceId?: string;
+
+  /**
+   * Success Message — `richText`
+   *
+   *
+   */
+  successMessage?: RichText;
 };
 
 export type ProjectsBlock = {
