@@ -29,8 +29,6 @@ const PAGE_QUERY = groq`
   }
 `
 
-const PAGE_ORDER = ['', 'films', 'contact']
-
 export const getStaticPaths: GetStaticPaths = async () => {
   const pages = await client.fetch(ALL_SLUGS_QUERY)
   return {

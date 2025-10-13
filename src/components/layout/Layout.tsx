@@ -18,7 +18,7 @@ import { IconLogo } from '@components/icons'
 import { AnimatePresence, motion } from 'framer-motion'
 import classNames from 'classnames'
 import { useRef } from 'react'
-import { useView } from '@contexts/view/ViewContext'
+import { useNavigation } from '@contexts/view/ViewContext'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 type PageData = Page | Project
@@ -40,7 +40,8 @@ export const Layout: FC<LayoutProps> = ({
 }) => {
   const { asPath, push } = useRouter()
   const page: PageData = filterDataToSingleItem(data)
-  const [view, updateView, { setNavigating, canNavigate }] = useView() as any
+  const [view, updateView, { setNavigating, canNavigate }] =
+    useNavigation() as any
 
   const [showIntro, setShowIntro] = useState(asPath === '/')
   const [showContent, setShowContent] = useState(false)
@@ -206,6 +207,7 @@ export const Layout: FC<LayoutProps> = ({
     const currentPageSlug = PAGE_ORDER[currentIndex] as '' | 'films' | 'contact'
 
     updateView({
+      ...view,
       page: currentPageSlug,
       nextPage:
         currentIndex < PAGE_ORDER.length - 1
@@ -218,7 +220,8 @@ export const Layout: FC<LayoutProps> = ({
       isNavigating: false,
       lastNavigationTime: view?.lastNavigationTime,
     })
-  }, [asPath, getCurrentPageIndex, updateView, view?.lastNavigationTime])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [asPath, getCurrentPageIndex, view?.lastNavigationTime])
 
   // Remove keyboard handlers and add wheel handler
   useEffect(() => {

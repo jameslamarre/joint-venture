@@ -58,6 +58,12 @@ export function ViewProvider({ children }: { children: ReactNode }) {
 export function useView() {
   const [{ view }, { updateView }] = useViewContext()
 
+  return [view, updateView]
+}
+
+export function useNavigation() {
+  const [{ view }, { updateView }] = useViewContext()
+
   const setNavigating = (isNavigating: boolean) => {
     updateView((prev: ViewProps) => ({
       ...prev,

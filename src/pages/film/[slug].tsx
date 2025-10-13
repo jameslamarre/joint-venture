@@ -137,6 +137,8 @@ const Project: NextPage<PageProps> = (
     }),
   }
 
+  console.log(view)
+
   // Update view context when project changes
   useEffect(() => {
     if (project.projectList) {
@@ -144,19 +146,17 @@ const Project: NextPage<PageProps> = (
         p => p.slug.current === router.query.slug
       )
 
-      if (position !== -1) {
-        updateView({
-          ...view,
-          film: position,
-          previousFilm:
-            position > 0 ? position - 1 : project.projectList.length - 1,
-          nextFilm:
-            position < project.projectList.length - 1 ? position + 1 : 0,
-        })
-      }
+      console.log(view.film, position)
+
+      updateView({
+        ...view,
+        film: position,
+        previousFilm: view?.film as number,
+        nextFilm: position < project.projectList.length - 1 ? position + 1 : 0,
+      })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.query.slug, project.projectList, updateView])
+  }, [router.query.slug, project.projectList])
 
   return !project?._id.includes('drafts.') || preview ? (
     <PageTransition ref={ref}>
