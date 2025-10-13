@@ -52,15 +52,27 @@ const Page: NextPage<PageProps> = (
   const pageVariants = {
     initial: {
       clipPath: 'inset(100% 0 0 0)',
-      opacity: 0,
+      opacity: 0.9,
+      transition: {
+        duration: 0.6,
+        ease: 'easeInOut',
+      },
     },
     animate: {
       clipPath: 'inset(0 0 0 0)',
       opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: 'easeInOut',
+      },
     },
     exit: {
       clipPath: 'inset(0 0 100% 0)',
-      opacity: 0,
+      opacity: 0.9,
+      transition: {
+        duration: 0.6,
+        ease: 'easeInOut',
+      },
     },
   }
 
@@ -69,15 +81,10 @@ const Page: NextPage<PageProps> = (
       <AnimatePresence mode="wait">
         <motion.article
           key={asPath}
-          variants={pageVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          transition={{
-            duration: 0.5,
-            ease: 'easeInOut',
-            clipPath: { duration: 0.4 },
-          }}
+          // variants={pageVariants}
+          // initial="initial"
+          // animate="animate"
+          // exit="exit"
           className="pt-page"
         >
           <BlockContent blocks={page?.body} className="flex flex-col w-full" />

@@ -6,6 +6,7 @@ import { Layout } from '@components/layout'
 import { Scripts } from '@components/scripts'
 import { Analytics } from '@vercel/analytics/react'
 import { animateScroll as scroll } from 'react-scroll'
+import ContextProvider from '@/contexts'
 
 import 'focus-visible'
 import 'swiper/css'
@@ -46,13 +47,15 @@ function App({ Component, pageProps }: AppProps<{}>) {
   console.log('🔵 Site developed by https://masthead.dev 🟡')
 
   return (
-    <Layout {...pageProps}>
-      <Scripts />
-      <AnimatePresence initial={false} mode="wait">
-        <Component {...pageProps} key={`page-${(pageProps as any).slug}`} />
-      </AnimatePresence>
-      <Analytics />
-    </Layout>
+    <ContextProvider>
+      <Layout {...pageProps}>
+        <Scripts />
+        <AnimatePresence initial={false} mode="wait">
+          <Component {...pageProps} key={`page-${(pageProps as any).slug}`} />
+        </AnimatePresence>
+        <Analytics />
+      </Layout>
+    </ContextProvider>
   )
 }
 

@@ -26,6 +26,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { IconLogo } from '@components/icons'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
+import { useView, ViewProps } from '@contexts/view/ViewContext'
 
 type PageRefType = React.ForwardedRef<HTMLDivElement>
 
@@ -80,19 +81,12 @@ const Project: NextPage<PageProps> = (
 ) => {
   const router = useRouter()
   const project: ProjectProps = filterDataToSingleItem(data)
+  const [view, updateView] = useView() as [
+    ViewProps,
+    React.Dispatch<React.SetStateAction<ViewProps>>
+  ]
 
   const [slideDirection, setSlideDirection] = useState<number | null>(null)
-  const [currentPosition, setCurrentPosition] = useState(() => {
-    if (project.projectList && router.query.slug) {
-      const position = project.projectList.findIndex(
-        p => p.slug.current === router.query.slug
-      )
-      if (position !== -1) {
-        return position
-      }
-    }
-    return 0
-  })
 
   const moveToProject = (newPosition: number, direction: number) => {
     if (newPosition >= 0 && newPosition < project.projectList.length) {
@@ -103,15 +97,15 @@ const Project: NextPage<PageProps> = (
   }
 
   const goToPrevious = () => {
-    const prevPosition =
-      currentPosition > 0 ? currentPosition - 1 : project.projectList.length - 1
-    moveToProject(prevPosition, -1)
+    if (view?.previousFilm !== undefined) {
+      moveToProject(view.previousFilm, -1)
+    }
   }
 
   const goToNext = () => {
-    const nextPosition =
-      currentPosition < project.projectList.length - 1 ? currentPosition + 1 : 0
-    moveToProject(nextPosition, 1)
+    if (view?.nextFilm !== undefined) {
+      moveToProject(view.nextFilm, 1)
+    }
   }
 
   let fieldLength = 1
@@ -124,19 +118,45 @@ const Project: NextPage<PageProps> = (
   }
 
   const contentMotion = {
-    incoming: (dir: number) => ({
-      clipPath: dir > 0 ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)',
+    outgoing: (dir: number) => ({
+      clipPath: dir < 0 ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)',
       opacity: 0.8,
     }),
     visible: {
       clipPath: 'inset(0 0 0 0)',
       opacity: 1,
     },
-    outgoing: (dir: number) => ({
-      clipPath: dir < 0 ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)',
+    incoming: () => ({
+      clipPath:
+        view === null
+          ? 'inset(0 0 0 0)'
+          : (view?.film as number) > (view?.previousFilm as number)
+          ? 'inset(0 0 0 100%)'
+          : 'inset(0 100% 0 0)',
       opacity: 0.8,
     }),
   }
+
+  // Update view context when project changes
+  useEffect(() => {
+    if (project.projectList) {
+      const position = project.projectList.findIndex(
+        p => p.slug.current === router.query.slug
+      )
+
+      if (position !== -1) {
+        updateView({
+          ...view,
+          film: position,
+          previousFilm:
+            position > 0 ? position - 1 : project.projectList.length - 1,
+          nextFilm:
+            position < project.projectList.length - 1 ? position + 1 : 0,
+        })
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.query.slug, project.projectList, updateView])
 
   return !project?._id.includes('drafts.') || preview ? (
     <PageTransition ref={ref}>

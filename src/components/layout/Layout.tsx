@@ -10,7 +10,7 @@ import { ToastContainer } from 'react-toastify'
 import type { Menus, Page, Project, SiteSettings } from '@gen/sanity-schema'
 import { Head } from '@components/head'
 import { Header } from '@components/header'
-import { Footer } from '@components/footer'
+// import { Footer } from '@components/footer'
 import { filterDataToSingleItem } from '@studio/lib'
 import { triggerToastPreview } from '@components/toast'
 import LogoContainer from '@components/logo/LogoContainer'
@@ -42,16 +42,18 @@ export const Layout: FC<LayoutProps> = ({
 
   const [showIntro, setShowIntro] = useState(asPath === '/')
   const [showContent, setShowContent] = useState(false)
-  const [showIndicator, setShowIndicator] = useState(false)
+
+  // const [showIndicator, setShowIndicator] = useState(false)
   const [direction, setDirection] = useState<'up' | 'down' | null>(null)
+
+  const [keyHoldProgress, setKeyHoldProgress] = useState(0)
+  const keyHoldTimer = useRef<NodeJS.Timeout | null>(null)
+  const keyProgressInterval = useRef<NodeJS.Timeout | null>(null)
+
+  const [userOverrideTheme, setUserOverrideTheme] = useState<boolean>(false)
   const [currentTheme, setCurrentTheme] = useState<
     'stone' | 'yellow' | 'blue' | 'dark'
   >(page?.initialColor || 'stone')
-  const [userOverrideTheme, setUserOverrideTheme] = useState<boolean>(false)
-  const [keyHoldProgress, setKeyHoldProgress] = useState(0)
-
-  const keyHoldTimer = useRef<NodeJS.Timeout | null>(null)
-  const keyProgressInterval = useRef<NodeJS.Timeout | null>(null)
 
   const seoImage =
     (page as any)?.previewImage || (page as any)?.image || undefined
@@ -79,72 +81,115 @@ export const Layout: FC<LayoutProps> = ({
     return PAGE_ORDER.indexOf(currentSlug)
   }, [asPath])
 
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
+  const scrollAccumulator = useRef<number>(0)
+  const lastScrollTime = useRef<number>(0)
+  const resetTimer = useRef<NodeJS.Timeout | null>(null)
+
+  const resetScrollProgress = useCallback(() => {
+    scrollAccumulator.current = 0
+    // setShowIndicator(false)
+    setKeyHoldProgress(0)
+    if (keyHoldTimer.current) {
+      clearTimeout(keyHoldTimer.current)
+      keyHoldTimer.current = null
+    }
+  }, [])
+
+  const handleWheel = useCallback(
+    (e: WheelEvent) => {
       // Only handle on pages, not projects or intro
       if (showIntro || page?._type !== 'page') return
 
-      if (
-        (e.key === 'ArrowUp' || e.key === 'ArrowDown') &&
-        !keyHoldTimer.current
-      ) {
-        e.preventDefault()
-        const currentIndex = getCurrentPageIndex()
+      const isAtTop = window.scrollY <= 10
+      const isAtBottom =
+        window.scrollY >=
+        document.documentElement.scrollHeight - window.innerHeight - 10
+      const hasScrollableContent =
+        document.documentElement.scrollHeight > window.innerHeight
 
-        // Check if navigation is possible
-        const canNavigateDown =
-          e.key === 'ArrowDown' && currentIndex < PAGE_ORDER.length - 1
-        const canNavigateUp = e.key === 'ArrowUp' && currentIndex > 0
+      // If there's scrollable content and we're not at boundaries, allow normal scrolling
+      if (hasScrollableContent) {
+        if (e.deltaY > 0 && !isAtBottom) return // Scrolling down but not at bottom
+        if (e.deltaY < 0 && !isAtTop) return // Scrolling up but not at top
+      }
 
-        if (canNavigateDown || canNavigateUp) {
-          setDirection(e.key === 'ArrowDown' ? 'down' : 'up')
-          setShowIndicator(true)
+      e.preventDefault()
+
+      const currentTime = Date.now()
+      const timeDelta = currentTime - lastScrollTime.current
+
+      // Reset accumulator if too much time has passed (new scroll gesture)
+      if (timeDelta > 300) {
+        scrollAccumulator.current = 0
+      }
+
+      lastScrollTime.current = currentTime
+      scrollAccumulator.current += e.deltaY
+
+      // Clear existing reset timer
+      if (resetTimer.current) {
+        clearTimeout(resetTimer.current)
+      }
+
+      // Set new reset timer
+      resetTimer.current = setTimeout(() => {
+        resetScrollProgress()
+      }, 800) // Reset after 800ms of no scrolling
+
+      const currentIndex = getCurrentPageIndex()
+      const absAccumulator = Math.abs(scrollAccumulator.current)
+
+      // Check if navigation is possible
+      const canNavigateDown =
+        scrollAccumulator.current > 0 && currentIndex < PAGE_ORDER.length - 1
+      const canNavigateUp = scrollAccumulator.current < 0 && currentIndex > 0
+
+      if ((canNavigateDown || canNavigateUp) && !keyHoldTimer.current) {
+        setDirection(scrollAccumulator.current > 0 ? 'down' : 'up')
+        // setShowIndicator(true)
+
+        if (absAccumulator < 150) {
           setKeyHoldProgress(0)
+        } else {
+          const progress = Math.min((absAccumulator - 50) / 700, 1) * 100 // 700px scroll distance for full progress
+          setKeyHoldProgress(progress)
 
-          // Start progress animation
-          keyProgressInterval.current = setInterval(() => {
-            setKeyHoldProgress(prev => {
-              const newProgress = prev + 100 / 8 // 8 intervals over 1 second
-              return Math.min(newProgress, 100)
-            })
-          }, 100)
+          // Trigger navigation when scroll threshold is reached
+          if (progress >= 100) {
+            keyHoldTimer.current = setTimeout(() => {
+              if (canNavigateDown) {
+                push(`/${PAGE_ORDER[currentIndex + 1]}`)
+              } else if (canNavigateUp) {
+                push(`/${PAGE_ORDER[currentIndex - 1]}`)
+              }
 
-          // Set timer for navigation
-          keyHoldTimer.current = setTimeout(() => {
-            if (canNavigateDown) {
-              push(`/${PAGE_ORDER[currentIndex + 1]}`)
-            } else if (canNavigateUp) {
-              push(`/${PAGE_ORDER[currentIndex - 1]}`)
-            }
-            setShowIndicator(false)
-            setKeyHoldProgress(0)
-            if (keyProgressInterval.current) {
-              clearInterval(keyProgressInterval.current)
-              keyProgressInterval.current = null
-            }
-            keyHoldTimer.current = null
-          }, 800)
+              // Reset
+              resetScrollProgress()
+            }, 100)
+          }
         }
       }
     },
-    [getCurrentPageIndex, push, showIntro, page?._type]
+    [getCurrentPageIndex, push, showIntro, page?._type, resetScrollProgress]
   )
 
-  const handleKeyUp = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-      // Cancel navigation if key is released early
+  // Remove keyboard handlers and add wheel handler
+  useEffect(() => {
+    document.addEventListener('wheel', handleWheel, { passive: false })
+
+    return () => {
+      document.removeEventListener('wheel', handleWheel)
       if (keyHoldTimer.current) {
         clearTimeout(keyHoldTimer.current)
-        keyHoldTimer.current = null
       }
       if (keyProgressInterval.current) {
         clearInterval(keyProgressInterval.current)
-        keyProgressInterval.current = null
       }
-      setShowIndicator(false)
-      setKeyHoldProgress(0)
+      if (resetTimer.current) {
+        clearTimeout(resetTimer.current)
+      }
     }
-  }, [])
+  }, [handleWheel])
 
   // Set CSS custom properties for theme colors
   useEffect(() => {
@@ -204,20 +249,7 @@ export const Layout: FC<LayoutProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asPath])
 
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown)
-    document.addEventListener('keyup', handleKeyUp)
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-      document.removeEventListener('keyup', handleKeyUp)
-      if (keyHoldTimer.current) {
-        clearTimeout(keyHoldTimer.current)
-      }
-      if (keyProgressInterval.current) {
-        clearInterval(keyProgressInterval.current)
-      }
-    }
-  }, [handleKeyDown, handleKeyUp])
+  console.log(keyHoldProgress)
 
   return (
     <>
@@ -239,7 +271,7 @@ export const Layout: FC<LayoutProps> = ({
         style={{ backgroundColor: 'var(--theme-bg)' }}
       >
         {/* Page Navigation Indicator with Progress */}
-        {showIndicator && page?._type === 'page' && (
+        {/* {showIndicator && page?._type === 'page' && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -293,7 +325,7 @@ export const Layout: FC<LayoutProps> = ({
               </div>
             </div>
           </motion.div>
-        )}
+        )} */}
 
         {showIntro ? (
           <LogoContainer setShowIntro={() => setShowIntro(false)} />
