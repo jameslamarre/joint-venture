@@ -246,8 +246,6 @@ export const Layout: FC<LayoutProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asPath, getCurrentPageIndex, view?.lastNavigationTime])
 
-  console.log(view)
-
   // Remove keyboard handlers and add wheel handler
   useEffect(() => {
     const keyHoldTimerRef = keyHoldTimer.current
@@ -347,7 +345,7 @@ export const Layout: FC<LayoutProps> = ({
         pageUrl={`${BASE_URL}${asPath}`}
       />
       <div
-        className="flex flex-col min-h-full transition-colors duration-300"
+        className="flex flex-col min-h-full transition-colors duration-100"
         style={{ backgroundColor: 'var(--theme-bg)' }}
       >
         <AnimatePresence>
@@ -358,7 +356,7 @@ export const Layout: FC<LayoutProps> = ({
                 animate="animate"
                 exit="exit"
                 variants={wipeVariants}
-                className={classNames('fixed w-full h-full bg-red z-above')}
+                className={classNames('fixed w-full h-full bg-blue z-above')}
               ></motion.div>
             </>
           )}

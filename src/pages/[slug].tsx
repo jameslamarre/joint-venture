@@ -54,8 +54,7 @@ const Page: NextPage<PageProps> = (
       clipPath:
         view.previousPage === 'film'
           ? 'inset(0 100% 0 0)'
-          : // : 'inset(100% 0 0 0)',
-            'inset(0)',
+          : 'inset(100% 0 0 0)',
       opacity: 0.9,
       transition: {
         duration: 0.6,
@@ -71,8 +70,8 @@ const Page: NextPage<PageProps> = (
       },
     },
     exit: {
-      clipPath: view.nextPage === 'film' ? 'inset(0 100% 0 0)' : 'inset(0)',
-      // 'inset(0 0 100% 0)',
+      clipPath:
+        view.nextPage === 'film' ? 'inset(0 100% 0 0)' : 'inset(0 0 100% 0)',
       opacity: 0.9,
       transition: {
         duration: 0.6,
