@@ -147,6 +147,7 @@ const Project: NextPage<PageProps> = (
       updateView({
         ...view,
         page: 'film',
+        nextPage: 'film',
         film: position,
         previousFilm:
           position > project.projectList.length - 1 ? position - 1 : 0,
