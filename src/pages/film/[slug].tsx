@@ -97,7 +97,8 @@ const Project: NextPage<PageProps> = (
   }
 
   const goToPrevious = () => {
-    view?.previousFilm && moveToProject(view.previousFilm, -1)
+    console.log('previous', view?.previousFilm)
+    view?.previousFilm !== undefined && moveToProject(view.previousFilm, -1)
   }
 
   const goToNext = () => {
@@ -127,8 +128,8 @@ const Project: NextPage<PageProps> = (
         view === null
           ? 'inset(0 0 0 0)'
           : (view?.film as number) > (view?.previousFilm as number)
-          ? 'inset(0 0 0 100%)'
-          : 'inset(0 100% 0 0)',
+          ? 'inset(0 100% 0 0)'
+          : 'inset(0 0 0 100%)',
       opacity: 0.8,
     }),
   }
@@ -142,7 +143,8 @@ const Project: NextPage<PageProps> = (
       updateView({
         ...view,
         film: position,
-        previousFilm: view?.film as number,
+        previousFilm:
+          position > project.projectList.length - 1 ? position - 1 : 0,
         nextFilm: position < project.projectList.length - 1 ? position + 1 : 0,
       })
     }
