@@ -165,7 +165,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                     }}
                     className="hover:invert"
                   >
-                    <IconAbout className="w-[184px] lg:w-[285px] h-auto" />
+                    <IconAbout className="w-[184px] lg:w-[255px] h-auto" />
                   </Link>
                 </motion.li>
 
@@ -189,7 +189,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                     }}
                     className="group"
                   >
-                    <IconFilms className="w-[177px] lg:w-[273px] h-auto group-hover:[&_.bg]:fill-blue" />
+                    <IconFilms className="w-[177px] lg:w-[243px] h-auto group-hover:[&_.bg]:fill-blue" />
                   </Link>
                 </motion.li>
 
@@ -213,7 +213,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                     }}
                     className="hover:invert"
                   >
-                    <IconContact className="w-[269px] lg:w-[416px] h-auto" />
+                    <IconContact className="w-[269px] lg:w-[366px] h-auto" />
                   </Link>
                 </motion.li>
 
@@ -225,7 +225,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                     top: positions[position][3]?.y || 400,
                   }}
                 >
-                  <IconJV className="w-[210px] lg:w-[323px] h-auto z-behind" />
+                  <IconJV className="w-[210px] lg:w-[293px] h-auto z-behind" />
                 </motion.li>
               </motion.ul>
             </motion.nav>
