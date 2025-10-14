@@ -116,7 +116,7 @@ const Project: NextPage<PageProps> = (
   const contentMotion = {
     outgoing: (dir: number) => ({
       clipPath:
-        view?.nextPage === 'films'
+        view?.nextPage !== 'film'
           ? 'inset(0 0 0 100%)'
           : dir < 0
           ? 'inset(0 0 0 100%)'

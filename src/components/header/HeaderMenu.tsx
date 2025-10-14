@@ -155,7 +155,14 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                 >
                   <Link
                     href="/"
-                    onClick={() => setCustomOpen(false)}
+                    onClick={() => {
+                      setCustomOpen(false)
+                      updateView({
+                        ...view,
+                        previousPage: view.page,
+                        nextPage: 'about',
+                      })
+                    }}
                     className="hover:invert"
                   >
                     <IconAbout className="w-[184px] lg:w-[285px] h-auto" />
@@ -196,7 +203,14 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                 >
                   <Link
                     href="/contact"
-                    onClick={() => setCustomOpen(false)}
+                    onClick={() => {
+                      setCustomOpen(false)
+                      updateView({
+                        ...view,
+                        previousPage: view.page,
+                        nextPage: 'contact',
+                      })
+                    }}
                     className="hover:invert"
                   >
                     <IconContact className="w-[269px] lg:w-[416px] h-auto" />
