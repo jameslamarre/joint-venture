@@ -149,7 +149,7 @@ const Project: NextPage<PageProps> = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query.slug, project.projectList])
 
-  console.log(view.film, project.projectList.length)
+  console.log(view?.film, project.projectList.length)
 
   return !project?._id.includes('drafts.') || preview ? (
     <PageTransition ref={ref}>
