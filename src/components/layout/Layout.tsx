@@ -406,9 +406,9 @@ export const Layout: FC<LayoutProps> = ({
                 animate={{ rotate: 360 }}
                 transition={{ duration: 16, ease: 'linear', repeat: Infinity }}
                 onClick={cycleTheme}
-                className="group absolute right-[calc(50%-40px)] md:right-[calc(50%-57px)] lg:right-x bottom-x p-2 hover:bg-black rounded-full z-above"
+                className="group fixed right-[calc(50%-40px)] md:right-[calc(50%-57px)] lg:right-x bottom-x p-2 mix-blend-difference md:mix-blend-normal bg-black md:bg-transparent hover:bg-black rounded-full z-above"
               >
-                <IconLogo className="w-[80px] md:w-[114px] h-auto animate-fadeIn theme-menu-fill group-hover:[&_path]:fill-white" />
+                <IconLogo className="w-[80px] md:w-[114px] h-auto animate-fadeIn theme-menu-fill [&_path]:fill-white md:[&_path]:fill-black group-hover:[&_path]:fill-white" />
               </motion.button>
             )}
           </>

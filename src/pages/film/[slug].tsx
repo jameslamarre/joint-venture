@@ -159,7 +159,7 @@ const Project: NextPage<PageProps> = (
 
   return !project?._id.includes('drafts.') || preview ? (
     <PageTransition ref={ref}>
-      <article className="max-w-app mx-auto">
+      <article className="max-w-app mx-auto pt-header md:pt-0">
         <div className="flex flex-col gap-yhalf pt-yhalf pb-y px-yhalf">
           <AnimatePresence custom={slideDirection} mode="wait">
             <motion.div

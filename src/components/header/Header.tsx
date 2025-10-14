@@ -40,7 +40,7 @@ export const Header: FC<HeaderProps> = ({
               ? isTablet && windowWidth < 1024
                 ? 465
                 : isMobile
-                ? 374
+                ? 290
                 : 308
               : 0,
           x: 0,
