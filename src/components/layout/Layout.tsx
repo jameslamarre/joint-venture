@@ -212,16 +212,18 @@ export const Layout: FC<LayoutProps> = ({
       nextPage:
         currentIndex < PAGE_ORDER.length - 1
           ? (PAGE_ORDER[currentIndex + 1] as 'films' | 'contact')
-          : undefined,
-      previousPage:
-        currentIndex > 0
-          ? (PAGE_ORDER[currentIndex - 1] as '' | 'films' | 'contact')
-          : undefined,
+          : view.nextPage || undefined,
+      // previousPage:
+      //   currentIndex > 0
+      //     ? (PAGE_ORDER[currentIndex - 1] as '' | 'films' | 'contact')
+      //     : view.previousPage || undefined,
       isNavigating: false,
       lastNavigationTime: view?.lastNavigationTime,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asPath, getCurrentPageIndex, view?.lastNavigationTime])
+
+  console.log(view)
 
   // Remove keyboard handlers and add wheel handler
   // useEffect(() => {

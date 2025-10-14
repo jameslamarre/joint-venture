@@ -7,6 +7,7 @@ import type {
 import type { SanityBlockElement } from '@components/sanity'
 import { Block, SanityImage } from '@components/sanity'
 import Link from 'next/link'
+import { useView } from '@contexts/view'
 
 type ProjectsBlockProps = Omit<SanityBlockElement, keyof ProjectsBlockType> &
   ProjectsBlockType
@@ -23,6 +24,8 @@ export const ProjectsBlock: FC<ProjectsBlockProps> = ({
     (projects as unknown as Project[])?.filter(project => !project?.featured) ||
     []
 
+  const [view, updateView] = useView() as any
+
   return (
     <Block
       className={classNames(
@@ -36,6 +39,13 @@ export const ProjectsBlock: FC<ProjectsBlockProps> = ({
             <Link
               key={index}
               href={`/film/${project.slug?.current}`}
+              onClick={() => {
+                updateView({
+                  ...view,
+                  nextPage: 'film',
+                  page: 'films',
+                })
+              }}
               className="flex flex-col gap-3 group"
             >
               {project.previewImage && (

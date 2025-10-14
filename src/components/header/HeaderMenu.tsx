@@ -11,7 +11,8 @@ import {
   IconJV,
 } from '@components/icons/menu'
 import { AnimatePresence, motion } from 'framer-motion'
-import { isMobile } from 'react-device-detect'
+import { isMobile, ViewProps } from 'react-device-detect'
+import { useView } from '@contexts/view'
 
 export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
   customOpen = false,
@@ -19,6 +20,8 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
   onOpen,
   className,
 }) => {
+  const [view, updateView] = useView() as any
+
   const position = Math.floor(Math.random() * 4)
 
   const positions = [
@@ -169,7 +172,14 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                 >
                   <Link
                     href="/films"
-                    onClick={() => setCustomOpen(false)}
+                    onClick={() => {
+                      setCustomOpen(false)
+                      updateView({
+                        ...view,
+                        previousPage: view.page,
+                        nextPage: 'films',
+                      })
+                    }}
                     className="group"
                   >
                     <IconFilms className="w-[177px] lg:w-[273px] h-auto group-hover:[&_.bg]:fill-blue" />

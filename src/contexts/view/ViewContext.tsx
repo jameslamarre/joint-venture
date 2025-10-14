@@ -9,9 +9,9 @@ import React, {
 } from 'react'
 
 export type ViewProps = {
-  page?: '' | 'films' | 'contact'
-  nextPage?: '' | 'films' | 'contact'
-  previousPage?: '' | 'films' | 'contact'
+  page?: '' | 'films' | 'contact' | 'film'
+  nextPage?: '' | 'films' | 'contact' | 'film'
+  previousPage?: '' | 'films' | 'contact' | 'film'
   isNavigating?: boolean
   lastNavigationTime?: number
 

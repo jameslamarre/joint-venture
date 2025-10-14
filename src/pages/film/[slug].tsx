@@ -97,7 +97,6 @@ const Project: NextPage<PageProps> = (
   }
 
   const goToPrevious = () => {
-    console.log('previous', view?.previousFilm)
     view?.previousFilm !== undefined && moveToProject(view.previousFilm, -1)
   }
 
@@ -116,7 +115,12 @@ const Project: NextPage<PageProps> = (
 
   const contentMotion = {
     outgoing: (dir: number) => ({
-      clipPath: dir < 0 ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)',
+      clipPath:
+        view?.nextPage === 'films'
+          ? 'inset(0 0 0 100%)'
+          : dir < 0
+          ? 'inset(0 0 0 100%)'
+          : 'inset(0 100% 0 0)',
       opacity: 0.8,
     }),
     visible: {
@@ -142,6 +146,7 @@ const Project: NextPage<PageProps> = (
 
       updateView({
         ...view,
+        page: 'film',
         film: position,
         previousFilm:
           position > project.projectList.length - 1 ? position - 1 : 0,
@@ -150,8 +155,6 @@ const Project: NextPage<PageProps> = (
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query.slug, project.projectList])
-
-  console.log(view?.film, project.projectList.length)
 
   return !project?._id.includes('drafts.') || preview ? (
     <PageTransition ref={ref}>

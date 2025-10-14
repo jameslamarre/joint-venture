@@ -14,6 +14,7 @@ import { forwardRef, ForwardRefRenderFunction } from 'react'
 import PageTransition from '@components/transition/PageTransition'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/router'
+import { useView } from '@contexts/view'
 
 type PageRefType = React.ForwardedRef<HTMLDivElement>
 
@@ -47,9 +48,15 @@ const Page: NextPage<PageProps> = (
   const { asPath } = useRouter()
   const page: SanityPage = filterDataToSingleItem(data)
 
+  const [view, updateView] = useView() as any
+
   const pageVariants = {
     initial: {
-      clipPath: 'inset(100% 0 0 0)',
+      clipPath:
+        view.previousPage === 'film'
+          ? 'inset(0 100% 0 0)'
+          : // : 'inset(100% 0 0 0)',
+            'inset(0)',
       opacity: 0.9,
       transition: {
         duration: 0.6,
@@ -65,7 +72,8 @@ const Page: NextPage<PageProps> = (
       },
     },
     exit: {
-      clipPath: 'inset(0 0 100% 0)',
+      clipPath: view.nextPage === 'film' ? 'inset(0 100% 0 0)' : 'inset(0)',
+      // 'inset(0 0 100% 0)',
       opacity: 0.9,
       transition: {
         duration: 0.6,
