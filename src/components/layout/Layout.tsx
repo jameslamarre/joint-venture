@@ -32,26 +32,6 @@ interface LayoutProps {
 
 const PAGE_ORDER = ['', 'films', 'contact']
 
-const wipeVariants = {
-  initial: {
-    clipPath: 'inset(100% 0 0 0)',
-  },
-  animate: {
-    clipPath: 'inset(0 0 0 0)',
-    transition: {
-      duration: 0.6,
-      ease: 'easeInOut',
-    },
-  },
-  exit: {
-    clipPath: 'inset(0 0 100% 0)',
-    transition: {
-      duration: 0.4,
-      ease: 'easeInOut',
-    },
-  },
-}
-
 export const Layout: FC<LayoutProps> = ({
   children,
   data,
@@ -119,6 +99,20 @@ export const Layout: FC<LayoutProps> = ({
   }, [])
 
   const [showWipe, setShowWipe] = useState(false)
+
+  const wipeVariants = {
+    initial: {
+      y: direction === 'up' ? '-100dvh' : '100dvh',
+    },
+    animate: {
+      y: direction === 'up' ? '100dvh' : '-100dvh',
+      transition: {
+        duration: 0.6,
+        delay: 0.6,
+        ease: 'easeInOut',
+      },
+    },
+  }
 
   const navigateToPage = useCallback(
     (targetPage: string) => {
@@ -356,13 +350,20 @@ export const Layout: FC<LayoutProps> = ({
         className="flex flex-col min-h-full transition-colors duration-300"
         style={{ backgroundColor: 'var(--theme-bg)' }}
       >
-        <motion.div
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          variants={wipeVariants}
-          className="fixed w-full bg-blue"
-        ></motion.div>
+        <AnimatePresence>
+          {showWipe && (
+            <>
+              <motion.div
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={wipeVariants}
+                className={classNames('fixed w-full h-full bg-red z-above')}
+              ></motion.div>
+            </>
+          )}
+        </AnimatePresence>
+
         {/* Page Navigation Indicator with Progress */}
         <AnimatePresence>
           {showIndicator && page?._type === 'page' && !view?.isNavigating && (
