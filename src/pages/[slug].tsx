@@ -66,6 +66,7 @@ const Page: NextPage<PageProps> = (
       opacity: 1,
       transition: {
         duration: 0.6,
+        delay: view.previousPage === 'film' ? 0 : 0.3,
         ease: 'easeInOut',
       },
     },
