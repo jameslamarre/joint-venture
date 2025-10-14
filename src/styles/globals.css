@@ -81,7 +81,7 @@
 
     --space-x: 42px;
     --space-y: 26px;
-    --space-page: calc(var(--header-height) + var(--space-y-double));
+    --space-page: calc(var(--header-height) + var(--space-y-double) * 1.5);
   }
 }
 
