@@ -233,31 +233,41 @@ const Project: NextPage<PageProps> = (
                 <div className="flex flex-col gap-0 w-full">
                   {project.title && (
                     <div className="px-2 border-right ruled-lines">
-                      <h4 className="inline text-h4 mr-1">Title:</h4>
+                      <h4 className="inline-block w-[200px] text-h4 mr-1">
+                        Title:
+                      </h4>
                       <p className="inline">{project.title}</p>
                     </div>
                   )}
                   {project.directedBy && (
                     <div className="px-2 border-right ruled-lines">
-                      <h4 className="inline text-h4 mr-1">Directed by:</h4>
+                      <h4 className="inline-block w-[200px] text-h4 mr-1">
+                        Directed by:
+                      </h4>
                       <p className="inline">{project.directedBy}</p>
                     </div>
                   )}
                   {project.writtenBy && (
                     <div className="px-2 border-right ruled-lines">
-                      <h4 className="inline text-h4 mr-1">Written by:</h4>
+                      <h4 className="inline-block w-[200px] text-h4 mr-1">
+                        Written by:
+                      </h4>
                       <p className="inline">{project.writtenBy}</p>
                     </div>
                   )}
                   {project.producedBy && (
                     <div className="px-2 border-right ruled-lines">
-                      <h4 className="inline text-h4 mr-1">Produced by:</h4>
+                      <h4 className="inline-block w-[200px] text-h4 mr-1">
+                        Produced by:
+                      </h4>
                       <p className="inline">{project.producedBy}</p>
                     </div>
                   )}
                   {project.starring && (
                     <div className="px-2 border-right ruled-lines">
-                      <h4 className="inline text-h4 mr-1">Starring:</h4>
+                      <h4 className="inline-block w-[200px] text-h4 mr-1">
+                        Starring:
+                      </h4>
                       <p className="inline">{project.starring}</p>
                     </div>
                   )}
@@ -268,7 +278,9 @@ const Project: NextPage<PageProps> = (
                         key={other._key}
                         className="px-2 border-right ruled-lines"
                       >
-                        <h4 className="inline text-h4 mr-1">{other.title}:</h4>
+                        <h4 className="inline-block w-[200px] text-h4 mr-1">
+                          {other.title}:
+                        </h4>
                         <p className="inline">{other.value}</p>
                       </div>
                     ))}
