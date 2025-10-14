@@ -32,6 +32,26 @@ interface LayoutProps {
 
 const PAGE_ORDER = ['', 'films', 'contact']
 
+const wipeVariants = {
+  initial: {
+    clipPath: 'inset(100% 0 0 0)',
+  },
+  animate: {
+    clipPath: 'inset(0 0 0 0)',
+    transition: {
+      duration: 0.6,
+      ease: 'easeInOut',
+    },
+  },
+  exit: {
+    clipPath: 'inset(0 0 100% 0)',
+    transition: {
+      duration: 0.4,
+      ease: 'easeInOut',
+    },
+  },
+}
+
 export const Layout: FC<LayoutProps> = ({
   children,
   data,
@@ -52,6 +72,7 @@ export const Layout: FC<LayoutProps> = ({
 
   const keyHoldTimer = useRef<NodeJS.Timeout | null>(null)
   const keyProgressInterval = useRef<NodeJS.Timeout | null>(null)
+  const resetTimer = useRef<NodeJS.Timeout | null>(null)
 
   const [userOverrideTheme, setUserOverrideTheme] = useState<boolean>(false)
   const [currentTheme, setCurrentTheme] = useState<
@@ -86,7 +107,6 @@ export const Layout: FC<LayoutProps> = ({
 
   const scrollAccumulator = useRef<number>(0)
   const lastScrollTime = useRef<number>(0)
-  const resetTimer = useRef<NodeJS.Timeout | null>(null)
 
   const resetScrollProgress = useCallback(() => {
     scrollAccumulator.current = 0
@@ -98,19 +118,28 @@ export const Layout: FC<LayoutProps> = ({
     }
   }, [])
 
+  const [showWipe, setShowWipe] = useState(false)
+
   const navigateToPage = useCallback(
     (targetPage: string) => {
       if (!canNavigate()) return
 
       setShowIndicator(false)
+      setShowWipe(true)
       setNavigating(true)
-      push(`/${targetPage}`)
+
+      // Start wipe animation, then navigate
+      setTimeout(() => {
+        push(`/${targetPage}`)
+      }, 300)
+
       resetScrollProgress()
 
-      // Reset navigation lock after transition
+      // Reset navigation lock and hide wipe after transition
       setTimeout(() => {
         setNavigating(false)
-      }, 1000)
+        setShowWipe(false)
+      }, 1200)
     },
     [canNavigate, setNavigating, push, resetScrollProgress]
   )
@@ -327,6 +356,13 @@ export const Layout: FC<LayoutProps> = ({
         className="flex flex-col min-h-full transition-colors duration-300"
         style={{ backgroundColor: 'var(--theme-bg)' }}
       >
+        <motion.div
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={wipeVariants}
+          className="fixed w-full bg-blue"
+        ></motion.div>
         {/* Page Navigation Indicator with Progress */}
         <AnimatePresence>
           {showIndicator && page?._type === 'page' && !view?.isNavigating && (

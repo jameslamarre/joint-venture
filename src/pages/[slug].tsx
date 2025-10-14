@@ -11,7 +11,6 @@ import { getPageStaticProps } from '@lib/next'
 import { BODY_QUERY, client, filterDataToSingleItem } from '@studio/lib'
 import { BlockContent } from '@components/sanity'
 import { forwardRef, ForwardRefRenderFunction } from 'react'
-import PageTransition from '@components/transition/PageTransition'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { useView } from '@contexts/view'
@@ -83,20 +82,18 @@ const Page: NextPage<PageProps> = (
   }
 
   return page?.body && (!page?._id.includes('drafts.') || preview) ? (
-    <PageTransition ref={ref}>
-      <AnimatePresence mode="wait">
-        <motion.article
-          key={asPath}
-          variants={pageVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          className="pt-page"
-        >
-          <BlockContent blocks={page?.body} className="flex flex-col w-full" />
-        </motion.article>
-      </AnimatePresence>
-    </PageTransition>
+    <AnimatePresence mode="wait">
+      <motion.article
+        key={asPath}
+        variants={pageVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        className="pt-page"
+      >
+        <BlockContent blocks={page?.body} className="flex flex-col w-full" />
+      </motion.article>
+    </AnimatePresence>
   ) : null
 }
 

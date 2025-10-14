@@ -193,7 +193,7 @@ const Project: NextPage<PageProps> = (
                     <button
                       onClick={goToPrevious}
                       disabled={view?.film === 0}
-                      className="w-full px-xhalf disabled:opacity-50 hover:bg-white border-left border-right text-left"
+                      className="w-full px-xhalf disabled:opacity-50 disabled:pointer-events-none hover:bg-white border-left border-right text-left"
                     >
                       <span className="inline-block py-1 leading-none uppercase font-sans">
                         Previous
