@@ -226,27 +226,27 @@ export const Layout: FC<LayoutProps> = ({
   console.log(view)
 
   // Remove keyboard handlers and add wheel handler
-  // useEffect(() => {
-  //   const keyHoldTimerRef = keyHoldTimer.current
-  //   const keyProgressIntervalRef = keyProgressInterval.current
-  //   const resetTimerRef = resetTimer.current
+  useEffect(() => {
+    const keyHoldTimerRef = keyHoldTimer.current
+    const keyProgressIntervalRef = keyProgressInterval.current
+    const resetTimerRef = resetTimer.current
 
-  //   document.addEventListener('wheel', handleWheel, { passive: false })
+    document.addEventListener('wheel', handleWheel, { passive: false })
 
-  //   return () => {
-  //     document.removeEventListener('wheel', handleWheel)
+    return () => {
+      document.removeEventListener('wheel', handleWheel)
 
-  //     if (keyHoldTimerRef) {
-  //       clearTimeout(keyHoldTimerRef)
-  //     }
-  //     if (keyProgressIntervalRef) {
-  //       clearInterval(keyProgressIntervalRef)
-  //     }
-  //     if (resetTimerRef) {
-  //       clearTimeout(resetTimerRef)
-  //     }
-  //   }
-  // }, [handleWheel])
+      if (keyHoldTimerRef) {
+        clearTimeout(keyHoldTimerRef)
+      }
+      if (keyProgressIntervalRef) {
+        clearInterval(keyProgressIntervalRef)
+      }
+      if (resetTimerRef) {
+        clearTimeout(resetTimerRef)
+      }
+    }
+  }, [handleWheel])
 
   // Set CSS custom properties for theme colors
   useEffect(() => {
@@ -328,7 +328,7 @@ export const Layout: FC<LayoutProps> = ({
         style={{ backgroundColor: 'var(--theme-bg)' }}
       >
         {/* Page Navigation Indicator with Progress */}
-        {/* <AnimatePresence>
+        <AnimatePresence>
           {showIndicator && page?._type === 'page' && !view?.isNavigating && (
             <motion.div
               initial={{ opacity: 0 }}
@@ -386,7 +386,7 @@ export const Layout: FC<LayoutProps> = ({
               </div>
             </motion.div>
           )}
-        </AnimatePresence> */}
+        </AnimatePresence>
 
         {showIntro ? (
           <LogoContainer setShowIntro={() => setShowIntro(false)} />
