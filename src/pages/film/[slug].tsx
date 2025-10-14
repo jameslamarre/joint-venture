@@ -97,15 +97,11 @@ const Project: NextPage<PageProps> = (
   }
 
   const goToPrevious = () => {
-    if (view?.previousFilm !== undefined) {
-      moveToProject(view.previousFilm, -1)
-    }
+    view?.previousFilm && moveToProject(view.previousFilm, -1)
   }
 
   const goToNext = () => {
-    if (view?.nextFilm !== undefined) {
-      moveToProject(view.nextFilm, 1)
-    }
+    view?.nextFilm !== undefined && moveToProject(view.nextFilm, 1)
   }
 
   let fieldLength = 1
@@ -153,6 +149,8 @@ const Project: NextPage<PageProps> = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query.slug, project.projectList])
 
+  console.log(view.film, project.projectList.length)
+
   return !project?._id.includes('drafts.') || preview ? (
     <PageTransition ref={ref}>
       <article className="max-w-app mx-auto">
@@ -188,7 +186,8 @@ const Project: NextPage<PageProps> = (
                   <div className="flex justify-between items-center w-full mt-2 mb-y border-top border-bottom">
                     <button
                       onClick={goToPrevious}
-                      className="w-full px-xhalf hover:bg-white border-left border-right text-left"
+                      disabled={view?.film === 0}
+                      className="w-full px-xhalf disabled:opacity-50 hover:bg-white border-left border-right text-left"
                     >
                       <span className="inline-block py-1 leading-none uppercase font-sans">
                         Previous
@@ -197,7 +196,10 @@ const Project: NextPage<PageProps> = (
 
                     <button
                       onClick={goToNext}
-                      className="w-full px-xhalf hover:bg-white border-right text-right"
+                      disabled={
+                        (view?.film as number) >= project.projectList.length - 1
+                      }
+                      className="w-full px-xhalf disabled:opacity-50 hover:bg-white border-right text-right"
                     >
                       <span className="inline-block py-1 leading-none uppercase font-sans">
                         Next

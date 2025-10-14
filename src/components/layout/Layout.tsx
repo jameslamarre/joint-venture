@@ -326,7 +326,7 @@ export const Layout: FC<LayoutProps> = ({
         style={{ backgroundColor: 'var(--theme-bg)' }}
       >
         {/* Page Navigation Indicator with Progress */}
-        <AnimatePresence>
+        {/* <AnimatePresence>
           {showIndicator && page?._type === 'page' && !view?.isNavigating && (
             <motion.div
               initial={{ opacity: 0 }}
@@ -384,7 +384,7 @@ export const Layout: FC<LayoutProps> = ({
               </div>
             </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
 
         {showIntro ? (
           <LogoContainer setShowIntro={() => setShowIntro(false)} />
