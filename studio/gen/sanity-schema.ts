@@ -292,49 +292,6 @@ export interface SiteSettings extends SanityDocument {
   title?: string;
 
   /**
-   * Footer Socials — `array`
-   *
-   * Social media links to display in the footer
-   */
-  footerSocials?: Array<
-    SanityKeyed<{
-      _type: "social";
-      /**
-       * Title — `string`
-       *
-       *
-       */
-      title?: string;
-
-      /**
-       * URL — `url`
-       *
-       *
-       */
-      url?: string;
-
-      /**
-       * Icon — `image`
-       *
-       *
-       */
-      icon?: {
-        _type: "image";
-        asset: SanityReference<SanityImageAsset>;
-        crop?: SanityImageCrop;
-        hotspot?: SanityImageHotspot;
-      };
-    }>
-  >;
-
-  /**
-   * Newsletter Audience ID — `string`
-   *
-   * The ID of the Mailchimp audience for the newsletter
-   */
-  newsletterId?: string;
-
-  /**
    * Site Description — `text`
    *
    *
@@ -359,13 +316,6 @@ export interface SiteSettings extends SanityDocument {
    * Phrase that you want your site to rank for.
    */
   siteKeywords?: string;
-
-  /**
-   * Main Menu — `reference`
-   *
-   * Select menu for main navigation
-   */
-  mainMenu?: SanityReference<Menus>;
 }
 
 export type Link = {

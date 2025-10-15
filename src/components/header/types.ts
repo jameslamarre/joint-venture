@@ -1,9 +1,7 @@
-import type { Menus as SanityMenu } from '@gen/sanity-schema'
 import type { Dispatch, HTMLAttributes, SetStateAction } from 'react'
 
 export interface HeaderProps
   extends Omit<HTMLAttributes<HTMLElement>, 'property'> {
-  mainMenu?: SanityMenu
   currentPage?: string
   pageBackground?: string
   setShowContent?: () => void
