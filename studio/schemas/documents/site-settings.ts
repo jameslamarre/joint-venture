@@ -15,10 +15,6 @@ export default {
       name: 'seo',
       title: 'SEO',
     },
-    {
-      name: 'menus',
-      title: 'Menus',
-    },
   ],
   fields: [
     {
@@ -27,44 +23,6 @@ export default {
       type: 'string',
       group: 'global',
       validation: (Rule: Rule): Rule => Rule.required(),
-    },
-    {
-      name: 'footerSocials',
-      title: 'Footer Socials',
-      group: 'global',
-      type: 'array',
-      of: [
-        {
-          name: 'social',
-          title: 'Social',
-          type: 'object',
-          fields: [
-            {
-              name: 'title',
-              title: 'Title',
-              type: 'string',
-            },
-            {
-              name: 'url',
-              title: 'URL',
-              type: 'url',
-            },
-            {
-              name: 'icon',
-              title: 'Icon',
-              type: 'image',
-            },
-          ],
-        },
-      ],
-      description: 'Social media links to display in the footer',
-    },
-    {
-      name: 'newsletterId',
-      title: 'Newsletter Audience ID',
-      type: 'string',
-      group: 'global',
-      description: 'The ID of the Mailchimp audience for the newsletter',
     },
     {
       name: 'description',
@@ -85,14 +43,6 @@ export default {
       description: 'Phrase that you want your site to rank for.',
       title: 'Keyphrase',
       group: 'seo',
-    },
-    {
-      name: 'mainMenu',
-      title: 'Main Menu',
-      type: 'reference',
-      description: 'Select menu for main navigation',
-      to: { type: 'menus' },
-      group: 'menus',
     },
   ],
   // eslint-disable-next-line camelcase
