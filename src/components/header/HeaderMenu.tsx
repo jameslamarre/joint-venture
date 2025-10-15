@@ -202,7 +202,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                   }}
                 >
                   <Link
-                    href="/contact"
+                    href="/join"
                     onClick={() => {
                       setCustomOpen(false)
                       updateView({

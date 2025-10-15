@@ -164,10 +164,40 @@ body {
   z-index: -1;
   transform: skew(-5deg);
   transform-origin: top left;
-  animation: highlightAnim 0.6s var(--highlight-delay, 0s) ease-in-out forwards;
+  animation: highlightAnim 0.6s var(--animate-delay, 0s) ease-in-out forwards;
 }
 
 @keyframes highlightAnim {
+  from {
+    width: 0;
+  }
+  to {
+    width: 104%;
+  }
+}
+
+.red-underline {
+  position: relative;
+  /* color: theme('colors.black');
+  background-color: theme('backgroundColor.yellow'); */
+  z-index: 0;
+}
+
+.red-underline::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -5px;
+  width: 0;
+  height: 0.1em;
+  background-color: theme(backgroundColor.red);
+  z-index: -1;
+  transform: skew(-5deg);
+  transform-origin: top left;
+  animation: highlightAnim 0.6s var(--animate-delay, 0s) ease-in-out forwards;
+}
+
+@keyframes underlineAnim {
   from {
     width: 0;
   }

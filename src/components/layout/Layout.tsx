@@ -19,6 +19,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import classNames from 'classnames'
 import { useRef } from 'react'
 import { useNavigation } from '@contexts/view/ViewContext'
+import IconLogoFill from '@components/icons/IconLogoFill'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 type PageData = Page | Project
@@ -440,9 +441,10 @@ export const Layout: FC<LayoutProps> = ({
                 animate={{ rotate: 360 }}
                 transition={{ duration: 16, ease: 'linear', repeat: Infinity }}
                 onClick={cycleTheme}
-                className="group fixed right-[calc(50%-40px)] md:right-[calc(50%-57px)] lg:right-x bottom-x p-2 mix-blend-difference md:mix-blend-normal bg-black md:bg-transparent hover:bg-black rounded-full z-above"
+                className="group fixed w-[100px] md:w-[134px] right-[calc(50%-40px)] md:right-[calc(50%-57px)] lg:right-x bottom-x p-2 mix-blend-difference md:mix-blend-normal bg-black md:bg-transparent rounded-full z-above"
               >
-                <IconLogo className="w-[80px] md:w-[114px] h-auto animate-fadeIn theme-menu-fill [&_path]:fill-white md:[&_path]:fill-black group-hover:[&_path]:fill-white" />
+                <IconLogo className="w-full h-auto animate-fadeIn theme-menu-fill group-hover:hidden" />
+                <IconLogoFill className="hidden relative w-full h-auto theme-menu-fill group-hover:block" />
               </motion.button>
             )}
           </>

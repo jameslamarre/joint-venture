@@ -3,10 +3,31 @@ import { BiCode } from 'react-icons/bi'
 import { GiButtonFinger } from 'react-icons/gi'
 import { GrImage } from 'react-icons/gr'
 import { RxDividerHorizontal } from 'react-icons/rx'
-import { LuAlignLeft, LuHighlighter } from 'react-icons/lu'
+import {
+  LuAlignLeft,
+  LuCircle,
+  LuHighlighter,
+  LuUnderline,
+} from 'react-icons/lu'
 
 const HighlightDecorator = (props: any) => {
   return <span style={{ backgroundColor: '#CFE806' }}>{props.children}</span>
+}
+
+const RedUnderlineDecorator = (props: any) => {
+  return (
+    <span style={{ textDecoration: 'underline', textDecorationColor: 'red' }}>
+      {props.children}
+    </span>
+  )
+}
+
+const RedCircleDecorator = (props: any) => {
+  return (
+    <span style={{ border: '1px solid red', borderRadius: '50%' }}>
+      {props.children}
+    </span>
+  )
 }
 
 export default {
@@ -33,6 +54,18 @@ export default {
             value: 'highlight',
             icon: LuHighlighter,
             component: HighlightDecorator,
+          },
+          {
+            title: 'Red Underline',
+            value: 'redUnderline',
+            icon: LuUnderline,
+            component: RedUnderlineDecorator,
+          },
+          {
+            title: 'Red Circle',
+            value: 'redCircle',
+            icon: LuCircle,
+            component: RedCircleDecorator,
           },
         ],
         annotations: [
