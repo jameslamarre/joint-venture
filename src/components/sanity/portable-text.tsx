@@ -6,6 +6,7 @@ import type {
 import { reactNodeToString } from '@lib/util'
 import { SanityLink, SanityMedia } from '.'
 import { SanityLinkType } from '@studio/lib'
+import { RoughNotation } from 'react-rough-notation'
 
 /**
  * PortableText types used globally
@@ -47,6 +48,36 @@ export const blockMarks: Partial<PortableTextReactComponents['marks']> = {
   },
   highlight: ({ children }) => {
     return <span className="highlight">{children}</span>
+  },
+  redUnderline: ({ children }) => {
+    return (
+      <RoughNotation
+        type="underline"
+        show={true}
+        color="#A90736"
+        strokeWidth={2}
+        iterations={1}
+        animationDelay={100}
+        animationDuration={600}
+      >
+        {children}
+      </RoughNotation>
+    )
+  },
+  redCircle: ({ children }) => {
+    return (
+      <RoughNotation
+        type="circle"
+        show={true}
+        color="#A90736"
+        strokeWidth={2}
+        iterations={1}
+        animationDelay={100}
+        animationDuration={600}
+      >
+        {children}
+      </RoughNotation>
+    )
   },
   alignment: ({ children, value }) => {
     return (

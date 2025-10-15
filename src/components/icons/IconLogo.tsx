@@ -8,7 +8,7 @@ export const IconLogoComponent = (props: SVGProps<SVGSVGElement>) => {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
-        viewBox="0 0 115 116"
+        viewBox="-10 -12 134 130"
         {...props}
       >
         <g fill="inherit" clipPath="url(#a)">
