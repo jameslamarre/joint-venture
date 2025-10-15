@@ -24,37 +24,6 @@ export default {
       group: 'global',
       validation: (Rule: Rule): Rule => Rule.required(),
     },
-    // {
-    //   name: 'footerSocials',
-    //   title: 'Footer Socials',
-    //   group: 'global',
-    //   type: 'array',
-    //   of: [
-    //     {
-    //       name: 'social',
-    //       title: 'Social',
-    //       type: 'object',
-    //       fields: [
-    //         {
-    //           name: 'title',
-    //           title: 'Title',
-    //           type: 'string',
-    //         },
-    //         {
-    //           name: 'url',
-    //           title: 'URL',
-    //           type: 'url',
-    //         },
-    //         {
-    //           name: 'icon',
-    //           title: 'Icon',
-    //           type: 'image',
-    //         },
-    //       ],
-    //     },
-    //   ],
-    //   description: 'Social media links to display in the footer',
-    // },
     {
       name: 'description',
       title: 'Site Description',
