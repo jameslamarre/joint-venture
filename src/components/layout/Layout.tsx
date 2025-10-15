@@ -432,7 +432,6 @@ export const Layout: FC<LayoutProps> = ({
               currentPage={page?._type === 'project' ? 'Films' : page?.title}
               pageBackground={currentTheme}
               setShowContent={() => setShowContent(true)}
-              mainMenu={siteSettings?.mainMenu as Menus | undefined}
             />
 
             {page?._type === 'page' && (

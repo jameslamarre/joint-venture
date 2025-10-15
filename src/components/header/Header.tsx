@@ -10,7 +10,6 @@ import { useRouter } from 'next/router'
 import { isMobile, isTablet } from 'react-device-detect'
 
 export const Header: FC<HeaderProps> = ({
-  mainMenu,
   currentPage,
   pageBackground,
   setShowContent,
@@ -113,7 +112,6 @@ export const Header: FC<HeaderProps> = ({
           customOpen={menuOpen}
           setCustomOpen={setMenuOpen}
           onOpen={onOpen}
-          mainMenu={mainMenu as SanityMenu}
           pageBackground={pageBackground}
           className="inline-block h-auto pointer-events-auto"
         />
