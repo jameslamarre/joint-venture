@@ -193,9 +193,14 @@ const Project: NextPage<PageProps> = (
                     <button
                       onClick={goToPrevious}
                       disabled={view?.film === 0}
-                      className="w-full px-xhalf disabled:opacity-50 disabled:pointer-events-none hover:bg-white border-left border-right text-left"
+                      className="w-full px-2 disabled:pointer-events-none hover:bg-white border-left border-right text-left"
                     >
-                      <span className="inline-block py-1 leading-none uppercase font-sans">
+                      <span
+                        className={classNames(
+                          view?.film === 0 ? 'opacity-20' : '',
+                          'inline-block py-1 leading-none uppercase font-sans'
+                        )}
+                      >
                         Previous
                       </span>
                     </button>
@@ -205,7 +210,7 @@ const Project: NextPage<PageProps> = (
                       disabled={
                         (view?.film as number) >= project.projectList.length - 1
                       }
-                      className="w-full px-xhalf disabled:opacity-50 hover:bg-white border-right text-right"
+                      className="w-full px-2 disabled:opacity-20 hover:bg-white border-right text-right"
                     >
                       <span className="inline-block py-1 leading-none uppercase font-sans">
                         Next

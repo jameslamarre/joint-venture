@@ -142,7 +142,7 @@ body {
 }
 
 ::selection {
-  background-color: theme('backgroundColor.red');
+  background-color: theme('backgroundColor.yellow');
   color: var(--theme-text);
 }
 

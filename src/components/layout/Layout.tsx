@@ -295,7 +295,7 @@ export const Layout: FC<LayoutProps> = ({
           root.style.setProperty('--theme-bg', '#CFE806')
           root.style.setProperty('--theme-text', '#31383C')
           root.style.setProperty('--theme-text--menu', '#CFE806')
-          root.style.setProperty('--theme-menu', '#31383C')
+          root.style.setProperty('--theme-menu', '#000')
           root.style.setProperty('--theme-highlight', '#91D2DA')
           break
         case 'blue':
@@ -356,7 +356,7 @@ export const Layout: FC<LayoutProps> = ({
                 animate="animate"
                 exit="exit"
                 variants={wipeVariants}
-                className={classNames('fixed w-full h-full bg-blue z-above')}
+                className={classNames('fixed w-full h-full bg-yellow z-above')}
               ></motion.div>
             </>
           )}

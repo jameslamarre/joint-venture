@@ -16,23 +16,6 @@ export const SITE_SETTINGS_QUERY = groq`
       ${IMAGE_QUERY}
     },
     siteKeywords,
-    footerContent,
-    newsletterId,
-    mainMenu->{
-      items[]{
-        _key,
-        text,
-        link{
-          ${LINK_QUERY}
-        }
-      }
-    },
-    footerSocials[]{
-      ...,
-      "icon": icon{
-        ${IMAGE_QUERY}
-      }
-    },
   }
 `
 
