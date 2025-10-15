@@ -52,7 +52,7 @@ const Page: NextPage<PageProps> = (
   const pageVariants = {
     initial: {
       clipPath:
-        view.previousPage === 'film'
+        view?.previousPage === 'film'
           ? 'inset(0 100% 0 0)'
           : 'inset(100% 0 0 0)',
       opacity: 0.9,
@@ -66,7 +66,7 @@ const Page: NextPage<PageProps> = (
       opacity: 1,
       transition: {
         duration: 0.6,
-        delay: view.previousPage === 'film' ? 0 : 0.3,
+        delay: view?.previousPage === 'film' ? 0 : 0.3,
         ease: 'easeInOut',
       },
     },
