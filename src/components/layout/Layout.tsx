@@ -31,7 +31,7 @@ interface LayoutProps {
   siteSettings?: SiteSettings | undefined
 }
 
-const PAGE_ORDER = ['', 'films', 'contact']
+const PAGE_ORDER = ['', 'films', 'join']
 
 export const Layout: FC<LayoutProps> = ({
   children,
@@ -115,10 +115,13 @@ export const Layout: FC<LayoutProps> = ({
     },
   }
 
+  const [isNavigationInProgress, setIsNavigationInProgress] = useState(false)
+
   const navigateToPage = useCallback(
     (targetPage: string) => {
-      if (!canNavigate()) return
+      if (!canNavigate() || isNavigationInProgress) return
 
+      setIsNavigationInProgress(true)
       setShowIndicator(false)
       setShowWipe(true)
       setNavigating(true)
@@ -134,15 +137,28 @@ export const Layout: FC<LayoutProps> = ({
       setTimeout(() => {
         setNavigating(false)
         setShowWipe(false)
+        setIsNavigationInProgress(false)
       }, 1200)
     },
-    [canNavigate, setNavigating, push, resetScrollProgress]
+    [
+      canNavigate,
+      setNavigating,
+      push,
+      resetScrollProgress,
+      isNavigationInProgress,
+    ]
   )
 
   const handleWheel = useCallback(
     (e: WheelEvent) => {
       // Only handle on pages, not projects or intro, and not during navigation
-      if (showIntro || page?._type !== 'page' || view?.isNavigating) return
+      if (
+        showIntro ||
+        page?._type !== 'page' ||
+        view?.isNavigating ||
+        isNavigationInProgress
+      )
+        return
 
       const isAtTop = window.scrollY <= 10
       const isAtBottom =
@@ -190,6 +206,7 @@ export const Layout: FC<LayoutProps> = ({
 
       if (
         canNavigate() &&
+        !isNavigationInProgress &&
         (canNavigateDown || canNavigateUp) &&
         !keyHoldTimer.current
       ) {
@@ -222,25 +239,26 @@ export const Layout: FC<LayoutProps> = ({
       view?.isNavigating,
       canNavigate,
       navigateToPage,
+      isNavigationInProgress,
     ]
   )
 
   // Update view context when page changes
   useEffect(() => {
     const currentIndex = getCurrentPageIndex()
-    const currentPageSlug = PAGE_ORDER[currentIndex] as '' | 'films' | 'contact'
+    const currentPageSlug = PAGE_ORDER[currentIndex] as '' | 'films' | 'join'
 
     updateView({
       ...view,
       page: currentPageSlug,
       nextPage:
         currentIndex < PAGE_ORDER.length - 1
-          ? (PAGE_ORDER[currentIndex + 1] as 'films' | 'contact')
-          : view.nextPage || undefined,
-      // previousPage:
-      //   currentIndex > 0
-      //     ? (PAGE_ORDER[currentIndex - 1] as '' | 'films' | 'contact')
-      //     : view.previousPage || undefined,
+          ? (PAGE_ORDER[currentIndex + 1] as 'films' | 'join')
+          : view?.nextPage || undefined,
+      previousPage:
+        currentIndex > 0
+          ? (PAGE_ORDER[currentIndex - 1] as '' | 'films' | 'join')
+          : view.previousPage || undefined,
       isNavigating: false,
       lastNavigationTime: view?.lastNavigationTime,
     })
@@ -275,11 +293,7 @@ export const Layout: FC<LayoutProps> = ({
     const root = document.documentElement
 
     // Only update theme from page if user hasn't overridden it
-    if (
-      !userOverrideTheme &&
-      page?.initialColor &&
-      page.initialColor !== currentTheme
-    ) {
+    if (!userOverrideTheme && page?.initialColor) {
       setCurrentTheme(page.initialColor)
     }
 

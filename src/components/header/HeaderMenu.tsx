@@ -208,7 +208,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                       updateView({
                         ...view,
                         previousPage: view.page,
-                        nextPage: 'contact',
+                        nextPage: 'join',
                       })
                     }}
                     className="hover:invert"
