@@ -23,7 +23,8 @@ export default {
     {
       name: 'poster',
       type: 'image',
-      description: 'Image that displays before the video is fully loaded',
+      description:
+        'Image that displays before the video is fully loaded (where applicable)',
     },
   ],
   preview: {

@@ -142,7 +142,7 @@ body {
 }
 
 ::selection {
-  background-color: theme('backgroundColor.red');
+  background-color: theme('backgroundColor.yellow');
   color: var(--theme-text);
 }
 
@@ -165,6 +165,10 @@ body {
   transform: skew(-5deg);
   transform-origin: top left;
   animation: highlightAnim 0.6s var(--animate-delay, 0s) ease-in-out forwards;
+}
+
+.highlight--hover:hover::before {
+  background-color: theme('backgroundColor.white');
 }
 
 @keyframes highlightAnim {

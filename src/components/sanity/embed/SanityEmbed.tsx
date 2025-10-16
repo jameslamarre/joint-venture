@@ -20,7 +20,7 @@ export const SanityEmbed: FC<SanityEmbedProps> = ({
       ) : (
         youtube?.youtubeId?.length && (
           <iframe
-            src={`https://www.youtube.com/embed/${youtube.youtubeId}`}
+            src={`https://www.youtube.com/embed/${youtube.youtubeId}?autoplay=1&showinfo=0`}
             allow="autoplay; fullscreen; picture-in-picture"
             frameBorder={0}
             allowFullScreen

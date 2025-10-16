@@ -224,7 +224,7 @@ export const Layout: FC<LayoutProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asPath, getCurrentPageIndex, view?.lastNavigationTime])
 
-  console.log(view)
+  // console.log(view)
 
   // Remove keyboard handlers and add wheel handler
   // useEffect(() => {
@@ -276,7 +276,7 @@ export const Layout: FC<LayoutProps> = ({
           root.style.setProperty('--theme-text', '#31383C')
           root.style.setProperty('--theme-text--menu', '#CFE806')
           root.style.setProperty('--theme-menu', '#31383C')
-          root.style.setProperty('--theme-highlight', '#91D2DA')
+          root.style.setProperty('--theme-highlight', '#CFE806')
           break
         case 'blue':
           root.style.setProperty('--theme-bg', '#91D2DA')

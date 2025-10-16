@@ -27,6 +27,8 @@ import { IconLogo } from '@components/icons'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import { useView, ViewProps } from '@contexts/view/ViewContext'
+import { Cta } from '@components/btns'
+import { SanityEmbed } from '@components/sanity/embed'
 
 type PageRefType = React.ForwardedRef<HTMLDivElement>
 
@@ -81,6 +83,9 @@ const Project: NextPage<PageProps> = (
 ) => {
   const router = useRouter()
   const project: ProjectProps = filterDataToSingleItem(data)
+
+  const [videoPlaying, setVideoPlaying] = useState(false)
+
   const [view, updateView] = useView() as [
     ViewProps,
     React.Dispatch<React.SetStateAction<ViewProps>>
@@ -177,16 +182,54 @@ const Project: NextPage<PageProps> = (
             >
               {project.previewImage && (
                 <div className="relative">
-                  <SanityImage
-                    asset={project.previewImage.asset}
-                    props={{
-                      alt: 'Project image',
-                      quality: 85,
-                      sizes:
-                        '(max-width: 640px) 100vw, (max-width: 1024px) 50vw',
-                    }}
-                    className="relative aspect-video w-full h-fit object-contain"
-                  />
+                  <div className="relative w-full h-fit leading-[0] aspect-video bg-darkgray">
+                    <AnimatePresence mode="popLayout">
+                      {!videoPlaying ? (
+                        <motion.div
+                          key="trailer-image-key"
+                          initial={{ opacity: 1 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="w-full h-auto leading-[0] z-above"
+                        >
+                          <SanityImage
+                            asset={project.previewImage.asset}
+                            props={{
+                              alt: 'Project image',
+                              quality: 85,
+                              sizes:
+                                '(max-width: 640px) 100vw, (max-width: 1024px) 50vw',
+                            }}
+                            className="relative w-full h-fit aspect-video object-fill"
+                          />
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          key="trailer-video-key"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.4, delay: 0.1 }}
+                          className="w-full h-full z-above"
+                        >
+                          <SanityEmbed
+                            className="w-full h-full"
+                            youtube={project?.trailer?.youtube}
+                            vimeo={project.trailer?.vimeo}
+                          />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {project.trailer && !videoPlaying && (
+                      <Cta
+                        className="absolute bottom-ydouble left-1/2 transform -translate-x-1/2"
+                        onClick={() => setVideoPlaying(true)}
+                      >
+                        Play trailer
+                      </Cta>
+                    )}
+                  </div>
 
                   {/* Navigation Controls */}
                   <div className="flex justify-between items-center w-full mt-2 mb-y border-top border-bottom">
