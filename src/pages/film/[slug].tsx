@@ -97,6 +97,11 @@ const Project: NextPage<PageProps> = (
     if (newPosition >= 0 && newPosition < project.projectList.length) {
       setSlideDirection(direction)
       const targetSlug = project.projectList[newPosition].slug.current
+      updateView({
+        ...view,
+        nextPage: 'film',
+        previousPage: 'film',
+      })
       router.push(`/film/${targetSlug}`)
     }
   }
@@ -151,8 +156,6 @@ const Project: NextPage<PageProps> = (
 
       updateView({
         ...view,
-        page: 'film',
-        nextPage: 'film',
         film: position,
         previousFilm:
           position > project.projectList.length - 1 ? position - 1 : 0,

@@ -7,20 +7,19 @@ import {
 } from 'react'
 import { useRouter } from 'next/router'
 import { ToastContainer } from 'react-toastify'
-import type { Menus, Page, Project, SiteSettings } from '@gen/sanity-schema'
+import type { Page, Project, SiteSettings } from '@gen/sanity-schema'
 import { Head } from '@components/head'
 import { Header } from '@components/header'
 // import { Footer } from '@components/footer'
 import { filterDataToSingleItem } from '@studio/lib'
 import { triggerToastPreview } from '@components/toast'
 import LogoContainer from '@components/logo/LogoContainer'
-import { IconLogo } from '@components/icons'
 import { AnimatePresence, motion } from 'framer-motion'
 import classNames from 'classnames'
 import { useRef } from 'react'
 import { useNavigation } from '@contexts/view/ViewContext'
-import IconLogoFill from '@components/icons/IconLogoFill'
 import PAGE_ORDER from '@globals/pages'
+import { LogoButton } from '@components/logo'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 type PageData = Page | Project
@@ -62,24 +61,6 @@ export const Layout: FC<LayoutProps> = ({
   const seoImage =
     (page as any)?.previewImage || (page as any)?.image || undefined
 
-  const cycleTheme = () => {
-    setUserOverrideTheme(true)
-    setCurrentTheme(prev => {
-      switch (prev) {
-        case 'stone':
-          return 'yellow'
-        case 'yellow':
-          return 'blue'
-        case 'blue':
-          return 'dark'
-        case 'dark':
-          return 'stone'
-        default:
-          return 'stone'
-      }
-    })
-  }
-
   const getCurrentPageIndex = useCallback(() => {
     const currentSlug = asPath.substring(1) as '' | 'films' | 'join'
     return PAGE_ORDER.indexOf(currentSlug)
@@ -118,16 +99,14 @@ export const Layout: FC<LayoutProps> = ({
     asPath.substring(1) as '' | 'films' | 'join'
   )
 
-  console.log(
-    currentIndex,
-    PAGE_ORDER.indexOf(view?.previousPage),
-    view?.previousPage
-  )
+  console.log(view?.page, view?.previousPage)
 
   const pageVariants = {
     initial: {
       clipPath:
-        view?.previousPage === undefined
+        view?.page === 'film' && view.previousPage === 'film'
+          ? 'inset(0)'
+          : view?.previousPage === undefined
           ? 'inset(0)'
           : view?.previousPage === 'film'
           ? 'inset(0 100% 0 0)'
@@ -137,7 +116,7 @@ export const Layout: FC<LayoutProps> = ({
       opacity: 0.9,
     },
     animate: {
-      clipPath: 'inset(0 0 0 0)',
+      clipPath: 'inset(0)',
       opacity: 1,
       transition: {
         duration: 0.6,
@@ -146,7 +125,9 @@ export const Layout: FC<LayoutProps> = ({
     },
     exit: {
       clipPath:
-        view?.nextPage === 'film'
+        view?.page === 'film'
+          ? 'inset(0)'
+          : view?.nextPage === 'film'
           ? 'inset(0 100% 0 0)'
           : direction === 'up'
           ? 'inset(100% 0 0 0)'
@@ -298,7 +279,7 @@ export const Layout: FC<LayoutProps> = ({
 
     updateView({
       ...view,
-      page: currentPageSlug,
+      page: page?._type === 'project' ? 'film' : currentPageSlug,
       isNavigating: false,
       lastNavigationTime: view?.lastNavigationTime,
     })
@@ -336,6 +317,7 @@ export const Layout: FC<LayoutProps> = ({
 
     // Only update theme from page if user hasn't overridden it
     if (!userOverrideTheme && page?.initialColor) {
+      // eslint-disable-next-line react-you-might-not-need-an-effect/no-derived-state
       setCurrentTheme(page.initialColor)
     }
 
@@ -474,21 +456,15 @@ export const Layout: FC<LayoutProps> = ({
             <Header
               className="flex-initial"
               currentPage={page?._type === 'project' ? 'Films' : page?.title}
-              pageBackground={currentTheme}
               setShowContent={() => setShowContent(true)}
             />
 
             {page?._type === 'page' && (
-              <motion.button
-                initial={{ rotate: 0 }}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 16, ease: 'linear', repeat: Infinity }}
-                onClick={cycleTheme}
-                className="group fixed w-[100px] md:w-[134px] right-[calc(50%-40px)] md:right-[calc(50%-57px)] lg:right-x bottom-x p-2 mix-blend-difference md:mix-blend-normal bg-black md:bg-transparent rounded-full z-above"
-              >
-                <IconLogo className="w-full h-auto animate-fadeIn theme-menu-fill group-hover:hidden" />
-                <IconLogoFill className="hidden relative w-full h-auto theme-menu-fill group-hover:block" />
-              </motion.button>
+              <LogoButton
+                color={page?.initialColor}
+                asPath={asPath}
+                setCurrentTheme={setCurrentTheme}
+              />
             )}
           </>
         )}

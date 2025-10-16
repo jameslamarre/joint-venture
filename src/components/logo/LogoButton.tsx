@@ -1,0 +1,49 @@
+import { useState, type FC, ButtonHTMLAttributes } from 'react'
+import { IconLogo } from '@components/icons'
+import { motion } from 'framer-motion'
+import IconLogoFill from '@components/icons/IconLogoFill'
+
+interface LogoButton extends ButtonHTMLAttributes<HTMLButtonElement> {
+  color?: 'stone' | 'yellow' | 'blue' | 'dark'
+  asPath?: string
+  setCurrentTheme: (arg0: any) => void
+}
+
+export const LogoButton: FC<LogoButton> = ({
+  color,
+  asPath,
+  setCurrentTheme,
+  className,
+}) => {
+  const cycleTheme = () => {
+    setCurrentTheme((prev: any) => {
+      switch (prev) {
+        case 'stone':
+          return 'yellow'
+        case 'yellow':
+          return 'blue'
+        case 'blue':
+          return 'dark'
+        case 'dark':
+          return 'stone'
+        default:
+          return 'stone'
+      }
+    })
+  }
+
+  return (
+    <motion.button
+      initial={{ rotate: 0 }}
+      animate={{ rotate: 360 }}
+      transition={{ duration: 16, ease: 'linear', repeat: Infinity }}
+      onClick={cycleTheme}
+      className="group fixed w-[100px] md:w-[134px] right-[calc(50%-40px)] md:right-[calc(50%-57px)] lg:right-x bottom-x p-2 mix-blend-difference md:mix-blend-normal bg-black md:bg-transparent rounded-full z-above"
+    >
+      <IconLogo className="w-full h-auto animate-fadeIn theme-menu-fill group-hover:hidden" />
+      <IconLogoFill className="hidden relative w-full h-auto theme-menu-fill group-hover:block" />
+    </motion.button>
+  )
+}
+
+export default LogoButton

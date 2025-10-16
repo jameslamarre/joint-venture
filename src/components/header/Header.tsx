@@ -11,7 +11,6 @@ import { isMobile, isTablet } from 'react-device-detect'
 
 export const Header: FC<HeaderProps> = ({
   currentPage,
-  pageBackground,
   setShowContent,
   className,
 }) => {
@@ -112,7 +111,6 @@ export const Header: FC<HeaderProps> = ({
           customOpen={menuOpen}
           setCustomOpen={setMenuOpen}
           onOpen={onOpen}
-          pageBackground={pageBackground}
           className="inline-block h-auto pointer-events-auto"
         />
       </motion.header>

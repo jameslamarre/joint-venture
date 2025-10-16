@@ -15,7 +15,7 @@ function PageTransition(
       animate={{ opacity: 1 }}
       exit={{ opacity: 0.95 }}
       transition={{
-        duration: 0.6,
+        duration: 0.3,
         ease: 'easeInOut',
       }}
     >

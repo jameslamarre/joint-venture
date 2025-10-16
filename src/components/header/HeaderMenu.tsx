@@ -159,7 +159,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                       setCustomOpen(false)
                       updateView({
                         ...view,
-                        previousPage: view.page,
+                        previousPage: view?.page,
                         nextPage: 'about',
                       })
                     }}
@@ -183,7 +183,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                       setCustomOpen(false)
                       updateView({
                         ...view,
-                        previousPage: view.page,
+                        previousPage: view?.page,
                         nextPage: 'films',
                       })
                     }}
@@ -207,7 +207,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                       setCustomOpen(false)
                       updateView({
                         ...view,
-                        previousPage: view.page,
+                        previousPage: view?.page,
                         nextPage: 'join',
                       })
                     }}
