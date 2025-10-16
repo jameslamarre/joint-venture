@@ -8,12 +8,13 @@ export const Cta: FC<CtaProps> = props => {
       type={props.type || 'button'}
       className={classNames(
         props.className,
-        'inline-flex items-center justify-center uppercase underline'
+        'highlight highlight--hover inline-flex items-center justify-center uppercase font-sans text-lg py-2 px-4'
       )}
+      // style={{ backgroundColor: 'var(--theme-highlight)' }}
       ref={props.innerRef as Ref<HTMLButtonElement>}
       onClick={props.onClick}
     >
-      <span className="relative leading-tight">{props.children}</span>
+      <span className="relative leading-none text-sm">{props.children}</span>
     </button>
   )
 }

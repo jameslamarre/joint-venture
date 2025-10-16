@@ -10,12 +10,14 @@ import type { PageProps } from '@lib/next'
 import { getPageStaticProps } from '@lib/next'
 import { BODY_QUERY, client, filterDataToSingleItem } from '@studio/lib'
 import { BlockContent } from '@components/sanity'
-import { forwardRef, ForwardRefRenderFunction } from 'react'
+import { forwardRef, ForwardRefRenderFunction, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { useView } from '@contexts/view'
 
 type PageRefType = React.ForwardedRef<HTMLDivElement>
+
+const PAGE_ORDER = ['', 'films', 'join']
 
 const ALL_SLUGS_QUERY = groq`*[_type == "page" && defined(slug.current)][].slug.current`
 const PAGE_QUERY = groq`
@@ -49,51 +51,10 @@ const Page: NextPage<PageProps> = (
 
   const [view, updateView] = useView() as any
 
-  const pageVariants = {
-    initial: {
-      clipPath:
-        view?.previousPage === 'film'
-          ? 'inset(0 100% 0 0)'
-          : 'inset(100% 0 0 0)',
-      opacity: 0.9,
-      transition: {
-        duration: 0.6,
-        ease: 'easeInOut',
-      },
-    },
-    animate: {
-      clipPath: 'inset(0 0 0 0)',
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        delay: view?.previousPage === 'film' ? 0 : 0.3,
-        ease: 'easeInOut',
-      },
-    },
-    exit: {
-      clipPath:
-        view.nextPage === 'film' ? 'inset(0 100% 0 0)' : 'inset(0 0 100% 0)',
-      opacity: 0.9,
-      transition: {
-        duration: 0.6,
-        ease: 'easeInOut',
-      },
-    },
-  }
-
   return page?.body && (!page?._id.includes('drafts.') || preview) ? (
-    <AnimatePresence mode="wait">
-      <motion.article
-        key={asPath}
-        variants={pageVariants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        className="pt-page"
-      >
-        <BlockContent blocks={page?.body} className="flex flex-col w-full" />
-      </motion.article>
-    </AnimatePresence>
+    <article key={`page-${asPath}`} className="pt-page">
+      <BlockContent blocks={page?.body} className="flex flex-col w-full" />
+    </article>
   ) : null
 }
 

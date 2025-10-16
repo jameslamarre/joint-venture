@@ -4,6 +4,7 @@ import { GiButtonFinger } from 'react-icons/gi'
 import { GrImage } from 'react-icons/gr'
 import { RxDividerHorizontal } from 'react-icons/rx'
 import {
+  LuAlignCenter,
   LuAlignLeft,
   LuCircle,
   LuHighlighter,
@@ -78,7 +79,7 @@ export default {
             title: 'Alignment',
             name: 'alignment',
             type: 'object',
-            icon: LuAlignLeft,
+            icon: LuAlignCenter,
             fields: [
               {
                 title: 'Align',
@@ -88,7 +89,6 @@ export default {
                   list: [
                     { title: 'Left', value: 'left' },
                     { title: 'Center', value: 'center' },
-                    { title: 'Right', value: 'right' },
                   ],
                   layout: 'radio',
                 },

@@ -20,6 +20,7 @@ import classNames from 'classnames'
 import { useRef } from 'react'
 import { useNavigation } from '@contexts/view/ViewContext'
 import IconLogoFill from '@components/icons/IconLogoFill'
+import PAGE_ORDER from '@globals/pages'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 type PageData = Page | Project
@@ -30,8 +31,6 @@ interface LayoutProps {
   data?: PageData[]
   siteSettings?: SiteSettings | undefined
 }
-
-const PAGE_ORDER = ['', 'films', 'join']
 
 export const Layout: FC<LayoutProps> = ({
   children,
@@ -82,7 +81,7 @@ export const Layout: FC<LayoutProps> = ({
   }
 
   const getCurrentPageIndex = useCallback(() => {
-    const currentSlug = asPath.substring(1)
+    const currentSlug = asPath.substring(1) as '' | 'films' | 'join'
     return PAGE_ORDER.indexOf(currentSlug)
   }, [asPath])
 
@@ -110,6 +109,51 @@ export const Layout: FC<LayoutProps> = ({
       transition: {
         duration: 0.6,
         delay: 0.6,
+        ease: 'easeInOut',
+      },
+    },
+  }
+
+  const currentIndex = PAGE_ORDER.indexOf(
+    asPath.substring(1) as '' | 'films' | 'join'
+  )
+
+  console.log(
+    currentIndex,
+    PAGE_ORDER.indexOf(view?.previousPage),
+    view?.previousPage
+  )
+
+  const pageVariants = {
+    initial: {
+      clipPath:
+        view?.previousPage === undefined
+          ? 'inset(0)'
+          : view?.previousPage === 'film'
+          ? 'inset(0 100% 0 0)'
+          : currentIndex > PAGE_ORDER.indexOf(view?.previousPage)
+          ? 'inset(100% 0 0 0)'
+          : 'inset(0 0 100% 0)',
+      opacity: 0.9,
+    },
+    animate: {
+      clipPath: 'inset(0 0 0 0)',
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: 'easeInOut',
+      },
+    },
+    exit: {
+      clipPath:
+        view?.nextPage === 'film'
+          ? 'inset(0 100% 0 0)'
+          : direction === 'up'
+          ? 'inset(100% 0 0 0)'
+          : 'inset(0 0 100% 0)',
+      opacity: 0.9,
+      transition: {
+        duration: 0.5,
         ease: 'easeInOut',
       },
     },
@@ -221,6 +265,10 @@ export const Layout: FC<LayoutProps> = ({
 
           // Trigger navigation when scroll threshold is reached
           if (progress >= 100) {
+            updateView({
+              ...view,
+              previousPage: view?.page,
+            })
             if (canNavigateDown) {
               navigateToPage(PAGE_ORDER[currentIndex + 1])
             } else if (canNavigateUp) {
@@ -251,19 +299,13 @@ export const Layout: FC<LayoutProps> = ({
     updateView({
       ...view,
       page: currentPageSlug,
-      nextPage:
-        currentIndex < PAGE_ORDER.length - 1
-          ? (PAGE_ORDER[currentIndex + 1] as 'films' | 'join')
-          : view?.nextPage || undefined,
-      previousPage:
-        currentIndex > 0
-          ? (PAGE_ORDER[currentIndex - 1] as '' | 'films' | 'join')
-          : view?.previousPage || undefined,
       isNavigating: false,
       lastNavigationTime: view?.lastNavigationTime,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asPath, getCurrentPageIndex, view?.lastNavigationTime])
+
+  // console.log(view)
 
   // Remove keyboard handlers and add wheel handler
   useEffect(() => {
@@ -310,8 +352,8 @@ export const Layout: FC<LayoutProps> = ({
           root.style.setProperty('--theme-bg', '#CFE806')
           root.style.setProperty('--theme-text', '#31383C')
           root.style.setProperty('--theme-text--menu', '#CFE806')
-          root.style.setProperty('--theme-menu', '#000')
-          root.style.setProperty('--theme-highlight', '#91D2DA')
+          root.style.setProperty('--theme-menu', '#31383C')
+          root.style.setProperty('--theme-highlight', '#CFE806')
           break
         case 'blue':
           root.style.setProperty('--theme-bg', '#91D2DA')
@@ -451,7 +493,20 @@ export const Layout: FC<LayoutProps> = ({
           </>
         )}
 
-        {showContent && <main className="flex-auto">{children}</main>}
+        <AnimatePresence mode="wait">
+          {showContent && (
+            <motion.main
+              key={`main-${asPath}`}
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="flex-auto overflow-hidden"
+            >
+              {children}
+            </motion.main>
+          )}
+        </AnimatePresence>
 
         {/* <Footer
           content={siteSettings?.footerSocials as any}
