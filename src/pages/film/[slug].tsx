@@ -21,7 +21,7 @@ import {
   useEffect,
 } from 'react'
 import PageTransition from '@components/transition/PageTransition'
-import { SanityImage } from '@components/sanity'
+import { RichText, SanityImage } from '@components/sanity'
 import { motion, AnimatePresence } from 'framer-motion'
 import { IconLogo } from '@components/icons'
 import classNames from 'classnames'
@@ -29,6 +29,7 @@ import { useRouter } from 'next/router'
 import { useView, ViewProps } from '@contexts/view/ViewContext'
 import { Cta } from '@components/btns'
 import { SanityEmbed } from '@components/sanity/embed'
+import { TypedObject } from '@portabletext/types'
 
 type PageRefType = React.ForwardedRef<HTMLDivElement>
 
@@ -226,7 +227,7 @@ const Project: NextPage<PageProps> = (
 
                     {project.trailer && !videoPlaying && (
                       <Cta
-                        className="absolute bottom-ydouble left-1/2 transform -translate-x-1/2"
+                        className="absolute top-1/2 md:top-auto md:bottom-ydouble left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:translate-y-0"
                         onClick={() => setVideoPlaying(true)}
                       >
                         Play trailer
@@ -266,7 +267,13 @@ const Project: NextPage<PageProps> = (
                 </div>
               )}
 
-              <div className="flex items-center gap-0 bg-white border-top border-left md:border-right">
+              <div className="flex items-center gap-0 relative bg-white border-top border-left md:border-right">
+                <div
+                  className={classNames(
+                    project.executiveProducedBy ? 'w-[286px]' : 'w-[188px]',
+                    'hidden md:block absolute h-full top-0 border-right pointer-events-none'
+                  )}
+                ></div>
                 <div className="hidden md:flex items-center justify-center order-2 w-[140px] md:w-[210px] h-[-webkit-fill-available] px-xdouble xl:px-0 border-bottom">
                   <div className="p-2 bg-black rounded-full z-above">
                     <IconLogo
@@ -283,43 +290,115 @@ const Project: NextPage<PageProps> = (
                 </div>
                 <div className="flex flex-col gap-0 w-full">
                   {project.title && (
-                    <div className="px-2 border-right ruled-lines">
-                      <h4 className="inline-block w-[200px] text-h4 mr-1">
-                        Title:
-                      </h4>
-                      <p className="inline">{project.title}</p>
+                    <div className="flex flex-col md:flex-wrap md:gap-2 px-2 border-right ruled-lines">
+                      <div
+                        className={classNames(
+                          project.executiveProducedBy
+                            ? 'w-full md:w-[286px]'
+                            : 'w-[180px]',
+                          'block md:inline-block h-max py-[2px] pr-2'
+                        )}
+                      >
+                        <h4 className="w-full text-h4 md:text-right">Title:</h4>
+                      </div>
+                      <p className="inline w-full md:w-[calc(100%-280px)]">
+                        {project.title}
+                      </p>
                     </div>
                   )}
                   {project.directedBy && (
-                    <div className="px-2 border-right ruled-lines">
-                      <h4 className="inline-block w-[200px] text-h4 mr-1">
-                        Directed by:
-                      </h4>
-                      <p className="inline">{project.directedBy}</p>
+                    <div className="flex flex-col md:flex-wrap md:gap-2 px-2 border-right ruled-lines">
+                      <div
+                        className={classNames(
+                          project.executiveProducedBy
+                            ? 'w-full md:w-[286px]'
+                            : 'w-[180px]',
+                          'block md:inline-block h-max py-[2px] pr-2'
+                        )}
+                      >
+                        <h4 className="w-full text-h4 md:text-right">
+                          Directed by:
+                        </h4>
+                      </div>
+                      <p className="inline w-full md:w-[calc(100%-280px)]">
+                        {project.directedBy}
+                      </p>
                     </div>
                   )}
                   {project.writtenBy && (
-                    <div className="px-2 border-right ruled-lines">
-                      <h4 className="inline-block w-[200px] text-h4 mr-1">
-                        Written by:
-                      </h4>
-                      <p className="inline">{project.writtenBy}</p>
+                    <div className="flex flex-col md:flex-wrap md:gap-2 px-2 border-right ruled-lines">
+                      <div
+                        className={classNames(
+                          project.executiveProducedBy
+                            ? 'w-full md:w-[286px]'
+                            : 'w-[180px]',
+                          'block md:inline-block h-max py-[2px] pr-2'
+                        )}
+                      >
+                        <h4 className="w-full text-h4 md:text-right">
+                          Written by:
+                        </h4>
+                      </div>
+                      <p className="inline w-full md:w-[calc(100%-280px)]">
+                        {project.writtenBy}
+                      </p>
                     </div>
                   )}
                   {project.producedBy && (
-                    <div className="px-2 border-right ruled-lines">
-                      <h4 className="inline-block w-[200px] text-h4 mr-1">
-                        Produced by:
-                      </h4>
-                      <p className="inline">{project.producedBy}</p>
+                    <div className="flex flex-col md:flex-wrap md:gap-2 px-2 border-right ruled-lines">
+                      <div
+                        className={classNames(
+                          project.executiveProducedBy
+                            ? 'w-full md:w-[286px]'
+                            : 'w-[180px]',
+                          'block md:inline-block h-max py-[2px] pr-2'
+                        )}
+                      >
+                        <h4 className="w-full text-h4 md:text-right">
+                          Produced by:
+                        </h4>
+                      </div>
+                      <p className="inline w-full md:w-[calc(100%-280px)]">
+                        {project.producedBy}
+                      </p>
+                    </div>
+                  )}
+                  {project.executiveProducedBy && (
+                    <div className="flex flex-col md:flex-wrap md:gap-2 px-2 border-right ruled-lines">
+                      <div
+                        className={classNames(
+                          project.executiveProducedBy
+                            ? 'w-full md:w-[286px]'
+                            : 'w-[180px]',
+                          'block md:inline-block h-max py-[2px] pr-2'
+                        )}
+                      >
+                        <h4 className="w-full text-h4 md:text-right">
+                          Executive produced by:
+                        </h4>
+                      </div>
+                      <p className="inline w-full md:w-[calc(100%-280px)]">
+                        {project.executiveProducedBy}
+                      </p>
                     </div>
                   )}
                   {project.starring && (
-                    <div className="px-2 border-right ruled-lines">
-                      <h4 className="inline-block w-[200px] text-h4 mr-1">
-                        Starring:
-                      </h4>
-                      <p className="inline">{project.starring}</p>
+                    <div className="flex flex-col md:flex-wrap md:gap-2 px-2 border-right ruled-lines">
+                      <div
+                        className={classNames(
+                          project.executiveProducedBy
+                            ? 'w-full md:w-[286px]'
+                            : 'w-[180px]',
+                          'block md:inline-block h-max py-[2px] pr-2'
+                        )}
+                      >
+                        <h4 className="w-full text-h4 md:text-right">
+                          Starring:
+                        </h4>
+                      </div>
+                      <p className="inline w-full md:w-[calc(100%-280px)]">
+                        {project.starring}
+                      </p>
                     </div>
                   )}
 
@@ -327,14 +406,47 @@ const Project: NextPage<PageProps> = (
                     project.otherFields.map(other => (
                       <div
                         key={other._key}
-                        className="px-2 border-right ruled-lines"
+                        className="flex flex-col md:flex-wrap md:gap-2 px-2 border-right ruled-lines"
                       >
-                        <h4 className="inline-block w-[200px] text-h4 mr-1">
-                          {other.title}:
-                        </h4>
-                        <p className="inline">{other.value}</p>
+                        <div
+                          className={classNames(
+                            project.executiveProducedBy
+                              ? 'w-full md:w-[286px]'
+                              : 'w-[180px]',
+                            'block md:inline-block h-max py-[2px] pr-2'
+                          )}
+                        >
+                          <h4 className="w-full text-h4 md:text-right">
+                            {other.title}:
+                          </h4>
+                        </div>
+                        <p className="inline w-full md:w-[calc(100%-280px)]">
+                          {other.value}
+                        </p>
                       </div>
                     ))}
+
+                  {project.synopsis && (
+                    <div className="flex flex-col md:flex-wrap md:gap-2 px-2 border-right ruled-lines">
+                      <div
+                        className={classNames(
+                          project.executiveProducedBy
+                            ? 'w-full md:w-[286px]'
+                            : 'w-[180px]',
+                          'block md:inline-block h-max py-[2px] pr-2'
+                        )}
+                      >
+                        <h4 className="w-full text-h4 md:text-right">
+                          Synopsis:
+                        </h4>
+                      </div>
+
+                      <RichText
+                        blocks={project.synopsis as TypedObject | TypedObject[]}
+                        className="inline w-full md:w-[calc(100%-280px)] small leading-[2.8]"
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>

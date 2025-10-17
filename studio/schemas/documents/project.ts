@@ -81,6 +81,11 @@ export default {
       type: 'string',
     },
     {
+      name: 'executiveProducedBy',
+      title: 'Executive Produced By',
+      type: 'string',
+    },
+    {
       name: 'starring',
       title: 'Starring',
       type: 'string',

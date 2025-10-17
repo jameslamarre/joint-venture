@@ -224,6 +224,13 @@ export interface Project extends SanityDocument {
   producedBy?: string;
 
   /**
+   * Executive Produced By — `string`
+   *
+   *
+   */
+  executiveProducedBy?: string;
+
+  /**
    * Starring — `string`
    *
    *
@@ -408,7 +415,7 @@ export type Embed = {
   /**
    * poster — `image`
    *
-   * Image that displays before the video is fully loaded
+   * Image that displays before the video is fully loaded (where applicable)
    */
   poster?: {
     _type: "image";

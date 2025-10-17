@@ -138,7 +138,7 @@ body {
   overscroll-behavior-y: none;
   background-color: var(--theme-bg);
   color: var(--theme-text);
-  transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 ::selection {

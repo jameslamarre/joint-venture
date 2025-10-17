@@ -197,6 +197,7 @@ export default {
           fontSize: theme('fontSize.sm'),
           fontFamily: theme('fontFamily.sans'),
           letterSpacing: '0.05em',
+          textTransform: 'uppercase',
         },
       })
     },
