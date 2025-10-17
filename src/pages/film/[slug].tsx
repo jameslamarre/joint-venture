@@ -236,11 +236,22 @@ const Project: NextPage<PageProps> = (
                   </div>
 
                   {/* Navigation Controls */}
-                  <div className="flex justify-between items-center w-full mt-2 mb-y border-top border-bottom">
+                  <div
+                    className="flex justify-between items-center w-full mt-2 mb-y"
+                    style={{
+                      borderTop: '1px solid var(--theme-text)',
+                      borderBottom: '1px solid var(--theme-text)',
+                      borderRight: '1px solid var(--theme-text)',
+                    }}
+                  >
                     <button
                       onClick={goToPrevious}
                       disabled={view?.film === 0}
-                      className="w-full px-2 disabled:pointer-events-none hover:bg-white hover:text-textColorTables border-left border-right text-left"
+                      className="w-full px-2 disabled:pointer-events-none hover:bg-white hover:text-textColorTables text-left"
+                      style={{
+                        borderLeft: '1px solid var(--theme-text)',
+                        borderRight: '1px solid var(--theme-text)',
+                      }}
                     >
                       <span
                         className={classNames(
@@ -257,7 +268,7 @@ const Project: NextPage<PageProps> = (
                       disabled={
                         (view?.film as number) >= project.projectList.length - 1
                       }
-                      className="w-full px-2 disabled:opacity-20 hover:bg-white hover:text-textColorTables border-right text-right"
+                      className="w-full px-2 disabled:opacity-20 hover:bg-white hover:text-textColorTables text-right"
                     >
                       <span className="inline-block py-1 leading-none uppercase font-sans">
                         Next
