@@ -290,7 +290,7 @@ const Project: NextPage<PageProps> = (
                 </div>
                 <div className="flex flex-col gap-0 w-full">
                   {project.title && (
-                    <div className="flex flex-col md:flex-wrap md:gap-2 px-2 border-right ruled-lines">
+                    <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
                       <div
                         className={classNames(
                           project.executiveProducedBy
@@ -299,7 +299,9 @@ const Project: NextPage<PageProps> = (
                           'block md:inline-block h-max py-[2px] pr-2'
                         )}
                       >
-                        <h4 className="w-full text-h4 md:text-right">Title:</h4>
+                        <h4 className="w-full md:w-auto text-h4 md:text-right">
+                          Title:
+                        </h4>
                       </div>
                       <p className="inline w-full md:w-[calc(100%-280px)]">
                         {project.title}
@@ -307,7 +309,7 @@ const Project: NextPage<PageProps> = (
                     </div>
                   )}
                   {project.directedBy && (
-                    <div className="flex flex-col md:flex-wrap md:gap-2 px-2 border-right ruled-lines">
+                    <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
                       <div
                         className={classNames(
                           project.executiveProducedBy
@@ -326,7 +328,7 @@ const Project: NextPage<PageProps> = (
                     </div>
                   )}
                   {project.writtenBy && (
-                    <div className="flex flex-col md:flex-wrap md:gap-2 px-2 border-right ruled-lines">
+                    <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
                       <div
                         className={classNames(
                           project.executiveProducedBy
@@ -345,7 +347,7 @@ const Project: NextPage<PageProps> = (
                     </div>
                   )}
                   {project.producedBy && (
-                    <div className="flex flex-col md:flex-wrap md:gap-2 px-2 border-right ruled-lines">
+                    <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
                       <div
                         className={classNames(
                           project.executiveProducedBy
@@ -364,7 +366,7 @@ const Project: NextPage<PageProps> = (
                     </div>
                   )}
                   {project.executiveProducedBy && (
-                    <div className="flex flex-col md:flex-wrap md:gap-2 px-2 border-right ruled-lines">
+                    <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
                       <div
                         className={classNames(
                           project.executiveProducedBy
@@ -383,7 +385,7 @@ const Project: NextPage<PageProps> = (
                     </div>
                   )}
                   {project.starring && (
-                    <div className="flex flex-col md:flex-wrap md:gap-2 px-2 border-right ruled-lines">
+                    <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
                       <div
                         className={classNames(
                           project.executiveProducedBy
@@ -406,7 +408,7 @@ const Project: NextPage<PageProps> = (
                     project.otherFields.map(other => (
                       <div
                         key={other._key}
-                        className="flex flex-col md:flex-wrap md:gap-2 px-2 border-right ruled-lines"
+                        className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines"
                       >
                         <div
                           className={classNames(
@@ -427,7 +429,7 @@ const Project: NextPage<PageProps> = (
                     ))}
 
                   {project.synopsis && (
-                    <div className="flex flex-col md:flex-wrap md:gap-2 px-2 border-right ruled-lines">
+                    <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
                       <div
                         className={classNames(
                           project.executiveProducedBy
