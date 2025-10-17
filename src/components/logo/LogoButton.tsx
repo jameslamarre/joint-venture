@@ -7,15 +7,18 @@ interface LogoButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: 'stone' | 'yellow' | 'blue' | 'dark'
   asPath?: string
   setCurrentTheme: (arg0: any) => void
+  setUserOverrideTheme: (arg0: boolean) => void
 }
 
 export const LogoButton: FC<LogoButton> = ({
   color,
   asPath,
   setCurrentTheme,
+  setUserOverrideTheme,
   className,
 }) => {
   const cycleTheme = () => {
+    setUserOverrideTheme(true)
     setCurrentTheme((prev: any) => {
       switch (prev) {
         case 'stone':

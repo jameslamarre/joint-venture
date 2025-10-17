@@ -282,8 +282,6 @@ export const Layout: FC<LayoutProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asPath, getCurrentPageIndex, view?.lastNavigationTime])
 
-  console.log(view)
-
   // Remove keyboard handlers and add wheel handler
   useEffect(() => {
     const keyHoldTimerRef = keyHoldTimer.current
@@ -310,6 +308,8 @@ export const Layout: FC<LayoutProps> = ({
   // Set CSS custom properties for theme colors
   useEffect(() => {
     const root = document.documentElement
+
+    console.log({ userOverrideTheme, pageInitialColor: page?.initialColor })
 
     // Only update theme from page if user hasn't overridden it
     if (!userOverrideTheme && page?.initialColor) {
@@ -352,9 +352,9 @@ export const Layout: FC<LayoutProps> = ({
   }, [currentTheme, page?.initialColor, userOverrideTheme])
 
   // Reset user override when navigating to new page
-  useEffect(() => {
-    setUserOverrideTheme(false)
-  }, [asPath])
+  // useEffect(() => {
+  //   setUserOverrideTheme(false)
+  // }, [asPath])
 
   useEffect(() => {
     if (preview)
@@ -460,6 +460,7 @@ export const Layout: FC<LayoutProps> = ({
                 color={page?.initialColor}
                 asPath={asPath}
                 setCurrentTheme={setCurrentTheme}
+                setUserOverrideTheme={setUserOverrideTheme}
               />
             )}
           </>
