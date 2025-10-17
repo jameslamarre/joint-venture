@@ -60,11 +60,14 @@ export const ProjectsBlock: FC<ProjectsBlockProps> = ({
                 />
               )}
 
-              <div className="border-black">
+              <div
+                className="text-textColorTables"
+                style={{ border: `1px solid var(--theme-text)` }}
+              >
                 <h3 className="w-full pt-2 pb-[5px] px-4 bg-white group-hover:bg-black group-hover:text-white border-bottom font-sans text-sm">
                   {project.title}
                 </h3>
-                <div className="w-full pt-2 pb-[5px] px-4 group-hover:bg-white font-sans text-xs">
+                <div className="w-full pt-2 pb-[5px] px-4 group-hover:bg-white group-hover:text-textColorActionHover font-sans text-xs text-textColor">
                   <span>+</span>
                 </div>
               </div>
@@ -93,7 +96,7 @@ export const ProjectsBlock: FC<ProjectsBlockProps> = ({
                 />
               )}
 
-              <div className="border-black">
+              <div className="border-black text-textColorTables">
                 <h3 className="w-full pt-2 pb-[5px] px-4 bg-white group-hover:bg-black group-hover:text-white border-bottom font-sans text-sm">
                   {project.title}
                 </h3>

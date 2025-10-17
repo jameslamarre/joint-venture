@@ -198,8 +198,8 @@ body {
   background-image: repeating-linear-gradient(
     transparent,
     transparent 1.94em,
-    var(--theme-text, #000) 1.94em,
-    var(--theme-text, #000) 2.1em
+    var(--theme-text--tables, #000) 1.94em,
+    var(--theme-text--tables, #000) 2.1em
   );
   background-size: 100% 2em;
   background-position: 0 0;

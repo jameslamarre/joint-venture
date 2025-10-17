@@ -321,6 +321,8 @@ export const Layout: FC<LayoutProps> = ({
           root.style.setProperty('--theme-bg', '#A59F8D')
           root.style.setProperty('--theme-text', '#000000')
           root.style.setProperty('--theme-text--menu', '#A59F8D')
+          root.style.setProperty('--theme-text--tables', '#000')
+          root.style.setProperty('--theme-text--action-hover', '#000')
           root.style.setProperty('--theme-menu', '#000')
           root.style.setProperty('--theme-highlight', '#CFE806')
           break
@@ -328,6 +330,8 @@ export const Layout: FC<LayoutProps> = ({
           root.style.setProperty('--theme-bg', '#CFE806')
           root.style.setProperty('--theme-text', '#000')
           root.style.setProperty('--theme-text--menu', '#CFE806')
+          root.style.setProperty('--theme-text--tables', '#000')
+          root.style.setProperty('--theme-text--action-hover', '#000')
           root.style.setProperty('--theme-menu', '#000')
           root.style.setProperty('--theme-highlight', '#CFE806')
           break
@@ -335,6 +339,8 @@ export const Layout: FC<LayoutProps> = ({
           root.style.setProperty('--theme-bg', '#91D2DA')
           root.style.setProperty('--theme-text', '#000')
           root.style.setProperty('--theme-text--menu', '#91D2DA')
+          root.style.setProperty('--theme-text--tables', '#000')
+          root.style.setProperty('--theme-text--action-hover', '#000')
           root.style.setProperty('--theme-menu', '#000')
           root.style.setProperty('--theme-highlight', '#FFF')
           break
@@ -342,6 +348,8 @@ export const Layout: FC<LayoutProps> = ({
           root.style.setProperty('--theme-bg', '#31383C')
           root.style.setProperty('--theme-text', '#fff')
           root.style.setProperty('--theme-text--menu', '#31383C')
+          root.style.setProperty('--theme-text--tables', '#000')
+          root.style.setProperty('--theme-text--action-hover', '#000')
           root.style.setProperty('--theme-menu', '#fff')
           root.style.setProperty('--theme-highlight', '#A90736')
           break

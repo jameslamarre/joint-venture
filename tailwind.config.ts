@@ -28,6 +28,9 @@ export default {
         stone: '#A59F8D',
         blue: '#91D2DA',
         yellow: '#CFE806',
+        textColor: 'var(--theme-text)',
+        textColorTables: 'var(--theme-text--tables)',
+        textColorActionHover: 'var(--theme-text--action-hover)',
       },
       fill: {
         red: '#A90736',

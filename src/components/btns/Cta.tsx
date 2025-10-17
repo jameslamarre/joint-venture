@@ -8,7 +8,7 @@ export const Cta: FC<CtaProps> = props => {
       type={props.type || 'button'}
       className={classNames(
         props.className,
-        'highlight highlight--hover inline-flex items-center justify-center uppercase font-sans text-xl md:text-lg pt-1 md:pt-2 px-3 md:px-4'
+        'highlight highlight--hover hover:text-textColorActionHover inline-flex items-center justify-center uppercase font-sans text-xl md:text-lg pt-1 md:pt-2 px-3 md:px-4'
       )}
       // style={{ backgroundColor: 'var(--theme-highlight)' }}
       ref={props.innerRef as Ref<HTMLButtonElement>}

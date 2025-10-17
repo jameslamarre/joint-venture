@@ -23,13 +23,13 @@ import {
 import PageTransition from '@components/transition/PageTransition'
 import { RichText, SanityImage } from '@components/sanity'
 import { motion, AnimatePresence } from 'framer-motion'
-import { IconLogo } from '@components/icons'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import { useView, ViewProps } from '@contexts/view/ViewContext'
 import { Cta } from '@components/btns'
 import { SanityEmbed } from '@components/sanity/embed'
 import { TypedObject } from '@portabletext/types'
+import IconLogoFill from '@components/icons/IconLogoFill'
 
 type PageRefType = React.ForwardedRef<HTMLDivElement>
 
@@ -240,7 +240,7 @@ const Project: NextPage<PageProps> = (
                     <button
                       onClick={goToPrevious}
                       disabled={view?.film === 0}
-                      className="w-full px-2 disabled:pointer-events-none hover:bg-white border-left border-right text-left"
+                      className="w-full px-2 disabled:pointer-events-none hover:bg-white hover:text-textColorTables border-left border-right text-left"
                     >
                       <span
                         className={classNames(
@@ -257,7 +257,7 @@ const Project: NextPage<PageProps> = (
                       disabled={
                         (view?.film as number) >= project.projectList.length - 1
                       }
-                      className="w-full px-2 disabled:opacity-20 hover:bg-white border-right text-right"
+                      className="w-full px-2 disabled:opacity-20 hover:bg-white hover:text-textColorTables border-right text-right"
                     >
                       <span className="inline-block py-1 leading-none uppercase font-sans">
                         Next
@@ -275,20 +275,23 @@ const Project: NextPage<PageProps> = (
                   )}
                 ></div>
                 <div className="hidden md:flex items-center justify-center order-2 w-[140px] md:w-[210px] h-[-webkit-fill-available] px-xdouble xl:px-0 border-bottom">
-                  <div className="p-2 bg-black rounded-full z-above">
-                    <IconLogo
+                  <div className="p-2 rounded-full z-above">
+                    <IconLogoFill
                       className={classNames(
-                        fieldLength > 4 ? 'md:w-[114px]' : '',
-                        fieldLength === 4 ? 'md:w-[5.25em]' : '',
-                        fieldLength === 3 ? 'md:w-[4.25em]' : '',
-                        fieldLength === 2 ? 'md:w-[3em]' : '',
-                        fieldLength === 1 ? 'md:w-[2em]' : '',
-                        'h-auto [&_path]:fill-white'
+                        fieldLength > 4 ? 'md:w-[130px]' : '',
+                        fieldLength === 4 ? 'md:w-[8em]' : '',
+                        fieldLength === 3 ? 'md:w-[5em]' : '',
+                        fieldLength === 2 ? 'md:w-[2.5em]' : '',
+                        fieldLength === 1 ? 'md:w-[1.25em]' : '',
+                        'h-auto'
                       )}
                     />
                   </div>
                 </div>
-                <div className="flex flex-col gap-0 w-full text-baseSerif">
+                <div
+                  className="flex flex-col gap-0 w-full text-baseSerif"
+                  style={{ color: 'var(--theme-text--tables)' }}
+                >
                   {project.title && (
                     <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
                       <div
