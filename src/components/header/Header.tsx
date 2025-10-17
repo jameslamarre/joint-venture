@@ -22,8 +22,6 @@ export const Header: FC<HeaderProps> = ({
     typeof window !== 'undefined' ? window.innerWidth : 1200
   )
 
-  console.log('test')
-
   useEffect(() => {
     menuOpen
       ? document.body.classList.add('overflow-hidden')
