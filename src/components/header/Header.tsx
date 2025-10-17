@@ -33,7 +33,7 @@ export const Header: FC<HeaderProps> = ({
       id="header"
       className={classNames(
         className,
-        'fixed w-full h-header mx-auto top-0 font-sans text-xl lg:text-lg z-header'
+        'block lg:fixed relative w-full h-header mx-auto top-0 font-sans text-xl lg:text-lg overflow-hidden lg:overflow-visible z-header'
       )}
     >
       <motion.header

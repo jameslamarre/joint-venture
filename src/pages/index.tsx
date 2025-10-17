@@ -61,7 +61,7 @@ const Page: NextPage<PageProps> = (
             ease: 'easeInOut',
             clipPath: { duration: 0.4 },
           }}
-          className="pt-page"
+          className="pt-y md:pt-page"
         >
           <BlockContent blocks={page?.body} className="flex flex-col w-full" />
         </motion.article>

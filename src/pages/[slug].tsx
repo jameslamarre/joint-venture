@@ -52,7 +52,7 @@ const Page: NextPage<PageProps> = (
   const [view, updateView] = useView() as any
 
   return page?.body && (!page?._id.includes('drafts.') || preview) ? (
-    <article key={`page-${asPath}`} className="pt-page">
+    <article key={`page-${asPath}`} className="pt-y md:pt-page">
       <BlockContent blocks={page?.body} className="flex flex-col w-full" />
     </article>
   ) : null

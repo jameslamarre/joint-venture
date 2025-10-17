@@ -417,7 +417,9 @@ export const Layout: FC<LayoutProps> = ({
             >
               <div
                 className={classNames(
-                  direction === 'up' ? 'top-page' : 'bottom-y',
+                  direction === 'up'
+                    ? 'top-header md:top-[calc(var(--header-height)+8px)]'
+                    : 'bottom-y',
                   'absolute rounded-full'
                 )}
               >
