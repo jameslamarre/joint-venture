@@ -288,7 +288,7 @@ const Project: NextPage<PageProps> = (
                     />
                   </div>
                 </div>
-                <div className="flex flex-col gap-0 w-full">
+                <div className="flex flex-col gap-0 w-full text-baseSerif">
                   {project.title && (
                     <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
                       <div

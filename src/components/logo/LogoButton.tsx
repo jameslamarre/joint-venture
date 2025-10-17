@@ -22,7 +22,7 @@ export const LogoButton: FC<LogoButton> = ({
     setCurrentTheme((prev: any) => {
       switch (prev) {
         case 'stone':
-          return 'yellow'
+          return 'blue'
         case 'yellow':
           return 'blue'
         case 'blue':

@@ -78,7 +78,7 @@
 .rich-text.small p,
 .rich-text.small span,
 .rich-text.small li {
-  @apply text-base leading-[2];
+  @apply text-baseSerif leading-[2];
 }
 
 .rich-text ul,

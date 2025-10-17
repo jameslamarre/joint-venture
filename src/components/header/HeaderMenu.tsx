@@ -26,28 +26,28 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
 
   const positions = [
     [
-      { x: isMobile ? '5%' : '25%', y: 120 },
-      { x: isMobile ? '25%' : '50%', y: 230 },
-      { x: isMobile ? '30%' : '57.5%', y: 450 },
-      { x: isMobile ? '20%' : '40%', y: 600 },
+      { x: isMobile ? '10%' : '25%', y: isMobile ? 100 : 120 },
+      { x: isMobile ? '25%' : '50%', y: isMobile ? 220 : 230 },
+      { x: isMobile ? '35%' : '57.5%', y: isMobile ? 370 : 450 },
+      { x: isMobile ? '20%' : '40%', y: isMobile ? 480 : 600 },
     ],
     [
-      { x: isMobile ? '35%' : '55%', y: 120 },
-      { x: isMobile ? '5%' : '25%', y: 300 },
-      { x: isMobile ? '30%' : '50%', y: 500 },
-      { x: isMobile ? '15%' : '35%', y: 700 },
+      { x: isMobile ? '35%' : '55%', y: isMobile ? 100 : 120 },
+      { x: isMobile ? '8%' : '25%', y: isMobile ? 220 : 300 },
+      { x: isMobile ? '30%' : '50%', y: isMobile ? 330 : 500 },
+      { x: isMobile ? '20%' : '35%', y: isMobile ? 480 : 700 },
     ],
     [
-      { x: isMobile ? '5%' : '25%', y: 100 },
-      { x: isMobile ? '25%' : '45%', y: 300 },
-      { x: isMobile ? '10%' : '30%', y: 570 },
-      { x: isMobile ? '35%' : '57.5%', y: 500 },
+      { x: isMobile ? '5%' : '25%', y: isMobile ? 90 : 100 },
+      { x: isMobile ? '35%' : '45%', y: isMobile ? 200 : 300 },
+      { x: isMobile ? '10%' : '30%', y: isMobile ? 410 : 570 },
+      { x: isMobile ? '45%' : '57.5%', y: isMobile ? 350 : 500 },
     ],
     [
-      { x: isMobile ? '0' : '22%', y: 260 },
-      { x: isMobile ? '20%' : '45%', y: 140 },
-      { x: isMobile ? '10%' : '30%', y: 455 },
-      { x: isMobile ? '30%' : '57.5%', y: 570 },
+      { x: isMobile ? '5%' : '22%', y: isMobile ? 200 : 260 },
+      { x: isMobile ? '30%' : '45%', y: isMobile ? 80 : 140 },
+      { x: isMobile ? '15%' : '30%', y: isMobile ? 320 : 455 },
+      { x: isMobile ? '40%' : '57.5%', y: isMobile ? 440 : 570 },
     ],
   ]
 
@@ -165,7 +165,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                     }}
                     className="hover:invert"
                   >
-                    <IconAbout className="w-[184px] lg:w-[255px] h-auto" />
+                    <IconAbout className="w-[134px] lg:w-[255px] h-auto" />
                   </Link>
                 </motion.li>
 
@@ -189,7 +189,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                     }}
                     className="group"
                   >
-                    <IconFilms className="w-[177px] lg:w-[243px] h-auto group-hover:[&_.bg]:fill-blue" />
+                    <IconFilms className="w-[127px] lg:w-[243px] h-auto group-hover:[&_.bg]:fill-blue" />
                   </Link>
                 </motion.li>
 
@@ -213,7 +213,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                     }}
                     className="hover:invert"
                   >
-                    <IconContact className="w-[269px] lg:w-[366px] h-auto" />
+                    <IconContact className="w-[180px] lg:w-[366px] h-auto" />
                   </Link>
                 </motion.li>
 
@@ -225,7 +225,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                     top: positions[position][3]?.y || 400,
                   }}
                 >
-                  <IconJV className="w-[210px] lg:w-[293px] h-auto z-behind" />
+                  <IconJV className="w-[140px] lg:w-[293px] h-auto z-behind" />
                 </motion.li>
               </motion.ul>
             </motion.nav>

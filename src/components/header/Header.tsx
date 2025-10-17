@@ -56,7 +56,7 @@ export const Header: FC<HeaderProps> = ({
             className={classNames(
               menuOpen
                 ? 'scale-x-[6] md:scale-x-[12] lg:scale-x-[10] scale-y-[32] md:scale-y-[40] lg:scale-y-[13.5] translate-y-[48svh]'
-                : 'scale-x-[4.9] scale-y-[2.25] md:scale-x-[8.25] lg:scale-x-[3.25] lg:scale-y-[1]',
+                : 'scale-x-[4.9] scale-y-[1.9] md:scale-x-[8.25] lg:scale-x-[3.25] lg:scale-y-[1]',
               'relative transition-all duration-500 2xl:duration-700'
             )}
           >

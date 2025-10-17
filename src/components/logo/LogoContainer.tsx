@@ -77,7 +77,7 @@ export const LogoContainer: FC<LogoContainerProps> = ({
             'scaleX(1)',
             'scaleX(8.25) translateX(0)',
             'scaleX(8.25) translateX(-27px)',
-            'scaleX(8.25) scaleY(2.25) translateX(-47px)',
+            'scaleX(8.25) scaleY(1.9) translateX(-47px)',
           ]
         : isMobileSize
         ? [

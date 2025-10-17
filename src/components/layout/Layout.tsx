@@ -309,8 +309,6 @@ export const Layout: FC<LayoutProps> = ({
   useEffect(() => {
     const root = document.documentElement
 
-    console.log({ userOverrideTheme, pageInitialColor: page?.initialColor })
-
     // Only update theme from page if user hasn't overridden it
     if (!userOverrideTheme && page?.initialColor) {
       // eslint-disable-next-line react-you-might-not-need-an-effect/no-derived-state
@@ -328,9 +326,9 @@ export const Layout: FC<LayoutProps> = ({
           break
         case 'yellow':
           root.style.setProperty('--theme-bg', '#CFE806')
-          root.style.setProperty('--theme-text', '#31383C')
+          root.style.setProperty('--theme-text', '#000')
           root.style.setProperty('--theme-text--menu', '#CFE806')
-          root.style.setProperty('--theme-menu', '#31383C')
+          root.style.setProperty('--theme-menu', '#000')
           root.style.setProperty('--theme-highlight', '#CFE806')
           break
         case 'blue':
@@ -423,7 +421,7 @@ export const Layout: FC<LayoutProps> = ({
                     <path
                       key="path-black"
                       fill="#000"
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M26.12.085c7.015 0 13.524 2.11 17.416 5.658 1.553 1.423 5.38 6.77 6.328 8.716 5.086 10.286 1.93 23.205-7.506 30.728-3.253 2.598-8.483 4.037-14.71 4.039-5.884-.002-11.996-1.277-16.36-3.418-4.334-2.126-9.828-12.46-10.286-17.89-.933-10.826 1.667-17.335 9.271-23.222C14.051 1.77 19.823.085 26.12.085m-.322 8.564c-1.018 0-2.036.105-3.001.288-4.126.783-7.573 3.394-9.688 7.363-2.297 4.282-2.742 9.608-1.201 14.23 2.271 6.814 6.476 10.13 12.873 10.13 1.723 0 3.655-.234 5.9-.73 5.953-1.28 12.455-10.68 12.011-17.364C41.886 10.604 32.377 9.364 28.741 8.89l-.044-.006-.6-.078a17 17 0 0 0-2.272-.157z"
                       clipRule="evenodd"
                     />

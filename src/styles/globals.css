@@ -3,6 +3,7 @@
   --font-size-xs: 11px;
   --font-size-sm: 12px;
   --font-size-base: 14px;
+  --font-size-base--serif: 15px;
   --font-size-md: 18px;
   --font-size-lg: 18px;
   --font-size-xl: 22px;
@@ -74,6 +75,7 @@
     --font-size-xs: 12px;
     --font-size-sm: 14px;
     --font-size-base: 16px;
+    --font-size-base--serif: 16px;
     --font-size-md: 24px;
     --font-size-lg: 30px;
     --font-size-xl: 32px;
@@ -180,36 +182,6 @@ body {
   }
 }
 
-.red-underline {
-  position: relative;
-  /* color: theme('colors.black');
-  background-color: theme('backgroundColor.yellow'); */
-  z-index: 0;
-}
-
-.red-underline::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: -5px;
-  width: 0;
-  height: 0.1em;
-  background-color: theme(backgroundColor.red);
-  z-index: -1;
-  transform: skew(-5deg);
-  transform-origin: top left;
-  animation: highlightAnim 0.6s var(--animate-delay, 0s) ease-in-out forwards;
-}
-
-@keyframes underlineAnim {
-  from {
-    width: 0;
-  }
-  to {
-    width: 104%;
-  }
-}
-
 .theme-menu-fill {
   fill: var(--theme-menu);
 }
@@ -227,10 +199,10 @@ body {
     transparent,
     transparent 1.94em,
     var(--theme-text, #000) 1.94em,
-    var(--theme-text, #000) 2em
+    var(--theme-text, #000) 2.1em
   );
   background-size: 100% 2em;
   background-position: 0 0;
-  line-height: 2;
+  line-height: 2.1;
   background-attachment: local;
 }
