@@ -348,7 +348,7 @@ export const Layout: FC<LayoutProps> = ({
           root.style.setProperty('--theme-highlight', '#A90736')
           break
       }
-    }, 600)
+    }, 300)
   }, [currentTheme, page?.initialColor, userOverrideTheme])
 
   // Reset user override when navigating to new page
