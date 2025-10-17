@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useCallback, useState, type FC } from 'react'
+import { useCallback, useEffect, useState, type FC } from 'react'
 import classNames from 'classnames'
 import type { HeaderProps } from './types'
 import HeaderMenu from './HeaderMenu'
@@ -21,6 +21,12 @@ export const Header: FC<HeaderProps> = ({
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== 'undefined' ? window.innerWidth : 1200
   )
+
+  useEffect(() => {
+    menuOpen
+      ? document.body.classList.add('overflow-hidden')
+      : document.body.classList.remove('overflow-hidden')
+  }, [menuOpen])
 
   return (
     <div

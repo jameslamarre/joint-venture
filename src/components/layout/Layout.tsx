@@ -177,7 +177,9 @@ export const Layout: FC<LayoutProps> = ({
         showIntro ||
         page?._type !== 'page' ||
         view?.isNavigating ||
-        isNavigationInProgress
+        isNavigationInProgress ||
+        (typeof window !== 'undefined' &&
+          document.body.classList.contains('overflow-hidden'))
       )
         return
 
