@@ -1,4 +1,4 @@
-import { useState, type FC, ButtonHTMLAttributes } from 'react'
+import { type FC, ButtonHTMLAttributes } from 'react'
 import { IconLogo } from '@components/icons'
 import { motion } from 'framer-motion'
 import IconLogoFill from '@components/icons/IconLogoFill'
@@ -38,7 +38,7 @@ export const LogoButton: FC<LogoButton> = ({
       animate={{ rotate: 360 }}
       transition={{ duration: 16, ease: 'linear', repeat: Infinity }}
       onClick={cycleTheme}
-      className="group fixed w-[100px] md:w-[134px] right-[calc(50%-40px)] md:right-[calc(50%-57px)] lg:right-x bottom-x p-2 mix-blend-difference md:mix-blend-normal bg-black md:bg-transparent rounded-full z-above"
+      className="group fixed w-[100px] md:w-[134px] right-[calc(50%-40px)] md:right-[calc(50%-57px)] lg:right-x bottom-x p-2 rounded-full z-above"
     >
       <IconLogo className="w-full h-auto animate-fadeIn theme-menu-fill group-hover:hidden" />
       <IconLogoFill className="hidden relative w-full h-auto theme-menu-fill group-hover:block" />
