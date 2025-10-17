@@ -99,14 +99,10 @@ export const Layout: FC<LayoutProps> = ({
     asPath.substring(1) as '' | 'films' | 'join'
   )
 
-  console.log(view?.page, view?.previousPage)
-
   const pageVariants = {
     initial: {
       clipPath:
-        view?.page === 'film' && view.previousPage === 'film'
-          ? 'inset(0)'
-          : view?.previousPage === undefined
+        view?.page === 'film' || view?.previousPage === undefined
           ? 'inset(0)'
           : view?.previousPage === 'film'
           ? 'inset(0 100% 0 0)'
@@ -286,7 +282,7 @@ export const Layout: FC<LayoutProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asPath, getCurrentPageIndex, view?.lastNavigationTime])
 
-  // console.log(view)
+  console.log(view)
 
   // Remove keyboard handlers and add wheel handler
   useEffect(() => {
