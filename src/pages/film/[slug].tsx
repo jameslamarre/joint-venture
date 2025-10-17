@@ -139,7 +139,7 @@ const Project: NextPage<PageProps> = (
     },
     incoming: () => ({
       clipPath:
-        view === null
+        view?.previousFilm === undefined
           ? 'inset(0 0 0 0)'
           : (view?.film as number) > (view?.previousFilm as number)
           ? 'inset(0 100% 0 0)'
