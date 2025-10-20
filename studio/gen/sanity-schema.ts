@@ -653,13 +653,6 @@ export type NewsletterBlock = {
   header?: string;
 
   /**
-   * URL Submit — `string`
-   *
-   *
-   */
-  urlSubmit?: string;
-
-  /**
    * Audience ID/Form GUID — `string`
    *
    *
