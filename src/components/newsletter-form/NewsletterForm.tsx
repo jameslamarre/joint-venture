@@ -57,7 +57,12 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({
   }
 
   if (formSubmitted && !formError) {
-    return <RichText blocks={successMessage as TypedObject | TypedObject[]} />
+    return (
+      <RichText
+        blocks={successMessage as TypedObject | TypedObject[]}
+        className="w-full text-center"
+      />
+    )
   }
 
   return (

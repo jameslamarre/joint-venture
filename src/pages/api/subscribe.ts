@@ -16,8 +16,8 @@ export default async function handler(
   }
 
   try {
-    const API_KEY = process.env.NEXT_PUBLIC_MAILCHIMP_API_KEY
-    const DATACENTER = process.env.NEXT_PUBLIC_MAILCHIMP_API_KEY?.split('-')[1] // us17 from API key
+    const API_KEY = process.env.MAILCHIMP_API_KEY
+    const DATACENTER = process.env.MAILCHIMP_API_KEY?.split('-')[1] // us17 from API key
 
     const data = {
       email_address: email,
