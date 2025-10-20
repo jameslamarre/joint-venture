@@ -38,6 +38,12 @@ export default {
         stone: '#A59F8D',
         blue: '#91D2DA',
       },
+      stroke: {
+        red: '#A90736',
+        black: '#000',
+        stone: '#A59F8D',
+        blue: '#91D2DA',
+      },
       screens,
       fontFamily: {
         sans: [

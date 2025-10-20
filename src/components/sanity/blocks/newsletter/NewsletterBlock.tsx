@@ -4,6 +4,10 @@ import type { NewsletterBlock as NewsletterBlockType } from '@gen/sanity-schema'
 import type { SanityBlockElement } from '@components/sanity'
 import { Block } from '@components/sanity'
 import { NewsletterForm } from '@components/newsletter-form'
+import Link from 'next/link'
+import IconInstagram from '@components/icons/IconInstagram'
+import IconTiktok from '@components/icons/IconTiktok'
+import { IconFacebook, IconYoutube } from '@components/icons'
 
 type NewsletterBlockProps = Omit<
   SanityBlockElement,
@@ -28,6 +32,44 @@ export const NewsletterBlock: FC<NewsletterBlockProps> = ({
           newsletterId={audienceId as string}
           successMessage={successMessage}
         />
+
+        <div className="flex items-center gap-xhalf md:gap-x mx-auto">
+          <Link
+            href="https://www.instagram.com/itsajointventure/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-red"
+          >
+            <IconInstagram className="w-auto h-8 mx-auto" />
+          </Link>
+
+          <Link
+            href="https://www.youtube.com/@ItsAJointVenture"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-red"
+          >
+            <IconYoutube className="w-auto h-6 mx-auto" />
+          </Link>
+
+          <Link
+            href="https://www.tiktok.com/@itsajointventure"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-red"
+          >
+            <IconTiktok className="w-auto h-8 mx-auto" />
+          </Link>
+
+          <Link
+            href="https://www.facebook.com/ItsAJointventure"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-red"
+          >
+            <IconFacebook className="w-auto h-6 mx-auto" />
+          </Link>
+        </div>
       </div>
     </Block>
   )
