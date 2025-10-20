@@ -462,6 +462,7 @@ export const Layout: FC<LayoutProps> = ({
             <Header
               className="flex-initial"
               currentPage={page?._type === 'project' ? 'Films' : page?.title}
+              showContent={showContent}
               setShowContent={() => setShowContent(true)}
             />
 

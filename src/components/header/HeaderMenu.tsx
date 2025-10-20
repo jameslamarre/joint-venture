@@ -8,6 +8,7 @@ import {
   IconAbout,
   IconContact,
   IconFilms,
+  IconJoin,
   IconJV,
 } from '@components/icons/menu'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -28,26 +29,30 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
     [
       { x: isMobile ? '10%' : '25%', y: isMobile ? 100 : 120 },
       { x: isMobile ? '25%' : '50%', y: isMobile ? 220 : 230 },
-      { x: isMobile ? '35%' : '57.5%', y: isMobile ? 370 : 450 },
+      { x: isMobile ? '55%' : '57.5%', y: isMobile ? 90 : 450 },
       { x: isMobile ? '20%' : '40%', y: isMobile ? 480 : 600 },
+      { x: isMobile ? '30%' : '22.5%', y: isMobile ? 350 : 400 },
     ],
     [
       { x: isMobile ? '35%' : '55%', y: isMobile ? 100 : 120 },
-      { x: isMobile ? '8%' : '25%', y: isMobile ? 220 : 300 },
-      { x: isMobile ? '30%' : '50%', y: isMobile ? 330 : 500 },
+      { x: isMobile ? '8%' : '25%', y: isMobile ? 200 : 260 },
+      { x: isMobile ? '55%' : '50%', y: isMobile ? 310 : 480 },
       { x: isMobile ? '20%' : '35%', y: isMobile ? 480 : 700 },
+      { x: isMobile ? '15%' : '20%', y: isMobile ? 390 : 480 },
     ],
     [
       { x: isMobile ? '5%' : '25%', y: isMobile ? 90 : 100 },
-      { x: isMobile ? '35%' : '45%', y: isMobile ? 200 : 300 },
+      { x: isMobile ? '35%' : '45%', y: isMobile ? 190 : 240 },
       { x: isMobile ? '10%' : '30%', y: isMobile ? 410 : 570 },
-      { x: isMobile ? '45%' : '57.5%', y: isMobile ? 350 : 500 },
+      { x: isMobile ? '45%' : '57.5%', y: isMobile ? 380 : 580 },
+      { x: isMobile ? '20%' : '37.5%', y: isMobile ? 300 : 400 },
     ],
     [
       { x: isMobile ? '5%' : '22%', y: isMobile ? 200 : 260 },
       { x: isMobile ? '30%' : '45%', y: isMobile ? 80 : 140 },
       { x: isMobile ? '15%' : '30%', y: isMobile ? 320 : 455 },
       { x: isMobile ? '40%' : '57.5%', y: isMobile ? 440 : 570 },
+      { x: isMobile ? '40%' : '45%', y: isMobile ? 250 : 320 },
     ],
   ]
 
@@ -165,7 +170,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                     }}
                     className="hover:invert"
                   >
-                    <IconAbout className="w-[134px] lg:w-[255px] h-auto" />
+                    <IconAbout className="w-[124px] lg:w-[235px] h-auto" />
                   </Link>
                 </motion.li>
 
@@ -189,7 +194,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                     }}
                     className="group"
                   >
-                    <IconFilms className="w-[127px] lg:w-[243px] h-auto group-hover:[&_.bg]:fill-blue" />
+                    <IconFilms className="w-[117px] lg:w-[223px] h-auto group-hover:[&_.bg]:fill-blue" />
                   </Link>
                 </motion.li>
 
@@ -213,7 +218,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                     }}
                     className="hover:invert"
                   >
-                    <IconContact className="w-[180px] lg:w-[366px] h-auto" />
+                    <IconJoin className="w-[95px] lg:w-[190px] h-auto" />
                   </Link>
                 </motion.li>
 
@@ -221,11 +226,28 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                   variants={itemVariants}
                   className="absolute"
                   style={{
+                    left: positions[position][4]?.x || 200,
+                    top: positions[position][4]?.y || 300,
+                  }}
+                >
+                  <Link
+                    href="mailto:info@ajointventure.com"
+                    target="_blank"
+                    className="hover:invert"
+                  >
+                    <IconContact className="w-[170px] lg:w-[346px] h-auto" />
+                  </Link>
+                </motion.li>
+
+                <motion.li
+                  variants={itemVariants}
+                  className="absolute pointer-events-none"
+                  style={{
                     left: positions[position][3]?.x || 300,
                     top: positions[position][3]?.y || 400,
                   }}
                 >
-                  <IconJV className="w-[140px] lg:w-[293px] h-auto z-behind" />
+                  <IconJV className="w-[130px] lg:w-[273px] h-auto z-behind" />
                 </motion.li>
               </motion.ul>
             </motion.nav>

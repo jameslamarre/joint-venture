@@ -10,6 +10,7 @@ import { isMobile, isTablet } from 'react-device-detect'
 
 export const Header: FC<HeaderProps> = ({
   currentPage,
+  showContent,
   setShowContent,
   className,
 }) => {
@@ -32,7 +33,10 @@ export const Header: FC<HeaderProps> = ({
       id="header"
       className={classNames(
         className,
-        'block lg:fixed relative w-full h-header mx-auto top-0 font-sans text-xl lg:text-lg overflow-hidden lg:overflow-visible z-header'
+        showContent
+          ? 'overflow-hidden lg:overflow-visible'
+          : 'overflow-visible',
+        'block lg:fixed relative w-full h-header mx-auto top-0 font-sans text-xl lg:text-lg z-header'
       )}
     >
       <motion.header
@@ -60,9 +64,9 @@ export const Header: FC<HeaderProps> = ({
           <div
             className={classNames(
               menuOpen
-                ? 'scale-x-[6] md:scale-x-[12] lg:scale-x-[10] scale-y-[32] md:scale-y-[40] lg:scale-y-[13.5] translate-y-[48svh]'
-                : 'scale-x-[4.9] scale-y-[1.9] md:scale-x-[8.25] lg:scale-x-[3.25] lg:scale-y-[1]',
-              'relative transition-all duration-500 2xl:duration-700'
+                ? 'fixed md:relative scale-x-[6] md:scale-x-[12] lg:scale-x-[10] scale-y-[32] md:scale-y-[40] lg:scale-y-[13.5] translate-y-[48svh] left-1/3 md:left-0'
+                : 'relative scale-x-[4.9] scale-y-[1.9] md:scale-x-[8.25] lg:scale-x-[3.25] lg:scale-y-[1]',
+              'transition-all duration-500 2xl:duration-700'
             )}
           >
             <IconHyphen

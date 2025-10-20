@@ -4,6 +4,7 @@ export interface HeaderProps
   extends Omit<HTMLAttributes<HTMLElement>, 'property'> {
   currentPage?: string
   pageBackground?: string
+  showContent?: boolean
   setShowContent?: () => void
 }
 
