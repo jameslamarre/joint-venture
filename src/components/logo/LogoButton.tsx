@@ -11,8 +11,6 @@ interface LogoButton extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const LogoButton: FC<LogoButton> = ({
-  color,
-  asPath,
   setCurrentTheme,
   setUserOverrideTheme,
   className,

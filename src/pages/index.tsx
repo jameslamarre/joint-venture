@@ -6,7 +6,6 @@ import { getPageStaticProps } from '@lib/next'
 import { BODY_QUERY, filterDataToSingleItem } from '@studio/lib'
 import { BlockContent } from '@components/sanity'
 import { forwardRef, ForwardRefRenderFunction } from 'react'
-import { useRouter } from 'next/router'
 import { AnimatePresence, motion } from 'framer-motion'
 import PageTransition from '@components/transition/PageTransition'
 

@@ -11,9 +11,7 @@ import { getPageStaticProps } from '@lib/next'
 import { BODY_QUERY, client, filterDataToSingleItem } from '@studio/lib'
 import { BlockContent } from '@components/sanity'
 import { forwardRef, ForwardRefRenderFunction, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/router'
-import { useView } from '@contexts/view'
 
 type PageRefType = React.ForwardedRef<HTMLDivElement>
 
@@ -48,8 +46,6 @@ const Page: NextPage<PageProps> = (
 ) => {
   const { asPath } = useRouter()
   const page: SanityPage = filterDataToSingleItem(data)
-
-  const [view, updateView] = useView() as any
 
   return page?.body && (!page?._id.includes('drafts.') || preview) ? (
     <article key={`page-${asPath}`} className="pt-y md:pt-page">

@@ -12,13 +12,6 @@ export default {
       title: 'Header',
     },
     {
-      name: 'urlSubmit',
-      type: 'string',
-      title: 'URL Submit',
-      descriotion:
-        'URL to submit form data to minus the form ID/GUID and API key',
-    },
-    {
       name: 'audienceId',
       type: 'string',
       title: 'Audience ID/Form GUID',
