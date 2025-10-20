@@ -56,8 +56,6 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
     ],
   ]
 
-  console.log('test')
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
