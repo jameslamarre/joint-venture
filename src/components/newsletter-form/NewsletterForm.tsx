@@ -90,7 +90,7 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({
       </form>
 
       {formError && (
-        <div className="w-full text-center text-sm font-sans text-red mt-yhalf uppercase">
+        <div className="w-full text-center text-sm font-serif text-red mt-yhalf">
           {formError}
         </div>
       )}

@@ -168,8 +168,8 @@ const Project: NextPage<PageProps> = (
 
   return !project?._id.includes('drafts.') || preview ? (
     <PageTransition ref={ref}>
-      <article className="max-w-app mx-auto">
-        <div className="flex flex-col gap-yhalf pt-yhalf pb-y px-yhalf">
+      <article className="max-w-app md:pt-header mx-auto">
+        <div className="flex flex-col gap-yhalf pt-yhalf md:pt-y pb-y px-2">
           <AnimatePresence custom={slideDirection} mode="wait">
             <motion.div
               key={router.query.slug as string}
@@ -227,53 +227,12 @@ const Project: NextPage<PageProps> = (
 
                     {project.trailer && !videoPlaying && (
                       <Cta
-                        className="absolute top-1/2 md:top-auto md:bottom-ydouble left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:translate-y-0"
+                        className="absolute top-1/2 md:top-auto md:bottom-ytrio left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:translate-y-0"
                         onClick={() => setVideoPlaying(true)}
                       >
                         Play trailer
                       </Cta>
                     )}
-                  </div>
-
-                  {/* Navigation Controls */}
-                  <div
-                    className="flex justify-between items-center w-full mt-2 mb-y"
-                    style={{
-                      borderTop: '1px solid var(--theme-text)',
-                      borderBottom: '1px solid var(--theme-text)',
-                      borderRight: '1px solid var(--theme-text)',
-                    }}
-                  >
-                    <button
-                      onClick={goToPrevious}
-                      disabled={view?.film === 0}
-                      className="w-full px-2 disabled:pointer-events-none hover:bg-white hover:text-textColorTables text-left"
-                      style={{
-                        borderLeft: '1px solid var(--theme-text)',
-                        borderRight: '1px solid var(--theme-text)',
-                      }}
-                    >
-                      <span
-                        className={classNames(
-                          view?.film === 0 ? 'opacity-20' : '',
-                          'inline-block py-1 leading-none uppercase font-sans'
-                        )}
-                      >
-                        Previous
-                      </span>
-                    </button>
-
-                    <button
-                      onClick={goToNext}
-                      disabled={
-                        (view?.film as number) >= project.projectList.length - 1
-                      }
-                      className="w-full px-2 disabled:opacity-20 hover:bg-white hover:text-textColorTables text-right"
-                    >
-                      <span className="inline-block py-1 leading-none uppercase font-sans">
-                        Next
-                      </span>
-                    </button>
                   </div>
                 </div>
               )}
@@ -464,6 +423,47 @@ const Project: NextPage<PageProps> = (
                     </div>
                   )}
                 </div>
+              </div>
+
+              {/* Navigation Controls */}
+              <div
+                className="flex justify-between items-center w-full mt-y mb-y"
+                style={{
+                  borderTop: '1px solid var(--theme-text)',
+                  borderBottom: '1px solid var(--theme-text)',
+                  borderRight: '1px solid var(--theme-text)',
+                }}
+              >
+                <button
+                  onClick={goToPrevious}
+                  disabled={view?.film === 0}
+                  className="w-full px-2 disabled:pointer-events-none hover:bg-white hover:text-textColorTables text-left"
+                  style={{
+                    borderLeft: '1px solid var(--theme-text)',
+                    borderRight: '1px solid var(--theme-text)',
+                  }}
+                >
+                  <span
+                    className={classNames(
+                      view?.film === 0 ? 'opacity-20' : '',
+                      'inline-block py-1 leading-none uppercase font-sans'
+                    )}
+                  >
+                    Previous
+                  </span>
+                </button>
+
+                <button
+                  onClick={goToNext}
+                  disabled={
+                    (view?.film as number) >= project.projectList.length - 1
+                  }
+                  className="w-full px-2 disabled:opacity-20 hover:bg-white hover:text-textColorTables text-right"
+                >
+                  <span className="inline-block py-1 leading-none uppercase font-sans">
+                    Next
+                  </span>
+                </button>
               </div>
             </motion.div>
           </AnimatePresence>

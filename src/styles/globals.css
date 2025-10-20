@@ -21,6 +21,8 @@
   --space-y-quarter: calc(var(--space-y) * 0.25);
   --space-y-half: calc(var(--space-y) * 0.5);
   --space-y-double: calc(var(--space-y) * 2);
+  --space-y-trio: calc(var(--space-y) * 3);
+  --space-y-quad: calc(var(--space-y) * 4);
   --space-y-lg: 80px;
   --space-y-sm: 10px;
 

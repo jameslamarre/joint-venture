@@ -81,6 +81,8 @@ export default {
         yhalf: 'var(--space-y-half)',
         yquarter: 'var(--space-y-quarter)',
         ydouble: 'var(--space-y-double)',
+        ytrio: 'var(--space-y-trio)',
+        yquad: 'var(--space-y-quad)',
         ysm: 'var(--space-y-sm)',
         ylg: 'var(--space-y-lg)',
         input: 'var(--input-size)',

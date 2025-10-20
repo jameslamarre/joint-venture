@@ -23,7 +23,7 @@ export const NewsletterBlock: FC<NewsletterBlockProps> = ({
 }) => {
   return (
     <Block className={classNames(className, 'relative py-page')}>
-      <div className="flex flex-col gap-yhalf w-full md:max-w-[calc(var(--wrap)+var(--space-x))] px-xhalf md:px-0 mx-auto">
+      <div className="flex flex-col gap-yhalf w-full md:max-w-[calc(var(--wrap)+var(--space-x))] px-2 md:px-0 mx-auto">
         {header && (
           <h3 className="text-md font-sans uppercase text-center">{header}</h3>
         )}
@@ -33,14 +33,14 @@ export const NewsletterBlock: FC<NewsletterBlockProps> = ({
           successMessage={successMessage}
         />
 
-        <div className="flex items-center gap-xhalf md:gap-x mx-auto">
+        <div className="flex items-center gap-x mx-auto mt-ydouble md:mt-ytrio">
           <Link
             href="https://www.instagram.com/itsajointventure/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-red"
           >
-            <IconInstagram className="w-auto h-8 mx-auto" />
+            <IconInstagram className="w-auto h-7 md:h-8 mx-auto" />
           </Link>
 
           <Link
@@ -49,7 +49,7 @@ export const NewsletterBlock: FC<NewsletterBlockProps> = ({
             rel="noopener noreferrer"
             className="hover:text-red"
           >
-            <IconYoutube className="w-auto h-6 mx-auto" />
+            <IconYoutube className="w-auto h-5 md:h-6 mx-auto" />
           </Link>
 
           <Link
@@ -58,7 +58,7 @@ export const NewsletterBlock: FC<NewsletterBlockProps> = ({
             rel="noopener noreferrer"
             className="hover:text-red"
           >
-            <IconTiktok className="w-auto h-8 mx-auto" />
+            <IconTiktok className="w-auto h-7 md:h-8 mx-auto" />
           </Link>
 
           <Link
@@ -67,7 +67,7 @@ export const NewsletterBlock: FC<NewsletterBlockProps> = ({
             rel="noopener noreferrer"
             className="hover:text-red"
           >
-            <IconFacebook className="w-auto h-6 mx-auto" />
+            <IconFacebook className="w-auto h-5 md:h-6 mx-auto" />
           </Link>
         </div>
       </div>
