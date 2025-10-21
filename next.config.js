@@ -39,7 +39,8 @@ const nextConfig = {
           { key: 'Access-Control-Allow-Credentials', value: 'true' },
           {
             key: 'Access-Control-Allow-Origin',
-            value: 'https://tiny-scripted.vercel.app',
+            value:
+              'https://joint-venture-git-production-mastheads-projects.vercel.app',
           },
           {
             key: 'Access-Control-Allow-Methods',
