@@ -30,6 +30,7 @@ import { Cta } from '@components/btns'
 import { SanityEmbed } from '@components/sanity/embed'
 import { TypedObject } from '@portabletext/types'
 import IconLogoFill from '@components/icons/IconLogoFill'
+import { isSafari } from 'react-device-detect'
 
 type PageRefType = React.ForwardedRef<HTMLDivElement>
 
@@ -237,14 +238,26 @@ const Project: NextPage<PageProps> = (
                 </div>
               )}
 
-              <div className="flex items-center gap-0 relative bg-white border-top border-left md:border-right">
+              <div
+                className={classNames(
+                  isSafari ? 'border-bottom mb-[-1px]' : '',
+                  'flex items-center gap-0 relative bg-white border-top border-left md:border-right'
+                )}
+              >
                 <div
                   className={classNames(
                     project.executiveProducedBy ? 'w-[286px]' : 'w-[188px]',
                     'hidden md:block absolute h-full top-0 border-right pointer-events-none'
                   )}
                 ></div>
-                <div className="hidden md:flex items-center justify-center order-2 w-[140px] md:w-[210px] h-[-webkit-fill-available] px-xdouble xl:px-0 border-bottom">
+                <div
+                  className={classNames(
+                    isSafari
+                      ? 'h-auto'
+                      : 'h-[-webkit-fill-available] border-bottom',
+                    'hidden md:flex items-center justify-center order-2 w-[140px] md:w-[210px] px-xdouble xl:px-0'
+                  )}
+                >
                   <div className="p-2 rounded-full z-above">
                     <IconLogoFill
                       className={classNames(
