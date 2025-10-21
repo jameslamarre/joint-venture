@@ -26,20 +26,14 @@ function App({ Component, pageProps }: AppProps<{}>) {
   const { events } = useRouter()
 
   useEffect(() => {
-    const handleHashChange = (url: string) => {
-      const el = document.getElementById(url.slice(url.lastIndexOf('#') + 1))
-      const elRectTop = el?.getBoundingClientRect().top
-      const scrollTop = window.pageYOffset || document.body.scrollTop
-      const headerEl = document.getElementById('header')
-      const headerStyle = getComputedStyle(headerEl as HTMLElement)
-      const offset = parseInt(headerStyle.height) + parseInt(headerStyle.top)
-      elRectTop && scroll.scrollTo(Math.floor(elRectTop + scrollTop - offset))
+    const handleRouteChange = () => {
+      scroll.scrollToTop({ behavior: 'smooth', duration: 900 })
     }
 
-    events.on('hashChangeStart', handleHashChange)
+    events.on('routeChangeStart', handleRouteChange)
 
     return () => {
-      events.off('hashChangeStart', handleHashChange)
+      events.off('routeChangeStart', handleRouteChange)
     }
   }, [events])
 
