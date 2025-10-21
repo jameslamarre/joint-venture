@@ -15,8 +15,6 @@ import { useRouter } from 'next/router'
 
 type PageRefType = React.ForwardedRef<HTMLDivElement>
 
-const PAGE_ORDER = ['', 'films', 'join']
-
 const ALL_SLUGS_QUERY = groq`*[_type == "page" && defined(slug.current)][].slug.current`
 const PAGE_QUERY = groq`
   *[_type == "page" && slug.current == $slug]{

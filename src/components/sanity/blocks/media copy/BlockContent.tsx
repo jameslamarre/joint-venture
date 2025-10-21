@@ -12,7 +12,6 @@ import {
   TextAndImageBlock,
   ScrollingTextBlock,
   NewsletterBlock,
-  MicrositeBlock,
 } from '.'
 import classNames from 'classnames'
 
@@ -48,9 +47,6 @@ export const BlockContent: FC<SanityBlockElement> = ({
             ),
             mediaBlock: ({ index, value }) => (
               <MediaBlock index={index} {...value} />
-            ),
-            micrositeBlock: ({ index, value }) => (
-              <MicrositeBlock index={index} {...value} />
             ),
             newsletterBlock: ({ index, value }) => (
               <NewsletterBlock index={index} {...value} />

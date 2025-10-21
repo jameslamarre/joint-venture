@@ -19,6 +19,11 @@ export default {
       title: 'Media Block',
     },
     {
+      name: 'micrositeBlock',
+      type: 'micrositeBlock',
+      title: 'Microsite Block',
+    },
+    {
       name: 'newsletterBlock',
       type: 'newsletterBlock',
       title: 'Newsletter Block',

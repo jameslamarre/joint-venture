@@ -92,6 +92,139 @@ export interface Menus extends SanityDocument {
 }
 
 /**
+ * Microsite
+ *
+ *
+ */
+export interface Microsite extends SanityDocument {
+  _type: "microsite";
+
+  /**
+   * Site Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Subdomain Name — `string`
+   *
+   * The subdomain name for the microsite (e.g., ifyouseesomething for ifyouseesomething.ajointventure.com).
+   */
+  subdomain?: string;
+
+  /**
+   * Microsite Slug — `slug`
+   *
+   * Used for the URL path (e.g., "ifyouseesomething")
+   */
+  slug?: { _type: "slug"; current: string };
+
+  /**
+   * Site Description — `text`
+   *
+   *
+   */
+  description?: string;
+
+  /**
+   * Site Image — `image`
+   *
+   *
+   */
+  image?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Keyphrase — `string`
+   *
+   * Phrase that you want your site to rank for.
+   */
+  siteKeywords?: string;
+
+  /**
+   * Home Page — `reference`
+   *
+   * The page that will be displayed as the home page of this microsite
+   */
+  homePage?: SanityReference<MicrositePage>;
+
+  /**
+   * Pages — `array`
+   *
+   *
+   */
+  pages?: Array<SanityKeyedReference<MicrositePage>>;
+}
+
+/**
+ * Microsite Page
+ *
+ *
+ */
+export interface MicrositePage extends SanityDocument {
+  _type: "micrositePage";
+
+  /**
+   * Microsite — `reference`
+   *
+   *
+   */
+  microsite?: SanityReference<Microsite>;
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Slug — `slug`
+   *
+   *
+   */
+  slug?: { _type: "slug"; current: string };
+
+  /**
+   * Preview Image — `image`
+   *
+   *
+   */
+  previewImage?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Initial Color — `string`
+   *
+   * Sets the initial color of the page before any transitions.
+   */
+  initialColor?: "stone" | "yellow" | "blue" | "dark";
+
+  /**
+   * Body — `blockContent`
+   *
+   *
+   */
+  body?: BlockContent;
+
+  /**
+   * SEO — `seo`
+   *
+   *
+   */
+  seo?: Seo;
+}
+
+/**
  * Page
  *
  *
@@ -572,6 +705,7 @@ export type BlockContent = Array<
   | SanityKeyed<DividerBlock>
   | SanityKeyed<EmbedBlock>
   | SanityKeyed<MediaBlock>
+  | SanityKeyed<MicrositeBlock>
   | SanityKeyed<NewsletterBlock>
   | SanityKeyed<ProjectsBlock>
   | SanityKeyed<ScrollingTextBlock>
@@ -641,6 +775,21 @@ export type MediaBlock = {
    *
    */
   media?: Media;
+};
+
+export type MicrositeBlock = {
+  _type: "micrositeBlock";
+  /**
+   * Background Image — `image`
+   *
+   *
+   */
+  backgroundImage?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
 };
 
 export type NewsletterBlock = {
@@ -721,4 +870,12 @@ export type TextAndImageBlock = {
   showImageFirst?: boolean;
 };
 
-export type Documents = Vimeo | Youtube | Menus | Page | Project | SiteSettings;
+export type Documents =
+  | Vimeo
+  | Youtube
+  | Menus
+  | Microsite
+  | MicrositePage
+  | Page
+  | Project
+  | SiteSettings;
