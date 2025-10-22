@@ -44,6 +44,11 @@ export default {
       title: 'Text Block',
     },
     {
+      name: 'doubleColumnBlock',
+      type: 'doubleColumnBlock',
+      title: 'Double Column Block',
+    },
+    {
       name: 'textAndImageBlock',
       type: 'textAndImageBlock',
       title: 'Text and Image Block',

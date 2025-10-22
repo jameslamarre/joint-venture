@@ -22,19 +22,9 @@ const MediaObject = {
       description: 'Describe the image for better accessibility',
     },
     {
-      name: 'video',
-      title: 'Video',
-      type: 'video',
-    },
-    {
       name: 'embed',
       title: 'Embed',
       type: 'embed',
-    },
-    {
-      name: 'caption',
-      type: 'richText',
-      title: 'Caption',
     },
   ],
   preview: {

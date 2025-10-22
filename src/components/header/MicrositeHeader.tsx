@@ -5,6 +5,7 @@ import type { HeaderProps } from './types'
 import { IconLogoLine, IconMicroHyphen } from '@components/icons'
 import { motion } from 'framer-motion'
 import MicrositeHeaderMenu from './MicrositeHeaderMenu'
+import { Btn } from '@components/btns'
 
 export const MicrositeHeader: FC<HeaderProps> = ({ mainMenu, className }) => {
   const onOpen = useCallback((open: boolean) => setMenuOpen(open), [])
@@ -37,12 +38,46 @@ export const MicrositeHeader: FC<HeaderProps> = ({ mainMenu, className }) => {
           className="relative w-[215px] h-auto z-menu"
         />
 
+        <Btn
+          className="absolute pt-[2px] lg:pt-0 right-xhalf top-1/2 transform lg:-translate-y-1/2 uppercase animate-fadeIn z-menu"
+          onClick={() => {
+            setMenuOpen(!menuOpen)
+          }}
+          custom={true}
+        >
+          <div className="flex flex-col gap-[3px] md:gap-[6px] w-[23px] md:w-[37px] h-auto">
+            <span
+              className={classNames(
+                menuOpen
+                  ? 'rotate-45 translate-x-[1px] -translate-y-[2px] bg-white'
+                  : '',
+                'w-full h-[3.5px] md:h-[5px] transform transition-all duration-500 origin-top-left'
+              )}
+              style={{ backgroundColor: 'var(--theme-text--menu)' }}
+            ></span>
+            <span
+              className={classNames(
+                menuOpen ? 'opacity-0' : 'opacity-1',
+                'w-full h-[3.5px] md:h-[5px] transition-opacity duration-300'
+              )}
+              style={{ backgroundColor: 'var(--theme-text--menu)' }}
+            ></span>
+            <span
+              className={classNames(
+                menuOpen ? '-rotate-45 translate-x-[1px] bg-white' : '',
+                'w-full h-[3.5px] md:h-[5px] transform transition-all duration-500 origin-bottom-left'
+              )}
+              style={{ backgroundColor: 'var(--theme-text--menu)' }}
+            ></span>
+          </div>
+        </Btn>
+
         <MicrositeHeaderMenu
           mainMenu={mainMenu}
           customOpen={menuOpen}
           setCustomOpen={setMenuOpen}
           onOpen={onOpen}
-          className="inline-block h-auto pointer-events-auto z-menu"
+          className="inline-block h-auto pointer-events-auto z-2"
         />
       </motion.header>
     </div>

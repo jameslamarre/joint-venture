@@ -95,4 +95,6 @@ export const blockMarks: Partial<PortableTextReactComponents['marks']> = {
 export const blockBlock: Record<
   PortableTextBlockStyle,
   PortableTextBlockComponent | undefined
-> = {}
+> = {
+  small: ({ children }) => <p className="small">{children}</p>,
+}

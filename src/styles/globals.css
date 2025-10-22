@@ -68,7 +68,7 @@
   :root {
     --header-height: 100px;
     --wrap: 550px;
-    --text-wrap: 1100px;
+    --text-wrap: 1024px;
   }
 }
 

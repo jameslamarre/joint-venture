@@ -27,7 +27,7 @@ export const MicrositeBlock: FC<MicrositeBlockProps> = ({
     <Block
       className={classNames(
         className,
-        'flex items-center justify-center relative h-[85dvh] lg:h-[90dvh] top-0 overflow-hidden'
+        'flex items-center justify-center relative h-[85dvh] lg:h-[98dvh] top-0 overflow-hidden'
       )}
     >
       <AnimatePresence mode="popLayout">

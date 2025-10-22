@@ -10,7 +10,7 @@ const getBaseDocumentSlug = (docType: pageTypes): string => {
     case 'project':
       return '/film'
     case 'microsite':
-      return '/microsite'
+      return '/'
     case 'micrositePage':
       return '/microsite'
     default:

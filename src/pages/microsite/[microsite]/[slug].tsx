@@ -79,10 +79,10 @@ const MicrositePage: NextPage<PageProps> = ({
   const page: SanityMicrositePage = filterDataToSingleItem(data)
 
   return page?.body && (!page?._id.includes('drafts.') || preview) ? (
-    <article className="pt-y md:pt-page">
+    <article className="pb-page">
       <BlockContent
         blocks={page.body}
-        className="flex flex-col w-full px-xhalf"
+        className="flex flex-col w-full px-x lg:px-xhalf"
       />
     </article>
   ) : null

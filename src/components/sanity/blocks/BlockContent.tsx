@@ -13,6 +13,7 @@ import {
   ScrollingTextBlock,
   NewsletterBlock,
   MicrositeBlock,
+  DoubleColumnBlock,
 } from '.'
 import classNames from 'classnames'
 
@@ -32,13 +33,14 @@ export const BlockContent: FC<SanityBlockElement> = ({
               <AccordionBlock index={index} {...value} />
             ),
             dividerBlock: ({ index, value }) => (
-              <div className="px-x my-ydouble">
+              <div className="px-x my-y md:my-ydouble">
                 <div
-                  className={classNames(
-                    value.border ? 'border-bottom--white' : ''
-                  )}
+                  className={classNames(value.border ? 'border-bottom' : '')}
                 ></div>
               </div>
+            ),
+            doubleColumnBlock: ({ index, value }) => (
+              <DoubleColumnBlock index={index} {...value} />
             ),
             embedBlock: ({ index, value }) => (
               <EmbedBlock index={index} {...value} />
@@ -62,7 +64,11 @@ export const BlockContent: FC<SanityBlockElement> = ({
               <ScrollingTextBlock index={index} {...value} />
             ),
             textBlock: ({ index, value }) => (
-              <TextBlock index={index} {...value} />
+              <TextBlock
+                index={index}
+                {...value}
+                className={index === 0 ? 'mt-y md:mt-page' : ''}
+              />
             ),
             textAndImageBlock: ({ index, value }) => (
               <TextAndImageBlock index={index} {...value} />

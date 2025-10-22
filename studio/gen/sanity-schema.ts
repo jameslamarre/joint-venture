@@ -731,6 +731,7 @@ export type BlockContent = Array<
   | SanityKeyed<ProjectsBlock>
   | SanityKeyed<ScrollingTextBlock>
   | SanityKeyed<TextBlock>
+  | SanityKeyed<DoubleColumnBlock>
   | SanityKeyed<TextAndImageBlock>
 >;
 
@@ -752,6 +753,23 @@ export type DividerBlock = {
    *
    */
   border?: boolean;
+};
+
+export type DoubleColumnBlock = {
+  _type: "doubleColumnBlock";
+  /**
+   * Text — `richText`
+   *
+   *
+   */
+  columnOne?: RichText;
+
+  /**
+   * Text — `richText`
+   *
+   *
+   */
+  columnTwo?: RichText;
 };
 
 export type EmbedBlock = {
