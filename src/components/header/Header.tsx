@@ -64,7 +64,7 @@ export const Header: FC<HeaderProps> = ({
           <div
             className={classNames(
               menuOpen
-                ? 'fixed md:relative scale-x-[6] md:scale-x-[12] lg:scale-x-[10] scale-y-[32] md:scale-y-[40] lg:scale-y-[13.5] translate-y-[48svh] left-1/3 md:left-0'
+                ? 'fixed lg:relative scale-x-[13] md:scale-x-[30] lg:scale-x-[10] scale-y-[32] md:scale-y-[40] lg:scale-y-[13.5] translate-y-[48svh] left-1/3 md:left-0'
                 : 'relative scale-x-[4.9] scale-y-[1.9] md:scale-x-[8.25] lg:scale-x-[3.25] lg:scale-y-[1]',
               'transition-all duration-500 2xl:duration-700'
             )}
