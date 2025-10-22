@@ -55,7 +55,7 @@ export const MicrositeHeaderMenu: FC<
               style={{ backgroundColor: 'var(--theme-bg)' }}
               className="flex relative w-full h-dvh px-xhalf text-xl md:text-2xl pointer-events-auto"
             >
-              <ul className="flex flex-col items-center justify-center gap-y lg:gap-y relative w-full h-[80dvh] lg:h-[70dvh] text-center">
+              <ul className="flex flex-col items-center justify-center gap-y lg:gap-y relative w-full h-[95dvh] lg:h-[70dvh] text-center">
                 {mainMenu?.items?.map(({ _key, text, link }, index) => {
                   return text && link ? (
                     <li key={_key}>
