@@ -4,7 +4,6 @@ import type { SanityBlockElement } from '@components/sanity'
 import { blockTypes, blockMarks, blockBlock } from '@components/sanity'
 import {
   TextBlock,
-  FiguresBlock,
   MediaBlock,
   AccordionBlock,
   ProjectsBlock,
@@ -14,6 +13,7 @@ import {
   NewsletterBlock,
   MicrositeBlock,
   DoubleColumnBlock,
+  ImageGridBlock,
 } from '.'
 import classNames from 'classnames'
 
@@ -45,8 +45,8 @@ export const BlockContent: FC<SanityBlockElement> = ({
             embedBlock: ({ index, value }) => (
               <EmbedBlock index={index} {...value} />
             ),
-            figuresBlock: ({ index, value }) => (
-              <FiguresBlock index={index} {...value} />
+            imageGridBlock: ({ index, value }) => (
+              <ImageGridBlock index={index} {...value} />
             ),
             mediaBlock: ({ index, value }) => (
               <MediaBlock index={index} {...value} />

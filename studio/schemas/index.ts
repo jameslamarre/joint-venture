@@ -32,6 +32,7 @@ import microsite from './documents/microsite'
 import micrositePage from './documents/micrositePage'
 import micrositeBlock from './blocks/microsite-block'
 import doubleColumnBlock from './blocks/double-column-block'
+import imageGridBlock from './blocks/image-grid-block'
 
 export const schemaTypes = [
   // objects
@@ -60,6 +61,7 @@ export const schemaTypes = [
   doubleColumnBlock,
   embedBlock,
   figuresBlock,
+  imageGridBlock,
   mediaBlock,
   micrositeBlock,
   newsletterBlock,

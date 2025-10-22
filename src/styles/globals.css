@@ -31,6 +31,7 @@
 
   /* container wrap sizes */
   --app: 1440px;
+  --microsite: 1280px;
   --wrap: 340px;
   --wrap-2xs: 400px;
   --wrap-xs: 416px;

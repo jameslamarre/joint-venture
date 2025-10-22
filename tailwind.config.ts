@@ -93,6 +93,7 @@ export default {
         btny: 'var(--btn-space-y)',
         header: 'var(--header-height)',
         app: 'var(--app)',
+        microsite: 'var(--microsite)',
         wrap: 'var(--wrap)',
         textWrap: 'var(--text-wrap)',
         page: 'var(--space-page)',

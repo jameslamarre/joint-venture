@@ -68,12 +68,6 @@ export const BODY_QUERY = `
         ${CTA_QUERY}
       },
     },
-    "figures": figures[]{
-      ...,
-      media{
-        ${MEDIA_QUERY}
-      },
-    },
     "projects": projects[]->{
       type,
       slug,
@@ -92,6 +86,9 @@ export const BODY_QUERY = `
       cta{
         ${CTA_QUERY}
       },
-    }
+    },
+    "images": images[]{
+      ${IMAGE_QUERY}
+    },
   },
 `

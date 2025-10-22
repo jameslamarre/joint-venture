@@ -15,7 +15,7 @@ export const MediaBlock: FC<MediaBlockProps> = ({ media, className }) => {
     <Block
       className={classNames(
         className,
-        'relative w-[100vw] -ml-xhalf mx-auto mb-ydouble object-cover'
+        'relative w-[100vw] max-w-microsite -ml-x lg:-ml-xhalf xl:ml-auto mx-auto mb-ydouble object-cover'
       )}
     >
       <SanityMedia

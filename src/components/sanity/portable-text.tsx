@@ -7,6 +7,7 @@ import { reactNodeToString } from '@lib/util'
 import { SanityLink, SanityMedia } from '.'
 import { SanityLinkType } from '@studio/lib'
 import { RoughNotation } from 'react-rough-notation'
+import { Cta } from '@components/btns'
 
 /**
  * PortableText types used globally
@@ -29,11 +30,12 @@ export const blockTypes: Partial<PortableTextReactComponents['types']> = {
   },
   cta: ({ value }) => {
     return (
-      <div className="inline-block relative mt-y z-above">
-        <SanityLink cta={true} {...(value.link as SanityLinkType)}>
-          {value.text}
-        </SanityLink>
-      </div>
+      <SanityLink
+        className="inline-block mt-y mr-x"
+        {...(value.link as SanityLinkType)}
+      >
+        <Cta type="button">{value.text}</Cta>
+      </SanityLink>
     )
   },
 }

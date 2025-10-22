@@ -611,25 +611,11 @@ export type Media = {
   alt?: string;
 
   /**
-   * Video — `video`
-   *
-   *
-   */
-  video?: Video;
-
-  /**
    * Embed — `embed`
    *
    *
    */
   embed?: Embed;
-
-  /**
-   * Caption — `richText`
-   *
-   *
-   */
-  caption?: RichText;
 };
 
 export type MenuItem = {
@@ -725,6 +711,7 @@ export type Video = {
 export type BlockContent = Array<
   | SanityKeyed<DividerBlock>
   | SanityKeyed<EmbedBlock>
+  | SanityKeyed<ImageGridBlock>
   | SanityKeyed<MediaBlock>
   | SanityKeyed<MicrositeBlock>
   | SanityKeyed<NewsletterBlock>
@@ -732,7 +719,6 @@ export type BlockContent = Array<
   | SanityKeyed<ScrollingTextBlock>
   | SanityKeyed<TextBlock>
   | SanityKeyed<DoubleColumnBlock>
-  | SanityKeyed<TextAndImageBlock>
 >;
 
 export type AccordionBlock = {
@@ -804,6 +790,23 @@ export type FiguresBlock = {
    *
    */
   columns?: number;
+};
+
+export type ImageGridBlock = {
+  _type: "imageGridBlock";
+  /**
+   * Images — `array`
+   *
+   *
+   */
+  images?: Array<
+    SanityKeyed<{
+      _type: "image";
+      asset: SanityReference<SanityImageAsset>;
+      crop?: SanityImageCrop;
+      hotspot?: SanityImageHotspot;
+    }>
+  >;
 };
 
 export type MediaBlock = {

@@ -14,6 +14,11 @@ export default {
       title: 'Embed Block',
     },
     {
+      name: 'imageGridBlock',
+      type: 'imageGridBlock',
+      title: 'Image Grid Block',
+    },
+    {
       name: 'mediaBlock',
       type: 'mediaBlock',
       title: 'Media Block',
@@ -47,11 +52,6 @@ export default {
       name: 'doubleColumnBlock',
       type: 'doubleColumnBlock',
       title: 'Double Column Block',
-    },
-    {
-      name: 'textAndImageBlock',
-      type: 'textAndImageBlock',
-      title: 'Text and Image Block',
     },
   ],
 }

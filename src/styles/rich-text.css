@@ -69,6 +69,10 @@
   @apply text-md;
 }
 
+.rich-text .highlight span {
+  @apply text-sm;
+}
+
 .rich-text.large p,
 .rich-text.large span,
 .rich-text.large li {
