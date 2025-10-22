@@ -5,25 +5,24 @@ import { Head } from '@components/head'
 import { MicrositeHeader } from '@components/header'
 import { filterDataToSingleItem } from '@studio/lib'
 import { triggerToastPreview } from '@components/toast'
-import { LayoutProps, PageData } from './types'
+import { AltLayoutProps, MicrositeData, PageData } from './types'
 import THEME_CSS_VARS from './consts'
 import { Footer } from '@components/footer'
-import type { Menus as SanityMenu } from '@gen/sanity-schema'
+import type { MicrositePage, Menus as SanityMenu } from '@gen/sanity-schema'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
-export const AltLayout: FC<LayoutProps> = ({
+export const AltLayout: FC<AltLayoutProps> = ({
   children,
   data,
   preview = false,
-  siteSettings,
 }) => {
   const { asPath } = useRouter()
-  const page: PageData = filterDataToSingleItem(data)
+  const page: MicrositeData = filterDataToSingleItem(data)
 
   const [currentTheme, setCurrentTheme] = useState<
     'stone' | 'yellow' | 'blue' | 'dark'
-  >(page?.initialColor || 'stone')
+  >((page as MicrositePage)?.initialColor || 'stone')
 
   const seoImage =
     (page as any)?.previewImage || (page as any)?.image || undefined
@@ -33,9 +32,9 @@ export const AltLayout: FC<LayoutProps> = ({
     const root = document.documentElement
 
     // Only update theme from page if user hasn't overridden it
-    if (page?.initialColor) {
+    if ((page as MicrositePage)?.initialColor) {
       // eslint-disable-next-line react-you-might-not-need-an-effect/no-derived-state
-      setCurrentTheme(page.initialColor)
+      setCurrentTheme((page as any).initialColor)
     }
 
     setTimeout(() => {
@@ -44,7 +43,8 @@ export const AltLayout: FC<LayoutProps> = ({
         root.style.setProperty(prop, value)
       })
     }, 300)
-  }, [currentTheme, page?.initialColor])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentTheme, (page as MicrositePage)?.initialColor])
 
   useEffect(() => {
     if (preview)
@@ -54,18 +54,40 @@ export const AltLayout: FC<LayoutProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asPath])
 
+  const siteSettings =
+    page?._type === 'microsite'
+      ? {
+          _id: (page as any)?._id,
+          _type: (page as any)?._type,
+          title: (page as any)?.title,
+          description: (page as any)?.description,
+          image: (page as any)?.image,
+          siteKeywords: (page as any)?.siteKeywords,
+          mainMenu: (page as any)?.mainMenu,
+          footerMenu: (page as any)?.footerMenu,
+        }
+      : {
+          _id: page?._id as string,
+          _type: page?._type as string,
+          title: page?.title as string,
+          description: (page?.microsite as any)?.description as string,
+          image: (page?.microsite as any)?.image as any,
+          siteKeywords: (page?.microsite as any)?.siteKeywords as any,
+          mainMenu: (page?.microsite as any)?.mainMenu as SanityMenu,
+          footerMenu: (page?.microsite as any)?.footerMenu as SanityMenu,
+        }
+
   return (
     <>
       <Head
-        siteTitle={siteSettings?.title || 'Joint Venture'}
+        siteTitle={`${page?.title} | 'Joint Venture'`}
         siteDescription={siteSettings?.description}
         siteImage={siteSettings?.image}
         siteKeywords={siteSettings?.siteKeywords}
-        seoTitle={page?.seo?.title}
-        pageType={page?._type}
+        seoTitle={(page as MicrositePage)?.seo?.title}
         pageTitle={page?.title}
-        pageDescription={page?.seo?.description}
-        pageKeywords={page?.seo?.keywords}
+        pageDescription={(page as MicrositePage)?.seo?.description}
+        pageKeywords={(page as MicrositePage)?.seo?.keywords}
         pageImage={seoImage}
         pageUrl={`${BASE_URL}${asPath}`}
       />
@@ -74,7 +96,7 @@ export const AltLayout: FC<LayoutProps> = ({
         style={{ backgroundColor: 'var(--theme-bg)' }}
       >
         <MicrositeHeader
-          mainMenu={(page as any)?.mainMenu as SanityMenu}
+          mainMenu={siteSettings?.mainMenu as SanityMenu}
           className="flex-initial"
         />
 

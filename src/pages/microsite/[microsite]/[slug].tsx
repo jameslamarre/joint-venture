@@ -8,7 +8,12 @@ import type {
 import type { MicrositePage as SanityMicrositePage } from '@gen/sanity-schema'
 import type { PageProps } from '@lib/next'
 import { getPageStaticProps } from '@lib/next'
-import { BODY_QUERY, client, filterDataToSingleItem } from '@studio/lib'
+import {
+  BODY_QUERY,
+  client,
+  filterDataToSingleItem,
+  LINK_QUERY,
+} from '@studio/lib'
 import { BlockContent } from '@components/sanity'
 
 const ALL_SLUGS_QUERY = groq`*[_type == "micrositePage" && defined(slug.current) && defined(microsite->slug.current)]{
@@ -23,12 +28,30 @@ const PAGE_QUERY = groq`
     title,
     initialColor,
     seo,
-    microsite->{
+    "microsite": microsite->{
       title,
       subdomain,
       description,
       image,
-      slug
+      slug,
+      mainMenu->{
+        items[]{
+          _key,
+          text,
+          link{
+            ${LINK_QUERY}
+          }
+        }
+      },
+      footerMenu->{
+        items[]{
+          _key,
+          text,
+          link{
+            ${LINK_QUERY}
+          }
+        }
+      }
     },
     ${BODY_QUERY}
   }

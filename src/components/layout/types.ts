@@ -10,6 +10,12 @@ import type {
 export type PageData = Page | Project
 export type MicrositeData = Microsite | MicrositePage
 
+export interface AltLayoutProps {
+  children?: ReactNode | undefined
+  preview?: boolean
+  data?: MicrositeData[]
+}
+
 export interface LayoutProps {
   children?: ReactNode | undefined
   preview?: boolean

@@ -8,7 +8,12 @@ import type {
 import type { Microsite as SanityMicrosite } from '@gen/sanity-schema'
 import type { PageProps } from '@lib/next'
 import { getPageStaticProps } from '@lib/next'
-import { BODY_QUERY, client, filterDataToSingleItem } from '@studio/lib'
+import {
+  BODY_QUERY,
+  client,
+  filterDataToSingleItem,
+  LINK_QUERY,
+} from '@studio/lib'
 import { BlockContent } from '@components/sanity'
 
 const ALL_MICROSITES_QUERY = groq`
@@ -25,15 +30,33 @@ const HOME_QUERY = groq`
     title,
     slug,
     description, image,
-    homePage->{
+    mainMenu->{
+      items[]{
+        _key,
+        text,
+        link{
+          ${LINK_QUERY}
+        }
+      }
+    },
+    footerMenu->{
+      items[]{
+        _key,
+        text,
+        link{
+          ${LINK_QUERY}
+        }
+      }
+    },
+    seo,
+    "page": homePage->{
       _id,
       _type,
       title,
       initialColor,
       seo,
       ${BODY_QUERY}
-    },
-    seo,
+    }
   }
 `
 
@@ -57,11 +80,11 @@ const MicrositeHome: NextPage<PageProps> = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const site: SanityMicrosite = filterDataToSingleItem(data)
 
-  return (site as any)?.homePage?.body &&
-    (!((site as any)?.homePage?._id || '').includes('drafts.') || preview) ? (
+  return (site as any)?.page?.body &&
+    (!((site as any)?.page?._id || '').includes('drafts.') || preview) ? (
     <article className="pt-y md:pt-page">
       <BlockContent
-        blocks={(site as any).homePage.body}
+        blocks={(site as any).page.body}
         className="flex flex-col w-full"
       />
     </article>

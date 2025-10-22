@@ -20,8 +20,6 @@ export const SanityLink: FC<SanityLinkProps> = ({
   externalLink,
   anchor,
   cta = false,
-  smallCta = false,
-  color,
   onClick,
   className,
   children,
