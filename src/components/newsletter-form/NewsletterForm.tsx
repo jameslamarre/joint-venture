@@ -66,7 +66,7 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({
   }
 
   return (
-    <div className={classNames(className)}>
+    <div>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <input
@@ -75,12 +75,15 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({
             name="email"
             onChange={e => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="input w-full h-[32px]"
+            className={classNames(className, 'input w-full h-[32px]')}
             required
           />
 
           <button
-            className="w-full h-[30px] text-center hover:bg-white border-left border-right border-bottom font-sans text-sm uppercase"
+            className={classNames(
+              className,
+              'w-full h-[30px] px-xhalf hover:bg-white border-left border-right border-bottom font-sans text-sm uppercase'
+            )}
             type="submit"
             disabled={isSubmitting}
           >
@@ -90,7 +93,12 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({
       </form>
 
       {formError && (
-        <div className="w-full text-center text-sm font-serif text-red mt-yhalf">
+        <div
+          className={classNames(
+            className,
+            'w-full text-sm font-serif text-red mt-yhalf'
+          )}
+        >
           {formError}
         </div>
       )}

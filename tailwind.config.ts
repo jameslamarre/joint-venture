@@ -156,6 +156,11 @@ export default {
         '.border-white': {
           border: '1px solid white',
         },
+        '.border-stone': {
+          borderWidth: '1px',
+          borderStyle: 'solid',
+          borderColor: theme('colors.stone'),
+        },
         '.border-black': {
           border: '1px solid black',
         },

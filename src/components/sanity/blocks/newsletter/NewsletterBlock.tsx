@@ -31,6 +31,7 @@ export const NewsletterBlock: FC<NewsletterBlockProps> = ({
         <NewsletterForm
           newsletterId={audienceId as string}
           successMessage={successMessage}
+          className="text-center"
         />
 
         <div className="flex items-center gap-x mx-auto mt-ydouble md:mt-ytrio">

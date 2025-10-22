@@ -1,13 +1,8 @@
 import type { HTMLAttributes } from 'react'
-import type { Media } from '@gen/sanity-schema'
+import type { Menus as SanityMenu } from '@gen/sanity-schema'
 
 export interface FooterProps
   extends Omit<HTMLAttributes<HTMLElement>, 'content'> {
-  content?: {
-    _key?: string
-    title?: string
-    url: string
-    icon?: Media
-  }[]
+  footerMenu?: SanityMenu
   newsletterId?: string
 }

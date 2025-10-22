@@ -6,10 +6,13 @@ import type { HeaderMenuProps } from './types'
 import { AnimatePresence, motion } from 'framer-motion'
 import { SanityLink } from '@components/sanity'
 import { SanityLinkType } from '@studio/lib'
+import { useRouter } from 'next/router'
 
 export const MicrositeHeaderMenu: FC<
   HeaderMenuProps & HTMLProps<HTMLDivElement>
 > = ({ customOpen = false, setCustomOpen, onOpen, mainMenu, className }) => {
+  const { asPath } = useRouter()
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -81,7 +84,18 @@ export const MicrositeHeaderMenu: FC<
                           setCustomOpen ? () => setCustomOpen(false) : undefined
                         }
                         {...(link as SanityLinkType)}
-                        className={classNames('inline-block uppercase')}
+                        className={classNames(
+                          asPath !== '' &&
+                            asPath.includes(
+                              `/${
+                                (link as SanityLinkType)?.internalLink?.slug
+                                  ?.current
+                              }`
+                            )
+                            ? 'underline underline-offset-4 decoration-4'
+                            : '',
+                          'inline-block text-black hover:text-white uppercase'
+                        )}
                       />
                     </li>
                   ) : null

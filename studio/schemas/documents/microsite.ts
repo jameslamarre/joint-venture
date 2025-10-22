@@ -54,6 +54,12 @@ export default {
       description: 'Used for the URL path (e.g., "ifyouseesomething")',
     },
     {
+      name: 'newsletterId',
+      title: 'Newsletter Id',
+      type: 'string',
+      group: 'global',
+    },
+    {
       name: 'description',
       title: 'Site Description',
       type: 'text',

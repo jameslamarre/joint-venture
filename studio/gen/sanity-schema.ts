@@ -121,6 +121,13 @@ export interface Microsite extends SanityDocument {
   slug?: { _type: "slug"; current: string };
 
   /**
+   * Newsletter Id — `string`
+   *
+   *
+   */
+  newsletterId?: string;
+
+  /**
    * Site Description — `text`
    *
    *

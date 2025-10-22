@@ -34,6 +34,7 @@ const PAGE_QUERY = groq`
       description,
       image,
       slug,
+      newsletterId,
       mainMenu->{
         items[]{
           _key,

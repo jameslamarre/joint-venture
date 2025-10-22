@@ -8,7 +8,11 @@ import { triggerToastPreview } from '@components/toast'
 import { AltLayoutProps, MicrositeData, PageData } from './types'
 import THEME_CSS_VARS from './consts'
 import { Footer } from '@components/footer'
-import type { MicrositePage, Menus as SanityMenu } from '@gen/sanity-schema'
+import type {
+  Microsite,
+  MicrositePage,
+  Menus as SanityMenu,
+} from '@gen/sanity-schema'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -57,20 +61,22 @@ export const AltLayout: FC<AltLayoutProps> = ({
   const siteSettings =
     page?._type === 'microsite'
       ? {
-          _id: (page as any)?._id,
-          _type: (page as any)?._type,
-          title: (page as any)?.title,
-          description: (page as any)?.description,
-          image: (page as any)?.image,
-          siteKeywords: (page as any)?.siteKeywords,
-          mainMenu: (page as any)?.mainMenu,
-          footerMenu: (page as any)?.footerMenu,
+          _id: (page as Microsite)?._id,
+          _type: (page as Microsite)?._type,
+          title: (page as Microsite)?.title,
+          description: (page as Microsite)?.description,
+          newsletterId: (page as Microsite)?.newsletterId,
+          image: (page as Microsite)?.image,
+          siteKeywords: (page as Microsite)?.siteKeywords,
+          mainMenu: (page as Microsite)?.mainMenu,
+          footerMenu: (page as Microsite)?.footerMenu,
         }
       : {
           _id: page?._id as string,
           _type: page?._type as string,
           title: page?.title as string,
           description: (page?.microsite as any)?.description as string,
+          newsletterId: (page?.microsite as any)?.newsletterId,
           image: (page?.microsite as any)?.image as any,
           siteKeywords: (page?.microsite as any)?.siteKeywords as any,
           mainMenu: (page?.microsite as any)?.mainMenu as SanityMenu,
@@ -104,10 +110,10 @@ export const AltLayout: FC<AltLayoutProps> = ({
           {children}
         </main>
 
-        {/* <Footer
-          content={siteSettings?.footerSocials as any}
+        <Footer
+          footerMenu={siteSettings?.footerMenu as SanityMenu}
           newsletterId={siteSettings?.newsletterId}
-        /> */}
+        />
       </div>
       <ToastContainer />
     </>
