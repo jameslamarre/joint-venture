@@ -98,5 +98,8 @@ export const BODY_QUERY = `
     "images": images[]{
       ${IMAGE_QUERY}
     },
+    "ticketsCta": ticketsCta{
+      ${CTA_QUERY}
+    },
   },
 `
