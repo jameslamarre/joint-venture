@@ -6,10 +6,24 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { SanityLink } from '@components/sanity'
 import { SanityLinkType } from '@studio/lib'
 import { useRouter } from 'next/router'
+import {
+  IconFacebook,
+  IconInstagram,
+  IconTiktok,
+  IconYoutube,
+} from '@components/icons'
+import Link from 'next/link'
 
 export const MicrositeHeaderMenu: FC<
   HeaderMenuProps & HTMLProps<HTMLDivElement>
-> = ({ customOpen = false, setCustomOpen, onOpen, mainMenu, className }) => {
+> = ({
+  customOpen = false,
+  setCustomOpen,
+  onOpen,
+  mainMenu,
+  socials,
+  className,
+}) => {
   const { asPath } = useRouter()
 
   const containerVariants = {
@@ -37,9 +51,9 @@ export const MicrositeHeaderMenu: FC<
               animate="visible"
               exit="hidden"
               style={{ backgroundColor: 'var(--theme-bg)' }}
-              className="flex relative w-full h-dvh px-xhalf text-2xl pointer-events-auto"
+              className="flex relative w-full h-dvh px-xhalf text-xl md:text-2xl pointer-events-auto"
             >
-              <ul className="flex flex-col items-center justify-center gap-ydouble lg:gap-y relative w-full h-[80dvh] lg:h-[70dvh] text-center">
+              <ul className="flex flex-col items-center justify-center gap-y lg:gap-y relative w-full h-[80dvh] lg:h-[70dvh] text-center">
                 {mainMenu?.items?.map(({ _key, text, link }, index) => {
                   return text && link ? (
                     <li key={_key}>
@@ -66,6 +80,62 @@ export const MicrositeHeaderMenu: FC<
                   ) : null
                 })}
               </ul>
+
+              {socials && (
+                <ul className="absolute flex justify-center items-center gap-xhalf left-1/2 bottom-ydouble transform -translate-x-1/2">
+                  {socials.instagram && (
+                    <li>
+                      <Link
+                        href={socials.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex w-auto h-fit hover:text-red"
+                      >
+                        <IconInstagram className="w-auto h-10" />
+                      </Link>
+                    </li>
+                  )}
+
+                  {socials.youtube && (
+                    <li>
+                      <Link
+                        href={socials.youtube}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex w-auto h-fit hover:text-red"
+                      >
+                        <IconYoutube className="w-auto h-7" />
+                      </Link>
+                    </li>
+                  )}
+
+                  {socials.tiktok && (
+                    <li>
+                      <Link
+                        href={socials.tiktok}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex w-auto h-fit hover:text-red"
+                      >
+                        <IconTiktok className="w-auto h-10" />
+                      </Link>
+                    </li>
+                  )}
+
+                  {socials.facebook && (
+                    <li>
+                      <Link
+                        href={socials.facebook}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex w-auto h-fit hover:text-red"
+                      >
+                        <IconFacebook className="w-auto h-7" />
+                      </Link>
+                    </li>
+                  )}
+                </ul>
+              )}
             </motion.nav>
           )}
         </AnimatePresence>

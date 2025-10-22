@@ -49,7 +49,10 @@ const HOME_QUERY = groq`
         }
       }
     },
-    seo,
+    instagramLink,
+    youtubeLink,
+    tiktokLink,
+    facebookLink,
     "page": homePage->{
       _id,
       _type,

@@ -161,7 +161,7 @@ export interface Microsite extends SanityDocument {
   homePage?: SanityReference<MicrositePage>;
 
   /**
-   * Pages — `array`
+   * Other Pages — `array`
    *
    *
    */
@@ -180,6 +180,34 @@ export interface Microsite extends SanityDocument {
    * Select menu for footer navigation
    */
   footerMenu?: SanityReference<Menus>;
+
+  /**
+   * Instagram Link — `url`
+   *
+   *
+   */
+  instagramLink?: string;
+
+  /**
+   * Youtube Link — `url`
+   *
+   *
+   */
+  youtubeLink?: string;
+
+  /**
+   * Tiktok Link — `url`
+   *
+   *
+   */
+  tiktokLink?: string;
+
+  /**
+   * Facebook Link — `url`
+   *
+   *
+   */
+  facebookLink?: string;
 }
 
 /**

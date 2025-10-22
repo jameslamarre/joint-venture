@@ -56,7 +56,7 @@ export const MicrositeBlock: FC<MicrositeBlockProps> = ({
           >
             {backgroundImage && (
               <div className="absolute inset-0 z-0">
-                <div className="absolute w-full h-full bg-black opacity-30 z-base"></div>
+                <div className="absolute w-full h-full bg-black opacity-25 z-base"></div>
                 <SanityImage
                   asset={backgroundImage.asset}
                   props={{

@@ -7,7 +7,11 @@ import { motion } from 'framer-motion'
 import MicrositeHeaderMenu from './MicrositeHeaderMenu'
 import { Btn } from '@components/btns'
 
-export const MicrositeHeader: FC<HeaderProps> = ({ mainMenu, className }) => {
+export const MicrositeHeader: FC<HeaderProps> = ({
+  mainMenu,
+  socials,
+  className,
+}) => {
   const onOpen = useCallback((open: boolean) => setMenuOpen(open), [])
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -74,6 +78,7 @@ export const MicrositeHeader: FC<HeaderProps> = ({ mainMenu, className }) => {
 
         <MicrositeHeaderMenu
           mainMenu={mainMenu}
+          socials={socials}
           customOpen={menuOpen}
           setCustomOpen={setMenuOpen}
           onOpen={onOpen}

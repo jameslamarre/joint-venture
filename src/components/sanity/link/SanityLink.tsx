@@ -24,13 +24,51 @@ export const SanityLink: FC<SanityLinkProps> = ({
   className,
   children,
 }) => {
-  const href = getHrefBySanityLink({
-    internalLink,
-    externalLink,
-    anchor,
-    query,
-  } as SanityLinkType)
+  const buildHref = (): string => {
+    // Prefer explicit external link if present
+    if (externalLink) return externalLink
+
+    const il: any = internalLink as any
+
+    // microsite page: /microsite/[microsite]/[slug]
+    if (il?._type === 'micrositePage') {
+      const ms =
+        il?.microsite?.slug?.current ||
+        il?.microsite?.slug || // in case it's already flattened
+        il?.micrositeSlug
+      const ps = il?.slug?.current || il?.slug
+
+      if (ms && ps) {
+        return `/microsite/${ms}/${ps}`
+      } else {
+        return `/microsite/${ms}`
+      }
+    }
+
+    // Fallback to shared resolver for other types
+    return getHrefBySanityLink({
+      internalLink,
+      externalLink,
+      anchor,
+      query,
+    } as SanityLinkType)
+  }
+
+  const withQueryAndAnchor = (base: string): string => {
+    let href = base
+    if (query && typeof query === 'object' && Object.keys(query).length) {
+      const qs = new URLSearchParams(
+        query as unknown as Record<string, string>
+      ).toString()
+      href += (href.includes('?') ? '&' : '?') + qs
+    }
+    if (anchor) href += `#${anchor}`
+    return href
+  }
+
+  const href = withQueryAndAnchor(buildHref())
   const external = !!externalLink
+
   return (
     <Link
       href={href}

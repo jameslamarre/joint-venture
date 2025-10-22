@@ -52,7 +52,11 @@ const PAGE_QUERY = groq`
             ${LINK_QUERY}
           }
         }
-      }
+      },
+      instagramLink,
+      youtubeLink,
+      tiktokLink,
+      facebookLink
     },
     ${BODY_QUERY}
   }

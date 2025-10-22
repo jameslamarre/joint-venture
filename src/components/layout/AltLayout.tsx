@@ -70,6 +70,10 @@ export const AltLayout: FC<AltLayoutProps> = ({
           siteKeywords: (page as Microsite)?.siteKeywords,
           mainMenu: (page as Microsite)?.mainMenu,
           footerMenu: (page as Microsite)?.footerMenu,
+          instagramLink: (page as Microsite)?.instagramLink,
+          youtubeLink: (page as Microsite)?.instagramLink,
+          tiktokLink: (page as Microsite)?.tiktokLink,
+          facebookLink: (page as Microsite)?.facebookLink,
         }
       : {
           _id: page?._id as string,
@@ -81,6 +85,10 @@ export const AltLayout: FC<AltLayoutProps> = ({
           siteKeywords: (page?.microsite as any)?.siteKeywords as any,
           mainMenu: (page?.microsite as any)?.mainMenu as SanityMenu,
           footerMenu: (page?.microsite as any)?.footerMenu as SanityMenu,
+          instagramLink: (page?.microsite as any)?.instagramLink,
+          youtubeLink: (page?.microsite as any)?.instagramLink,
+          tiktokLink: (page?.microsite as any)?.tiktokLink,
+          facebookLink: (page?.microsite as any)?.facebookLink,
         }
 
   return (
@@ -103,6 +111,12 @@ export const AltLayout: FC<AltLayoutProps> = ({
       >
         <MicrositeHeader
           mainMenu={siteSettings?.mainMenu as SanityMenu}
+          socials={{
+            instagram: siteSettings?.instagramLink,
+            youtube: siteSettings?.youtubeLink,
+            tiktok: siteSettings?.tiktokLink,
+            facebook: siteSettings?.facebookLink,
+          }}
           className="flex-initial"
         />
 

@@ -6,6 +6,12 @@ export interface HeaderProps
   currentPage?: string
   pageBackground?: string
   mainMenu?: SanityMenu
+  socials?: {
+    instagram?: string
+    youtube?: string
+    tiktok?: string
+    facebook?: string
+  }
   showContent?: boolean
   setShowContent?: () => void
 }

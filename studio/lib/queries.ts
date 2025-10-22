@@ -20,6 +20,10 @@ export const LINK_QUERY = `
   "internalLink": internalLink.reference->{
     _type,
     slug,
+    // Include parent microsite for microsite pages
+    _type == "micrositePage" => {
+      "microsite": microsite->{ slug }
+    }
   },
   "anchor": internalLink.anchor,
 `
@@ -30,6 +34,10 @@ export const LINK_MARKDEFS_QUERY = `
     "internalLink": @.internalLink.reference->{
       _type,
       slug,
+      // Include parent microsite for microsite pages
+      _type == "micrositePage" => {
+        "microsite": microsite->{ slug }
+      }
     },
     "anchor": @.internalLink.anchor,
   },
