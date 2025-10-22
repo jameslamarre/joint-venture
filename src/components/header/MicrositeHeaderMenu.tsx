@@ -14,6 +14,7 @@ import {
 } from '@components/icons'
 import Link from 'next/link'
 import { RoughNotation } from 'react-rough-notation'
+import { isMobile } from 'react-device-detect'
 
 export const MicrositeHeaderMenu: FC<
   HeaderMenuProps & HTMLProps<HTMLDivElement>
@@ -78,7 +79,7 @@ export const MicrositeHeaderMenu: FC<
                             color="#A90736"
                             strokeWidth={4}
                             iterations={1}
-                            padding={-6}
+                            padding={isMobile ? -2 : -6}
                             animationDelay={100}
                             animationDuration={600}
                           >

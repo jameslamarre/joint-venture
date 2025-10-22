@@ -86,7 +86,7 @@ const MicrositeHome: NextPage<PageProps> = ({
 
   return (site as any)?.page?.body &&
     (!((site as any)?.page?._id || '').includes('drafts.') || preview) ? (
-    <article>
+    <article className="-mt-page lg:mt-0">
       <BlockContent
         blocks={(site as any).page.body}
         className="flex flex-col w-full"
