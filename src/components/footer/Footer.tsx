@@ -17,7 +17,7 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
         <div className="lg:col-span-1 w-full h-fit border-stone">
           <NewsletterForm
             newsletterId={newsletterId as string}
-            className="text-center lg:text-left"
+            className="border-none text-center lg:text-left"
           />
         </div>
 

@@ -75,7 +75,7 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({
             name="email"
             onChange={e => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className={classNames(className, 'input w-full h-[32px]')}
+            className={classNames(className, 'input border w-full h-[32px]')}
             required
           />
 
