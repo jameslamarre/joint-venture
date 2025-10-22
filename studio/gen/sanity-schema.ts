@@ -159,6 +159,20 @@ export interface Microsite extends SanityDocument {
    *
    */
   pages?: Array<SanityKeyedReference<MicrositePage>>;
+
+  /**
+   * Main Menu — `reference`
+   *
+   * Select menu for main navigation
+   */
+  mainMenu?: SanityReference<Menus>;
+
+  /**
+   * Footer Menu — `reference`
+   *
+   * Select menu for footer navigation
+   */
+  footerMenu?: SanityReference<Menus>;
 }
 
 /**
@@ -472,7 +486,7 @@ export type Link = {
      *
      *
      */
-    reference?: SanityReference<Page>;
+    reference?: SanityReference<Page | Project | MicrositePage>;
   };
 
   /**

@@ -57,8 +57,6 @@ const MicrositeHome: NextPage<PageProps> = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const site: SanityMicrosite = filterDataToSingleItem(data)
 
-  console.log(data, site)
-
   return (site as any)?.homePage?.body &&
     (!((site as any)?.homePage?._id || '').includes('drafts.') || preview) ? (
     <article className="pt-y md:pt-page">

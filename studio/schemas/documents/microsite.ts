@@ -19,6 +19,10 @@ export default {
       name: 'content',
       title: 'Content',
     },
+    {
+      name: 'menus',
+      title: 'Menus',
+    },
   ],
   fields: [
     {
@@ -84,6 +88,22 @@ export default {
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'micrositePage' }] }],
       group: 'content',
+    },
+    {
+      name: 'mainMenu',
+      title: 'Main Menu',
+      type: 'reference',
+      description: 'Select menu for main navigation',
+      to: { type: 'menus' },
+      group: 'menus',
+    },
+    {
+      name: 'footerMenu',
+      title: 'Footer Menu',
+      type: 'reference',
+      description: 'Select menu for footer navigation',
+      to: { type: 'menus' },
+      group: 'menus',
     },
   ],
 }

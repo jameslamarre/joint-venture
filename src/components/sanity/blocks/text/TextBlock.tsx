@@ -15,7 +15,7 @@ export const TextBlock: FC<TextBlockProps> = ({ text, className }) => {
     <Block className={classNames(className)}>
       <RichText
         blocks={text as RichTextType}
-        className={classNames('w-full mx-auto')}
+        className={classNames('w-full max-w-textWrap mx-auto')}
       />
     </Block>
   )

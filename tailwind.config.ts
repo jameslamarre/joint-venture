@@ -61,7 +61,7 @@ export default {
         sm: ['var(--font-size-sm)', '1'],
         base: ['var(--font-size-base)', '0'],
         baseSerif: ['var(--font-size-base--serif)', '0'],
-        md: ['var(--font-size-md)', '1.1'],
+        md: ['var(--font-size-md)', '1.25'],
         lg: ['var(--font-size-lg)', '1'],
         xl: ['var(--font-size-xl)', '1'],
         '2xl': ['var(--font-size-2xl)', '1'],
@@ -94,8 +94,7 @@ export default {
         header: 'var(--header-height)',
         app: 'var(--app)',
         wrap: 'var(--wrap)',
-        wrapxs: 'var(--wrap-xs)',
-        wrapsm: 'var(--wrap-sm)',
+        textWrap: 'var(--text-wrap)',
         page: 'var(--space-page)',
       },
       keyframes: {
