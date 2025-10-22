@@ -67,7 +67,7 @@ export const BlockContent: FC<SanityBlockElement> = ({
               <TextBlock
                 index={index}
                 {...value}
-                className={index === 0 ? 'mt-y md:mt-page' : ''}
+                className={index === 0 ? 'mt-y lg:mt-page' : ''}
               />
             ),
             textAndImageBlock: ({ index, value }) => (
