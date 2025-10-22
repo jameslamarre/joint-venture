@@ -13,6 +13,7 @@ import {
   IconYoutube,
 } from '@components/icons'
 import Link from 'next/link'
+import { RoughNotation } from 'react-rough-notation'
 
 export const MicrositeHeaderMenu: FC<
   HeaderMenuProps & HTMLProps<HTMLDivElement>
@@ -58,24 +59,35 @@ export const MicrositeHeaderMenu: FC<
                   return text && link ? (
                     <li key={_key}>
                       <SanityLink
-                        text={text}
                         onClick={
                           setCustomOpen ? () => setCustomOpen(false) : undefined
                         }
                         {...(link as SanityLinkType)}
-                        className={classNames(
-                          asPath !== '' &&
-                            asPath.includes(
-                              `/${
-                                (link as SanityLinkType)?.internalLink?.slug
-                                  ?.current
-                              }`
-                            )
-                            ? 'underline underline-offset-4 decoration-4'
-                            : '',
-                          'inline-block text-black hover:text-white uppercase'
+                        className="inline-block text-black hover:text-white uppercase"
+                      >
+                        {asPath !== '' &&
+                        asPath.includes(
+                          `/${
+                            (link as SanityLinkType)?.internalLink?.slug
+                              ?.current
+                          }`
+                        ) ? (
+                          <RoughNotation
+                            type="underline"
+                            show={true}
+                            color="#A90736"
+                            strokeWidth={4}
+                            iterations={1}
+                            padding={-6}
+                            animationDelay={100}
+                            animationDuration={600}
+                          >
+                            {text}
+                          </RoughNotation>
+                        ) : (
+                          <span>{text}</span>
                         )}
-                      />
+                      </SanityLink>
                     </li>
                   ) : null
                 })}
