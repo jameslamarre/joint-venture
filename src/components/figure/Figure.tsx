@@ -6,17 +6,11 @@ import styles from './figure.module.css'
 export const Figure: FC<FigureProps> = ({
   children,
   content,
-  caption,
-  captionClass,
   className,
   ...props
 }) => (
   <figure className={classNames(styles.figure, className, 'figure')} {...props}>
     {content}
-    <figcaption className={classNames(captionClass)}>
-      {caption}
-      {children}
-    </figcaption>
   </figure>
 )
 

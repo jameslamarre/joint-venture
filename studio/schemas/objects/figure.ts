@@ -3,7 +3,6 @@ import type { PreviewValue } from '@sanity/types'
 import type { Media } from '@gen/sanity-schema'
 
 interface MediaSelectProps {
-  caption?: Media['caption']
   image?: string
 }
 
@@ -22,7 +21,6 @@ export default {
   ],
   preview: {
     select: {
-      caption: 'media.caption',
       image: 'media.image',
     },
     prepare({ image }: MediaSelectProps): PreviewValue {

@@ -3,7 +3,6 @@ import { PreviewValue } from 'sanity'
 
 interface MediaSelectProps {
   videoPosterUrl?: string
-  caption?: string
 }
 
 export default {
@@ -29,11 +28,10 @@ export default {
   ],
   preview: {
     select: {
-      caption: 'caption',
       videoPosterUrl: 'poster.media.image.asset.url',
     },
-    prepare({ caption, videoPosterUrl }: MediaSelectProps): PreviewValue {
-      const title = caption || 'Video Embed'
+    prepare({ videoPosterUrl }: MediaSelectProps): PreviewValue {
+      const title = 'Video Embed'
       return {
         title,
         media: videoPosterUrl,
