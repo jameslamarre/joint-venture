@@ -95,7 +95,7 @@ export const MicrositeHeaderMenu: FC<
               </ul>
 
               {socials && (
-                <ul className="absolute flex justify-center items-center gap-xhalf left-1/2 bottom-y lg:bottom-ydouble transform -translate-x-1/2">
+                <ul className="absolute flex justify-center items-center gap-x left-1/2 bottom-y lg:bottom-ydouble transform -translate-x-1/2">
                   {socials.instagram && (
                     <li>
                       <Link
