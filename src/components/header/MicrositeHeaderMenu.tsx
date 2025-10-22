@@ -23,7 +23,7 @@ export const MicrositeHeaderMenu: FC<
   return (
     <div className={className}>
       <Btn
-        className="absolute right-xhalf top-1/2 transform -translate-y-1/2 uppercase animate-fadeIn z-header"
+        className="absolute pt-[2px] lg:pt-0 right-xhalf top-1/2 transform lg:-translate-y-1/2 uppercase animate-fadeIn z-header"
         onClick={() => {
           setCustomOpen(!customOpen)
         }}
@@ -72,9 +72,9 @@ export const MicrositeHeaderMenu: FC<
               animate="visible"
               exit="hidden"
               style={{ backgroundColor: 'var(--theme-bg)' }}
-              className="flex items-center justify-center relative w-full h-dvh top-page px-xhalf text-2xl pointer-events-auto"
+              className="flex relative w-full h-dvh top-page px-xhalf text-2xl pointer-events-auto"
             >
-              <ul className="flex flex-col gap-y relative w-full h-full text-center">
+              <ul className="flex flex-col items-center justify-center gap-ydouble lg:gap-y relative w-full h-[75dvh] lg:h-[60dvh] text-center">
                 {mainMenu?.items?.map(({ _key, text, link }, index) => {
                   return text && link ? (
                     <li key={_key}>

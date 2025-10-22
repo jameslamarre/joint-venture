@@ -21,14 +21,14 @@ export const MicrositeHeader: FC<HeaderProps> = ({ mainMenu, className }) => {
       id="header"
       className={classNames(
         className,
-        'block lg:fixed relative w-auto h-header mx-auto right-2 font-sans text-xl lg:text-lg z-header'
+        'block lg:fixed relative w-auto h-header mx-auto lg:right-2 font-sans text-xl lg:text-lg z-header'
       )}
     >
       <motion.header
         role="banner"
-        className="flex justify-between items-center relative w-[345px] h-[26px] lg:h-[68px] px-xhalf top-4 right-2"
+        className="flex justify-between items-center relative w-[345px] h-[48px] lg:h-[68px] px-xhalf pt-[22px] lg:pt-0 top-0 lg:top-4 lg:right-2"
       >
-        <div className="absolute w-[345px] left-0 top-0 z-menu">
+        <div className="absolute w-[345px] left-0 top-0 scale-y-[0.705] lg:scale-y-[1] z-menu">
           <IconMicroHyphen className="w-[345px] h-auto" />
         </div>
 

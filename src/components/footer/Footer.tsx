@@ -21,7 +21,7 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
           />
         </div>
 
-        <div className="lg:col-span-2">
+        <ul className="lg:col-span-2 flex flex-col md:inline-block gap-x-x gap-y-yhalf md:columns-2 lg:columns-3 mt-y md:mt-0 text-center md:text-left">
           {footerMenu?.items?.map(({ _key, text, link }) => {
             return text && link ? (
               <li key={_key}>
@@ -29,13 +29,13 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
                   text={text}
                   {...(link as SanityLinkType)}
                   className={classNames(
-                    'inline-block text-stone hover:text-white uppercase'
+                    'inline-block md:mb-y text-stone text-sm hover:text-white uppercase'
                   )}
                 />
               </li>
             ) : null
           })}
-        </div>
+        </ul>
       </div>
 
       <IconLogoOutline className="w-full h-auto" />
