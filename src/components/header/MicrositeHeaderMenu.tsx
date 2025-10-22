@@ -77,7 +77,7 @@ export const MicrositeHeaderMenu: FC<
                             type="underline"
                             show={true}
                             color="#A90736"
-                            strokeWidth={4}
+                            strokeWidth={isMobile ? 2.5 : 4}
                             iterations={1}
                             padding={isMobile ? -2 : -6}
                             animationDelay={100}
