@@ -106,7 +106,7 @@ export const AltLayout: FC<AltLayoutProps> = ({
           className="flex-initial"
         />
 
-        <main key={`main-${asPath}`} className="flex-auto overflow-hidden">
+        <main key={`main-${asPath}`} className="flex-auto">
           {children}
         </main>
 

@@ -811,6 +811,46 @@ export type MicrositeBlock = {
     crop?: SanityImageCrop;
     hotspot?: SanityImageHotspot;
   };
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Subhead — `string`
+   *
+   *
+   */
+  subhead?: string;
+
+  /**
+   * Laurels — `image`
+   *
+   * Optional laurels (or other) image to display on the bottom right.
+   */
+  laurels?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Tickets CTA — `cta`
+   *
+   *
+   */
+  ticketsCta?: Cta;
+
+  /**
+   * Trailer CTA — `embed`
+   *
+   *
+   */
+  trailerCta?: Embed;
 };
 
 export type NewsletterBlock = {
