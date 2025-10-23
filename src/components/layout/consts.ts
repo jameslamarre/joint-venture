@@ -17,7 +17,7 @@ const THEME_CSS_VARS: Record<ThemeName, Record<string, string>> = {
     '--theme-text--tables': '#000',
     '--theme-text--action-hover': '#000',
     '--theme-menu': '#000',
-    '--theme-highlight': '#CFE806',
+    '--theme-highlight': '#fff',
   },
   blue: {
     '--theme-bg': '#91D2DA',

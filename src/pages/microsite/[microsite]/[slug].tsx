@@ -26,7 +26,6 @@ const PAGE_QUERY = groq`
     _id,
     _type,
     title,
-    initialColor,
     seo,
     "microsite": microsite->{
       title,
@@ -35,6 +34,7 @@ const PAGE_QUERY = groq`
       image,
       slug,
       newsletterId,
+      theme,
       mainMenu->{
         items[]{
           _key,

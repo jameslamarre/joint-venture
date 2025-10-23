@@ -45,22 +45,6 @@ export default {
       },
     },
     {
-      name: 'initialColor',
-      type: 'string',
-      title: 'Initial Color',
-      description: 'Sets the initial color of the page before any transitions.',
-      options: {
-        list: [
-          { title: 'Stone', value: 'stone' },
-          { title: 'Yellow', value: 'yellow' },
-          { title: 'Blue', value: 'blue' },
-          { title: 'Dark', value: 'dark' },
-        ],
-        layout: 'radio',
-      },
-      initialValue: 'stone',
-    },
-    {
       name: 'body',
       title: 'Body',
       type: 'blockContent',

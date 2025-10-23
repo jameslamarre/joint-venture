@@ -30,7 +30,9 @@ const HOME_QUERY = groq`
     title,
     slug,
     newsletterId,
-    description, image,
+    description, 
+    image,
+    theme,
     mainMenu->{
       items[]{
         _key,
@@ -57,7 +59,6 @@ const HOME_QUERY = groq`
       _id,
       _type,
       title,
-      initialColor,
       seo,
       ${BODY_QUERY}
     }

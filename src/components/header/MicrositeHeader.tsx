@@ -34,7 +34,10 @@ export const MicrositeHeader: FC<HeaderProps> = ({
         className="flex justify-between items-center relative w-[345px] h-[48px] lg:h-[68px] px-xhalf pt-[22px] lg:pt-0 top-0 lg:top-4 lg:right-2"
       >
         <div className="absolute w-[345px] left-0 top-0 scale-y-[0.705] lg:scale-y-[1] z-menu">
-          <IconMicroHyphen className="w-[345px] h-auto" />
+          <IconMicroHyphen
+            fill="var(--theme-menu)"
+            className="w-[345px] h-auto"
+          />
         </div>
 
         <IconLogoLine

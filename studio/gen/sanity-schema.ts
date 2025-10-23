@@ -154,6 +154,13 @@ export interface Microsite extends SanityDocument {
   siteKeywords?: string;
 
   /**
+   * Theme — `string`
+   *
+   * Sets the theme of the microsite.
+   */
+  theme?: "stone" | "yellow" | "blue" | "dark";
+
+  /**
    * Home Page — `reference`
    *
    * The page that will be displayed as the home page of this microsite
@@ -250,13 +257,6 @@ export interface MicrositePage extends SanityDocument {
     crop?: SanityImageCrop;
     hotspot?: SanityImageHotspot;
   };
-
-  /**
-   * Initial Color — `string`
-   *
-   * Sets the initial color of the page before any transitions.
-   */
-  initialColor?: "stone" | "yellow" | "blue" | "dark";
 
   /**
    * Body — `blockContent`

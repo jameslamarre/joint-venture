@@ -80,6 +80,22 @@ export default {
       group: 'seo',
     },
     {
+      name: 'theme',
+      type: 'string',
+      title: 'Theme',
+      description: 'Sets the theme of the microsite.',
+      options: {
+        list: [
+          { title: 'Stone', value: 'stone' },
+          { title: 'Yellow', value: 'yellow' },
+          { title: 'Blue', value: 'blue' },
+          { title: 'Dark', value: 'dark' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'stone',
+    },
+    {
       name: 'homePage',
       title: 'Home Page',
       type: 'reference',

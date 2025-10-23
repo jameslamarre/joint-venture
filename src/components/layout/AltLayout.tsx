@@ -1,11 +1,11 @@
-import { useEffect, useState, type FC } from 'react'
+import { useEffect, type FC } from 'react'
 import { useRouter } from 'next/router'
 import { ToastContainer } from 'react-toastify'
 import { Head } from '@components/head'
 import { MicrositeHeader } from '@components/header'
 import { filterDataToSingleItem } from '@studio/lib'
 import { triggerToastPreview } from '@components/toast'
-import { AltLayoutProps, MicrositeData, PageData } from './types'
+import { AltLayoutProps, MicrositeData } from './types'
 import THEME_CSS_VARS from './consts'
 import { Footer } from '@components/footer'
 import type {
@@ -13,6 +13,8 @@ import type {
   MicrositePage,
   Menus as SanityMenu,
 } from '@gen/sanity-schema'
+
+type THEME_OPTIONS = 'stone' | 'yellow' | 'blue' | 'dark'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -23,10 +25,12 @@ export const AltLayout: FC<AltLayoutProps> = ({
 }) => {
   const { asPath } = useRouter()
   const page: MicrositeData = filterDataToSingleItem(data)
+  console.log(page)
 
-  const [currentTheme, setCurrentTheme] = useState<
-    'stone' | 'yellow' | 'blue' | 'dark'
-  >((page as MicrositePage)?.initialColor || 'stone')
+  const currentTheme: THEME_OPTIONS =
+    page._type === 'microsite'
+      ? page.theme || 'stone'
+      : (page.microsite as any)?.theme || 'stone'
 
   const seoImage =
     (page as any)?.previewImage || (page as any)?.image || undefined
@@ -35,20 +39,12 @@ export const AltLayout: FC<AltLayoutProps> = ({
   useEffect(() => {
     const root = document.documentElement
 
-    // Only update theme from page if user hasn't overridden it
-    if ((page as MicrositePage)?.initialColor) {
-      // eslint-disable-next-line react-you-might-not-need-an-effect/no-derived-state
-      setCurrentTheme((page as any).initialColor)
-    }
-
-    setTimeout(() => {
-      const vars = THEME_CSS_VARS[currentTheme]
-      Object.entries(vars).forEach(([prop, value]) => {
-        root.style.setProperty(prop, value)
-      })
-    }, 300)
+    const vars = THEME_CSS_VARS[currentTheme]
+    Object.entries(vars).forEach(([prop, value]) => {
+      root.style.setProperty(prop, value)
+    })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentTheme, (page as MicrositePage)?.initialColor])
+  }, [])
 
   useEffect(() => {
     if (preview)

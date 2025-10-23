@@ -5,6 +5,7 @@ import { IconLogoOutline } from '@components/icons'
 import { NewsletterForm } from '@components/newsletter-form'
 import { SanityLink } from '@components/sanity'
 import { SanityLinkType } from '@studio/lib'
+import Link from 'next/link'
 
 export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
   footerMenu,
@@ -12,7 +13,10 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
   className,
 }) => {
   return (
-    <footer className="flex flex-col gap-header w-full pt-ydouble pb-y px-xhalf mx-auto bg-black text-stone font-sans">
+    <footer
+      style={{ color: 'var(--theme-bg)', backgroundColor: 'var(--theme-text)' }}
+      className="flex flex-col gap-header w-full pt-ydouble pb-y px-xhalf mx-auto font-sans"
+    >
       <div className="flex flex-col lg:grid lg:grid-cols-3 gap-x">
         <div className="lg:col-span-1 w-full h-fit border-stone">
           <NewsletterForm
@@ -28,8 +32,9 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
                 <SanityLink
                   text={text}
                   {...(link as SanityLinkType)}
+                  style={{ color: 'var(--theme-bg)' }}
                   className={classNames(
-                    'inline-block md:mb-y text-stone text-sm hover:text-white uppercase'
+                    'inline-block md:mb-y text-sm hover:text-[var(--theme-highlight)] uppercase'
                   )}
                 />
               </li>
@@ -38,7 +43,9 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
         </ul>
       </div>
 
-      <IconLogoOutline className="w-full h-auto" />
+      <Link href="https://www.ajointventure.com" target="_blank">
+        <IconLogoOutline className="w-full h-auto fill-[var(--theme-bg)]" />
+      </Link>
     </footer>
   )
 }

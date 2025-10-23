@@ -35,6 +35,8 @@ export const MicrositeHeaderMenu: FC<
     },
   }
 
+  console.log(asPath)
+
   return (
     <div className={className}>
       <div
@@ -64,7 +66,7 @@ export const MicrositeHeaderMenu: FC<
                           setCustomOpen ? () => setCustomOpen(false) : undefined
                         }
                         {...(link as SanityLinkType)}
-                        className="inline-block text-black hover:text-white uppercase"
+                        className="inline-block text-[var(--theme-text)] hover:text-[var(--theme-highlight)] uppercase"
                       >
                         {asPath !== '' &&
                         asPath.includes(
