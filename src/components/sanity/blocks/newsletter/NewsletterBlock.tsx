@@ -19,6 +19,7 @@ export const NewsletterBlock: FC<NewsletterBlockProps> = ({
   header,
   audienceId,
   successMessage,
+  showSocials,
   className,
 }) => {
   return (
@@ -34,43 +35,45 @@ export const NewsletterBlock: FC<NewsletterBlockProps> = ({
           className="text-center"
         />
 
-        <div className="flex items-center gap-x mx-auto mt-ydouble md:mt-ytrio">
-          <Link
-            href="https://www.instagram.com/itsajointventure/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-red"
-          >
-            <IconInstagram className="w-auto h-7 md:h-8 mx-auto" />
-          </Link>
+        {showSocials && (
+          <div className="flex items-center gap-x mx-auto mt-ydouble md:mt-ytrio">
+            <Link
+              href="https://www.instagram.com/itsajointventure/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-red"
+            >
+              <IconInstagram className="w-auto h-7 md:h-8 mx-auto" />
+            </Link>
 
-          <Link
-            href="https://www.youtube.com/@ItsAJointVenture"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-red"
-          >
-            <IconYoutube className="w-auto h-5 md:h-6 mx-auto" />
-          </Link>
+            <Link
+              href="https://www.youtube.com/@ItsAJointVenture"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-red"
+            >
+              <IconYoutube className="w-auto h-5 md:h-6 mx-auto" />
+            </Link>
 
-          <Link
-            href="https://www.tiktok.com/@itsajointventure"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-red"
-          >
-            <IconTiktok className="w-auto h-7 md:h-8 mx-auto" />
-          </Link>
+            <Link
+              href="https://www.tiktok.com/@itsajointventure"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-red"
+            >
+              <IconTiktok className="w-auto h-7 md:h-8 mx-auto" />
+            </Link>
 
-          <Link
-            href="https://www.facebook.com/ItsAJointventure"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-red"
-          >
-            <IconFacebook className="w-auto h-5 md:h-6 mx-auto" />
-          </Link>
-        </div>
+            <Link
+              href="https://www.facebook.com/ItsAJointventure"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-red"
+            >
+              <IconFacebook className="w-auto h-5 md:h-6 mx-auto" />
+            </Link>
+          </div>
+        )}
       </div>
     </Block>
   )

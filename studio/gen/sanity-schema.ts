@@ -924,6 +924,13 @@ export type NewsletterBlock = {
    *
    */
   successMessage?: RichText;
+
+  /**
+   * Show Social Media Links — `boolean`
+   *
+   *
+   */
+  showSocials?: boolean;
 };
 
 export type ProjectsBlock = {
