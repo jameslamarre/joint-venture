@@ -25,7 +25,6 @@ export const AltLayout: FC<AltLayoutProps> = ({
 }) => {
   const { asPath } = useRouter()
   const page: MicrositeData = filterDataToSingleItem(data)
-  console.log(page)
 
   const currentTheme: THEME_OPTIONS =
     page._type === 'microsite'

@@ -16,6 +16,7 @@ import {
   ImageGridBlock,
 } from '.'
 import classNames from 'classnames'
+import { TypedObject } from '@portabletext/types'
 
 export const BlockContent: FC<SanityBlockElement> = ({
   blocks,
@@ -49,7 +50,15 @@ export const BlockContent: FC<SanityBlockElement> = ({
               <ImageGridBlock index={index} {...value} />
             ),
             mediaBlock: ({ index, value }) => (
-              <MediaBlock index={index} {...value} />
+              <MediaBlock
+                index={index}
+                {...value}
+                className={classNames(
+                  index === (blocks as TypedObject[]).length - 1
+                    ? ''
+                    : 'mb-ydouble'
+                )}
+              />
             ),
             micrositeBlock: ({ index, value }) => (
               <MicrositeBlock index={index} {...value} />

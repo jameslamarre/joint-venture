@@ -47,19 +47,23 @@
   @apply mb-0;
 }
 
-.rich-text h1 {
+.rich-text h1,
+.rich-text h1 span {
   @apply text-h1;
 }
 
-.rich-text h2 {
+.rich-text h2,
+.rich-text h2 span {
   @apply text-h2;
 }
 
-.rich-text h3 {
+.rich-text h3,
+.rich-text h3 span {
   @apply text-h3;
 }
 
-.rich-text h4 {
+.rich-text h4,
+.rich-text h4 span {
   @apply text-h4;
 }
 
