@@ -20,7 +20,7 @@ export const MediaBlock: FC<MediaBlockProps> = ({ media, className }) => {
     >
       <SanityMedia
         {...(media as SanityMediaProps)}
-        className="relative max-w-full min-w-full h-auto object-cover"
+        className="relative max-w-full min-w-full h-auto min-h-[350px] max-h-[50vh] object-cover"
         imageProps={{
           alt: media?.alt as string,
           lqip: (media as any)?.metadata?.lqip as string,

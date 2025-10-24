@@ -6,12 +6,16 @@ import { IconLogoLine, IconMicroHyphen } from '@components/icons'
 import { motion } from 'framer-motion'
 import MicrositeHeaderMenu from './MicrositeHeaderMenu'
 import { Btn } from '@components/btns'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export const MicrositeHeader: FC<HeaderProps> = ({
   mainMenu,
   socials,
   className,
 }) => {
+  const { asPath } = useRouter()
+
   const onOpen = useCallback((open: boolean) => setMenuOpen(open), [])
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -26,27 +30,22 @@ export const MicrositeHeader: FC<HeaderProps> = ({
       id="header"
       className={classNames(
         className,
-        'block lg:fixed relative w-auto h-header mx-auto lg:right-2 font-sans text-xl lg:text-lg z-header'
+        'fixed w-auto h-header mx-auto right-2 font-sans text-xl lg:text-lg z-header'
       )}
     >
       <motion.header
         role="banner"
-        className="flex justify-between items-center relative w-[345px] h-[48px] lg:h-[68px] px-xhalf pt-[22px] lg:pt-0 top-0 lg:top-4 lg:right-2"
+        className="flex justify-between items-center relative w-[52px] md:w-[88px] h-[48px] lg:h-[42px] px-xhalf pt-[22px] lg:pt-0 top-0 lg:top-4 right-2"
       >
-        <div className="absolute w-[345px] left-0 top-0 scale-y-[0.705] lg:scale-y-[1] z-menu">
+        <div className="absolute w-[52px] md:w-[88px] left-0 top-yhalf md:top-0 scale-y-[3] lg:scale-y-[3.1] z-menu">
           <IconMicroHyphen
             fill="var(--theme-menu)"
-            className="w-[345px] h-auto"
+            className="w-[52px] md:w-[88px] h-auto"
           />
         </div>
 
-        <IconLogoLine
-          fill="var(--theme-text--menu)"
-          className="relative w-[215px] h-auto z-menu"
-        />
-
         <Btn
-          className="absolute pt-[2px] lg:pt-0 right-xhalf top-1/2 transform lg:-translate-y-1/2 uppercase animate-fadeIn z-menu"
+          className="absolute pt-[2px] lg:pt-0 right-xhalf uppercase animate-fadeIn z-menu"
           onClick={() => {
             setMenuOpen(!menuOpen)
           }}

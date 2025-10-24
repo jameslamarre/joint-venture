@@ -1,7 +1,7 @@
 import { type FC, type HTMLProps } from 'react'
 import type { FooterProps } from './types'
 import classNames from 'classnames'
-import { IconLogoOutline } from '@components/icons'
+import { IconLogoLong, IconLogoOutline } from '@components/icons'
 import { NewsletterForm } from '@components/newsletter-form'
 import { SanityLink } from '@components/sanity'
 import { SanityLinkType } from '@studio/lib'
@@ -44,7 +44,7 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
       </div>
 
       <Link href="https://www.ajointventure.com" target="_blank">
-        <IconLogoOutline className="w-full h-auto fill-[var(--theme-bg)]" />
+        <IconLogoLong className="w-full h-auto fill-[var(--theme-bg)]" />
       </Link>
     </footer>
   )

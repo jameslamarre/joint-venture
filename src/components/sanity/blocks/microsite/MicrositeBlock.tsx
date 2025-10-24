@@ -85,7 +85,7 @@ export const MicrositeBlock: FC<MicrositeBlockProps> = ({
             {/* Content */}
             <div className="flex flex-col max-w-[95%] mx-auto text-center text-white z-above">
               {title && <h1 className="text-h1 capitalize">{title}</h1>}
-              {subhead && <h2 className="text-h2">{subhead}</h2>}
+              {subhead && <h2 className="text-xl font-sans">{subhead}</h2>}
 
               <div className="flex flex-col md:flex-row justify-center gap-x mt-y">
                 {ticketsCta && (
