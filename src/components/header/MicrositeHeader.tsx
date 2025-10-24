@@ -35,9 +35,9 @@ export const MicrositeHeader: FC<HeaderProps> = ({
     >
       <motion.header
         role="banner"
-        className="flex justify-between items-center relative w-[52px] md:w-[88px] h-[48px] lg:h-[42px] px-xhalf pt-[22px] lg:pt-0 top-0 lg:top-4 right-2"
+        className="flex justify-between items-center relative w-[52px] md:w-[88px] h-[48px] lg:h-[42px] px-xhalf pt-[22px] lg:pt-0 top-0 lg:top-8 right-2 lg:right-6"
       >
-        <div className="absolute w-[52px] md:w-[88px] left-0 top-yhalf md:top-0 scale-y-[3] lg:scale-y-[3.1] z-menu">
+        <div className="absolute w-[52px] md:w-[88px] left-0 top-yhalf lg:top-0 scale-y-[3] lg:scale-y-[3.1] z-menu">
           <IconMicroHyphen
             fill="var(--theme-menu)"
             className="w-[52px] md:w-[88px] h-auto"
