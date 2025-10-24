@@ -41,10 +41,26 @@ export const BlockContent: FC<SanityBlockElement> = ({
               </div>
             ),
             doubleColumnBlock: ({ index, value }) => (
-              <DoubleColumnBlock index={index} {...value} />
+              <DoubleColumnBlock
+                index={index}
+                {...value}
+                className={
+                  index === (blocks as TypedObject[]).length - 1
+                    ? 'mb-page'
+                    : ''
+                }
+              />
             ),
             embedBlock: ({ index, value }) => (
-              <EmbedBlock index={index} {...value} />
+              <EmbedBlock
+                index={index}
+                {...value}
+                className={
+                  index === (blocks as TypedObject[]).length - 1
+                    ? 'mb-page'
+                    : ''
+                }
+              />
             ),
             imageGridBlock: ({ index, value }) => (
               <ImageGridBlock index={index} {...value} />
