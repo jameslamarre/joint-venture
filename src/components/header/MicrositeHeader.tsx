@@ -37,13 +37,6 @@ export const MicrositeHeader: FC<HeaderProps> = ({
         role="banner"
         className="flex justify-between items-center relative w-[52px] md:w-[88px] h-[48px] lg:h-[42px] px-xhalf pt-[22px] lg:pt-0 top-0 lg:top-8 right-2 lg:right-6"
       >
-        <div className="absolute w-[52px] md:w-[88px] left-0 top-yhalf lg:top-0 scale-y-[3] lg:scale-y-[3.1] z-menu">
-          <IconMicroHyphen
-            fill="var(--theme-menu)"
-            className="w-[52px] md:w-[88px] h-auto"
-          />
-        </div>
-
         <Btn
           className="absolute pt-[2px] lg:pt-0 right-xhalf uppercase animate-fadeIn z-menu"
           onClick={() => {
@@ -59,21 +52,27 @@ export const MicrositeHeader: FC<HeaderProps> = ({
                   : '',
                 'w-full h-[3.5px] md:h-[5px] transform transition-all duration-500 origin-top-left'
               )}
-              style={{ backgroundColor: 'var(--theme-text--menu)' }}
+              style={{
+                backgroundColor: menuOpen ? 'var(--theme-menu)' : '#fff',
+              }}
             ></span>
             <span
               className={classNames(
                 menuOpen ? 'opacity-0' : 'opacity-1',
                 'w-full h-[3.5px] md:h-[5px] transition-opacity duration-300'
               )}
-              style={{ backgroundColor: 'var(--theme-text--menu)' }}
+              style={{
+                backgroundColor: menuOpen ? 'var(--theme-menu)' : '#fff',
+              }}
             ></span>
             <span
               className={classNames(
                 menuOpen ? '-rotate-45 translate-x-[1px] bg-white' : '',
                 'w-full h-[3.5px] md:h-[5px] transform transition-all duration-500 origin-bottom-left'
               )}
-              style={{ backgroundColor: 'var(--theme-text--menu)' }}
+              style={{
+                backgroundColor: menuOpen ? 'var(--theme-menu)' : '#fff',
+              }}
             ></span>
           </div>
         </Btn>

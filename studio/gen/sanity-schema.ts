@@ -862,11 +862,49 @@ export type MicrositeBlock = {
   };
 
   /**
+   * Title Alignment — `string`
+   *
+   *
+   */
+  alignment?: "center" | "top" | "bottom";
+
+  /**
    * Title — `string`
    *
    *
    */
   title?: string;
+
+  /**
+   * Title Image — `image`
+   *
+   * Optional image to use instead of the title text.
+   */
+  titleImage?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Mobile Title Image — `image`
+   *
+   * Optional image to use instead of the title text on mobile, with a more square aspect ratio.
+   */
+  mobileImage?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Description — `string`
+   *
+   *
+   */
+  description?: string;
 
   /**
    * Subhead — `string`

@@ -13,9 +13,41 @@ export default {
       title: 'Background Image',
     },
     {
+      name: 'alignment',
+      type: 'string',
+      title: 'Title Alignment',
+      options: {
+        list: [
+          { title: 'Center', value: 'center' },
+          { title: 'Top', value: 'top' },
+          { title: 'Bottom', value: 'bottom' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'center',
+    },
+    {
       name: 'title',
       type: 'string',
       title: 'Title',
+    },
+    {
+      name: 'titleImage',
+      type: 'image',
+      title: 'Title Image',
+      description: 'Optional image to use instead of the title text.',
+    },
+    {
+      name: 'mobileImage',
+      type: 'image',
+      title: 'Mobile Title Image',
+      description:
+        'Optional image to use instead of the title text on mobile, with a more square aspect ratio.',
+    },
+    {
+      name: 'description',
+      type: 'string',
+      title: 'Description',
     },
     {
       name: 'subhead',
