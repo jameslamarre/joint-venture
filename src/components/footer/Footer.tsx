@@ -15,7 +15,7 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
   return (
     <footer
       style={{ color: 'var(--theme-bg)', backgroundColor: 'var(--theme-text)' }}
-      className="flex flex-col gap-header w-full pt-ydouble pb-y px-xhalf mx-auto font-sans"
+      className="flex flex-col gap-header w-full pt-ydouble pb-y px-xhalf mx-auto font-sans z-above"
     >
       <div className="flex flex-col lg:grid lg:grid-cols-3 gap-x">
         <div className="lg:col-span-1 w-full h-fit border-stone">
