@@ -919,18 +919,18 @@ export type NewsletterBlock = {
   audienceId?: string;
 
   /**
-   * Success Message — `richText`
-   *
-   *
-   */
-  successMessage?: RichText;
-
-  /**
    * Show Social Media Links — `boolean`
    *
    *
    */
   showSocials?: boolean;
+
+  /**
+   * Success Message — `richText`
+   *
+   *
+   */
+  successMessage?: RichText;
 };
 
 export type ProjectsBlock = {

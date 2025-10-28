@@ -44,8 +44,8 @@ export default {
       description: 'Sets the initial color of the page before any transitions.',
       options: {
         list: [
-          { title: 'Stone', value: 'stone' },
-          { title: 'Yellow', value: 'yellow' },
+          { title: 'Khaki', value: 'stone' },
+          { title: 'Chartreuse', value: 'yellow' },
         ],
         layout: 'radio',
       },

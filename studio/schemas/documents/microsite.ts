@@ -86,10 +86,10 @@ export default {
       description: 'Sets the theme of the microsite.',
       options: {
         list: [
-          { title: 'Stone', value: 'stone' },
-          { title: 'Yellow', value: 'yellow' },
-          { title: 'Blue', value: 'blue' },
-          { title: 'Dark', value: 'dark' },
+          { title: 'Khaki', value: 'stone' },
+          { title: 'Chartreuse', value: 'yellow' },
+          { title: 'Cyan', value: 'blue' },
+          { title: 'Graphite', value: 'dark' },
         ],
         layout: 'radio',
       },
