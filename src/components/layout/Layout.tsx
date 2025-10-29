@@ -21,7 +21,7 @@ import { useNavigation } from '@contexts/view/ViewContext'
 import PAGE_ORDER from '@globals/pages'
 import { LogoButton } from '@components/logo'
 import { FaRotateLeft } from 'react-icons/fa6'
-import { isMobile } from 'react-device-detect'
+import { isMobile, isTablet } from 'react-device-detect'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 type PageData = Page | Project
