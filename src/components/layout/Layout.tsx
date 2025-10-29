@@ -21,7 +21,7 @@ import { useNavigation } from '@contexts/view/ViewContext'
 import PAGE_ORDER from '@globals/pages'
 import { LogoButton } from '@components/logo'
 import { FaRotateLeft } from 'react-icons/fa6'
-import { isMobile, isTablet } from 'react-device-detect'
+import { isMobile } from 'react-device-detect'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 type PageData = Page | Project
@@ -395,8 +395,7 @@ export const Layout: FC<LayoutProps> = ({
       >
         <div
           className={classNames(
-            isMobile ? 'landscape:flex base:landscape:hidden' : '',
-            'hidden flex-col items-center justify-center gap-yhalf fixed w-full h-full top-0 left-0 inset-0 pointer-events-none z-alert'
+            'hidden landscape:flex base:landscape:hidden flex-col items-center justify-center gap-yhalf fixed w-full h-full top-0 left-0 inset-0 pointer-events-none z-alert'
           )}
           style={{ backgroundColor: 'var(--theme-bg)' }}
         >
