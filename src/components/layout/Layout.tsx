@@ -20,6 +20,8 @@ import { useRef } from 'react'
 import { useNavigation } from '@contexts/view/ViewContext'
 import PAGE_ORDER from '@globals/pages'
 import { LogoButton } from '@components/logo'
+import { FaRotateLeft } from 'react-icons/fa6'
+import { isMobile } from 'react-device-detect'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 type PageData = Page | Project
@@ -391,6 +393,20 @@ export const Layout: FC<LayoutProps> = ({
         className="flex flex-col min-h-full transition-colors duration-100"
         style={{ backgroundColor: 'var(--theme-bg)' }}
       >
+        <div
+          className={classNames(
+            isMobile ? 'landscape:flex base:landscape:hidden' : '',
+            'hidden flex-col items-center justify-center gap-yhalf fixed w-full h-full top-0 left-0 inset-0 pointer-events-none z-alert'
+          )}
+          style={{ backgroundColor: 'var(--theme-bg)' }}
+        >
+          <FaRotateLeft
+            size="32"
+            className="animate-spin direction-reverse ease-in-out duration-snail"
+          />
+          <h3 className="text-h3">Site best viewed in portrait</h3>
+        </div>
+
         <AnimatePresence>
           {showWipe && (
             <>
