@@ -835,6 +835,13 @@ export type ImageGridBlock = {
       hotspot?: SanityImageHotspot;
     }>
   >;
+
+  /**
+   * Display as carousel — `boolean`
+   *
+   *
+   */
+  carousel?: boolean;
 };
 
 export type MediaBlock = {

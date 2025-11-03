@@ -7,6 +7,12 @@ export default {
   icon: BiImages,
   fields: [
     {
+      name: 'carousel',
+      type: 'boolean',
+      title: 'Display as carousel',
+      initialValue: false,
+    },
+    {
       name: 'images',
       type: 'array',
       title: 'Images',
