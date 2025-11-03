@@ -54,7 +54,7 @@
   --speed-normal: 0.3s;
   --speed-slow: 0.5s;
   --speed-xslow: 0.8s;
-  --speed-snail: 1.25s;
+  --speed-snail: 2s;
   --speed-block: var(--speed-slow);
 
   /* theme colors - defaults */

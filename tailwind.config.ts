@@ -127,6 +127,7 @@ export default {
         above: '2',
         header: '3',
         menu: '4',
+        alert: '5',
       },
       borderRadius: {
         lg: 'var(--radius)',

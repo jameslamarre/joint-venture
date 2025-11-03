@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback, type FC } from 'react'
 import { useRouter } from 'next/router'
 import { ToastContainer } from 'react-toastify'
 import { Head } from '@components/head'
-import { Header, MicrositeHeader } from '@components/header'
+import { Header } from '@components/header'
 // import { Footer } from '@components/footer'
 import { filterDataToSingleItem } from '@studio/lib'
 import { triggerToastPreview } from '@components/toast'
@@ -16,6 +16,7 @@ import { LogoButton } from '@components/logo'
 import { TransitionIndicator } from '@components/transition-indicator'
 import { LayoutProps, PageData } from './types'
 import THEME_CSS_VARS from './consts'
+import { FaRotateLeft } from 'react-icons/fa6'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -339,6 +340,19 @@ export const Layout: FC<LayoutProps> = ({
         className="flex flex-col min-h-full transition-colors duration-100"
         style={{ backgroundColor: 'var(--theme-bg)' }}
       >
+        <div
+          className={classNames(
+            'hidden landscape:flex base:landscape:hidden flex-col items-center justify-center gap-yhalf fixed w-full h-full top-0 left-0 inset-0 pointer-events-none z-alert'
+          )}
+          style={{ backgroundColor: 'var(--theme-bg)' }}
+        >
+          <FaRotateLeft
+            size="32"
+            className="animate-spin direction-reverse ease-in-out duration-snail"
+          />
+          <h3 className="text-h3">Site best viewed in portrait</h3>
+        </div>
+
         <AnimatePresence>
           {showWipe && (
             <motion.div

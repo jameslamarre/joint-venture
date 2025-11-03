@@ -3,6 +3,7 @@ export enum SCREENS {
   xs = 420,
   sm = 640,
   md = 768,
+  'base' = 761,
   lg = 1024,
   xl = 1280,
   '2xl' = 1440,
