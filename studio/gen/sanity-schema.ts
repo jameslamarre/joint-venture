@@ -128,6 +128,13 @@ export interface Microsite extends SanityDocument {
   newsletterId?: string;
 
   /**
+   * Mailchimp Audience Tag — `string`
+   *
+   *
+   */
+  audienceTag?: string;
+
+  /**
    * Site Description — `text`
    *
    *
@@ -823,6 +830,13 @@ export type FiguresBlock = {
 export type ImageGridBlock = {
   _type: "imageGridBlock";
   /**
+   * Display as carousel — `boolean`
+   *
+   *
+   */
+  carousel?: boolean;
+
+  /**
    * Images — `array`
    *
    *
@@ -835,13 +849,6 @@ export type ImageGridBlock = {
       hotspot?: SanityImageHotspot;
     }>
   >;
-
-  /**
-   * Display as carousel — `boolean`
-   *
-   *
-   */
-  carousel?: boolean;
 };
 
 export type MediaBlock = {
