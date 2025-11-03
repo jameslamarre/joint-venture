@@ -128,13 +128,6 @@ export interface Microsite extends SanityDocument {
   newsletterId?: string;
 
   /**
-   * Mailchimp Audience Tag — `string`
-   *
-   *
-   */
-  audienceTag?: string;
-
-  /**
    * Site Description — `text`
    *
    *
