@@ -10,7 +10,11 @@ interface MediaBlockProps
   bgColor?: 'black' | 'white'
 }
 
-export const MediaBlock: FC<MediaBlockProps> = ({ media, className }) => {
+export const MediaBlock: FC<MediaBlockProps> = ({
+  media,
+  index,
+  className,
+}) => {
   return (
     <Block
       className={classNames(
@@ -20,7 +24,10 @@ export const MediaBlock: FC<MediaBlockProps> = ({ media, className }) => {
     >
       <SanityMedia
         {...(media as SanityMediaProps)}
-        className="relative max-w-full min-w-full h-auto min-h-[350px] max-h-[50vh] object-cover"
+        className={classNames(
+          index === 0 ? 'max-h-[50vh]' : 'max-h-[85vh]',
+          'relative max-w-full min-w-full h-auto min-h-[350px] object-cover'
+        )}
         imageProps={{
           alt: media?.alt as string,
           lqip: (media as any)?.metadata?.lqip as string,
