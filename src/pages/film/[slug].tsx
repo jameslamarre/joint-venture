@@ -85,6 +85,7 @@ const Project: NextPage<PageProps> = (
 ) => {
   const router = useRouter()
   const project: ProjectProps = filterDataToSingleItem(data)
+  const [showWipe, setShowWipe] = useState(false)
 
   const [videoPlaying, setVideoPlaying] = useState(false)
 
@@ -98,13 +99,17 @@ const Project: NextPage<PageProps> = (
   const moveToProject = (newPosition: number, direction: number) => {
     if (newPosition >= 0 && newPosition < project.projectList.length) {
       setSlideDirection(direction)
+      setShowWipe(true)
+
       const targetSlug = project.projectList[newPosition].slug.current
       updateView({
         ...view,
         nextPage: 'film',
         previousPage: 'film',
       })
-      router.push(`/film/${targetSlug}`)
+      setTimeout(() => {
+        router.push(`/film/${targetSlug}`)
+      }, 500)
     }
   }
 
@@ -123,6 +128,20 @@ const Project: NextPage<PageProps> = (
     if (project.producedBy) fieldLength++
     if (project.starring) fieldLength++
     if (project.otherFields) fieldLength += project.otherFields.length
+  }
+
+  const wipeVariants = {
+    initial: {
+      x: slideDirection === -1 ? '-100dvw' : '100dvw',
+    },
+    animate: {
+      x: slideDirection === -1 ? '100dvw' : '-100dvw',
+      transition: {
+        duration: 1.1,
+        delay: 0.2,
+        ease: 'easeInOut',
+      },
+    },
   }
 
   const contentMotion = {
@@ -169,6 +188,20 @@ const Project: NextPage<PageProps> = (
 
   return !project?._id.includes('drafts.') || preview ? (
     <PageTransition ref={ref}>
+      <AnimatePresence>
+        {showWipe && (
+          <motion.div
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={wipeVariants}
+            className={classNames(
+              'fixed w-[80vw] h-full bg-[var(--theme-highlight)] z-above'
+            )}
+          ></motion.div>
+        )}
+      </AnimatePresence>
+
       <article className="max-w-app md:pt-header mx-auto">
         <div className="flex flex-col gap-yhalf pt-yhalf md:pt-y pb-y px-2">
           <AnimatePresence custom={slideDirection} mode="wait">
