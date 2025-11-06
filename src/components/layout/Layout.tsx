@@ -34,10 +34,11 @@ export const Layout: FC<LayoutProps> = ({
   const [view, updateView, { setNavigating, canNavigate }] =
     useNavigation() as any
 
+  const themeSetRef = useRef(false)
+
   const [showIntro, setShowIntro] = useState(asPath === '/')
   const [showContent, setShowContent] = useState(false)
 
-  const [userOverrideTheme, setUserOverrideTheme] = useState<boolean>(false)
   const [currentTheme, setCurrentTheme] = useState<
     'stone' | 'yellow' | 'blue' | 'dark'
   >(page?.initialColor || 'stone')
@@ -258,6 +259,34 @@ export const Layout: FC<LayoutProps> = ({
     ]
   )
 
+  const cycleTheme = useCallback(() => {
+    const root = document.documentElement
+
+    const nextTheme = () => {
+      switch (currentTheme) {
+        case 'stone':
+          return 'blue'
+        case 'yellow':
+          return 'blue'
+        case 'blue':
+          return 'dark'
+        case 'dark':
+          return 'stone'
+        default:
+          return 'stone'
+      }
+    }
+
+    themeSetRef.current = true
+
+    const newTheme = nextTheme()
+    const vars = THEME_CSS_VARS[newTheme]
+    Object.entries(vars).forEach(([prop, value]) => {
+      root.style.setProperty(prop, value)
+    })
+    setCurrentTheme(newTheme)
+  }, [currentTheme])
+
   // Update view context when page changes
   useEffect(() => {
     const currentIndex = getCurrentPageIndex()
@@ -297,21 +326,11 @@ export const Layout: FC<LayoutProps> = ({
 
   // Set CSS custom properties for theme colors
   useEffect(() => {
-    const root = document.documentElement
-
     // Only update theme from page if user hasn't overridden it
-    if (!userOverrideTheme && page?.initialColor) {
-      // eslint-disable-next-line react-you-might-not-need-an-effect/no-derived-state
+    if (page?.initialColor && !themeSetRef.current) {
       setCurrentTheme(page.initialColor)
     }
-
-    setTimeout(() => {
-      const vars = THEME_CSS_VARS[currentTheme]
-      Object.entries(vars).forEach(([prop, value]) => {
-        root.style.setProperty(prop, value)
-      })
-    }, 300)
-  }, [currentTheme, page?.initialColor, userOverrideTheme])
+  }, [page?.initialColor])
 
   useEffect(() => {
     if (preview)
@@ -390,8 +409,7 @@ export const Layout: FC<LayoutProps> = ({
               <LogoButton
                 color={page?.initialColor}
                 asPath={asPath}
-                setCurrentTheme={setCurrentTheme}
-                setUserOverrideTheme={setUserOverrideTheme}
+                cycleTheme={cycleTheme}
               />
             )}
           </>

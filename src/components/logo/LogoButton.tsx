@@ -6,33 +6,10 @@ import IconLogoFill from '@components/icons/IconLogoFill'
 interface LogoButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: 'stone' | 'yellow' | 'blue' | 'dark'
   asPath?: string
-  setCurrentTheme: (arg0: any) => void
-  setUserOverrideTheme: (arg0: boolean) => void
+  cycleTheme: () => void
 }
 
-export const LogoButton: FC<LogoButton> = ({
-  setCurrentTheme,
-  setUserOverrideTheme,
-  className,
-}) => {
-  const cycleTheme = () => {
-    setUserOverrideTheme(true)
-    setCurrentTheme((prev: any) => {
-      switch (prev) {
-        case 'stone':
-          return 'blue'
-        case 'yellow':
-          return 'blue'
-        case 'blue':
-          return 'dark'
-        case 'dark':
-          return 'stone'
-        default:
-          return 'stone'
-      }
-    })
-  }
-
+export const LogoButton: FC<LogoButton> = ({ cycleTheme, className }) => {
   return (
     <motion.button
       initial={{ rotate: 0 }}
