@@ -651,7 +651,7 @@ export type MenuItem = {
   /**
    * Menu Item Text — `string`
    *
-   *
+   * The text that will be displayed for this menu item, suggest keeping under 20 characters.
    */
   text?: string;
 

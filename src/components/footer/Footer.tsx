@@ -16,13 +16,15 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
     <footer
       style={{ color: 'var(--theme-bg)', backgroundColor: 'var(--theme-text)' }}
       className={classNames(
-        footerMenu?.items && footerMenu?.items.length > 4
-          ? 'gap-header'
-          : 'gap-y',
-        'flex flex-col w-full pt-ydouble pb-y px-xhalf mx-auto font-sans z-above'
+        'flex flex-col w-full gap-header pt-ydouble pb-y px-xhalf mx-auto font-sans z-above'
       )}
     >
-      <div className="flex flex-col lg:grid lg:grid-cols-3 gap-x">
+      <div
+        className={classNames(
+          footerMenu?.items && footerMenu?.items.length > 4 ? '' : '',
+          'flex flex-col lg:grid lg:grid-cols-3 gap-x'
+        )}
+      >
         <div
           className={classNames(
             footerMenu?.items && footerMenu?.items.length > 4 ? '' : '',
@@ -37,10 +39,10 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
 
         <ul
           className={classNames(
-            footerMenu?.items && footerMenu?.items.length > 3
+            footerMenu?.items && footerMenu?.items.length > 4
               ? 'lg:columns-3'
-              : '2xl:columns-4',
-            'lg:col-span-2 flex flex-col md:inline-block gap-x-x gap-y-yhalf md:columns-2 mt-y md:mt-0 text-center md:text-left'
+              : 'lg:columns-auto lg:flex lg:flex-row lg:justify-end lg:items-end lg:gap-x-[calc(var(--space-x)*1.5)]',
+            'lg:col-span-2 flex flex-col lg:inline-block gap-x-x gap-y-yhalf lg:columns-2 mt-y lg:mt-0 text-center lg:text-left'
           )}
         >
           {footerMenu?.items?.map(({ _key, text, link }) => {
@@ -48,9 +50,9 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
               <li
                 key={_key}
                 className={classNames(
-                  footerMenu?.items && footerMenu?.items.length > 3
+                  footerMenu?.items && footerMenu?.items.length > 4
                     ? ''
-                    : '2xl:text-right 2xl:items-end 2xl:justify-end',
+                    : 'lg:text-right lg:items-end lg:justify-end',
                   ''
                 )}
               >
@@ -59,7 +61,7 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
                   {...(link as SanityLinkType)}
                   style={{ color: 'var(--theme-bg)' }}
                   className={classNames(
-                    'inline-block md:mb-y text-sm hover:text-[var(--theme-highlight)] uppercase'
+                    'inline-block lg:mb-y text-sm lg:text-xs xl:text-sm hover:text-[var(--theme-highlight)] uppercase'
                   )}
                 />
               </li>
@@ -71,9 +73,9 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
       <Link
         href="https://www.ajointventure.com"
         target="_blank"
-        className="inline-block"
+        className="inline-block relative"
       >
-        <IconLogoLong className="block w-full lg:w-1/2 h-auto fill-[var(--theme-bg)]" />
+        <IconLogoLong className="block w-full h-auto stroke-[var(--theme-bg)]" />
       </Link>
     </footer>
   )
