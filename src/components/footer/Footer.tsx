@@ -65,40 +65,6 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
               </li>
             ) : null
           })}
-          <li
-            className={classNames(
-              footerMenu?.items && footerMenu?.items.length > 3
-                ? ''
-                : '2xl:text-right 2xl:items-end 2xl:justify-end',
-              ''
-            )}
-          >
-            <SanityLink
-              text={footerMenu.items[1].text}
-              {...(footerMenu.items[1].link as SanityLinkType)}
-              style={{ color: 'var(--theme-bg)' }}
-              className={classNames(
-                'inline-block md:mb-y text-sm hover:text-[var(--theme-highlight)] uppercase'
-              )}
-            />
-          </li>
-          <li
-            className={classNames(
-              footerMenu?.items && footerMenu?.items.length > 3
-                ? ''
-                : '2xl:text-right 2xl:items-end 2xl:justify-end',
-              ''
-            )}
-          >
-            <SanityLink
-              text={footerMenu.items[3].text}
-              {...(footerMenu.items[3].link as SanityLinkType)}
-              style={{ color: 'var(--theme-bg)' }}
-              className={classNames(
-                'inline-block md:mb-y text-sm hover:text-[var(--theme-highlight)] uppercase'
-              )}
-            />
-          </li>
         </ul>
       </div>
 
