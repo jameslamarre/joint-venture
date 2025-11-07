@@ -15,20 +15,45 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
   return (
     <footer
       style={{ color: 'var(--theme-bg)', backgroundColor: 'var(--theme-text)' }}
-      className="flex flex-col gap-header w-full pt-ydouble pb-y px-xhalf mx-auto font-sans z-above"
+      className={classNames(
+        footerMenu?.items && footerMenu?.items.length > 4
+          ? 'gap-header'
+          : 'gap-y',
+        'flex flex-col w-full pt-ydouble pb-y px-xhalf mx-auto font-sans z-above'
+      )}
     >
       <div className="flex flex-col lg:grid lg:grid-cols-3 gap-x">
-        <div className="lg:col-span-1 w-full h-fit border-stone">
+        <div
+          className={classNames(
+            footerMenu?.items && footerMenu?.items.length > 4 ? '' : '',
+            'lg:col-span-1 w-full h-fit border-stone'
+          )}
+        >
           <NewsletterForm
             newsletterId={newsletterId as string}
             className="border-none text-center lg:text-left"
           />
         </div>
 
-        <ul className="lg:col-span-2 flex flex-col md:inline-block gap-x-x gap-y-yhalf md:columns-2 lg:columns-3 mt-y md:mt-0 text-center md:text-left">
+        <ul
+          className={classNames(
+            footerMenu?.items && footerMenu?.items.length > 3
+              ? 'lg:columns-3'
+              : '2xl:columns-4',
+            'lg:col-span-2 flex flex-col md:inline-block gap-x-x gap-y-yhalf md:columns-2 mt-y md:mt-0 text-center md:text-left'
+          )}
+        >
           {footerMenu?.items?.map(({ _key, text, link }) => {
             return text && link ? (
-              <li key={_key}>
+              <li
+                key={_key}
+                className={classNames(
+                  footerMenu?.items && footerMenu?.items.length > 3
+                    ? ''
+                    : '2xl:text-right 2xl:items-end 2xl:justify-end',
+                  ''
+                )}
+              >
                 <SanityLink
                   text={text}
                   {...(link as SanityLinkType)}
@@ -40,11 +65,49 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
               </li>
             ) : null
           })}
+          <li
+            className={classNames(
+              footerMenu?.items && footerMenu?.items.length > 3
+                ? ''
+                : '2xl:text-right 2xl:items-end 2xl:justify-end',
+              ''
+            )}
+          >
+            <SanityLink
+              text={footerMenu.items[1].text}
+              {...(footerMenu.items[1].link as SanityLinkType)}
+              style={{ color: 'var(--theme-bg)' }}
+              className={classNames(
+                'inline-block md:mb-y text-sm hover:text-[var(--theme-highlight)] uppercase'
+              )}
+            />
+          </li>
+          <li
+            className={classNames(
+              footerMenu?.items && footerMenu?.items.length > 3
+                ? ''
+                : '2xl:text-right 2xl:items-end 2xl:justify-end',
+              ''
+            )}
+          >
+            <SanityLink
+              text={footerMenu.items[3].text}
+              {...(footerMenu.items[3].link as SanityLinkType)}
+              style={{ color: 'var(--theme-bg)' }}
+              className={classNames(
+                'inline-block md:mb-y text-sm hover:text-[var(--theme-highlight)] uppercase'
+              )}
+            />
+          </li>
         </ul>
       </div>
 
-      <Link href="https://www.ajointventure.com" target="_blank">
-        <IconLogoLong className="w-full h-auto fill-[var(--theme-bg)]" />
+      <Link
+        href="https://www.ajointventure.com"
+        target="_blank"
+        className="inline-block"
+      >
+        <IconLogoLong className="block w-full lg:w-1/2 h-auto fill-[var(--theme-bg)]" />
       </Link>
     </footer>
   )
