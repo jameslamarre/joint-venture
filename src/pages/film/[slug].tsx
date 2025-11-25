@@ -13,6 +13,7 @@ import {
   client,
   CTA_QUERY,
   filterDataToSingleItem,
+  SanityLinkType,
 } from '@studio/lib'
 import {
   forwardRef,
@@ -21,7 +22,7 @@ import {
   useEffect,
 } from 'react'
 import PageTransition from '@components/transition/PageTransition'
-import { RichText, SanityImage } from '@components/sanity'
+import { RichText, SanityImage, SanityLink } from '@components/sanity'
 import { motion, AnimatePresence } from 'framer-motion'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
@@ -226,13 +227,22 @@ const Project: NextPage<PageProps> = (
                       )}
                     </AnimatePresence>
 
-                    {project.trailer && !videoPlaying && (
-                      <Cta
-                        className="absolute top-1/2 md:top-auto md:bottom-ytrio left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:translate-y-0"
-                        onClick={() => setVideoPlaying(true)}
-                      >
-                        Play trailer
-                      </Cta>
+                    {project.cta ? (
+                      <SanityLink {...(project.cta.link as SanityLinkType)}>
+                        <Cta className="absolute top-1/2 md:top-auto md:bottom-ytrio left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:translate-y-0">
+                          {project.cta.text}
+                        </Cta>
+                      </SanityLink>
+                    ) : (
+                      project.trailer &&
+                      !videoPlaying && (
+                        <Cta
+                          className="absolute top-1/2 md:top-auto md:bottom-ytrio left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:translate-y-0"
+                          onClick={() => setVideoPlaying(true)}
+                        >
+                          Play trailer
+                        </Cta>
+                      )
                     )}
                   </div>
                 </div>
