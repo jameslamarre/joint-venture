@@ -230,7 +230,11 @@ const Project: NextPage<PageProps> = (
                     <div className="flex flex-col md:flex-row items-center justify-center gap-xhalf absolute top-1/2 md:top-auto md:bottom-ytrio left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:translate-y-0">
                       {project.cta && !videoPlaying && (
                         <SanityLink {...(project.cta.link as SanityLinkType)}>
-                          <Cta className="w-[148px] md:w-[178px]">
+                          <Cta
+                            className={classNames(
+                              project.trailer ? 'w-[148px] md:w-[178px]' : ''
+                            )}
+                          >
                             {project.cta.text}
                           </Cta>
                         </SanityLink>
