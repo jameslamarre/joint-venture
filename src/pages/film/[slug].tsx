@@ -59,6 +59,7 @@ const PROJECT_QUERY = groq`
     directedBy,
     writtenBy,
     producedBy,
+    executiveProducedBy,
     starring,
     otherFields,
     synopsis,
@@ -161,7 +162,7 @@ const Project: NextPage<PageProps> = (
         ...view,
         film: position,
         previousFilm:
-          position > project.projectList.length - 1 ? position - 1 : 0,
+          position + 1 > project.projectList.length - 1 ? position - 1 : 0,
         nextFilm: position < project.projectList.length - 1 ? position + 1 : 0,
       })
     }
@@ -261,7 +262,7 @@ const Project: NextPage<PageProps> = (
               >
                 <div
                   className={classNames(
-                    project.executiveProducedBy ? 'w-[286px]' : 'w-[188px]',
+                    project.executiveProducedBy ? 'w-[294px]' : 'w-[188px]',
                     'hidden md:block absolute h-full top-0 border-right pointer-events-none'
                   )}
                 ></div>
@@ -278,7 +279,7 @@ const Project: NextPage<PageProps> = (
                       className={classNames(
                         fieldLength > 4 ? 'md:w-[130px]' : '',
                         fieldLength === 4 ? 'md:w-[8em]' : '',
-                        fieldLength === 3 ? 'md:w-[5em]' : '',
+                        fieldLength === 3 ? 'md:w-[6.4em]' : '',
                         fieldLength === 2 ? 'md:w-[2.5em]' : '',
                         fieldLength === 1 ? 'md:w-[1.25em]' : '',
                         'h-auto'
@@ -295,7 +296,7 @@ const Project: NextPage<PageProps> = (
                       <div
                         className={classNames(
                           project.executiveProducedBy
-                            ? 'w-full md:w-[286px]'
+                            ? 'w-full md:w-[294px]'
                             : 'w-[180px]',
                           'block md:inline-block h-max py-[2px] pr-2'
                         )}
@@ -314,7 +315,7 @@ const Project: NextPage<PageProps> = (
                       <div
                         className={classNames(
                           project.executiveProducedBy
-                            ? 'w-full md:w-[286px]'
+                            ? 'w-full md:w-[294px]'
                             : 'w-[180px]',
                           'block md:inline-block h-max py-[2px] pr-2'
                         )}
@@ -333,7 +334,7 @@ const Project: NextPage<PageProps> = (
                       <div
                         className={classNames(
                           project.executiveProducedBy
-                            ? 'w-full md:w-[286px]'
+                            ? 'w-full md:w-[294px]'
                             : 'w-[180px]',
                           'block md:inline-block h-max py-[2px] pr-2'
                         )}
@@ -352,7 +353,7 @@ const Project: NextPage<PageProps> = (
                       <div
                         className={classNames(
                           project.executiveProducedBy
-                            ? 'w-full md:w-[286px]'
+                            ? 'w-full md:w-[294px]'
                             : 'w-[180px]',
                           'block md:inline-block h-max py-[2px] pr-2'
                         )}
@@ -366,12 +367,13 @@ const Project: NextPage<PageProps> = (
                       </p>
                     </div>
                   )}
+
                   {project.executiveProducedBy && (
                     <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
                       <div
                         className={classNames(
                           project.executiveProducedBy
-                            ? 'w-full md:w-[286px]'
+                            ? 'w-full md:w-[294px]'
                             : 'w-[180px]',
                           'block md:inline-block h-max py-[2px] pr-2'
                         )}
@@ -385,12 +387,13 @@ const Project: NextPage<PageProps> = (
                       </p>
                     </div>
                   )}
+
                   {project.starring && (
                     <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
                       <div
                         className={classNames(
                           project.executiveProducedBy
-                            ? 'w-full md:w-[286px]'
+                            ? 'w-full md:w-[294px]'
                             : 'w-[180px]',
                           'block md:inline-block h-max py-[2px] pr-2'
                         )}
@@ -414,7 +417,7 @@ const Project: NextPage<PageProps> = (
                         <div
                           className={classNames(
                             project.executiveProducedBy
-                              ? 'w-full md:w-[286px]'
+                              ? 'w-full md:w-[294px]'
                               : 'w-[180px]',
                             'block md:inline-block h-max py-[2px] pr-2'
                           )}
@@ -434,7 +437,7 @@ const Project: NextPage<PageProps> = (
                       <div
                         className={classNames(
                           project.executiveProducedBy
-                            ? 'w-full md:w-[286px]'
+                            ? 'w-full md:w-[294px]'
                             : 'w-[180px]',
                           'block md:inline-block h-max py-[2px] pr-2'
                         )}
