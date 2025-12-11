@@ -10,10 +10,10 @@
       "has": [
         {
           "type": "host",
-          "value": "ifyouseesomething.ajointventure.com"
+          "value": "ajointventure.com/microsite/ifyouseesomething"
         }
       ],
-      "destination": "https://ajointventure.com/microsite/ifyouseesomething/$1",
+      "destination": "https://ifyouseesomething.ajointventure.com/$1",
       "permanent": true
     }
   ],
