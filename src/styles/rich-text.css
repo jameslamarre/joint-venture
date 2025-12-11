@@ -90,6 +90,12 @@
   @apply text-base;
 }
 
+.ruled-lines .rich-text p,
+.ruled-lines .rich-text.large p,
+.ruled-lines .rich-text.small p {
+  @apply leading-[inherit];
+}
+
 .rich-text ul,
 .rich-text ol {
   @apply mx-auto mb-yquarter;
