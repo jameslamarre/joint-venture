@@ -482,7 +482,7 @@ const Project: NextPage<PageProps> = (
 
                       <RichText
                         blocks={project.synopsis as TypedObject | TypedObject[]}
-                        className="inline w-full md:w-[calc(100%-280px)] small leading-[2.8]"
+                        className="inline w-full md:w-[calc(100%-280px)] small"
                       />
                     </div>
                   )}
