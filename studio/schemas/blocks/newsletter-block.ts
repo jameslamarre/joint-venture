@@ -17,6 +17,12 @@ export default {
       title: 'Audience ID/Form GUID',
     },
     {
+      name: 'showSocials',
+      type: 'boolean',
+      title: 'Show Social Media Links',
+      initialValue: true,
+    },
+    {
       name: 'successMessage',
       type: 'richText',
       title: 'Success Message',

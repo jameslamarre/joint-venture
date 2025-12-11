@@ -25,11 +25,6 @@ export default {
       },
       description: 'Image that displays before the video is loaded',
     },
-    // {
-    //   name: 'caption',
-    //   type: 'string',
-    //   title: 'Caption',
-    // },
     {
       name: 'loop',
       type: 'boolean',

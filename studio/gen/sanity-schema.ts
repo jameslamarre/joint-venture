@@ -92,6 +92,188 @@ export interface Menus extends SanityDocument {
 }
 
 /**
+ * Microsite
+ *
+ *
+ */
+export interface Microsite extends SanityDocument {
+  _type: "microsite";
+
+  /**
+   * Site Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Subdomain Name — `string`
+   *
+   * The subdomain name for the microsite (e.g., ifyouseesomething for ifyouseesomething.ajointventure.com).
+   */
+  subdomain?: string;
+
+  /**
+   * Microsite Slug — `slug`
+   *
+   * Used for the URL path (e.g., "ifyouseesomething")
+   */
+  slug?: { _type: "slug"; current: string };
+
+  /**
+   * Newsletter Id — `string`
+   *
+   *
+   */
+  newsletterId?: string;
+
+  /**
+   * Site Description — `text`
+   *
+   *
+   */
+  description?: string;
+
+  /**
+   * Site Image — `image`
+   *
+   *
+   */
+  image?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Keyphrase — `string`
+   *
+   * Phrase that you want your site to rank for.
+   */
+  siteKeywords?: string;
+
+  /**
+   * Theme — `string`
+   *
+   * Sets the theme of the microsite.
+   */
+  theme?: "stone" | "yellow" | "blue" | "dark";
+
+  /**
+   * Home Page — `reference`
+   *
+   * The page that will be displayed as the home page of this microsite
+   */
+  homePage?: SanityReference<MicrositePage>;
+
+  /**
+   * Other Pages — `array`
+   *
+   *
+   */
+  pages?: Array<SanityKeyedReference<MicrositePage>>;
+
+  /**
+   * Main Menu — `reference`
+   *
+   * Select menu for main navigation
+   */
+  mainMenu?: SanityReference<Menus>;
+
+  /**
+   * Footer Menu — `reference`
+   *
+   * Select menu for footer navigation
+   */
+  footerMenu?: SanityReference<Menus>;
+
+  /**
+   * Instagram Link — `url`
+   *
+   *
+   */
+  instagramLink?: string;
+
+  /**
+   * Youtube Link — `url`
+   *
+   *
+   */
+  youtubeLink?: string;
+
+  /**
+   * Tiktok Link — `url`
+   *
+   *
+   */
+  tiktokLink?: string;
+
+  /**
+   * Facebook Link — `url`
+   *
+   *
+   */
+  facebookLink?: string;
+}
+
+/**
+ * Microsite Page
+ *
+ *
+ */
+export interface MicrositePage extends SanityDocument {
+  _type: "micrositePage";
+
+  /**
+   * Microsite — `reference`
+   *
+   *
+   */
+  microsite?: SanityReference<Microsite>;
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Slug — `slug`
+   *
+   *
+   */
+  slug?: { _type: "slug"; current: string };
+
+  /**
+   * Preview Image — `image`
+   *
+   *
+   */
+  previewImage?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Body — `blockContent`
+   *
+   *
+   */
+  body?: BlockContent;
+
+  /**
+   * SEO — `seo`
+   *
+   *
+   */
+  seo?: Seo;
+}
+
+/**
  * Page
  *
  *
@@ -339,7 +521,7 @@ export type Link = {
      *
      *
      */
-    reference?: SanityReference<Page>;
+    reference?: SanityReference<Page | Project | MicrositePage>;
   };
 
   /**
@@ -457,25 +639,11 @@ export type Media = {
   alt?: string;
 
   /**
-   * Video — `video`
-   *
-   *
-   */
-  video?: Video;
-
-  /**
    * Embed — `embed`
    *
    *
    */
   embed?: Embed;
-
-  /**
-   * Caption — `richText`
-   *
-   *
-   */
-  caption?: RichText;
 };
 
 export type MenuItem = {
@@ -483,7 +651,7 @@ export type MenuItem = {
   /**
    * Menu Item Text — `string`
    *
-   *
+   * The text that will be displayed for this menu item, suggest keeping under 20 characters.
    */
   text?: string;
 
@@ -571,12 +739,14 @@ export type Video = {
 export type BlockContent = Array<
   | SanityKeyed<DividerBlock>
   | SanityKeyed<EmbedBlock>
+  | SanityKeyed<ImageGridBlock>
   | SanityKeyed<MediaBlock>
+  | SanityKeyed<MicrositeBlock>
   | SanityKeyed<NewsletterBlock>
   | SanityKeyed<ProjectsBlock>
   | SanityKeyed<ScrollingTextBlock>
   | SanityKeyed<TextBlock>
-  | SanityKeyed<TextAndImageBlock>
+  | SanityKeyed<DoubleColumnBlock>
 >;
 
 export type AccordionBlock = {
@@ -597,6 +767,23 @@ export type DividerBlock = {
    *
    */
   border?: boolean;
+};
+
+export type DoubleColumnBlock = {
+  _type: "doubleColumnBlock";
+  /**
+   * Text — `richText`
+   *
+   *
+   */
+  columnOne?: RichText;
+
+  /**
+   * Text — `richText`
+   *
+   *
+   */
+  columnTwo?: RichText;
 };
 
 export type EmbedBlock = {
@@ -633,6 +820,30 @@ export type FiguresBlock = {
   columns?: number;
 };
 
+export type ImageGridBlock = {
+  _type: "imageGridBlock";
+  /**
+   * Display as carousel — `boolean`
+   *
+   *
+   */
+  carousel?: boolean;
+
+  /**
+   * Images — `array`
+   *
+   *
+   */
+  images?: Array<
+    SanityKeyed<{
+      _type: "image";
+      asset: SanityReference<SanityImageAsset>;
+      crop?: SanityImageCrop;
+      hotspot?: SanityImageHotspot;
+    }>
+  >;
+};
+
 export type MediaBlock = {
   _type: "mediaBlock";
   /**
@@ -641,6 +852,99 @@ export type MediaBlock = {
    *
    */
   media?: Media;
+};
+
+export type MicrositeBlock = {
+  _type: "micrositeBlock";
+  /**
+   * Background Image — `image`
+   *
+   *
+   */
+  backgroundImage?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Title Alignment — `string`
+   *
+   *
+   */
+  alignment?: "center" | "top" | "bottom";
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Title Image — `image`
+   *
+   * Optional image to use instead of the title text.
+   */
+  titleImage?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Mobile Title Image — `image`
+   *
+   * Optional image to use instead of the title text on mobile, with a more square aspect ratio.
+   */
+  mobileImage?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Description — `string`
+   *
+   *
+   */
+  description?: string;
+
+  /**
+   * Subhead — `string`
+   *
+   *
+   */
+  subhead?: string;
+
+  /**
+   * Laurels — `image`
+   *
+   * Optional laurels (or other) image to display on the bottom right.
+   */
+  laurels?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Tickets CTA — `cta`
+   *
+   *
+   */
+  ticketsCta?: Cta;
+
+  /**
+   * Trailer CTA — `embed`
+   *
+   *
+   */
+  trailerCta?: Embed;
 };
 
 export type NewsletterBlock = {
@@ -658,6 +962,13 @@ export type NewsletterBlock = {
    *
    */
   audienceId?: string;
+
+  /**
+   * Show Social Media Links — `boolean`
+   *
+   *
+   */
+  showSocials?: boolean;
 
   /**
    * Success Message — `richText`
@@ -721,4 +1032,12 @@ export type TextAndImageBlock = {
   showImageFirst?: boolean;
 };
 
-export type Documents = Vimeo | Youtube | Menus | Page | Project | SiteSettings;
+export type Documents =
+  | Vimeo
+  | Youtube
+  | Menus
+  | Microsite
+  | MicrositePage
+  | Page
+  | Project
+  | SiteSettings;

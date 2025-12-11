@@ -2,7 +2,7 @@
 import { useEffect } from 'react'
 import type { AppProps } from 'next/app'
 import '../../wdyr'
-import { Layout } from '@components/layout'
+import { Layout, AltLayout } from '@components/layout'
 import { Scripts } from '@components/scripts'
 import { Analytics } from '@vercel/analytics/react'
 import { animateScroll as scroll } from 'react-scroll'
@@ -24,6 +24,7 @@ if (process.env.NODE_ENV === 'development') {
 
 function App({ Component, pageProps }: AppProps<{}>) {
   const { events } = useRouter()
+  const type = (pageProps as any).data?.[0]?._type || 'page'
 
   useEffect(() => {
     const handleRouteChange = () => {
@@ -42,13 +43,21 @@ function App({ Component, pageProps }: AppProps<{}>) {
 
   return (
     <ContextProvider>
-      <Layout {...pageProps}>
-        <Scripts />
-        <AnimatePresence initial={false} mode="wait">
+      {type === 'page' || type === 'project' ? (
+        <Layout {...pageProps}>
+          <Scripts />
+          <AnimatePresence initial={false} mode="wait">
+            <Component {...pageProps} key={`page-${(pageProps as any).slug}`} />
+          </AnimatePresence>
+          <Analytics />
+        </Layout>
+      ) : (
+        <AltLayout {...pageProps}>
+          <Scripts />
           <Component {...pageProps} key={`page-${(pageProps as any).slug}`} />
-        </AnimatePresence>
-        <Analytics />
-      </Layout>
+          <Analytics />
+        </AltLayout>
+      )}
     </ContextProvider>
   )
 }

@@ -28,6 +28,11 @@ import embedBlock from './blocks/embed-block'
 import textAndImageBlock from './blocks/text-and-image-block'
 import scrollingTextBlock from './blocks/scrolling-text-block'
 import newsletterBlock from './blocks/newsletter-block'
+import microsite from './documents/microsite'
+import micrositePage from './documents/micrositePage'
+import micrositeBlock from './blocks/microsite-block'
+import doubleColumnBlock from './blocks/double-column-block'
+import imageGridBlock from './blocks/image-grid-block'
 
 export const schemaTypes = [
   // objects
@@ -53,9 +58,12 @@ export const schemaTypes = [
   blockContent,
   accordionBlock,
   dividerBlock,
+  doubleColumnBlock,
   embedBlock,
   figuresBlock,
+  imageGridBlock,
   mediaBlock,
+  micrositeBlock,
   newsletterBlock,
   projectsBlock,
   scrollingTextBlock,
@@ -64,6 +72,8 @@ export const schemaTypes = [
 
   // documents
   menus,
+  microsite,
+  micrositePage,
   page,
   project,
   siteSettings,

@@ -20,6 +20,10 @@ export const LINK_QUERY = `
   "internalLink": internalLink.reference->{
     _type,
     slug,
+    // Include parent microsite for microsite pages
+    _type == "micrositePage" => {
+      "microsite": microsite->{ slug }
+    }
   },
   "anchor": internalLink.anchor,
 `
@@ -30,6 +34,10 @@ export const LINK_MARKDEFS_QUERY = `
     "internalLink": @.internalLink.reference->{
       _type,
       slug,
+      // Include parent microsite for microsite pages
+      _type == "micrositePage" => {
+        "microsite": microsite->{ slug }
+      }
     },
     "anchor": @.internalLink.anchor,
   },
@@ -68,12 +76,6 @@ export const BODY_QUERY = `
         ${CTA_QUERY}
       },
     },
-    "figures": figures[]{
-      ...,
-      media{
-        ${MEDIA_QUERY}
-      },
-    },
     "projects": projects[]->{
       type,
       slug,
@@ -92,6 +94,12 @@ export const BODY_QUERY = `
       cta{
         ${CTA_QUERY}
       },
-    }
+    },
+    "images": images[]{
+      ${IMAGE_QUERY}
+    },
+    "ticketsCta": ticketsCta{
+      ${CTA_QUERY}
+    },
   },
 `

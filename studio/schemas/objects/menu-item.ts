@@ -12,6 +12,8 @@ export default {
       title: 'Menu Item Text',
       type: 'string',
       validation: (Rule: Rule): Rule => Rule.required(),
+      description:
+        'The text that will be displayed for this menu item, suggest keeping under 20 characters.',
     },
     {
       name: 'link',

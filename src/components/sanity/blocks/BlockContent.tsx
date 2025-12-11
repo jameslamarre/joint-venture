@@ -4,7 +4,6 @@ import type { SanityBlockElement } from '@components/sanity'
 import { blockTypes, blockMarks, blockBlock } from '@components/sanity'
 import {
   TextBlock,
-  FiguresBlock,
   MediaBlock,
   AccordionBlock,
   ProjectsBlock,
@@ -12,8 +11,12 @@ import {
   TextAndImageBlock,
   ScrollingTextBlock,
   NewsletterBlock,
+  MicrositeBlock,
+  DoubleColumnBlock,
+  ImageGridBlock,
 } from '.'
 import classNames from 'classnames'
+import { TypedObject } from '@portabletext/types'
 
 export const BlockContent: FC<SanityBlockElement> = ({
   blocks,
@@ -31,22 +34,50 @@ export const BlockContent: FC<SanityBlockElement> = ({
               <AccordionBlock index={index} {...value} />
             ),
             dividerBlock: ({ index, value }) => (
-              <div className="px-x my-ydouble">
+              <div className="px-x my-y md:my-ydouble">
                 <div
-                  className={classNames(
-                    value.border ? 'border-bottom--white' : ''
-                  )}
+                  className={classNames(value.border ? 'border-bottom' : '')}
                 ></div>
               </div>
             ),
-            embedBlock: ({ index, value }) => (
-              <EmbedBlock index={index} {...value} />
+            doubleColumnBlock: ({ index, value }) => (
+              <DoubleColumnBlock
+                index={index}
+                {...value}
+                className={
+                  index === (blocks as TypedObject[]).length - 1
+                    ? 'mb-page'
+                    : ''
+                }
+              />
             ),
-            figuresBlock: ({ index, value }) => (
-              <FiguresBlock index={index} {...value} />
+            embedBlock: ({ index, value }) => (
+              <EmbedBlock
+                index={index}
+                {...value}
+                className={
+                  index === (blocks as TypedObject[]).length - 1
+                    ? 'mb-page'
+                    : ''
+                }
+              />
+            ),
+            imageGridBlock: ({ index, value }) => (
+              <ImageGridBlock index={index} {...value} />
             ),
             mediaBlock: ({ index, value }) => (
-              <MediaBlock index={index} {...value} />
+              <MediaBlock
+                index={index}
+                {...value}
+                className={classNames(
+                  index === (blocks as TypedObject[]).length - 1
+                    ? ''
+                    : 'mb-ydouble'
+                )}
+              />
+            ),
+            micrositeBlock: ({ index, value }) => (
+              <MicrositeBlock index={index} {...value} />
             ),
             newsletterBlock: ({ index, value }) => (
               <NewsletterBlock index={index} {...value} />
@@ -58,7 +89,16 @@ export const BlockContent: FC<SanityBlockElement> = ({
               <ScrollingTextBlock index={index} {...value} />
             ),
             textBlock: ({ index, value }) => (
-              <TextBlock index={index} {...value} />
+              <TextBlock
+                index={index}
+                {...value}
+                className={classNames(
+                  index === 0 ? 'mt-y lg:mt-page' : '',
+                  index === (blocks as TypedObject[]).length - 1
+                    ? 'mb-page'
+                    : ''
+                )}
+              />
             ),
             textAndImageBlock: ({ index, value }) => (
               <TextAndImageBlock index={index} {...value} />

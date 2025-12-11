@@ -59,9 +59,9 @@ export default {
       fontSize: {
         xs: ['var(--font-size-xs)', '1.3'],
         sm: ['var(--font-size-sm)', '1'],
-        base: ['var(--font-size-base)', '0'],
+        base: ['var(--font-size-base)', '1.3'],
         baseSerif: ['var(--font-size-base--serif)', '0'],
-        md: ['var(--font-size-md)', '1.1'],
+        md: ['var(--font-size-md)', '1.25'],
         lg: ['var(--font-size-lg)', '1'],
         xl: ['var(--font-size-xl)', '1'],
         '2xl': ['var(--font-size-2xl)', '1'],
@@ -93,9 +93,9 @@ export default {
         btny: 'var(--btn-space-y)',
         header: 'var(--header-height)',
         app: 'var(--app)',
+        microsite: 'var(--microsite)',
         wrap: 'var(--wrap)',
-        wrapxs: 'var(--wrap-xs)',
-        wrapsm: 'var(--wrap-sm)',
+        textWrap: 'var(--text-wrap)',
         page: 'var(--space-page)',
       },
       keyframes: {
@@ -157,6 +157,11 @@ export default {
         },
         '.border-white': {
           border: '1px solid white',
+        },
+        '.border-stone': {
+          borderWidth: '1px',
+          borderStyle: 'solid',
+          borderColor: theme('colors.stone'),
         },
         '.border-black': {
           border: '1px solid black',

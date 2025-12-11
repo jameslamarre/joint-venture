@@ -54,11 +54,6 @@ export const FiguresBlock: FC<FiguresBlockProps> = ({
                   }}
                   className="aspect-square object-cover w-full h-auto"
                 />
-                {media?.caption && (
-                  <RichText
-                    blocks={media?.caption as TypedObject | TypedObject[]}
-                  />
-                )}
               </div>
             </div>
           ) : null

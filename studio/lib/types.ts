@@ -8,6 +8,7 @@ export interface BlockHeading {
 export enum SANITY_DOCUMENT_TYPES {
   PAGE = 'page',
   PROJECT = 'project',
+  MICROSITE_PAGE = 'micrositePage',
 }
 
 export interface SanityInternalLink {

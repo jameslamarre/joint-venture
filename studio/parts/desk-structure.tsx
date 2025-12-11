@@ -1,6 +1,6 @@
 import { GrSettingsOption } from 'react-icons/gr'
 import { RiFileList3Line } from 'react-icons/ri'
-import { GiFilmProjector } from 'react-icons/gi'
+import { GiFilmProjector, GiFilmSpool } from 'react-icons/gi'
 import { StructureBuilder } from 'sanity/desk'
 import type { SanityDocument } from '@sanity/types'
 import Iframe from 'sanity-plugin-iframe-pane'
@@ -41,6 +41,12 @@ export const deskStructure = (S: StructureBuilder) =>
             .documentId('siteSettings')
             .title('Site Settings')
         ),
+      S.divider(),
+      S.divider(),
+      S.listItem()
+        .title('Microsites')
+        .child(S.documentTypeList('microsite').title('Microsites'))
+        .icon(GiFilmSpool),
     ])
 
 export default deskStructure

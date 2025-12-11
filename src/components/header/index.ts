@@ -1,3 +1,5 @@
 export * from './types'
 export * from './Header'
 export * from './HeaderMenu'
+export * from './MicrositeHeader'
+export * from './MicrositeHeaderMenu'

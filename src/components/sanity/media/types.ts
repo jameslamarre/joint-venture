@@ -41,6 +41,5 @@ export interface SanityMediaProps extends HTMLAttributes<HTMLImageElement> {
   onLoadingComplete?: () => void
   video?: SanityVideoType
   mediaRatio?: number | null
-  caption?: TypedObject | TypedObject[]
   embed?: SanityEmbedProps
 }
