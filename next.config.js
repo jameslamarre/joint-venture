@@ -30,22 +30,6 @@ const nextConfig = {
     largePageDataBytes: 120 * 1000,
   },
   assetPrefix: process.env.NEXT_PUBLIC_BASE_URL,
-  rewrites() {
-    return {
-      beforeFiles: [
-        {
-          source: '/:path*',
-          has: [
-            {
-              type: 'host',
-              value: 'ifyouseesomething.ajointventure.com',
-            },
-          ],
-          destination: '/microsite/ifyouseesomething/:path*',
-        },
-      ],
-    }
-  },
   async headers() {
     return [
       {
