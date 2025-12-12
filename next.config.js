@@ -38,7 +38,7 @@ const nextConfig = {
           has: [
             {
               type: 'host',
-              value: 'ifyouseesomething.ajointventure.com',
+              value: '(?<microsite>.+)\\.ajointventure\\.com',
             },
           ],
           destination: '/microsite/:microsite/:path*',
