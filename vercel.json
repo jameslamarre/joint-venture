@@ -4,19 +4,6 @@
   "rewrites": [
     { "source": "/studio/(.*)", "destination": "/studio/index.html" }
   ],
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "ajointventure.com/microsite/ifyouseesomething"
-        }
-      ],
-      "destination": "https://ifyouseesomething.ajointventure.com/$1",
-      "permanent": true
-    }
-  ],
   "headers": [
     {
       "source": "/api/(.*)",
