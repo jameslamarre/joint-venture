@@ -71,8 +71,7 @@ export const SanityLink: FC<SanityLinkProps> = ({
 
   const normalizeMicrositePath = (href: string): string => {
     // Only normalize in production/client-side when we're in a microsite context
-    if (typeof window === 'undefined' || process.env.NODE_ENV !== 'production')
-      return href
+    if (typeof window === 'undefined') return href
 
     // Check if current path is a microsite
     const micrositeMatch = asPath.match(/^\/microsite\/([^\/]+)/)
