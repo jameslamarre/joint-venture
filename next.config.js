@@ -38,10 +38,10 @@ const nextConfig = {
           has: [
             {
               type: 'host',
-              value: '(?<microsite>.+)\\.ajointventure\\.com',
+              value: 'ifyouseesomething.ajointventure.com',
             },
           ],
-          destination: '/microsite/:microsite/:path*',
+          destination: '/microsite/ifyouseesomething/:path*',
         },
       ],
     }
@@ -55,8 +55,7 @@ const nextConfig = {
           { key: 'Access-Control-Allow-Credentials', value: 'true' },
           {
             key: 'Access-Control-Allow-Origin',
-            value:
-              'https://joint-venture-git-production-mastheads-projects.vercel.app',
+            value: 'https://www.ajointventure.com, https://ajointventure.com',
           },
           {
             key: 'Access-Control-Allow-Methods',
