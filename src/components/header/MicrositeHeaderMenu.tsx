@@ -29,35 +29,15 @@ export const MicrositeHeaderMenu: FC<
 }) => {
   const { asPath } = useRouter()
 
-  // Extract microsite name from path if present
-  const micrositeMatch = asPath.match(/^\/microsite\/([^\/]+)/)
-  const micrositeName = micrositeMatch?.[1]
-
-  // Helper to normalize paths for microsite context
-  const normalizePath = (link: SanityLinkType) => {
-    if (!micrositeName) return link
-
-    const slug = link.internalLink?.slug?.current
-    if (!slug) return link
-
-    // Return just the slug path without microsite prefix
-    return {
-      ...link,
-      internalLink: {
-        ...link.internalLink,
-        slug: { current: slug },
-      },
-    }
-  }
-
   // Helper to check if link is active
   const isActiveLink = (link: SanityLinkType) => {
     const slug = link.internalLink?.slug?.current
     if (!slug || !asPath) return false
 
     // Strip microsite prefix for comparison
-    const normalizedPath = micrositeName
-      ? asPath.replace(`/microsite/${micrositeName}`, '')
+    const micrositeMatch = asPath.match(/^\/microsite\/([^\/]+)/)
+    const normalizedPath = micrositeMatch
+      ? asPath.replace(`/microsite/${micrositeMatch[1]}`, '')
       : asPath
 
     return normalizedPath.includes(`/${slug}`)
@@ -98,9 +78,7 @@ export const MicrositeHeaderMenu: FC<
                         onClick={
                           setCustomOpen ? () => setCustomOpen(false) : undefined
                         }
-                        {...(normalizePath(
-                          link as SanityLinkType
-                        ) as SanityLinkType)}
+                        {...(link as SanityLinkType)}
                         className="inline-block text-[var(--theme-text)] hover:text-[var(--theme-highlight)] uppercase"
                       >
                         {isActiveLink(link as SanityLinkType) ? (

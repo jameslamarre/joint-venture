@@ -5,6 +5,7 @@ import type { LinkProps } from '@components/links'
 import { Link } from '@components/links'
 import { Cta } from '@components/btns'
 import classNames from 'classnames'
+import { useRouter } from 'next/router'
 
 type SanityLinkProps = SanityLinkType &
   Omit<LinkProps, 'href'> & {
@@ -24,6 +25,8 @@ export const SanityLink: FC<SanityLinkProps> = ({
   className,
   children,
 }) => {
+  const { asPath } = useRouter()
+
   const buildHref = (): string => {
     // Prefer explicit external link if present
     if (externalLink) return externalLink
@@ -66,7 +69,27 @@ export const SanityLink: FC<SanityLinkProps> = ({
     return href
   }
 
-  const href = withQueryAndAnchor(buildHref())
+  const normalizeMicrositePath = (href: string): string => {
+    // Only normalize in production/client-side when we're in a microsite context
+    if (typeof window === 'undefined' || process.env.NODE_ENV !== 'production')
+      return href
+
+    // Check if current path is a microsite
+    const micrositeMatch = asPath.match(/^\/microsite\/([^\/]+)/)
+    if (!micrositeMatch) return href
+
+    const micrositeName = micrositeMatch[1]
+
+    // If the href contains the microsite prefix, strip it
+    const micrositePrefix = `/microsite/${micrositeName}`
+    if (href.startsWith(micrositePrefix)) {
+      return href.replace(micrositePrefix, '') || '/'
+    }
+
+    return href
+  }
+
+  const href = normalizeMicrositePath(withQueryAndAnchor(buildHref()))
   const external = !!externalLink
 
   return (
