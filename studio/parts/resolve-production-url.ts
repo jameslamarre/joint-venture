@@ -10,7 +10,7 @@ const getBaseDocumentSlug = (docType: pageTypes): string => {
     case 'project':
       return '/film'
     case 'microsite':
-      return '/'
+      return '/microsite'
     case 'micrositePage':
       return '/microsite'
     default:
@@ -22,7 +22,10 @@ export const resolveProductionUrl = (doc: PageDocument): string => {
   const previewUrl = new URL(APP_URL)
   const typeSlug = getBaseDocumentSlug(doc['_type'] as pageTypes)
   const docSlug = doc?.slug?.current
-  const slug = `${typeSlug}/${docSlug ?? ''}`
+  const slug =
+    typeSlug === '/microsite'
+      ? `${typeSlug}/ifyouseesomething/${docSlug ?? ''}`
+      : `${typeSlug}/${docSlug ?? ''}`
   previewUrl.pathname = '/api/preview'
   previewUrl.searchParams.append('secret', PREVIEW_SECRET)
   previewUrl.searchParams.append('slug', slug)
