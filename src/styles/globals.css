@@ -207,6 +207,12 @@ body {
   );
   background-size: 100% 2em;
   background-position: 0 0;
-  line-height: 2;
+  line-height: 2.143;
   background-attachment: local;
+}
+
+@screen lg {
+  .ruled-lines {
+    line-height: 2;
+  }
 }
