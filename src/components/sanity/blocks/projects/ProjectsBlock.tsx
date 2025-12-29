@@ -30,7 +30,7 @@ export const ProjectsBlock: FC<ProjectsBlockProps> = ({
     <Block
       className={classNames(
         className,
-        'w-full lg:w-[750px] mx-auto px-2 md:px-xhalf pb-page'
+        'flex flex-col gap-y w-full lg:w-[750px] mx-auto px-2 md:px-xhalf pb-page'
       )}
     >
       {featuredProjects && (
