@@ -206,7 +206,9 @@ body {
 .rich-text:has(> .cta-align) h2,
 .rich-text:has(> .cta-align) h3,
 .rich-text:has(> .cta-align) h4,
-.rich-text:has(> .cta-align) p {
+.rich-text:has(> .cta-align) p,
+.rich-text:has(> .cta-align) ul,
+.rich-text:has(> .cta-align) ol {
   @apply text-left;
 }
 
