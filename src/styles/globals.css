@@ -198,6 +198,18 @@ body {
   fill: #a90736;
 }
 
+.rich-text:has(> .cta-align) {
+  @apply text-center;
+}
+
+.rich-text:has(> .cta-align) h1,
+.rich-text:has(> .cta-align) h2,
+.rich-text:has(> .cta-align) h3,
+.rich-text:has(> .cta-align) h4,
+.rich-text:has(> .cta-align) p {
+  @apply text-left;
+}
+
 .ruled-lines {
   background-image: repeating-linear-gradient(
     transparent,

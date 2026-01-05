@@ -31,10 +31,11 @@ export const blockTypes: Partial<PortableTextReactComponents['types']> = {
   cta: ({ value }) => {
     return (
       <SanityLink
-        className="inline-block mt-y mr-x"
+        className="cta-align inline-block mt-y mr-x last-of-type:mr-0"
+        cta={true}
         {...(value.link as SanityLinkType)}
       >
-        <Cta type="button">{value.text}</Cta>
+        {value.text}
       </SanityLink>
     )
   },

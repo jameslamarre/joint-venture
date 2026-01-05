@@ -5,7 +5,6 @@ import type { LinkProps } from '@components/links'
 import { Link } from '@components/links'
 import { Cta } from '@components/btns'
 import classNames from 'classnames'
-import { useRouter } from 'next/router'
 
 type SanityLinkProps = SanityLinkType &
   Omit<LinkProps, 'href'> & {
@@ -25,8 +24,6 @@ export const SanityLink: FC<SanityLinkProps> = ({
   className,
   children,
 }) => {
-  const { asPath } = useRouter()
-
   const buildHref = (): string => {
     // Prefer explicit external link if present
     if (externalLink) return externalLink
@@ -97,11 +94,11 @@ export const SanityLink: FC<SanityLinkProps> = ({
     <Link
       href={href}
       external={external}
-      className={classNames(className, cta ? 'block h-full !border-none' : '')}
+      className={classNames(className, cta ? '' : '')}
       onClick={onClick as MouseEventHandler<HTMLAnchorElement> | undefined}
     >
       {cta ? (
-        <Cta className={className}>
+        <Cta type="button">
           {text}
           {children}
         </Cta>
