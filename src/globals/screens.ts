@@ -7,6 +7,7 @@ export enum SCREENS {
   lg = 1024,
   xl = 1280,
   '2xl' = 1440,
+  '3xl' = 1820,
 }
 
 export default SCREENS

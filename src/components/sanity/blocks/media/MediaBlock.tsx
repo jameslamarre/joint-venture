@@ -19,13 +19,13 @@ export const MediaBlock: FC<MediaBlockProps> = ({
     <Block
       className={classNames(
         className,
-        'relative w-[100vw] max-w-microsite -ml-x lg:-ml-xhalf xl:ml-auto mx-auto object-cover'
+        'relative w-[100vw] max-w-microsite -ml-x lg:-ml-xhalf 3xl:ml-auto mx-auto object-cover'
       )}
     >
       <SanityMedia
         {...(media as SanityMediaProps)}
         className={classNames(
-          index === 0 ? 'max-h-[50vh]' : 'max-h-[85vh]',
+          index === 0 ? 'max-h-[50vh] 2xl:max-h-[70vh]' : 'max-h-[85vh]',
           'relative max-w-full min-w-full h-auto min-h-[350px] object-cover'
         )}
         imageProps={{
