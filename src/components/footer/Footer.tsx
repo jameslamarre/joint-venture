@@ -1,15 +1,13 @@
 import { type FC, type HTMLProps } from 'react'
 import type { FooterProps } from './types'
 import classNames from 'classnames'
-import { IconLogoLine, IconLogoLong, IconLogoOutline } from '@components/icons'
+import { IconLogoStack } from '@components/icons'
 import { NewsletterForm } from '@components/newsletter-form'
 import { SanityLink } from '@components/sanity'
 import { SanityLinkType } from '@studio/lib'
 import Link from 'next/link'
-import IconLogoStack from '@components/icons/IconLogoStack'
 
 export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
-  altLogo,
   footerMenu,
   newsletterId,
   className,
@@ -18,7 +16,7 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
     <footer
       style={{ color: 'var(--theme-bg)', backgroundColor: 'var(--theme-text)' }}
       className={classNames(
-        'flex flex-col w-full gap-header pt-ydouble pb-y px-xhalf mx-auto font-sans z-above'
+        'flex flex-col gap-ydouble w-full pt-ydouble pb-y px-xhalf mx-auto font-sans z-above'
       )}
     >
       <div
@@ -77,14 +75,7 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
         target="_blank"
         className="inline-block relative"
       >
-        {altLogo ? (
-          <IconLogoStack fill="var(--theme-bg)" />
-        ) : (
-          <IconLogoLine
-            className="block w-full h-auto"
-            fill="var(--theme-bg)"
-          />
-        )}
+        <IconLogoStack className="w-full md:w-[200px]" fill="var(--theme-bg)" />
       </Link>
     </footer>
   )

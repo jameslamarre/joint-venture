@@ -54,13 +54,6 @@ export default {
       description: 'Used for the URL path (e.g., "ifyouseesomething")',
     },
     {
-      name: 'altLogo',
-      title: 'Alternate Logo',
-      type: 'boolean',
-      group: 'global',
-      description: 'Toggle to use the three line logo in footer.',
-    },
-    {
       name: 'newsletterId',
       title: 'Newsletter Id',
       type: 'string',
