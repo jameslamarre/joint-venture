@@ -1,13 +1,15 @@
 import { type FC, type HTMLProps } from 'react'
 import type { FooterProps } from './types'
 import classNames from 'classnames'
-import { IconLogoLong, IconLogoOutline } from '@components/icons'
+import { IconLogoLine, IconLogoLong, IconLogoOutline } from '@components/icons'
 import { NewsletterForm } from '@components/newsletter-form'
 import { SanityLink } from '@components/sanity'
 import { SanityLinkType } from '@studio/lib'
 import Link from 'next/link'
+import IconLogoStack from '@components/icons/IconLogoStack'
 
 export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
+  altLogo,
   footerMenu,
   newsletterId,
   className,
@@ -75,7 +77,14 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
         target="_blank"
         className="inline-block relative"
       >
-        <IconLogoLong className="block w-full h-auto stroke-[var(--theme-bg)]" />
+        {altLogo ? (
+          <IconLogoStack fill="var(--theme-bg)" />
+        ) : (
+          <IconLogoLine
+            className="block w-full h-auto"
+            fill="var(--theme-bg)"
+          />
+        )}
       </Link>
     </footer>
   )
