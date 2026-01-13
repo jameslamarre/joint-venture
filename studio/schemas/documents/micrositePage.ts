@@ -33,6 +33,25 @@ export default {
       options: {
         source: 'title',
         maxLength: 96,
+        isUnique: async (slug: { current: string }, context: any) => {
+          const { document } = context
+          const micrositeId = document?.microsite?._ref
+          if (!document.slug?.current) return true
+          const docId = document._id?.replace(/^drafts\./, '')
+          const draftId = `drafts.${docId}`
+          const existing = await context
+            .getClient({ apiVersion: '2023-05-03' })
+            .fetch(
+              `*[_type == "micrositePage" && slug.current == $slug && microsite._ref == $micrositeId && !(_id in [$docId, $draftId])][0]{_id, title}`,
+              {
+                slug: document.slug.current,
+                micrositeId,
+                docId,
+                draftId,
+              }
+            )
+          return !existing
+        },
       },
     },
     {

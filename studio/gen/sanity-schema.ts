@@ -259,7 +259,7 @@ export interface MicrositePage extends SanityDocument {
   };
 
   /**
-   * Body — `blockContent`
+   * Content Blocks — `blockContent`
    *
    *
    */
@@ -315,7 +315,7 @@ export interface Page extends SanityDocument {
   initialColor?: "stone" | "yellow";
 
   /**
-   * Body — `blockContent`
+   * Content Blocks — `blockContent`
    *
    *
    */
