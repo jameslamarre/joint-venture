@@ -4,7 +4,7 @@ import { BiImage } from 'react-icons/bi'
 export default {
   name: 'micrositeBlock',
   type: 'object',
-  title: 'Microsite Block',
+  title: 'Hero Block',
   icon: BiImage,
   fields: [
     {
@@ -73,6 +73,6 @@ export default {
     },
   ],
   preview: {
-    prepare: (): { title: string } => ({ title: 'Microsite block' }),
+    prepare: (): { title: string } => ({ title: 'Hero block' }),
   },
 }

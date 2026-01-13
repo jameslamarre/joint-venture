@@ -26,7 +26,7 @@ export default {
     {
       name: 'micrositeBlock',
       type: 'micrositeBlock',
-      title: 'Microsite Block',
+      title: 'Hero Block',
     },
     {
       name: 'newsletterBlock',

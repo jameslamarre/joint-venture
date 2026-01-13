@@ -46,7 +46,7 @@ export default {
     },
     {
       name: 'body',
-      title: 'Body',
+      title: 'Content Blocks',
       type: 'blockContent',
     },
     {
