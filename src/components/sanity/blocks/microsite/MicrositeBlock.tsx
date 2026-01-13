@@ -79,6 +79,7 @@ export const MicrositeBlock: FC<MicrositeBlockProps> = ({
                     alt: 'Background image',
                     sizes: '100vw',
                     priority: true,
+                    quality: 90,
                   }}
                   className="relative w-full h-full object-cover z-behind"
                 />
