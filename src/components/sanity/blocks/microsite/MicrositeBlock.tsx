@@ -111,7 +111,7 @@ export const MicrositeBlock: FC<MicrositeBlockProps> = ({
                       }}
                       className={classNames(
                         mobileImage ? 'hidden sm:block' : '',
-                        'w-auto h-fit mb-y object-contain'
+                        'w-auto max-w-[1280px] h-fit mb-y object-contain'
                       )}
                     />
                   )}
@@ -135,7 +135,13 @@ export const MicrositeBlock: FC<MicrositeBlockProps> = ({
 
               {description && (
                 <div className="rich-text max-w-textWrap mx-auto">
-                  <p className="mb-y md:mb-[calc(var(--space-y)*1.5)]">
+                  <p
+                    className={classNames(
+                      subhead
+                        ? 'mb-y md:mb-[calc(var(--space-y)*1.5)]'
+                        : 'md:mb-y'
+                    )}
+                  >
                     {description}
                   </p>
                 </div>
