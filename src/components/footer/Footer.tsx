@@ -18,7 +18,7 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
       className={classNames(
         footerMenu?.items && footerMenu?.items.length > 0
           ? 'flex-col'
-          : 'lg:justify-between lg:items-end',
+          : 'flex-col lg:flex-row lg:justify-between lg:items-end',
         'flex gap-ydouble w-full pt-ydouble pb-y px-xhalf mx-auto font-sans z-above'
       )}
     >
