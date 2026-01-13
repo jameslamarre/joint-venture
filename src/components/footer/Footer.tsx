@@ -16,19 +16,26 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
     <footer
       style={{ color: 'var(--theme-bg)', backgroundColor: 'var(--theme-text)' }}
       className={classNames(
-        'flex flex-col gap-ydouble w-full pt-ydouble pb-y px-xhalf mx-auto font-sans z-above'
+        footerMenu?.items && footerMenu?.items.length > 0
+          ? 'flex-col'
+          : 'lg:justify-between lg:items-end',
+        'flex gap-ydouble w-full pt-ydouble pb-y px-xhalf mx-auto font-sans z-above'
       )}
     >
       <div
         className={classNames(
-          footerMenu?.items && footerMenu?.items.length > 4 ? '' : '',
-          'flex flex-col lg:grid lg:grid-cols-3 gap-x'
+          footerMenu?.items && footerMenu?.items.length > 0
+            ? 'lg:order-1'
+            : 'lg:order-2',
+          'flex flex-col lg:grid lg:grid-cols-3 gap-x-x w-full h-fit'
         )}
       >
         <div
           className={classNames(
-            footerMenu?.items && footerMenu?.items.length > 4 ? '' : '',
-            'lg:col-span-1 w-full h-fit border-stone'
+            footerMenu?.items && footerMenu?.items.length > 0
+              ? 'lg:col-span-1'
+              : 'lg:col-span-2 lg:col-start-2',
+            'w-full h-fit border-stone'
           )}
         >
           <NewsletterForm
@@ -73,7 +80,12 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
       <Link
         href="https://www.ajointventure.com"
         target="_blank"
-        className="inline-block relative"
+        className={classNames(
+          footerMenu?.items && footerMenu?.items.length > 0
+            ? 'lg:order-2'
+            : 'lg:order-1',
+          'inline-block relative'
+        )}
       >
         <IconLogoStack className="w-full md:w-[200px]" fill="var(--theme-bg)" />
       </Link>
