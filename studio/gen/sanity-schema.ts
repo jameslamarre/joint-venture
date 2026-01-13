@@ -121,13 +121,6 @@ export interface Microsite extends SanityDocument {
   slug?: { _type: "slug"; current: string };
 
   /**
-   * Alternate Logo — `boolean`
-   *
-   * Toggle to use the three line logo in footer.
-   */
-  altLogo?: boolean;
-
-  /**
    * Newsletter Id — `string`
    *
    *

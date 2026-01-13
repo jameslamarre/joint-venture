@@ -12,7 +12,7 @@ export const getDefaultDocumentNode = (S: StructureBuilder) => {
     S.view
       .component(Iframe)
       .options({
-        url: (doc: SanityDocument) => resolveProductionUrl(doc),
+        url: async (doc: SanityDocument) => await resolveProductionUrl(doc),
       })
       .title('Preview'),
   ])

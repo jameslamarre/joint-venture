@@ -3,8 +3,8 @@ import config from './config'
 import type { SanityClient } from 'sanity'
 
 export const client = createClient({
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'glavz1o5',
   apiVersion: '2023-05-03',
   useCdn: process.env.NODE_ENV === 'production',
 })

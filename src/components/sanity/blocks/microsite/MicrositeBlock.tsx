@@ -111,7 +111,7 @@ export const MicrositeBlock: FC<MicrositeBlockProps> = ({
                       }}
                       className={classNames(
                         mobileImage ? 'hidden sm:block' : '',
-                        'w-auto mb-y object-contain'
+                        'w-auto h-fit mb-y object-contain'
                       )}
                     />
                   )}

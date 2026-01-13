@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "main": "package.json",
   "license": "UNLICENSED",
+  "author": "James L <jameslamarre@gmail.com>",
   "scripts": {
     "dev": "sanity dev",
     "start": "sanity start",

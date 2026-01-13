@@ -15,6 +15,7 @@ import {
   LINK_QUERY,
 } from '@studio/lib'
 import { BlockContent } from '@components/sanity'
+import { useRouter } from 'next/router'
 
 const ALL_MICROSITES_QUERY = groq`
   *[_type == "microsite" && defined(slug.current)]{
@@ -60,6 +61,10 @@ const HOME_QUERY = groq`
       _type,
       title,
       seo,
+      microsite->{
+        _id,
+        slug
+      },
       ${BODY_QUERY}
     }
   }
@@ -83,7 +88,9 @@ const MicrositeHome: NextPage<PageProps> = ({
   data,
   preview,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const site: SanityMicrosite = filterDataToSingleItem(data)
+  const { query } = useRouter()
+  const micrositeSlug = query.microsite as string
+  const site: SanityMicrosite = filterDataToSingleItem(data, micrositeSlug)
 
   return (site as any)?.page?.body &&
     (!((site as any)?.page?._id || '').includes('drafts.') || preview) ? (
