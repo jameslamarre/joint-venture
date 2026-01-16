@@ -2,7 +2,7 @@ import type { SVGProps } from 'react'
 import { memo } from 'react'
 
 export const IconYoutubeComponent = (
-  props: SVGProps<SVGSVGElement> & { youtubefill: string }
+  props: SVGProps<SVGSVGElement> & { youtubefill?: string }
 ) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.57 20" {...props}>
