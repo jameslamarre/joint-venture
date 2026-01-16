@@ -6,20 +6,23 @@ import { NewsletterForm } from '@components/newsletter-form'
 import { SanityLink } from '@components/sanity'
 import { SanityLinkType } from '@studio/lib'
 import Link from 'next/link'
+import { Socials } from '@components/socials'
 
 export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
   footerMenu,
   newsletterId,
+  socials,
   className,
 }) => {
   return (
     <footer
       style={{ color: 'var(--theme-bg)', backgroundColor: 'var(--theme-text)' }}
       className={classNames(
+        className,
         footerMenu?.items && footerMenu?.items.length > 0
           ? 'flex-col'
           : 'flex-col lg:flex-row lg:justify-between lg:items-end',
-        'flex gap-ydouble w-full pt-ydouble pb-y px-xhalf mx-auto font-sans z-above'
+        'flex gap-y md:gap-ydouble w-full pt-y md:pt-ydouble pb-y px-xhalf mx-auto font-sans z-above'
       )}
     >
       <div
@@ -77,18 +80,33 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
         </ul>
       </div>
 
-      <Link
-        href="https://www.ajointventure.com"
-        target="_blank"
+      <div
         className={classNames(
           footerMenu?.items && footerMenu?.items.length > 0
             ? 'lg:order-2'
             : 'lg:order-1',
-          'inline-block relative'
+          'block md:flex md:justify-between md:items-end relative w-full'
         )}
       >
-        <IconLogoStack className="w-full md:w-[200px]" fill="var(--theme-bg)" />
-      </Link>
+        <Link
+          href="https://www.ajointventure.com"
+          target="_blank"
+          className="block w-[48%] md:w-fit"
+        >
+          <IconLogoStack
+            className="block w-full md:w-[200px]"
+            fill="var(--theme-bg)"
+          />
+        </Link>
+
+        {socials && (
+          <Socials
+            socials={socials}
+            youtubeFill="#000"
+            className="flex flex-row items-center justify-start gap-xhalf w-fit mt-yhalf"
+          />
+        )}
+      </div>
     </footer>
   )
 }

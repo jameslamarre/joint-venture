@@ -6,16 +6,11 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { SanityLink } from '@components/sanity'
 import { SanityLinkType } from '@studio/lib'
 import { useRouter } from 'next/router'
-import {
-  IconFacebook,
-  IconInstagram,
-  IconLogoFull,
-  IconTiktok,
-  IconYoutube,
-} from '@components/icons'
-import Link from 'next/link'
 import { RoughNotation } from 'react-rough-notation'
 import { isMobile } from 'react-device-detect'
+import { Socials } from '@components/socials'
+import Link from 'next/link'
+import { IconLogoFull } from '@components/icons'
 
 export const MicrositeHeaderMenu: FC<
   HeaderMenuProps & HTMLProps<HTMLDivElement>
@@ -103,67 +98,18 @@ export const MicrositeHeaderMenu: FC<
                 })}
               </ul>
 
-              {socials && (
-                <div className="absolute flex flex-col justify-center items-center gap-yhalf left-1/2 bottom-y lg:bottom-ydouble transform -translate-x-1/2">
-                  <Link href="https://www.ajointventure.com" target="_blank">
-                    <IconLogoFull className="w-auto h-[100px] md:h-[88px] fill-[var(--theme-text)]" />
-                  </Link>
+              <div className="absolute flex flex-col justify-center items-center gap-yhalf left-1/2 bottom-y lg:bottom-ydouble transform -translate-x-1/2">
+                <Link href="https://www.ajointventure.com" target="_blank">
+                  <IconLogoFull className="w-auto h-[100px] md:h-[88px] fill-[var(--theme-text)]" />
+                </Link>
 
-                  <ul className="flex justify-center items-center gap-x">
-                    {socials.instagram && (
-                      <li>
-                        <Link
-                          href={socials.instagram}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex w-auto h-fit hover:text-red"
-                        >
-                          <IconInstagram className="w-auto h-10" />
-                        </Link>
-                      </li>
-                    )}
-
-                    {socials.youtube && (
-                      <li>
-                        <Link
-                          href={socials.youtube}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex w-auto h-fit hover:text-red"
-                        >
-                          <IconYoutube className="w-auto h-7" />
-                        </Link>
-                      </li>
-                    )}
-
-                    {socials.tiktok && (
-                      <li>
-                        <Link
-                          href={socials.tiktok}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex w-auto h-fit hover:text-red"
-                        >
-                          <IconTiktok className="w-auto h-10" />
-                        </Link>
-                      </li>
-                    )}
-
-                    {socials.facebook && (
-                      <li>
-                        <Link
-                          href={socials.facebook}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex w-auto h-fit hover:text-red"
-                        >
-                          <IconFacebook className="w-auto h-7" />
-                        </Link>
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              )}
+                {socials && (
+                  <Socials
+                    socials={socials}
+                    className="flex justify-center items-center gap-x"
+                  />
+                )}
+              </div>
             </motion.nav>
           )}
         </AnimatePresence>

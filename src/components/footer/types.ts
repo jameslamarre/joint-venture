@@ -6,4 +6,10 @@ export interface FooterProps
   altLogo?: boolean
   footerMenu?: SanityMenu
   newsletterId?: string
+  socials?: {
+    instagram?: string
+    youtube?: string
+    tiktok?: string
+    facebook?: string
+  }
 }

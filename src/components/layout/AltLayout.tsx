@@ -123,6 +123,12 @@ export const AltLayout: FC<AltLayoutProps> = ({
         <Footer
           footerMenu={siteSettings?.footerMenu as SanityMenu}
           newsletterId={siteSettings?.newsletterId}
+          socials={{
+            instagram: siteSettings?.instagramLink,
+            youtube: siteSettings?.youtubeLink,
+            tiktok: siteSettings?.tiktokLink,
+            facebook: siteSettings?.facebookLink,
+          }}
         />
       </div>
       <ToastContainer />
