@@ -86,7 +86,8 @@
 .rich-text.small p,
 .rich-text.small span,
 .rich-text.small li,
-.rich-text p.small {
+.rich-text p.small,
+.rich-text p.small span {
   @apply text-base;
 }
 
