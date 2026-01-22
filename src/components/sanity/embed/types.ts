@@ -7,4 +7,5 @@ export interface SanityEmbedProps extends HTMLAttributes<HTMLIFrameElement> {
   youtube?: {
     youtubeId?: string
   }
+  autoplay?: boolean
 }

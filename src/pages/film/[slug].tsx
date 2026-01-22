@@ -256,6 +256,7 @@ const Project: NextPage<PageProps> = (
                             className="w-full h-full"
                             youtube={project?.trailer?.youtube}
                             vimeo={project.trailer?.vimeo}
+                            autoplay={true}
                           />
                         </motion.div>
                       )}

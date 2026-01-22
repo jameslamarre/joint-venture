@@ -5,6 +5,7 @@ import type { SanityEmbedProps } from './types'
 export const SanityEmbed: FC<SanityEmbedProps> = ({
   vimeo,
   youtube,
+  autoplay,
   className,
 }) => {
   return (
@@ -20,7 +21,9 @@ export const SanityEmbed: FC<SanityEmbedProps> = ({
       ) : (
         youtube?.youtubeId?.length && (
           <iframe
-            src={`https://www.youtube.com/embed/${youtube.youtubeId}?autoplay=1&showinfo=0`}
+            src={`https://www.youtube.com/embed/${youtube.youtubeId}?autoplay=${
+              autoplay ? '1' : '0'
+            }&showinfo=0`}
             allow="autoplay; fullscreen; picture-in-picture"
             frameBorder={0}
             allowFullScreen

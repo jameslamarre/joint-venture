@@ -52,6 +52,7 @@ export const MicrositeBlock: FC<MicrositeBlockProps> = ({
               className="w-full h-full"
               youtube={trailerCta?.youtube}
               vimeo={trailerCta?.vimeo}
+              autoplay={true}
             />
           </motion.div>
         ) : (

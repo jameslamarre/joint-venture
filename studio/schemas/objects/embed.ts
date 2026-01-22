@@ -25,6 +25,13 @@ export default {
       description:
         'Image that displays before the video is fully loaded (where applicable)',
     },
+    {
+      name: 'autoplay',
+      title: 'Autoplay',
+      type: 'boolean',
+      description: 'Automatically start playing the video when loaded',
+      initialValue: false,
+    },
   ],
   preview: {
     select: {

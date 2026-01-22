@@ -605,6 +605,13 @@ export type Embed = {
     crop?: SanityImageCrop;
     hotspot?: SanityImageHotspot;
   };
+
+  /**
+   * Autoplay — `boolean`
+   *
+   * Automatically start playing the video when loaded
+   */
+  autoplay?: boolean;
 };
 
 export type Figure = {

@@ -24,7 +24,9 @@ export const SanityMedia: FC<SanityMediaProps> = ({
   if (video?.files?.length)
     return <SanityVideo id="sanity-video" video={video} className={className} />
   if (embed) {
-    return <SanityEmbed {...embed} className="w-full aspect-video" />
+    return (
+      <SanityEmbed {...embed} className="w-full h-auto aspect-[16/8] px-x" />
+    )
   }
   return null
 }
