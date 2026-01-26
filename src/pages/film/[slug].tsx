@@ -275,14 +275,16 @@ const Project: NextPage<PageProps> = (
                         </SanityLink>
                       )}
 
-                      {project.trailer && !videoPlaying && (
-                        <Cta
-                          className="w-[148px] md:w-[178px]"
-                          onClick={() => setVideoPlaying(true)}
-                        >
-                          Play trailer
-                        </Cta>
-                      )}
+                      {project.trailer &&
+                        (project.trailer.vimeo || project.trailer.youtube) &&
+                        !videoPlaying && (
+                          <Cta
+                            className="w-[148px] md:w-[178px]"
+                            onClick={() => setVideoPlaying(true)}
+                          >
+                            Play trailer
+                          </Cta>
+                        )}
                     </div>
                   </div>
                 </div>
