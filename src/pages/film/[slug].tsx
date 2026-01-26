@@ -181,7 +181,7 @@ const Project: NextPage<PageProps> = (
         ...view,
         film: position,
         previousFilm:
-          position + 1 > project.projectList.length - 1 ? position - 1 : 0,
+          position + 1 >= project.projectList.length - 1 ? position - 1 : 0,
         nextFilm: position < project.projectList.length - 1 ? position + 1 : 0,
       })
     }
