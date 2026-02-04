@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { SanityImage } from '@components/sanity'
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination } from 'swiper/modules'
+import { Pagination, Autoplay } from 'swiper/modules'
 import type { Swiper as SwiperType } from 'swiper'
 import SCREENS from '@globals/screens'
 import { Project } from '@studio/gen/sanity-schema'
@@ -27,15 +27,10 @@ export const ProjectsCarousel: FC<ProjectsCarouselType> = ({
     0: {
       direction: 'vertical',
       loop: false,
-      autoplay: false,
     },
     [SCREENS.lg]: {
       direction: 'horizontal',
-      loop: true,
-      autoplay: {
-        delay: 4000,
-        disableOnInteraction: true,
-      },
+      loop: false,
     },
   }
 
@@ -43,11 +38,15 @@ export const ProjectsCarousel: FC<ProjectsCarouselType> = ({
     <div className={classNames(className, 'relative')}>
       <Swiper
         ref={slidesRef}
-        modules={[Pagination]}
+        modules={[Autoplay, Pagination]}
         breakpoints={breakpoints}
         spaceBetween={0}
         slidesPerView={1}
-        speed={600}
+        speed={700}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: true,
+        }}
         onSlideChange={swiper => {
           setActiveIndex(swiper.activeIndex)
           setShowNotation(false)
