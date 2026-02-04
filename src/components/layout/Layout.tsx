@@ -289,7 +289,11 @@ export const Layout: FC<LayoutProps> = ({
   // Update view context when page changes
   useEffect(() => {
     const currentIndex = getCurrentPageIndex()
-    const currentPageSlug = PAGE_ORDER[currentIndex] as '' | 'films' | 'join'
+    const currentPageSlug = PAGE_ORDER[currentIndex] as
+      | ''
+      | 'about'
+      | 'films'
+      | 'join'
 
     updateView({
       ...view,
