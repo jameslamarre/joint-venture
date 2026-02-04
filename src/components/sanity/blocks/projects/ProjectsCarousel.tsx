@@ -133,7 +133,7 @@ export const ProjectsCarousel: FC<ProjectsCarouselType> = ({
             </motion.div>
 
             {project.previewImage && (
-              <div className="fixed inset-0 z-0">
+              <div className="absolute inset-0 z-0">
                 <div className="absolute w-full h-full bg-black opacity-25 z-base"></div>
                 <SanityImage
                   asset={project.previewImage.asset}
