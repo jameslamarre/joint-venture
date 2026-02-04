@@ -108,7 +108,7 @@ export const ProjectsCarousel: FC<ProjectsCarouselType> = ({
               ) : (
                 project.title && (
                   <Link href={`/film/${project.slug?.current}`}>
-                    <h1 className="text-h1 leading-none capitalize">
+                    <h1 className="text-h1 leading-none uppercase">
                       {project.title}
                     </h1>
                   </Link>
