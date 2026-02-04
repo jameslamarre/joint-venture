@@ -82,11 +82,11 @@ export const ProjectsCarousel: FC<ProjectsCarouselType> = ({
                       asset={project.titleImg.asset}
                       props={{
                         alt: project.title || 'Project title image',
-                        sizes: '(max-width: 640px) 95vw, 90vw',
+                        sizes: '(max-width: 640px) 95vw, 780px',
                       }}
                       className={classNames(
                         project.titleImgMobile ? 'hidden sm:block' : '',
-                        'w-full lg:w-auto max-w-[850px] h-fit object-contain'
+                        'w-full lg:w-auto max-w-[780px] h-fit object-contain'
                       )}
                     />
                   )}
@@ -96,7 +96,7 @@ export const ProjectsCarousel: FC<ProjectsCarouselType> = ({
                       asset={project.titleImgMobile.asset}
                       props={{
                         alt: 'Film title image',
-                        sizes: '(max-width: 640px) 95vw, 850px',
+                        sizes: '(max-width: 640px) 95vw, 50vw',
                         quality: 65,
                       }}
                       className={classNames(
