@@ -65,6 +65,7 @@ export default {
         lg: ['var(--font-size-lg)', '1'],
         xl: ['var(--font-size-xl)', '1'],
         '2xl': ['var(--font-size-2xl)', '1'],
+        '3xl': ['var(--font-size-3xl)', '1'],
       },
       letterSpacing: {
         body: '-0.021em',
@@ -192,6 +193,12 @@ export default {
         },
         '.border-bottom--white': {
           borderBottom: '1px solid white',
+        },
+        '.text-super': {
+          fontSize: theme('fontSize.3xl'),
+          fontFamily: theme('fontFamily.sans'),
+          letterSpacing: '0.05em',
+          textTransform: 'uppercase',
         },
         '.text-h1': {
           fontSize: theme('fontSize.2xl'),

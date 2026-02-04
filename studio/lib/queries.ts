@@ -83,6 +83,17 @@ export const BODY_QUERY = `
       previewImage{
         ${IMAGE_QUERY}
       },
+      titleImg{
+        ${IMAGE_QUERY}
+      },
+      titleImgMobile{
+        ${IMAGE_QUERY}
+      },
+      subhead,
+      carouselImage{
+        ${IMAGE_QUERY}
+      },
+      video,
       trailer, 
       featured, 
       directedBy,

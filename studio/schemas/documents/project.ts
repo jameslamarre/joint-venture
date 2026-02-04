@@ -1,5 +1,6 @@
 import { MdPermMedia } from 'react-icons/md'
 import type { Rule } from '@sanity/types'
+import { group } from 'console'
 
 export default {
   name: 'project',
@@ -7,6 +8,10 @@ export default {
   type: 'document',
   icon: MdPermMedia,
   groups: [
+    {
+      name: 'carousel',
+      title: 'Carousel',
+    },
     {
       name: 'metadata',
       title: 'Metadata',
@@ -30,7 +35,7 @@ export default {
     },
     {
       name: 'previewImage',
-      title: 'Image',
+      title: 'Preview Image',
       type: 'image',
       group: 'metadata',
       options: {
@@ -50,6 +55,47 @@ export default {
         layout: 'radio',
       },
       initialValue: 'yellow',
+    },
+    {
+      name: 'carouselImage',
+      title: 'Carousel Image',
+      type: 'image',
+      options: {
+        hotspot: false,
+      },
+      group: 'carousel',
+      description:
+        'Optional image used in carousels, if different from Preview Image',
+    },
+    {
+      name: 'video',
+      title: 'Carousel Video',
+      type: 'video',
+      group: 'carousel',
+      description: 'Optional video used in carousels',
+    },
+    {
+      name: 'titleImg',
+      title: 'Carousel Title Image',
+      type: 'image',
+      group: 'carousel',
+      description: 'Optional image used for title in carousels instead of text',
+    },
+    {
+      name: 'titleImgMobile',
+      title: 'Carousel Title Mobile Image',
+      type: 'image',
+      group: 'carousel',
+      description:
+        'Optional image used for title in carousels instead of text on mobile devices',
+    },
+    {
+      name: 'subhead',
+      title: 'Carousel Subhead',
+      type: 'string',
+      group: 'carousel',
+      description: 'Optional subhead displayed in carousels',
+      validation: (Rule: Rule): Rule => Rule.max(50),
     },
     {
       name: 'trailer',
