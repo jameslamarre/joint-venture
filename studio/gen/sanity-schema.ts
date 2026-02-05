@@ -371,6 +371,25 @@ export interface Project extends SanityDocument {
   initialColor?: "stone" | "yellow";
 
   /**
+   * Carousel Image — `image`
+   *
+   * Optional image used in carousels, if different from Preview Image
+   */
+  carouselImage?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Carousel Video — `video`
+   *
+   * Optional video used in carousels
+   */
+  video?: Video;
+
+  /**
    * Carousel Title Image — `image`
    *
    * Optional image used for title in carousels instead of text
@@ -400,25 +419,6 @@ export interface Project extends SanityDocument {
    * Optional subhead displayed in carousels
    */
   subhead?: string;
-
-  /**
-   * Carousel Image — `image`
-   *
-   * Optional image used in carousels, if different from Preview Image
-   */
-  carouselImage?: {
-    _type: "image";
-    asset: SanityReference<SanityImageAsset>;
-    crop?: SanityImageCrop;
-    hotspot?: SanityImageHotspot;
-  };
-
-  /**
-   * Carousel Video — `video`
-   *
-   * Optional video used in carousels
-   */
-  video?: Video;
 
   /**
    * Trailer — `embed`

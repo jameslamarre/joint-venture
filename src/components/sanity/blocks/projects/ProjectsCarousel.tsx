@@ -75,61 +75,61 @@ export const ProjectsCarousel: FC<ProjectsCarouselType> = ({
               transition={{ duration: 0.8, delay: 0.5 }}
               className="flex flex-col absolute items-center lg:items-start justify-start px-x top-1/2 -translate-y-1/2 md:top-auto md:translate-y-0 md:bottom-[calc(var(--space-x)+160px)] text-white text-center lg:text-left z-above"
             >
-              {project.titleImg || project.titleImgMobile ? (
-                <>
-                  {project.titleImg && (
-                    <SanityImage
-                      asset={project.titleImg.asset}
-                      props={{
-                        alt: project.title || 'Project title image',
-                        sizes: '(max-width: 640px) 95vw, 780px',
-                      }}
-                      className={classNames(
-                        project.titleImgMobile ? 'hidden sm:block' : '',
-                        'w-full lg:w-auto max-w-[780px] h-fit object-contain'
-                      )}
-                    />
-                  )}
+              <Link href={`/film/${project.slug?.current}`}>
+                {project.titleImg || project.titleImgMobile ? (
+                  <>
+                    {project.titleImg && (
+                      <SanityImage
+                        asset={project.titleImg.asset}
+                        props={{
+                          alt: project.title || 'Project title image',
+                          sizes: '(max-width: 640px) 95vw, 780px',
+                        }}
+                        className={classNames(
+                          project.titleImgMobile ? 'hidden sm:block' : '',
+                          'w-full lg:w-auto max-w-[780px] h-fit object-contain'
+                        )}
+                      />
+                    )}
 
-                  {project.titleImgMobile && (
-                    <SanityImage
-                      asset={project.titleImgMobile.asset}
-                      props={{
-                        alt: 'Film title image',
-                        sizes: '(max-width: 640px) 95vw, 50vw',
-                        quality: 65,
-                      }}
-                      className={classNames(
-                        'block sm:hidden w-full h-fit object-contain'
-                      )}
-                    />
-                  )}
-                </>
-              ) : (
-                project.title && (
-                  <Link href={`/film/${project.slug?.current}`}>
+                    {project.titleImgMobile && (
+                      <SanityImage
+                        asset={project.titleImgMobile.asset}
+                        props={{
+                          alt: 'Film title image',
+                          sizes: '(max-width: 640px) 95vw, 50vw',
+                          quality: 65,
+                        }}
+                        className={classNames(
+                          'block sm:hidden w-full h-fit object-contain'
+                        )}
+                      />
+                    )}
+                  </>
+                ) : (
+                  project.title && (
                     <h1 className="text-h1 leading-none uppercase">
                       {project.title}
                     </h1>
-                  </Link>
-                )
-              )}
+                  )
+                )}
 
-              {project.subhead && (
-                <p className="w-[200px] lg:w-fit uppercase font-sans text-md mt-yhalf pb-1">
-                  <RoughNotation
-                    type="underline"
-                    show={showNotation}
-                    color="#A90736"
-                    strokeWidth={2.5}
-                    iterations={1}
-                    padding={0}
-                    animationDuration={700}
-                  >
-                    {project.subhead}
-                  </RoughNotation>
-                </p>
-              )}
+                {project.subhead && (
+                  <p className="w-[200px] lg:w-fit uppercase font-sans text-md mt-yhalf pb-1">
+                    <RoughNotation
+                      type="underline"
+                      show={showNotation}
+                      color="#A90736"
+                      strokeWidth={2.5}
+                      iterations={1}
+                      padding={0}
+                      animationDuration={700}
+                    >
+                      {project.subhead}
+                    </RoughNotation>
+                  </p>
+                )}
+              </Link>
             </motion.div>
 
             {project.previewImage && (
