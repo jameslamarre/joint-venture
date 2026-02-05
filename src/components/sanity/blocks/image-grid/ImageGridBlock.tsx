@@ -6,9 +6,7 @@ import { Block, SanityImage } from '@components/sanity'
 import Link from 'next/link'
 import { SanityImageAsset } from '@sanity/asset-utils'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { type SwiperOptions } from 'swiper/types'
 import { Navigation } from 'swiper/modules'
-import SCREENS from '@globals/screens'
 
 interface ImageGridBlockProps
   extends Omit<SanityBlockElement, keyof ImageGridBlockType>,
@@ -64,36 +62,38 @@ export const ImageGridBlock: FC<ImageGridBlockProps> = ({
             </SwiperSlide>
           ))}
 
-          <div
-            className="flex justify-between items-center w-full mt-y mb-y"
-            style={{
-              borderTop: '1px solid var(--theme-text)',
-              borderBottom: '1px solid var(--theme-text)',
-              borderRight: '1px solid var(--theme-text)',
-            }}
-          >
-            <button
-              className="swiper-prev w-full px-2 disabled:pointer-events-none hover:bg-white hover:text-textColorTables text-left"
+          {images && images.length > 1 && (
+            <div
+              className="flex justify-between items-center w-full mt-y mb-y"
               style={{
-                borderLeft: '1px solid var(--theme-text)',
+                borderTop: '1px solid var(--theme-text)',
+                borderBottom: '1px solid var(--theme-text)',
                 borderRight: '1px solid var(--theme-text)',
               }}
             >
-              <span
-                className={classNames(
-                  'inline-block py-1 leading-none uppercase font-sans'
-                )}
+              <button
+                className="swiper-prev w-full px-2 disabled:pointer-events-none hover:bg-white hover:text-textColorTables text-left"
+                style={{
+                  borderLeft: '1px solid var(--theme-text)',
+                  borderRight: '1px solid var(--theme-text)',
+                }}
               >
-                Previous
-              </span>
-            </button>
+                <span
+                  className={classNames(
+                    'inline-block py-1 leading-none uppercase font-sans'
+                  )}
+                >
+                  Previous
+                </span>
+              </button>
 
-            <button className="swiper-next w-full px-2 disabled:opacity-20 hover:bg-white hover:text-textColorTables text-right">
-              <span className="inline-block py-1 leading-none uppercase font-sans">
-                Next
-              </span>
-            </button>
-          </div>
+              <button className="swiper-next w-full px-2 disabled:opacity-20 hover:bg-white hover:text-textColorTables text-right">
+                <span className="inline-block py-1 leading-none uppercase font-sans">
+                  Next
+                </span>
+              </button>
+            </div>
+          )}
         </Swiper>
       ) : (
         images && (
