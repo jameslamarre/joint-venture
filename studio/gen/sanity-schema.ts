@@ -352,7 +352,7 @@ export interface Project extends SanityDocument {
   slug?: { _type: "slug"; current: string };
 
   /**
-   * Image — `image`
+   * Preview Image — `image`
    *
    *
    */
@@ -369,6 +369,56 @@ export interface Project extends SanityDocument {
    * Sets the initial color of the page before any transitions.
    */
   initialColor?: "stone" | "yellow";
+
+  /**
+   * Carousel Image — `image`
+   *
+   * Optional image used in carousels, if different from Preview Image
+   */
+  carouselImage?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Carousel Video — `video`
+   *
+   * Optional video used in carousels
+   */
+  video?: Video;
+
+  /**
+   * Carousel Title Image — `image`
+   *
+   * Optional image used for title in carousels instead of text
+   */
+  titleImg?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Carousel Title Mobile Image — `image`
+   *
+   * Optional image used for title in carousels instead of text on mobile devices
+   */
+  titleImgMobile?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Carousel Subhead — `string`
+   *
+   * Optional subhead displayed in carousels
+   */
+  subhead?: string;
 
   /**
    * Trailer — `embed`
@@ -987,6 +1037,13 @@ export type NewsletterBlock = {
 
 export type ProjectsBlock = {
   _type: "projectsBlock";
+  /**
+   * Display as Carousel — `boolean`
+   *
+   * If enabled, projects will be displayed in a full-bleed carousel
+   */
+  carousel?: boolean;
+
   /**
    * Projects — `array`
    *

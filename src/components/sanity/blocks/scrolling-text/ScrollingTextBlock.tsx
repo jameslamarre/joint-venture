@@ -191,8 +191,8 @@ const TypewriterText = ({
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.02,
-        delayChildren: 0.2,
+        staggerChildren: 0.01,
+        delayChildren: 0.12,
       },
     },
   }
@@ -238,7 +238,7 @@ const TypewriterText = ({
               style={
                 group.isHighlight
                   ? ({
-                      '--animate-delay': `${animateIndex * 0.2 + 1.2}s`,
+                      '--animate-delay': `${animateIndex * 0.25 + 0.4}s`,
                     } as React.CSSProperties)
                   : undefined
               }
@@ -251,7 +251,7 @@ const TypewriterText = ({
                   strokeWidth={2.5}
                   iterations={1}
                   padding={-1}
-                  animationDelay={animateIndex * 200 + 1200}
+                  animationDelay={animateIndex * 200 + 600}
                   animationDuration={600}
                 >
                   {content}
@@ -263,7 +263,7 @@ const TypewriterText = ({
                   color="#A90736"
                   strokeWidth={2.5}
                   iterations={1}
-                  animationDelay={animateIndex * 200 + 1200}
+                  animationDelay={animateIndex * 200 + 600}
                   animationDuration={600}
                 >
                   {content}

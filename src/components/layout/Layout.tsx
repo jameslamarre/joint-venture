@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { ToastContainer } from 'react-toastify'
 import { Head } from '@components/head'
 import { Header } from '@components/header'
-// import { Footer } from '@components/footer'
 import { filterDataToSingleItem } from '@studio/lib'
 import { triggerToastPreview } from '@components/toast'
 import LogoContainer from '@components/logo/LogoContainer'
@@ -58,7 +57,7 @@ export const Layout: FC<LayoutProps> = ({
     (page as any)?.previewImage || (page as any)?.image || undefined
 
   const getCurrentPageIndex = useCallback(() => {
-    const currentSlug = asPath.substring(1) as '' | 'films' | 'join'
+    const currentSlug = asPath.substring(1) as '' | 'about' | 'films' | 'join'
     return PAGE_ORDER.indexOf(currentSlug)
   }, [asPath])
 
@@ -73,7 +72,7 @@ export const Layout: FC<LayoutProps> = ({
   }, [])
 
   const currentIndex = PAGE_ORDER.indexOf(
-    asPath.substring(1) as '' | 'films' | 'join'
+    asPath.substring(1) as '' | 'about' | 'films' | 'join'
   )
 
   const wipeVariants = {
@@ -290,7 +289,11 @@ export const Layout: FC<LayoutProps> = ({
   // Update view context when page changes
   useEffect(() => {
     const currentIndex = getCurrentPageIndex()
-    const currentPageSlug = PAGE_ORDER[currentIndex] as '' | 'films' | 'join'
+    const currentPageSlug = PAGE_ORDER[currentIndex] as
+      | ''
+      | 'about'
+      | 'films'
+      | 'join'
 
     updateView({
       ...view,
@@ -429,11 +432,6 @@ export const Layout: FC<LayoutProps> = ({
             </motion.main>
           )}
         </AnimatePresence>
-
-        {/* <Footer
-          content={siteSettings?.footerSocials as any}
-          newsletterId={siteSettings?.newsletterId}
-        /> */}
       </div>
       <ToastContainer />
     </>

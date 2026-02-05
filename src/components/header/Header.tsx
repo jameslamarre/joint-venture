@@ -36,7 +36,7 @@ export const Header: FC<HeaderProps> = ({
         showContent
           ? 'overflow-hidden lg:overflow-visible'
           : 'overflow-visible',
-        'block lg:fixed relative w-full h-header mx-auto top-0 font-sans text-xl lg:text-lg z-header'
+        'fixed w-full h-header mx-auto top-0 font-sans text-xl lg:text-lg z-header'
       )}
     >
       <motion.header

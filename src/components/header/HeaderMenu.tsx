@@ -159,7 +159,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                   }}
                 >
                   <Link
-                    href="/"
+                    href="/about"
                     onClick={() => {
                       setCustomOpen(false)
                       updateView({
@@ -241,13 +241,26 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
 
                 <motion.li
                   variants={itemVariants}
-                  className="absolute pointer-events-none"
+                  className="absolute"
                   style={{
                     left: positions[position][3]?.x || 300,
                     top: positions[position][3]?.y || 400,
                   }}
                 >
-                  <IconJV className="w-[130px] lg:w-[273px] h-auto z-behind" />
+                  <Link
+                    href="/"
+                    onClick={() => {
+                      setCustomOpen(false)
+                      updateView({
+                        ...view,
+                        previousPage: view?.page,
+                        nextPage: '',
+                      })
+                    }}
+                    className="hover:invert"
+                  >
+                    <IconJV className="w-[130px] lg:w-[273px] h-auto z-behind" />
+                  </Link>
                 </motion.li>
               </motion.ul>
             </motion.nav>

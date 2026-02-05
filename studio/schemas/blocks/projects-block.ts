@@ -8,6 +8,14 @@ export default {
   icon: AiOutlinePlusSquare,
   fields: [
     {
+      name: 'carousel',
+      title: 'Display as Carousel',
+      type: 'boolean',
+      description:
+        'If enabled, projects will be displayed in a full-bleed carousel',
+      initialValue: false,
+    },
+    {
       name: 'projects',
       title: 'Projects',
       type: 'array',
