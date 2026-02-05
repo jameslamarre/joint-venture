@@ -75,7 +75,10 @@ export const ProjectsCarousel: FC<ProjectsCarouselType> = ({
               transition={{ duration: 0.8, delay: 0.5 }}
               className="flex flex-col absolute items-center lg:items-start justify-start px-x top-1/2 -translate-y-1/2 md:top-auto md:translate-y-0 md:bottom-[calc(var(--space-x)+160px)] text-white text-center lg:text-left z-above"
             >
-              <Link href={`/film/${project.slug?.current}`}>
+              <Link
+                href={`/film/${project.slug?.current}`}
+                className="flex flex-col items-center lg:items-start justify-start"
+              >
                 {project.titleImg || project.titleImgMobile ? (
                   <>
                     {project.titleImg && (
