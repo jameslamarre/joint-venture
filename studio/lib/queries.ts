@@ -83,6 +83,9 @@ export const BODY_QUERY = `
       previewImage{
         ${IMAGE_QUERY}
       },
+      posterImage{
+        ${IMAGE_QUERY}
+      },
       titleImg{
         ${IMAGE_QUERY}
       },
@@ -95,7 +98,6 @@ export const BODY_QUERY = `
       },
       video,
       trailer, 
-      featured, 
       directedBy,
       writtenBy,
       producedBy,

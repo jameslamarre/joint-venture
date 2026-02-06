@@ -43,6 +43,15 @@ export default {
       },
     },
     {
+      name: 'posterImage',
+      title: 'Poster Image',
+      type: 'image',
+      group: 'metadata',
+      options: {
+        hotspot: false,
+      },
+    },
+    {
       name: 'initialColor',
       type: 'string',
       title: 'Initial Color',
@@ -104,12 +113,6 @@ export default {
       options: {
         collapsed: true,
       },
-    },
-    {
-      name: 'featured',
-      title: 'Featured',
-      type: 'boolean',
-      initialValue: false,
     },
     {
       name: 'directedBy',

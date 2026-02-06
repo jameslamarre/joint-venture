@@ -364,6 +364,18 @@ export interface Project extends SanityDocument {
   };
 
   /**
+   * Poster Image — `image`
+   *
+   *
+   */
+  posterImage?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
    * Initial Color — `string`
    *
    * Sets the initial color of the page before any transitions.
@@ -426,13 +438,6 @@ export interface Project extends SanityDocument {
    *
    */
   trailer?: Embed;
-
-  /**
-   * Featured — `boolean`
-   *
-   *
-   */
-  featured?: boolean;
 
   /**
    * Directed By — `string`

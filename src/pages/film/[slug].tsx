@@ -55,7 +55,6 @@ const PROJECT_QUERY = groq`
     initialColor,
     previewImage,
     trailer, 
-    featured, 
     directedBy,
     writtenBy,
     producedBy,
