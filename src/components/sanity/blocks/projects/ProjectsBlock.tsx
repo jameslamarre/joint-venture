@@ -9,7 +9,6 @@ import { Block, SanityImage } from '@components/sanity'
 import Link from 'next/link'
 import { useView } from '@contexts/view'
 import ProjectsCarousel from './ProjectsCarousel'
-import { SanityImageAsset } from '@sanity/asset-utils'
 
 export type ProjectsBlockProps = Omit<
   SanityBlockElement,
