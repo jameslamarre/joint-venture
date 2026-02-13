@@ -14,6 +14,7 @@ export const PsaBlock: FC<PsaBlockProps> = ({ showPsa, className }) => {
         <div className="w-full h-[80dvh]">
           <iframe
             src="/code/psa-for-iframe/index.html"
+            frameBorder="0"
             width="100%"
             height="100%"
           />
