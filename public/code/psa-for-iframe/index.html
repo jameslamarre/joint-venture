@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Colonoscopy Reminder</title>
+
+<style>
+html{
+  scroll-behavior:smooth;
+}
+
+:root{
+  --aqua:#fff;
+  --black:#000;
+  --white:#fff;
+  --red:#e33b3b;
+
+  --max:1100px;
+  --pad:24px;
+
+  --font-display: Helvetica, Arial, arial-unicode, "Arial Narrow Bold", sans-serif;
+  --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+
+body{
+  font-family:var(--font-body);
+  background:var(--aqua);
+  color:var(--black);
+  line-height:1.4;
+}
+
+.container{
+  width:min(var(--max),100% - 2*var(--pad));
+  margin-inline:auto;
+}
+
+/* NAV */
+header{
+  background:var(--white);
+  color:var(--black);
+}
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 0;
+}
+.brand{
+  font-family:var(--font-display);
+  text-transform:capitalize;
+  font-size:20px;
+}
+.nav a{
+  margin-left:20px;
+  font-size:14px;
+  text-transform:capitalize;
+  letter-spacing:.6px;
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  min-height:40vh;
+  background:#000;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+}
+
+/* replaces the <img> with a panning background */
+.hero-pan{
+  position:absolute;
+  inset:0;
+  background-image:url("images/top-banner-0.jpg");
+  background-repeat:no-repeat;
+  background-size:auto 100%;     /* keep full height, allow wide collage to exceed viewport */
+  background-position:0% 50%;
+  opacity:.85;
+
+  /* pan across the collage */
+  animation: heroPan 30s linear infinite alternate;
+  will-change: background-position;
+}
+
+/* optional: subtle darkening for text contrast */
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    90deg,
+    rgba(0,0,0,.35) 0%,
+    rgba(0,0,0,.15) 45%,
+    rgba(0,0,0,.05) 100%
+  );
+  pointer-events:none;
+}
+
+@keyframes heroPan{
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* slightly quicker on small screens */
+@media (max-width:600px){
+  .hero-pan{ animation-duration: 50s; }
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .hero-pan{ animation:none; background-position:50% 50%; }
+}
+
+.hero-content{
+  position:relative;
+  z-index:1;
+  padding:20px 0;
+}
+.hero h1{
+  font-family:var(--font-display);
+  color:var(--white);
+  font-size:clamp(30px,6vw,60px);
+  line-height:.95;
+  max-width:20ch;
+}
+
+/* SECTIONS */
+section{
+  padding:40px 0;
+  scroll-margin-top:40px; /* header safety */
+}
+
+.section-title{
+  font-family:var(--font-display);
+  text-transform:capitalize;
+  font-size:42px;
+  display:inline-block;
+  position:relative;
+  margin-bottom:32px;
+}
+.section-title{
+  position: relative;
+}
+
+.section-title::after{
+  content:"";
+  position:absolute;
+  left:0%;
+  bottom:-5px;
+
+  width: 100%;
+  height: 3px;
+
+  background: #9b2139;
+  border-radius: 4px;
+
+  transform: rotate(-1.5deg);
+}
+.section-title::after{
+  box-shadow:
+    0 1px 0 rgba(0,0,0,0.05),
+    0 2px 0 rgba(0,0,0,0.04);
+}
+#film {
+  padding-top:0px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1.25fr;
+  gap:40px;
+}
+.grid.r2{
+  display:grid;
+  grid-template-columns:1.25fr 1fr;
+  gap:40px;
+}
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr;}
+}
+
+/* COPY */
+p{
+  font-size:18px;
+  max-width:58ch;
+  margin:0 0 16px;
+}
+.emphasis{font-weight:700;}
+.muted{opacity:.8;}
+
+/* BUTTON */
+.btn{
+  display:inline-block;
+  background:var(--black);
+  color:var(--white);
+  border:2px solid var(--black);
+  padding:12px 28px;
+  border-radius:999px;
+  font-family:var(--font-display);
+  text-transform:capitalize;
+  font-size:14px;
+  letter-spacing:.5px;
+}
+.btn:hover{
+  background:var(--white);
+  color:var(--black);
+}
+
+/* MEDIA */
+.media{
+  border:0px solid var(--black);
+  background:var(--aqua);
+}
+.video{
+  position:relative;
+  aspect-ratio:16/9;
+  cursor:pointer;
+}
+.video img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius: 0px;
+}
+.play{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+}
+.play span{
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  background:rgba(0,0,0,.6);
+  display:grid;
+  place-items:center;
+}
+.play svg{
+  width:26px;
+  height:26px;
+  fill:#fff;
+  transform:translateX(2px);
+}
+
+/* FOOTER */
+footer{
+  background:var(--black);
+  color:var(--white);
+  text-align:center;
+  padding:32px 0;
+  font-size:12px;
+  text-transform:capitalize;
+}
+
+/* LIGHTBOX */
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.8);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+.lightbox.active{display:flex;}
+.lightbox-inner{
+  width:min(960px,100%);
+  aspect-ratio:16/9;
+  background:#000;
+  position:relative;
+}
+.lightbox iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+.lightbox-close{
+  position:absolute;
+  top:-50px;
+  right:0;
+  background:var(--black);
+  color:var(--white);
+  border:2px solid var(--white);
+  border-radius:50%;
+  width:40px;
+  height:40px;
+  cursor:pointer;
+}
+
+/* SCROLL REVEAL */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+.reveal.is-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* MOBILE NAV – CENTERED */
+@media (max-width: 600px){
+  .navbar{
+    flex-direction: column;
+    align-items: center;      /* center logo */
+    gap: 12px;
+    padding: 16px 0;
+  }
+
+  .brand{
+    font-size: 18px;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .nav{
+    width: 100%;
+    display: flex;
+    justify-content: center;  /* center nav row */
+    gap: 24px;
+  }
+
+  .nav a{
+    margin-left: 0;           /* kill desktop spacing */
+    font-size: 12px;
+    letter-spacing: .6px;
+    white-space: nowrap;
+    text-align: center;
+  }
+}
+
+/* MOBILE: FILM SECTION ORDER FIX */
+@media (max-width: 900px){
+  #film .grid{
+    display: flex;
+    flex-direction: column;
+  }
+
+  #film .grid > div:nth-child(1){
+    order: 3; /* video thumbnail LAST */
+  }
+
+  #film .grid > div:nth-child(2){
+    order: 1; /* text + button FIRST */
+  }
+
+  #film .btn{
+    margin-bottom: 24px; /* breathing room before thumbnail */
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container navbar">
+    <div class="brand">Colonoscopy Reminder</div>
+    <nav class="nav">
+      <a href="#reminder">Send Reminder</a>
+      <a href="#film">Watch Trailer</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero reveal">
+  <div class="hero-pan" aria-hidden="true"></div>
+
+  <div class="container hero-content">
+    <h1>
+      Congratulations!<br>
+      You are officially reminded to get a colonoscopy.
+    </h1>
+  </div>
+</section>
+
+<section id="reminder" class="reveal">
+  <div class="container grid">
+    <div class="reveal">
+      <h2 class="section-title">Reminder</h2>
+      <p class="emphasis">Because colon cancer is everywhere.<br>And also preventable.<br>So why not remind a friend?</p>
+      <a href="#form" class="btn">Send a Colonoscopy Reminder</a>
+    </div>
+
+    <div class="media video js-video reveal" data-video="https://www.youtube.com/watch?v=Hw8-rIHJe30">
+      <img src="images/vid-thumb.jpg" alt="">
+      <div class="play">
+        <span>
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="film" class="reveal">
+  <div class="container grid r2">
+    <div class="media video js-video reveal" data-video="https://www.youtube.com/watch?v=mvUXrNgNUz8">
+      <img src="images/andre-thumb.jpg" alt="">
+      <div class="play">
+        <span>
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <h2 class="section-title">The Film</h2>
+      <p class="emphasis">
+        And after you get screened, screen
+        Andre is an Idiot,
+        an uplifting movie about ass cancer
+        in theatres now.
+      </p>
+      <a href="https://andre.ajointventure.com/tickets" class="btn" target="_blank">Buy Tickets</a>
+    </div>
+  </div>
+</section>
+
+<section id="form" class="reveal">
+  <div class="container">
+    <h2 class="section-title">Send a Reminder</h2>
+    <script src="https://form.jotform.com/jsform/260285593635162"></script>
+  </div>
+</section>
+
+<footer>
+  © 2026 Colonoscopy Reminder
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="close">✕</button>
+    <iframe allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+/* LIGHTBOX VIDEO */
+const lightbox = document.getElementById('lightbox');
+const frame = lightbox.querySelector('iframe');
+const closeBtn = document.getElementById('close');
+
+document.querySelectorAll('.js-video').forEach(el=>{
+  el.addEventListener('click',()=>{
+    const id = el.dataset.video.split('v=')[1];
+    frame.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+    lightbox.classList.add('active');
+    document.body.style.overflow='hidden';
+  });
+});
+
+closeBtn.onclick = ()=>{
+  frame.src='';
+  lightbox.classList.remove('active');
+  document.body.style.overflow='';
+};
+
+/* SCROLL REVEAL */
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.15});
+
+reveals.forEach(el=>observer.observe(el));
+</script>
+
+</body>
+</html>

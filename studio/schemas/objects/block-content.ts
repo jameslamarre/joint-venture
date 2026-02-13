@@ -39,6 +39,11 @@ export default {
       title: 'Projects Block',
     },
     {
+      name: 'psaBlock',
+      type: 'psaBlock',
+      title: 'Andre PSA Block',
+    },
+    {
       name: 'scrollingTextBlock',
       type: 'scrollingTextBlock',
       title: 'Scrolling Text Block',

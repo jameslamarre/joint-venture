@@ -14,6 +14,7 @@ import {
   MicrositeBlock,
   DoubleColumnBlock,
   ImageGridBlock,
+  PsaBlock,
 } from '.'
 import classNames from 'classnames'
 import { TypedObject } from '@portabletext/types'
@@ -84,6 +85,9 @@ export const BlockContent: FC<SanityBlockElement> = ({
             ),
             projectsBlock: ({ index, value }) => (
               <ProjectsBlock index={index} {...value} />
+            ),
+            psaBlock: ({ index, value }) => (
+              <PsaBlock index={index} {...value} />
             ),
             scrollingTextBlock: ({ index, value }) => (
               <ScrollingTextBlock index={index} {...value} />

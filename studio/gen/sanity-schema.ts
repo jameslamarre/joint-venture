@@ -801,6 +801,7 @@ export type BlockContent = Array<
   | SanityKeyed<MicrositeBlock>
   | SanityKeyed<NewsletterBlock>
   | SanityKeyed<ProjectsBlock>
+  | SanityKeyed<PsaBlock>
   | SanityKeyed<ScrollingTextBlock>
   | SanityKeyed<TextBlock>
   | SanityKeyed<DoubleColumnBlock>
@@ -1050,6 +1051,16 @@ export type ProjectsBlock = {
    *
    */
   projects?: Array<SanityKeyedReference<Project>>;
+};
+
+export type PsaBlock = {
+  _type: "psaBlock";
+  /**
+   * Show PSA — `boolean`
+   *
+   *
+   */
+  showPsa?: boolean;
 };
 
 export type ScrollingTextBlock = {
