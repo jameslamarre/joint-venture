@@ -47,6 +47,11 @@ export const deskStructure = (S: StructureBuilder) =>
         .title('Microsites')
         .child(S.documentTypeList('microsite').title('Microsites'))
         .icon(GiFilmSpool),
+      S.divider(),
+      S.listItem()
+        .title('PSA')
+        .child(S.documentTypeList('psa').title('PSA'))
+        .icon(RiFileList3Line),
     ])
 
 export default deskStructure

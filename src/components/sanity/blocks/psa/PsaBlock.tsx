@@ -9,9 +9,9 @@ export type PsaBlockProps = Omit<SanityBlockElement, keyof PsaBlockType> &
 
 export const PsaBlock: FC<PsaBlockProps> = ({ showPsa, className }) => {
   return (
-    <Block className={classNames(className, 'pt-header px-xhalf pb-ydouble')}>
+    <Block className={classNames(className, '')}>
       {showPsa && (
-        <div className="w-full h-[80dvh]">
+        <div className="w-full h-[100dvh]">
           <iframe
             src="/code/psa-for-iframe/index.html"
             frameBorder="0"

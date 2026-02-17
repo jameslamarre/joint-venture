@@ -43,7 +43,13 @@ function App({ Component, pageProps }: AppProps<{}>) {
 
   return (
     <ContextProvider>
-      {type === 'page' || type === 'project' ? (
+      {type === 'psa' ? (
+        <>
+          <Scripts />
+          <Component {...pageProps} key={`psa-${(pageProps as any).slug}`} />
+          <Analytics />
+        </>
+      ) : type === 'page' || type === 'project' ? (
         <Layout {...pageProps}>
           <Scripts />
           <AnimatePresence initial={false} mode="wait">
