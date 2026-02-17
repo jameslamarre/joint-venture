@@ -1,8 +1,9 @@
-import { type FC, useEffect, useRef } from 'react'
+import { type FC, useCallback, useEffect, useState } from 'react'
 import classNames from 'classnames'
 import type { EmbedBlock as EmbedBlockType } from '@gen/sanity-schema'
 import type { SanityBlockElement } from '@components/sanity'
 import { Block } from '@components/sanity'
+import { useRouter } from 'next/router'
 
 interface EmbedBlockProps
   extends Omit<SanityBlockElement, keyof EmbedBlockType>,
@@ -10,43 +11,61 @@ interface EmbedBlockProps
   bgColor?: 'black' | 'white'
 }
 
-export const EmbedBlock: FC<EmbedBlockProps> = ({ embed, className }) => {
-  const containerRef = useRef<HTMLDivElement>(null)
+export const EmbedBlock: FC<EmbedBlockProps> = ({
+  embed,
+  index,
+  className,
+}) => {
+  const { events } = useRouter()
+  const [key, setKey] = useState(Date.now())
 
+  // Reset key when route completes to force remount
   useEffect(() => {
-    if (!containerRef.current || !embed) return
+    const handleRouteComplete = () => {
+      setKey(Date.now())
+    }
 
-    // Find all script tags in the embed HTML
-    const container = containerRef.current
-    const scripts = container.querySelectorAll('script')
+    events.on('routeChangeComplete', handleRouteComplete)
+    return () => {
+      events.off('routeChangeComplete', handleRouteComplete)
+    }
+  }, [events])
 
-    scripts.forEach(oldScript => {
-      // Create a new script element to force execution
-      const newScript = document.createElement('script')
+  // Use callback ref to execute scripts when the element mounts
+  const containerRefCallback = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (!node || !embed) return
 
-      // Copy all attributes
-      Array.from(oldScript.attributes).forEach(attr => {
-        newScript.setAttribute(attr.name, attr.value)
+      // Use requestAnimationFrame to ensure DOM is fully painted
+      requestAnimationFrame(() => {
+        const scripts = node.querySelectorAll('script')
+
+        scripts.forEach(oldScript => {
+          const newScript = document.createElement('script')
+
+          Array.from(oldScript.attributes).forEach(attr => {
+            newScript.setAttribute(attr.name, attr.value)
+          })
+
+          newScript.textContent = oldScript.textContent
+          oldScript.parentNode?.replaceChild(newScript, oldScript)
+        })
       })
+    },
+    [embed, key]
+  )
 
-      // Copy inline script content
-      newScript.textContent = oldScript.textContent
-
-      // Replace old script with new one to trigger execution
-      oldScript.parentNode?.replaceChild(newScript, oldScript)
-    })
-  }, [embed])
+  if (!embed) return null
 
   return (
     <Block className={classNames(className, 'w-full')}>
       <div className="w-full max-w-textWrap min-h-[50svh] mt-y mx-auto">
-        {embed && (
-          <div
-            ref={containerRef}
-            className="h-full min-h-[50svh]"
-            dangerouslySetInnerHTML={{ __html: embed }}
-          />
-        )}
+        <div
+          key={`${key}-${index}`}
+          ref={containerRefCallback}
+          className="h-full min-h-[50svh]"
+          dangerouslySetInnerHTML={{ __html: embed as string }}
+        />
       </div>
     </Block>
   )
