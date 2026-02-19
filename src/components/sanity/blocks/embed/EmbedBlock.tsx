@@ -52,6 +52,7 @@ export const EmbedBlock: FC<EmbedBlockProps> = ({
         })
       })
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [embed, key]
   )
 
