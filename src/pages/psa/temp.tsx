@@ -7,7 +7,7 @@ import { BODY_QUERY, filterDataToSingleItem } from '@studio/lib'
 import { BlockContent } from '@components/sanity'
 
 const HOME_QUERY = groq`
-  *[_type == "psa" && slug.current == $slug]{
+  *[_type == "psa" && slug.current == "temp"]{
     _id,
     _type,
     title,

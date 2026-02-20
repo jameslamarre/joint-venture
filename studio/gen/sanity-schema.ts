@@ -516,6 +516,55 @@ export interface Project extends SanityDocument {
 }
 
 /**
+ * PSA
+ *
+ *
+ */
+export interface Psa extends SanityDocument {
+  _type: "psa";
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Slug — `slug`
+   *
+   *
+   */
+  slug?: { _type: "slug"; current: string };
+
+  /**
+   * Preview Image — `image`
+   *
+   *
+   */
+  previewImage?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Content Blocks — `blockContent`
+   *
+   *
+   */
+  body?: BlockContent;
+
+  /**
+   * SEO — `seo`
+   *
+   *
+   */
+  seo?: Seo;
+}
+
+/**
  * Site Settings
  *
  *
@@ -1115,4 +1164,5 @@ export type Documents =
   | MicrositePage
   | Page
   | Project
+  | Psa
   | SiteSettings;

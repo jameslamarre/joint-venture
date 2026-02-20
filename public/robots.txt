@@ -1,2 +1,5 @@
 User-agent: *
 Disallow: /psa
+
+User-agent: *
+Disallow: /psa/temp
