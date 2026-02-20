@@ -12,10 +12,10 @@ export function middleware(request: NextRequest) {
   }
 
   // Check if it's colonoscopyreminder.com
-  if (hostname.includes('colonoscopyreminder.com')) {
-    url.pathname = `/psa/${url.pathname}` // maps colonoscopyreminder.com -> /psa/about
-    return NextResponse.rewrite(url)
-  }
+  // if (hostname.includes('colonoscopyreminder.com')) {
+  //   url.pathname = `/psa/${url.pathname}` // maps colonoscopyreminder.com -> /psa/
+  //   return NextResponse.rewrite(url)
+  // }
 
   return NextResponse.next()
 }

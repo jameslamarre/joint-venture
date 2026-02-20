@@ -13,11 +13,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.rewrite(url)
   }
 
-  if (psaMatch) {
-    const url = request.nextUrl.clone()
-    url.pathname = `/psa/${url.pathname}`
-    return NextResponse.rewrite(url)
-  }
+  // if (psaMatch) {
+  //   const url = request.nextUrl.clone()
+  //   url.pathname = `/psa/${url.pathname}`
+  //   return NextResponse.rewrite(url)
+  // }
 }
 
 export const config = {
