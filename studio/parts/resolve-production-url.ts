@@ -4,12 +4,14 @@ import type { PageDocument } from '../types'
 const PREVIEW_SECRET = process.env.SANITY_STUDIO_PREVIEW_SECRET
 const APP_URL = process.env.SANITY_STUDIO_NEXT_URL
 
-type pageTypes = 'page' | 'project' | 'micrositePage' | 'microsite'
+type pageTypes = 'page' | 'project' | 'micrositePage' | 'microsite' | 'psa'
 
 const getBaseDocumentSlug = (docType: pageTypes): string => {
   switch (docType) {
     case 'project':
       return '/film'
+    case 'psa':
+      return '/psa'
     case 'microsite':
       return '/microsite'
     case 'micrositePage':

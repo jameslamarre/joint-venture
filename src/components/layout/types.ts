@@ -5,9 +5,10 @@ import type {
   Page,
   Project,
   SiteSettings,
+  Psa,
 } from '@gen/sanity-schema'
 
-export type PageData = Page | Project
+export type PageData = Page | Project | Psa
 export type MicrositeData = Microsite | MicrositePage
 
 export interface AltLayoutProps {

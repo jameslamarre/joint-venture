@@ -1,19 +1,6 @@
 {
   "buildCommand": "mkdir gen && npm run generate:sanity && npm run build",
   "installCommand": "pnpm install:all",
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "colonoscopyreminder.com"
-        }
-      ],
-      "destination": "https://colonoscopyreminder.com/psa/$1",
-      "permanent": true
-    }
-  ],
   "rewrites": [
     { "source": "/studio/(.*)", "destination": "/studio/index.html" }
   ],
