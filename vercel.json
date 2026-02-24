@@ -4,6 +4,13 @@
   "rewrites": [
     { "source": "/studio/(.*)", "destination": "/studio/index.html" }
   ],
+  "redirects": [
+    {
+      "source": "/microsite/andre/tickets",
+      "destination": "https://andreisanidiot.film/tickets",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/api/(.*)",
