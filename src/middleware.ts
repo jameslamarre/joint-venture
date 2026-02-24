@@ -15,6 +15,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.rewrite(url)
   }
 
+  if (hostname === 'andre.ajointventure.com') {
+    // redirect andre.ajointventure.com/tickets to andreisanidiot.film/tickets
+    if (url.pathname === '/tickets') {
+      return NextResponse.redirect('https://andreisanidiot.film/tickets')
+    }
+  }
+
   // Check if it's a subdomain of ajointventure.com
   if (hostname.includes('.ajointventure.com') && !hostname.startsWith('www.')) {
     const subdomain = hostname.split('.')[0]
