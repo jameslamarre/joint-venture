@@ -60,11 +60,11 @@ export const EmbedBlock: FC<EmbedBlockProps> = ({
 
   return (
     <Block className={classNames(className, 'w-full')}>
-      <div className="w-full max-w-textWrap min-h-[50svh] mt-y mx-auto">
+      <div className="w-full max-w-textWrap min-h-[70dvh] md:min-h-[50dvh] mt-y mx-auto">
         <div
           key={`${key}-${index}`}
           ref={containerRefCallback}
-          className="h-full min-h-[50svh]"
+          className="h-full min-h-[70dvh] md:min-h-[50dvh]"
           dangerouslySetInnerHTML={{ __html: embed as string }}
         />
       </div>
