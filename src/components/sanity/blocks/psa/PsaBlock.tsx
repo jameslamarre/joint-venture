@@ -13,7 +13,7 @@ export const PsaBlock: FC<PsaBlockProps> = ({ showPsa, className }) => {
       {showPsa && (
         <div className="w-full h-[100dvh]">
           <iframe
-            src="/code/psa-for-iframe/index.html"
+            src="https://ajointventure.com/code/psa-for-iframe/index.html"
             frameBorder="0"
             width="100%"
             height="100%"
