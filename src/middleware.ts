@@ -4,6 +4,16 @@ export function middleware(request: NextRequest) {
   const hostname = request.headers.get('host') || ''
   const url = request.nextUrl.clone()
 
+  // Redirect /psa paths on main domain to colonoscopyreminder.com
+  if (
+    (hostname === 'www.ajointventure.com' ||
+      hostname === 'ajointventure.com') &&
+    url.pathname.startsWith('/psa')
+  ) {
+    const newPath = url.pathname.replace(/^\/psa/, '') || '/'
+    return NextResponse.redirect(`https://colonoscopyreminder.com${newPath}`)
+  }
+
   // Check if it's colonoscopyreminder.com
   if (hostname.includes('colonoscopyreminder.com')) {
     url.pathname = `/psa${url.pathname}`
