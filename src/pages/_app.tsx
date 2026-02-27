@@ -41,8 +41,6 @@ function App({ Component, pageProps }: AppProps<{}>) {
   // eslint-disable-next-line no-console
   console.log('🔵 Site developed by https://masthead.dev 🟡')
 
-  console.log('Pageprops: ', pageProps)
-
   return (
     <ContextProvider>
       {type === 'psa' ? (
