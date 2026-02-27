@@ -71,7 +71,9 @@ export const MicrositeHeaderMenu: FC<
                     <li key={_key}>
                       <SanityLink
                         onClick={
-                          setCustomOpen ? () => setCustomOpen(false) : undefined
+                          setCustomOpen
+                            ? () => setTimeout(() => setCustomOpen(false), 150)
+                            : undefined
                         }
                         {...(link as SanityLinkType)}
                         className="inline-block text-[var(--theme-text)] hover:text-[var(--theme-highlight)] uppercase"
