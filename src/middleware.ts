@@ -6,11 +6,6 @@ export function middleware(request: NextRequest) {
 
   // Check if it's colonoscopyreminder.com
   if (hostname.includes('colonoscopyreminder.com')) {
-    // Serve PSA-specific robots.txt
-    if (url.pathname === '/robots.txt') {
-      return NextResponse.rewrite(new URL('/psa-robots.txt', request.url))
-    }
-
     url.pathname = `/psa${url.pathname}`
     return NextResponse.rewrite(url)
   }
