@@ -16,7 +16,9 @@ export function middleware(request: NextRequest) {
 
   // Check if it's colonoscopyreminder.com
   if (hostname.includes('colonoscopyreminder.com')) {
-    url.pathname = `/psa${url.pathname}`
+    // Normalize: /psa for root, /psa/something for subpaths
+    const newPath = url.pathname === '/' ? '/psa' : `/psa${url.pathname}`
+    url.pathname = newPath
     return NextResponse.rewrite(url)
   }
 

@@ -17,11 +17,7 @@ const HOME_QUERY = groq`
 `
 
 export const getStaticProps: GetStaticProps = context =>
-  getPageStaticProps({
-    ...context,
-    params: { slug: 'home' },
-    query: HOME_QUERY,
-  })
+  getPageStaticProps({ ...context, query: HOME_QUERY })
 
 const Page: NextPage<PageProps> = ({
   data,
