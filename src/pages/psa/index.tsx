@@ -4,9 +4,10 @@ import type { Page as SanityPage } from '@gen/sanity-schema'
 import type { PageProps } from '@lib/next'
 import { getPageStaticProps } from '@lib/next'
 import { BODY_QUERY, filterDataToSingleItem } from '@studio/lib'
+import { BlockContent } from '@components/sanity'
 
 const HOME_QUERY = groq`
-  *[_type == "psa" && slug.current == "temp"]{
+  *[_type == "psa" && slug.current == $slug]{
     _id,
     _type,
     title,
@@ -25,9 +26,7 @@ const Page: NextPage<PageProps> = ({
   const page: SanityPage = filterDataToSingleItem(data)
 
   return page?.body && (!page?._id.includes('drafts.') || preview) ? (
-    <article className="flex flex-col items-center justify-center w-full h-[90dvh]">
-      <span>Coming Soon</span>
-    </article>
+    <BlockContent blocks={page?.body} className="flex flex-col w-full" />
   ) : null
 }
 
