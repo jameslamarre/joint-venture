@@ -12,6 +12,7 @@ const HOME_QUERY = groq`
     _type,
     title,
     seo,
+    previewImage,
     ${BODY_QUERY}
   }
 `

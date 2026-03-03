@@ -17,6 +17,7 @@ import '../styles/main.css'
 import '../styles/toast.css'
 import { useRouter } from 'next/router'
 import { AnimatePresence } from 'framer-motion'
+import { Head } from '@components/head'
 
 if (process.env.NODE_ENV === 'development') {
   require('../../wdyr')
@@ -45,6 +46,22 @@ function App({ Component, pageProps }: AppProps<{}>) {
     <ContextProvider>
       {type === 'psa' ? (
         <>
+          <Head
+            siteTitle={(pageProps as any).data[0]?.seo?.title}
+            siteDescription={(pageProps as any).siteSettings?.description}
+            siteImage={(pageProps as any).siteSettings?.image}
+            siteKeywords={(pageProps as any).siteSettings?.siteKeywords}
+            seoTitle={(pageProps as any).data[0]?.seo?.title}
+            pageType={(pageProps as any).data[0]?._type}
+            pageTitle={(pageProps as any).data[0]?.title}
+            pageDescription={(pageProps as any).data[0]?.seo?.description}
+            pageImage={
+              (pageProps as any).data[0]?.previewImage ||
+              (pageProps as any).data[0]?.image ||
+              undefined
+            }
+            pageUrl={`https://colonoscopyreminder.com`}
+          />
           <Scripts />
           <Component {...pageProps} key={`psa-${(pageProps as any).slug}`} />
           <Analytics />
