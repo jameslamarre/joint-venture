@@ -62,7 +62,6 @@ function App({ Component, pageProps }: AppProps<{}>) {
             }
             pageUrl={`https://colonoscopyreminder.com`}
           />
-          <Scripts />
           <Component {...pageProps} key={`psa-${(pageProps as any).slug}`} />
           <Analytics />
         </>
