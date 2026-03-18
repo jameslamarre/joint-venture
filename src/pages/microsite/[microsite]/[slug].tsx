@@ -7,12 +7,13 @@ import type {
 } from 'next'
 import type { MicrositePage as SanityMicrositePage } from '@gen/sanity-schema'
 import type { PageProps } from '@lib/next'
-import { getPageStaticProps } from '@lib/next'
 import {
   BODY_QUERY,
   client,
   filterDataToSingleItem,
   LINK_QUERY,
+  previewClient,
+  getSiteSettingsProps,
 } from '@studio/lib'
 import { BlockContent } from '@components/sanity'
 
@@ -22,7 +23,7 @@ const ALL_SLUGS_QUERY = groq`*[_type == "micrositePage" && defined(slug.current)
 }`
 
 const PAGE_QUERY = groq`
-  *[_type == "micrositePage" && slug.current == $slug]{
+  *[_type == "micrositePage" && slug.current == $slug && microsite->slug.current == $micrositeSlug]{
     _id,
     _type,
     title,
@@ -73,8 +74,29 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = context =>
-  getPageStaticProps({ ...context, query: PAGE_QUERY })
+export const getStaticProps: GetStaticProps = async ({
+  params,
+  preview = false,
+}) => {
+  const { microsite: micrositeSlug, slug } = params as {
+    microsite: string
+    slug: string
+  }
+  const [siteSettings, page] = await Promise.all([
+    getSiteSettingsProps(),
+    previewClient.fetch(PAGE_QUERY, { slug, micrositeSlug }),
+  ])
+  if (!page) return { notFound: true }
+  return {
+    props: {
+      preview,
+      siteSettings,
+      slug,
+      data: page,
+      query: PAGE_QUERY,
+    },
+  }
+}
 
 const MicrositePage: NextPage<PageProps> = ({
   data,
