@@ -98,7 +98,7 @@ export const ProjectsBlock: FC<ProjectsBlockProps> = ({
                         sizes:
                           '(max-width: 640px) 100vw, (max-width: 1024px) 50vw',
                       }}
-                      className="relative w-full h-auto object-contain"
+                      className="relative w-full h-auto aspect-video object-cover"
                     />
                   )}
 
