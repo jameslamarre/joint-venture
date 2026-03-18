@@ -95,7 +95,7 @@ export const MicrositeBlock: FC<MicrositeBlockProps> = ({
                     alt: 'Film laurels',
                     sizes: '180px',
                   }}
-                  className="w-auto max-w-[110px] md:max-w-[180px] h-auto object-contain"
+                  className="w-auto max-w-[110px] md:max-w-[180px] h-auto max-h-[100px] lg:max-h-[120px] object-contain"
                 />
               </div>
             )}

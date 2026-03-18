@@ -80,9 +80,13 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({
           />
 
           <button
+            style={{
+              color: 'var(--theme-text)',
+              backgroundColor: 'var(--theme-bg)',
+            }}
             className={classNames(
               className,
-              'w-full h-[30px] px-xhalf hover:bg-white hover:text-black border-left border-right border-bottom font-sans text-sm uppercase'
+              'w-full h-[30px] px-xhalf hover:!bg-black hover:!text-white border-left border-right border-bottom font-sans text-sm uppercase'
             )}
             type="submit"
             disabled={isSubmitting}
