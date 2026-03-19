@@ -237,9 +237,9 @@ const Project: NextPage<PageProps> = (
                             asset={project.previewImage.asset}
                             props={{
                               alt: 'Project image',
-                              quality: 85,
+                              quality: 90,
                               sizes:
-                                '(max-width: 640px) 100vw, (max-width: 1024px) 50vw',
+                                '(max-width: 640px) 100vw, (max-width: 1024px) 95vw',
                             }}
                             className="relative w-full h-fit aspect-video object-cover"
                           />
