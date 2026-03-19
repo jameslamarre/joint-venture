@@ -204,7 +204,7 @@ const Project: NextPage<PageProps> = (
         )}
       </AnimatePresence>
 
-      <article className="max-w-app pt-header mx-auto">
+      <article className="max-w-container pt-header lg:px-xdouble 2xl:px-0 mx-auto">
         <div className="flex flex-col gap-yhalf pt-yhalf md:pt-y pb-y px-2">
           <AnimatePresence custom={slideDirection} mode="wait">
             <motion.div
