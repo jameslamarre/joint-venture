@@ -89,7 +89,14 @@ export const MicrositeBlock: FC<MicrositeBlockProps> = ({
             )}
 
             {laurels && laurels.length > 0 && (
-              <div className="flex flex-col gap-yhalf xl:gap-y justify-center items-center absolute bottom-2 md:bottom-y left-yhalf md:left-y z-base">
+              <div
+                className={classNames(
+                  alignment === 'bottom'
+                    ? 'bottom-2 md:bottom-auto md:top-y'
+                    : 'bottom-2 md:bottom-y',
+                  'flex flex-col md:flex-row gap-yhalf xl:gap-y justify-center items-center absolute left-yhalf md:left-y z-base'
+                )}
+              >
                 {laurels.map(laurel => (
                   <SanityImage
                     key={laurel._key}
