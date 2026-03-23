@@ -1,4 +1,5 @@
 import { Rule } from '@sanity/types'
+import { off } from 'process'
 import { BiImage } from 'react-icons/bi'
 
 export default {
@@ -56,7 +57,23 @@ export default {
     },
     {
       name: 'laurels',
-      type: 'image',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'laurel',
+          fields: [
+            { name: 'image', type: 'image' },
+            {
+              name: 'size',
+              type: 'string',
+              title: 'Size',
+              options: { list: ['small', 'medium', 'large'], layout: 'radio' },
+              initialValue: 'medium',
+            },
+          ],
+        },
+      ],
       title: 'Laurels',
       description:
         'Optional laurels (or other) image to display on the bottom right.',

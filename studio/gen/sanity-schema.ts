@@ -1028,16 +1028,33 @@ export type MicrositeBlock = {
   subhead?: string;
 
   /**
-   * Laurels — `image`
+   * Laurels — `array`
    *
    * Optional laurels (or other) image to display on the bottom right.
    */
-  laurels?: {
-    _type: "image";
-    asset: SanityReference<SanityImageAsset>;
-    crop?: SanityImageCrop;
-    hotspot?: SanityImageHotspot;
-  };
+  laurels?: Array<
+    SanityKeyed<{
+      _type: "laurel";
+      /**
+       * image — `image`
+       *
+       *
+       */
+      image?: {
+        _type: "image";
+        asset: SanityReference<SanityImageAsset>;
+        crop?: SanityImageCrop;
+        hotspot?: SanityImageHotspot;
+      };
+
+      /**
+       * Size — `string`
+       *
+       *
+       */
+      size?: "small" | "medium" | "large";
+    }>
+  >;
 
   /**
    * Tickets CTA — `cta`
