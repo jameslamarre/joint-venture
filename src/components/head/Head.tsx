@@ -15,6 +15,11 @@ export const Head: FC<HeadProps> = props => {
     siteImage: props.siteImage,
   })
 
+  const currentPageUrl =
+    typeof window !== 'undefined'
+      ? `${window.location.origin}${window.location.pathname}${window.location.search}`
+      : props.pageUrl
+
   return (
     <NextHead>
       <title key="title">{title || 'Joint Venture'}</title>
@@ -32,7 +37,7 @@ export const Head: FC<HeadProps> = props => {
         content={props.pageKeywords || props.siteKeywords}
         key="keywords"
       />
-      <link rel="canonical" href={props.pageUrl} />
+      {currentPageUrl && <link rel="canonical" href={currentPageUrl} />}
       {/* og */}
       <meta property="og:type" content="website" />
       <meta name="og:title" property="og:title" content={title} />
@@ -42,7 +47,7 @@ export const Head: FC<HeadProps> = props => {
         content={props.pageDescription || props.siteDescription}
       />
       <meta property="og:site_name" content={props.siteTitle} />
-      <meta property="og:url" content={props.pageUrl} />
+      {currentPageUrl && <meta property="og:url" content={currentPageUrl} />}
       <meta property="og:image" content={pageImage?.src || siteImage?.src} />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:title" content={title} />
