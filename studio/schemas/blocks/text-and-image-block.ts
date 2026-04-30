@@ -1,4 +1,4 @@
-import type { Rule } from '@sanity/types'
+import type { Rule } from 'sanity'
 import { RiImageEditLine } from 'react-icons/ri'
 
 export default {

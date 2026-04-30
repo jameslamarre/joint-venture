@@ -1,5 +1,3 @@
-import { Rule } from '@sanity/types'
-import { off } from 'process'
 import { BiImage } from 'react-icons/bi'
 
 export default {

@@ -1,4 +1,4 @@
-import type { Slug } from '@sanity/types'
+import type { Slug } from 'sanity'
 
 export interface BlockHeading {
   title: string

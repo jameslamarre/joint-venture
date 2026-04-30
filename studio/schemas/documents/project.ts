@@ -1,5 +1,5 @@
 import { MdPermMedia } from 'react-icons/md'
-import type { Rule } from '@sanity/types'
+import type { Rule } from 'sanity'
 import { group } from 'console'
 
 export default {

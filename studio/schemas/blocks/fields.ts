@@ -1,5 +1,5 @@
-import { toPlainText } from '@portabletext/react'
-import type { Rule, Slug } from '@sanity/types'
+import { toPlainText } from '@portabletext/toolkit'
+import type { Rule, Slug } from 'sanity'
 
 export const titleField = {
   name: 'title',

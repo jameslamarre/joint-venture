@@ -2,7 +2,7 @@ import { GrSettingsOption } from 'react-icons/gr'
 import { RiFileList3Line } from 'react-icons/ri'
 import { GiFilmProjector, GiFilmSpool } from 'react-icons/gi'
 import { StructureBuilder } from 'sanity/desk'
-import type { SanityDocument } from '@sanity/types'
+import type { SanityDocument } from 'sanity'
 import Iframe from 'sanity-plugin-iframe-pane'
 import resolveProductionUrl from './resolve-production-url'
 
