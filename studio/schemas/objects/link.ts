@@ -19,6 +19,7 @@ export default {
           to: [
             { type: 'page' },
             { type: 'project' },
+            { type: 'job' },
             { type: 'micrositePage' },
           ],
           weak: true,
