@@ -47,10 +47,13 @@ const Page: NextPage<PageProps> = (
   const page: SanityPage = filterDataToSingleItem(data)
 
   return page?.body && (!page?._id.includes('drafts.') || preview) ? (
-    <article key={`page-${asPath}`} className="pt-page px-x">
-      <BlockContent blocks={page?.body} className="flex flex-col w-full" />
+    <article key={`page-${asPath}`} className="py-page px-x">
+      <BlockContent
+        blocks={page?.body}
+        className="flex flex-col relative w-full"
+      />
 
-      <div className="absolute block w-full max-w-textWrap px-x lg:px-0 left-1/2 transform -translate-x-1/2">
+      <div className="relative block w-full max-w-textWrap mx-auto">
         <Link href="/jobs">← Back to all job listings</Link>
       </div>
     </article>

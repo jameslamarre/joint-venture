@@ -27,8 +27,6 @@ export const BlockContent: FC<SanityBlockElement> = ({
 }) => {
   return blocks ? (
     <div className={className} style={style}>
-      {children}
-
       <PortableText
         value={blocks}
         components={{
@@ -115,6 +113,8 @@ export const BlockContent: FC<SanityBlockElement> = ({
           block: blockBlock,
         }}
       />
+
+      {children}
     </div>
   ) : null
 }
