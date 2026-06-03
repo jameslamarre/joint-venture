@@ -40,7 +40,7 @@ export const Layout: FC<LayoutProps> = ({
 
   const [currentTheme, setCurrentTheme] = useState<
     'stone' | 'yellow' | 'blue' | 'dark'
-  >(page?.initialColor || 'stone')
+  >(page?._type === 'job' ? 'dark' : page?.initialColor || 'stone')
 
   const [showIndicator, setShowIndicator] = useState(false)
   const [direction, setDirection] = useState<'up' | 'down' | null>(null)
@@ -259,8 +259,6 @@ export const Layout: FC<LayoutProps> = ({
   )
 
   const cycleTheme = useCallback(() => {
-    const root = document.documentElement
-
     const nextTheme = () => {
       switch (currentTheme) {
         case 'stone':
@@ -279,10 +277,6 @@ export const Layout: FC<LayoutProps> = ({
     themeSetRef.current = true
 
     const newTheme = nextTheme()
-    const vars = THEME_CSS_VARS[newTheme]
-    Object.entries(vars).forEach(([prop, value]) => {
-      root.style.setProperty(prop, value)
-    })
     setCurrentTheme(newTheme)
   }, [currentTheme])
 
@@ -327,13 +321,23 @@ export const Layout: FC<LayoutProps> = ({
     }
   }, [handleWheel])
 
+  // Apply CSS custom properties whenever currentTheme changes
+  useEffect(() => {
+    const vars = THEME_CSS_VARS[currentTheme]
+    Object.entries(vars).forEach(([prop, value]) => {
+      document.documentElement.style.setProperty(prop, value)
+    })
+  }, [currentTheme])
+
   // Set CSS custom properties for theme colors
   useEffect(() => {
     // Only update theme from page if user hasn't overridden it
-    if (page?.initialColor && !themeSetRef.current) {
+    if (page?._type === 'job') {
+      setCurrentTheme('dark')
+    } else if (page?.initialColor && !themeSetRef.current) {
       setCurrentTheme(page.initialColor)
     }
-  }, [page?.initialColor])
+  }, [page?._type, page?.initialColor])
 
   useEffect(() => {
     if (preview)
@@ -342,6 +346,8 @@ export const Layout: FC<LayoutProps> = ({
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asPath])
+
+  console.log(currentTheme, page?._type)
 
   return (
     <>
@@ -414,7 +420,7 @@ export const Layout: FC<LayoutProps> = ({
               setShowContent={() => setShowContent(true)}
             />
 
-            {(page?._type === 'page' || page?._type === 'job') && (
+            {page?._type === 'page' && (
               <LogoButton
                 color={page?.initialColor}
                 asPath={asPath}
