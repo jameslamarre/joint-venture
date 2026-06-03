@@ -9,6 +9,7 @@ export enum SANITY_DOCUMENT_TYPES {
   PAGE = 'page',
   PROJECT = 'project',
   MICROSITE_PAGE = 'micrositePage',
+  JOB = 'job',
 }
 
 export interface SanityInternalLink {

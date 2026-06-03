@@ -66,7 +66,7 @@ function App({ Component, pageProps }: AppProps<{}>) {
           <Component {...pageProps} key={`psa-${(pageProps as any).slug}`} />
           <Analytics />
         </>
-      ) : type === 'page' || type === 'project' ? (
+      ) : type === 'page' || type === 'project' || type === 'job' ? (
         <Layout {...pageProps}>
           <Scripts />
           <AnimatePresence initial={false} mode="wait">

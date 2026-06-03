@@ -142,7 +142,6 @@ export default {
     preflight: false,
   },
   plugins: [
-    require('tailwindcss-animate'),
     ({ addComponents, theme }: { addComponents: any; theme: any }) => {
       addComponents({
         '.container': {

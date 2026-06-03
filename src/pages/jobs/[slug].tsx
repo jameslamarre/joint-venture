@@ -12,12 +12,13 @@ import { BODY_QUERY, client, filterDataToSingleItem } from '@studio/lib'
 import { BlockContent } from '@components/sanity'
 import { forwardRef, ForwardRefRenderFunction } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 type PageRefType = React.ForwardedRef<HTMLDivElement>
 
-const ALL_SLUGS_QUERY = groq`*[_type == "page" && defined(slug.current)][].slug.current`
+const ALL_SLUGS_QUERY = groq`*[_type == "job" && defined(slug.current)][].slug.current`
 const PAGE_QUERY = groq`
-  *[_type == "page" && slug.current == $slug]{
+  *[_type == "job" && slug.current == $slug]{
     _id,
     _type,
     title,
@@ -30,7 +31,7 @@ const PAGE_QUERY = groq`
 export const getStaticPaths: GetStaticPaths = async () => {
   const pages = await client.fetch(ALL_SLUGS_QUERY)
   return {
-    paths: pages.map((slug: string) => `/${slug}`),
+    paths: pages.map((slug: string) => `/jobs/${slug}`),
     fallback: false,
   }
 }
@@ -46,8 +47,12 @@ const Page: NextPage<PageProps> = (
   const page: SanityPage = filterDataToSingleItem(data)
 
   return page?.body && (!page?._id.includes('drafts.') || preview) ? (
-    <article key={`page-${asPath}`} className="pt-page">
+    <article key={`page-${asPath}`} className="pt-page px-x">
       <BlockContent blocks={page?.body} className="flex flex-col w-full" />
+
+      <div className="absolute block w-full max-w-textWrap px-x lg:px-0 left-1/2 transform -translate-x-1/2">
+        <Link href="/jobs">← Back to all job listings</Link>
+      </div>
     </article>
   ) : null
 }

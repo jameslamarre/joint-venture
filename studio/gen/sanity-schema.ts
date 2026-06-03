@@ -69,6 +69,62 @@ export interface Youtube extends SanityDocument {
 }
 
 /**
+ * Job
+ *
+ *
+ */
+export interface Job extends SanityDocument {
+  _type: "job";
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Slug — `slug`
+   *
+   *
+   */
+  slug?: { _type: "slug"; current: string };
+
+  /**
+   * Preview Image — `image`
+   *
+   *
+   */
+  previewImage?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Initial Color — `string`
+   *
+   * Sets the initial color of the page before any transitions.
+   */
+  initialColor?: "stone" | "yellow";
+
+  /**
+   * Content Blocks — `blockContent`
+   *
+   *
+   */
+  body?: BlockContent;
+
+  /**
+   * SEO — `seo`
+   *
+   *
+   */
+  seo?: Seo;
+}
+
+/**
  * Menus
  *
  *
@@ -1176,6 +1232,7 @@ export type TextAndImageBlock = {
 export type Documents =
   | Vimeo
   | Youtube
+  | Job
   | Menus
   | Microsite
   | MicrositePage

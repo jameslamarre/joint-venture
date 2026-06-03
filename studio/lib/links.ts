@@ -4,6 +4,8 @@ export const getSanityLinkPath = (link?: SanityInternalLink): string => {
   switch (link?._type) {
     case 'project':
       return '/film/'
+    case 'job':
+      return '/jobs/'
     case 'page':
       return '/'
     default:

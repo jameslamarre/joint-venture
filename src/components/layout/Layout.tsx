@@ -403,12 +403,18 @@ export const Layout: FC<LayoutProps> = ({
           <>
             <Header
               className="flex-initial"
-              currentPage={page?._type === 'project' ? 'Films' : page?.title}
+              currentPage={
+                page?._type === 'project'
+                  ? 'Films'
+                  : page?._type === 'job'
+                  ? 'Jobs'
+                  : page?.title
+              }
               showContent={showContent}
               setShowContent={() => setShowContent(true)}
             />
 
-            {page?._type === 'page' && (
+            {(page?._type === 'page' || page?._type === 'job') && (
               <LogoButton
                 color={page?.initialColor}
                 asPath={asPath}

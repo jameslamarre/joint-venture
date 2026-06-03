@@ -22,10 +22,13 @@ import { TypedObject } from '@portabletext/types'
 export const BlockContent: FC<SanityBlockElement> = ({
   blocks,
   className,
+  children,
   style,
 }) => {
   return blocks ? (
     <div className={className} style={style}>
+      {children}
+
       <PortableText
         value={blocks}
         components={{

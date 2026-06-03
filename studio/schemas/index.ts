@@ -35,6 +35,7 @@ import doubleColumnBlock from './blocks/double-column-block'
 import imageGridBlock from './blocks/image-grid-block'
 import psaBlock from './blocks/psa-block'
 import psa from './documents/psa'
+import job from './documents/job'
 
 export const schemaTypes = [
   // objects
@@ -74,6 +75,7 @@ export const schemaTypes = [
   textAndImageBlock,
 
   // documents
+  job,
   menus,
   microsite,
   micrositePage,
