@@ -676,7 +676,7 @@ export type Link = {
      *
      *
      */
-    reference?: SanityReference<Page | Project | MicrositePage>;
+    reference?: SanityReference<Page | Project | Job | MicrositePage>;
   };
 
   /**
