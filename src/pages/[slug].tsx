@@ -46,7 +46,7 @@ const Page: NextPage<PageProps> = (
   const page: SanityPage = filterDataToSingleItem(data)
 
   return page?.body && (!page?._id.includes('drafts.') || preview) ? (
-    <article key={`page-${asPath}`} className="pt-page">
+    <article key={`page-${asPath}`} className="pt-page px-x md:px-0">
       <BlockContent blocks={page?.body} className="flex flex-col w-full" />
     </article>
   ) : null
