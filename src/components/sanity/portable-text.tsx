@@ -50,7 +50,7 @@ export const blockMarks: Partial<PortableTextReactComponents['marks']> = {
     return <SanityLink {...{ ...value, text }} />
   },
   highlight: ({ children }) => {
-    return <span className="highlight">{children}</span>
+    return <span className="inline-block relative highlight">{children}</span>
   },
   redUnderline: ({ children }) => {
     return (
