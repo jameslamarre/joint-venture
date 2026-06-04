@@ -40,7 +40,7 @@ export const Layout: FC<LayoutProps> = ({
 
   const [currentTheme, setCurrentTheme] = useState<
     'stone' | 'yellow' | 'blue' | 'dark'
-  >(page?._type === 'job' ? 'dark' : page?.initialColor || 'stone')
+  >(asPath.includes('/jobs') ? 'dark' : page?.initialColor || 'stone')
 
   const [showIndicator, setShowIndicator] = useState(false)
   const [direction, setDirection] = useState<'up' | 'down' | null>(null)
@@ -332,12 +332,12 @@ export const Layout: FC<LayoutProps> = ({
   // Set CSS custom properties for theme colors
   useEffect(() => {
     // Only update theme from page if user hasn't overridden it
-    if (page?._type === 'job') {
+    if (asPath.includes('/jobs')) {
       setCurrentTheme('dark')
     } else if (page?.initialColor && !themeSetRef.current) {
       setCurrentTheme(page.initialColor)
     }
-  }, [page?._type, page?.initialColor])
+  }, [asPath, page?._type, page?.initialColor])
 
   useEffect(() => {
     if (preview)
@@ -420,7 +420,7 @@ export const Layout: FC<LayoutProps> = ({
               setShowContent={() => setShowContent(true)}
             />
 
-            {page?._type === 'page' && (
+            {!asPath.includes('/jobs') && (
               <LogoButton
                 color={page?.initialColor}
                 asPath={asPath}
