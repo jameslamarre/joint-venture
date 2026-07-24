@@ -33,6 +33,9 @@ import micrositePage from './documents/micrositePage'
 import micrositeBlock from './blocks/microsite-block'
 import doubleColumnBlock from './blocks/double-column-block'
 import imageGridBlock from './blocks/image-grid-block'
+import psaBlock from './blocks/psa-block'
+import psa from './documents/psa'
+import job from './documents/job'
 
 export const schemaTypes = [
   // objects
@@ -66,16 +69,19 @@ export const schemaTypes = [
   micrositeBlock,
   newsletterBlock,
   projectsBlock,
+  psaBlock,
   scrollingTextBlock,
   textBlock,
   textAndImageBlock,
 
   // documents
+  job,
   menus,
   microsite,
   micrositePage,
   page,
   project,
+  psa,
   siteSettings,
 ]
 

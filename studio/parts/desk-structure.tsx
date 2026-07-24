@@ -2,9 +2,10 @@ import { GrSettingsOption } from 'react-icons/gr'
 import { RiFileList3Line } from 'react-icons/ri'
 import { GiFilmProjector, GiFilmSpool } from 'react-icons/gi'
 import { StructureBuilder } from 'sanity/desk'
-import type { SanityDocument } from '@sanity/types'
+import type { SanityDocument } from 'sanity'
 import Iframe from 'sanity-plugin-iframe-pane'
 import resolveProductionUrl from './resolve-production-url'
+import { MdPersonSearch } from 'react-icons/md'
 
 export const getDefaultDocumentNode = (S: StructureBuilder) => {
   return S.document().views([
@@ -33,6 +34,11 @@ export const deskStructure = (S: StructureBuilder) =>
         .icon(GiFilmProjector),
       S.divider(),
       S.listItem()
+        .title('Jobs')
+        .child(S.documentTypeList('job').title('Jobs'))
+        .icon(MdPersonSearch),
+      S.divider(),
+      S.listItem()
         .title('Settings')
         .icon(GrSettingsOption)
         .child(
@@ -47,6 +53,12 @@ export const deskStructure = (S: StructureBuilder) =>
         .title('Microsites')
         .child(S.documentTypeList('microsite').title('Microsites'))
         .icon(GiFilmSpool),
+      S.divider(),
+      S.divider(),
+      S.listItem()
+        .title('PSA')
+        .child(S.documentTypeList('psa').title('PSA'))
+        .icon(RiFileList3Line),
     ])
 
 export default deskStructure

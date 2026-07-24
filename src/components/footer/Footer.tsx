@@ -102,7 +102,7 @@ export const Footer: FC<FooterProps & HTMLProps<HTMLDivElement>> = ({
         {socials && (
           <Socials
             socials={socials}
-            youtubeFill="#000"
+            youtubeFill="var(--theme-text)"
             className="flex flex-row items-center justify-start gap-xhalf w-fit mt-yhalf"
           />
         )}

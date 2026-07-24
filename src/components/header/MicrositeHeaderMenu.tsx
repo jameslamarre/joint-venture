@@ -71,7 +71,9 @@ export const MicrositeHeaderMenu: FC<
                     <li key={_key}>
                       <SanityLink
                         onClick={
-                          setCustomOpen ? () => setCustomOpen(false) : undefined
+                          setCustomOpen
+                            ? () => setTimeout(() => setCustomOpen(false), 150)
+                            : undefined
                         }
                         {...(link as SanityLinkType)}
                         className="inline-block text-[var(--theme-text)] hover:text-[var(--theme-highlight)] uppercase"
@@ -100,7 +102,10 @@ export const MicrositeHeaderMenu: FC<
 
               <div className="absolute flex flex-col justify-center items-center gap-yhalf left-1/2 bottom-y lg:bottom-ydouble transform -translate-x-1/2">
                 <Link href="https://www.ajointventure.com" target="_blank">
-                  <IconLogoFull className="w-auto h-[100px] md:h-[88px] fill-[var(--theme-text)]" />
+                  <IconLogoFull
+                    className="w-auto h-[100px] md:h-[88px]"
+                    fill="var(--theme-text)"
+                  />
                 </Link>
 
                 {socials && (

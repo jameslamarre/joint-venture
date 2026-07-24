@@ -1,4 +1,4 @@
-import type { SanityDocument } from '@sanity/types'
+import type { SanityDocument } from 'sanity'
 
 export type PageDocument = SanityDocument & {
   slug?: {

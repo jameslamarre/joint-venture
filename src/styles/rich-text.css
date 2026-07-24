@@ -111,10 +111,7 @@
 }
 
 .rich-text li {
-  @apply border;
-
-  margin-top: calc(-1 * var(--border-size));
-  padding-left: var(--space-x-quarter);
+  padding-left: 16px;
   padding-bottom: var(--space-y-sm);
 }
 
@@ -127,9 +124,11 @@
 }
 
 .rich-text ul li::before {
-  content: '-';
+  content: '•';
   position: absolute;
   left: 0;
+  font-size: 1em;
+  line-height: 0.75;
 }
 
 .rich-text li:first-child {

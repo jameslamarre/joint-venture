@@ -1,5 +1,5 @@
 import { GrLink } from 'react-icons/gr'
-import type { Rule } from '@sanity/types'
+import type { Rule } from 'sanity'
 import type { Link } from '@gen/sanity-schema'
 
 export default {
@@ -19,6 +19,7 @@ export default {
           to: [
             { type: 'page' },
             { type: 'project' },
+            { type: 'job' },
             { type: 'micrositePage' },
           ],
           weak: true,

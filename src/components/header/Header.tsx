@@ -7,6 +7,7 @@ import { IconHyphen } from '@components/icons'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { isMobile, isTablet } from 'react-device-detect'
+import Link from 'next/link'
 
 export const Header: FC<HeaderProps> = ({
   currentPage,
@@ -96,7 +97,7 @@ export const Header: FC<HeaderProps> = ({
                 Menu
               </motion.span>
             ) : (
-              <motion.span
+              <motion.div
                 key="page-key"
                 initial={{ maxWidth: 0 }}
                 animate={{ maxWidth: 210 }}
@@ -110,8 +111,12 @@ export const Header: FC<HeaderProps> = ({
                 className="inline-block leading-none overflow-hidden"
                 style={{ color: 'var(--theme-text--menu)' }}
               >
-                {currentPage}
-              </motion.span>
+                {currentPage?.toLowerCase() === 'films' ? (
+                  <Link href="/films">Films</Link>
+                ) : (
+                  currentPage
+                )}
+              </motion.div>
             )}
           </AnimatePresence>
         </div>

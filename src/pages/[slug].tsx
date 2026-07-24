@@ -10,7 +10,7 @@ import type { PageProps } from '@lib/next'
 import { getPageStaticProps } from '@lib/next'
 import { BODY_QUERY, client, filterDataToSingleItem } from '@studio/lib'
 import { BlockContent } from '@components/sanity'
-import { forwardRef, ForwardRefRenderFunction, useCallback } from 'react'
+import { forwardRef, ForwardRefRenderFunction } from 'react'
 import { useRouter } from 'next/router'
 
 type PageRefType = React.ForwardedRef<HTMLDivElement>
@@ -46,7 +46,7 @@ const Page: NextPage<PageProps> = (
   const page: SanityPage = filterDataToSingleItem(data)
 
   return page?.body && (!page?._id.includes('drafts.') || preview) ? (
-    <article key={`page-${asPath}`} className="pt-page">
+    <article key={`page-${asPath}`} className="pt-page px-x md:px-0">
       <BlockContent blocks={page?.body} className="flex flex-col w-full" />
     </article>
   ) : null

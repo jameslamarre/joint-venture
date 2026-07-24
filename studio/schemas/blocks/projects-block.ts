@@ -1,4 +1,4 @@
-import type { Rule } from '@sanity/types'
+import type { Rule } from 'sanity'
 import { AiOutlinePlusSquare } from 'react-icons/ai'
 
 export default {

@@ -203,7 +203,7 @@ const Project: NextPage<PageProps> = (
         )}
       </AnimatePresence>
 
-      <article className="max-w-app pt-header mx-auto">
+      <article className="max-w-container pt-header lg:px-xdouble 2xl:px-0 mx-auto">
         <div className="flex flex-col gap-yhalf pt-yhalf md:pt-y pb-y px-2">
           <AnimatePresence custom={slideDirection} mode="wait">
             <motion.div
@@ -236,11 +236,11 @@ const Project: NextPage<PageProps> = (
                             asset={project.previewImage.asset}
                             props={{
                               alt: 'Project image',
-                              quality: 85,
+                              quality: 90,
                               sizes:
-                                '(max-width: 640px) 100vw, (max-width: 1024px) 50vw',
+                                '(max-width: 640px) 100vw, (max-width: 1024px) 95vw',
                             }}
-                            className="relative w-full h-fit aspect-video object-fill"
+                            className="relative w-full h-fit aspect-video object-cover"
                           />
                         </motion.div>
                       ) : (

@@ -1,5 +1,5 @@
 import { GiButtonFinger } from 'react-icons/gi'
-import type { Rule } from '@sanity/types'
+import type { Rule } from 'sanity'
 import type { Cta } from 'gen/sanity-schema'
 
 export default {

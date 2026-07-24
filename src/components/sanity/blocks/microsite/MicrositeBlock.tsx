@@ -7,6 +7,7 @@ import { Cta } from '@components/btns'
 import { SanityLinkType } from '@studio/lib'
 import { AnimatePresence, motion } from 'framer-motion'
 import { SanityEmbed } from '@components/sanity/embed'
+import { SanityImageAsset } from '@sanity/asset-utils'
 
 interface MicrositeBlockProps
   extends Omit<SanityBlockElement, keyof MicrositeBlockType>,
@@ -87,16 +88,33 @@ export const MicrositeBlock: FC<MicrositeBlockProps> = ({
               </div>
             )}
 
-            {laurels && (
-              <div className="absolute bottom-2 md:bottom-y left-yhalf md:left-y z-base">
-                <SanityImage
-                  asset={laurels.asset}
-                  props={{
-                    alt: 'Film laurels',
-                    sizes: '180px',
-                  }}
-                  className="w-auto max-w-[110px] md:max-w-[180px] h-auto object-contain"
-                />
+            {laurels && laurels.length > 0 && (
+              <div
+                className={classNames(
+                  alignment === 'bottom'
+                    ? 'bottom-2 md:bottom-auto md:top-y'
+                    : 'bottom-2 md:bottom-y',
+                  'flex flex-col md:flex-row gap-yhalf xl:gap-y justify-center items-center absolute left-yhalf md:left-y z-base'
+                )}
+              >
+                {laurels.map(laurel => (
+                  <SanityImage
+                    key={laurel._key}
+                    asset={laurel.image?.asset as unknown as SanityImageAsset}
+                    props={{
+                      alt: 'Film laurels',
+                      sizes: '220px',
+                    }}
+                    className={classNames(
+                      laurel.size === 'large'
+                        ? 'max-w-[110px] md:max-w-[132px] xl:max-w-[160px]'
+                        : laurel.size === 'medium'
+                        ? 'max-w-[88px] md:max-w-[100px] xl:max-w-[120px]'
+                        : 'max-w-[48px] md:max-w-[56px] xl:max-w-[64px]',
+                      'w-auto h-auto object-contain'
+                    )}
+                  />
+                ))}
               </div>
             )}
 

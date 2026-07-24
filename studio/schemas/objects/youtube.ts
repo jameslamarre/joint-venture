@@ -1,5 +1,5 @@
 import { GrVideo } from 'react-icons/gr'
-import type { Rule } from '@sanity/types'
+import type { Rule } from 'sanity'
 
 export default {
   name: 'youtube',

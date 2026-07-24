@@ -69,6 +69,62 @@ export interface Youtube extends SanityDocument {
 }
 
 /**
+ * Job
+ *
+ *
+ */
+export interface Job extends SanityDocument {
+  _type: "job";
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Slug — `slug`
+   *
+   *
+   */
+  slug?: { _type: "slug"; current: string };
+
+  /**
+   * Preview Image — `image`
+   *
+   *
+   */
+  previewImage?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Initial Color — `string`
+   *
+   * Sets the initial color of the page before any transitions.
+   */
+  initialColor?: "stone" | "yellow";
+
+  /**
+   * Content Blocks — `blockContent`
+   *
+   *
+   */
+  body?: BlockContent;
+
+  /**
+   * SEO — `seo`
+   *
+   *
+   */
+  seo?: Seo;
+}
+
+/**
  * Menus
  *
  *
@@ -440,6 +496,13 @@ export interface Project extends SanityDocument {
   trailer?: Embed;
 
   /**
+   * Featured — `boolean`
+   *
+   *
+   */
+  featured?: boolean;
+
+  /**
    * Directed By — `string`
    *
    *
@@ -521,6 +584,55 @@ export interface Project extends SanityDocument {
 }
 
 /**
+ * PSA
+ *
+ *
+ */
+export interface Psa extends SanityDocument {
+  _type: "psa";
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Slug — `slug`
+   *
+   *
+   */
+  slug?: { _type: "slug"; current: string };
+
+  /**
+   * Preview Image — `image`
+   *
+   *
+   */
+  previewImage?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Content Blocks — `blockContent`
+   *
+   *
+   */
+  body?: BlockContent;
+
+  /**
+   * SEO — `seo`
+   *
+   *
+   */
+  seo?: Seo;
+}
+
+/**
  * Site Settings
  *
  *
@@ -576,7 +688,7 @@ export type Link = {
      *
      *
      */
-    reference?: SanityReference<Page | Project | MicrositePage>;
+    reference?: SanityReference<Page | Project | Job | MicrositePage>;
   };
 
   /**
@@ -806,6 +918,7 @@ export type BlockContent = Array<
   | SanityKeyed<MicrositeBlock>
   | SanityKeyed<NewsletterBlock>
   | SanityKeyed<ProjectsBlock>
+  | SanityKeyed<PsaBlock>
   | SanityKeyed<ScrollingTextBlock>
   | SanityKeyed<TextBlock>
   | SanityKeyed<DoubleColumnBlock>
@@ -983,16 +1096,33 @@ export type MicrositeBlock = {
   subhead?: string;
 
   /**
-   * Laurels — `image`
+   * Laurels — `array`
    *
    * Optional laurels (or other) image to display on the bottom right.
    */
-  laurels?: {
-    _type: "image";
-    asset: SanityReference<SanityImageAsset>;
-    crop?: SanityImageCrop;
-    hotspot?: SanityImageHotspot;
-  };
+  laurels?: Array<
+    SanityKeyed<{
+      _type: "laurel";
+      /**
+       * image — `image`
+       *
+       *
+       */
+      image?: {
+        _type: "image";
+        asset: SanityReference<SanityImageAsset>;
+        crop?: SanityImageCrop;
+        hotspot?: SanityImageHotspot;
+      };
+
+      /**
+       * Size — `string`
+       *
+       *
+       */
+      size?: "small" | "medium" | "large";
+    }>
+  >;
 
   /**
    * Tickets CTA — `cta`
@@ -1057,6 +1187,16 @@ export type ProjectsBlock = {
   projects?: Array<SanityKeyedReference<Project>>;
 };
 
+export type PsaBlock = {
+  _type: "psaBlock";
+  /**
+   * Show PSA — `boolean`
+   *
+   *
+   */
+  showPsa?: boolean;
+};
+
 export type ScrollingTextBlock = {
   _type: "scrollingTextBlock";
   /**
@@ -1104,9 +1244,11 @@ export type TextAndImageBlock = {
 export type Documents =
   | Vimeo
   | Youtube
+  | Job
   | Menus
   | Microsite
   | MicrositePage
   | Page
   | Project
+  | Psa
   | SiteSettings;

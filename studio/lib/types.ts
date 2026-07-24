@@ -1,4 +1,4 @@
-import type { Slug } from '@sanity/types'
+import type { Slug } from 'sanity'
 
 export interface BlockHeading {
   title: string
@@ -9,6 +9,7 @@ export enum SANITY_DOCUMENT_TYPES {
   PAGE = 'page',
   PROJECT = 'project',
   MICROSITE_PAGE = 'micrositePage',
+  JOB = 'job',
 }
 
 export interface SanityInternalLink {

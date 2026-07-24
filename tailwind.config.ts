@@ -93,6 +93,7 @@ export default {
         btnx: 'var(--btn-space-x)',
         btny: 'var(--btn-space-y)',
         header: 'var(--header-height)',
+        container: 'var(--container)',
         app: 'var(--app)',
         microsite: 'var(--microsite)',
         wrap: 'var(--wrap)',
@@ -141,7 +142,6 @@ export default {
     preflight: false,
   },
   plugins: [
-    require('tailwindcss-animate'),
     ({ addComponents, theme }: { addComponents: any; theme: any }) => {
       addComponents({
         '.container': {

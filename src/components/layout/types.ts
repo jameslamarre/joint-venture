@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react'
 import type {
+  Job,
   Microsite,
   MicrositePage,
   Page,
@@ -7,7 +8,7 @@ import type {
   SiteSettings,
 } from '@gen/sanity-schema'
 
-export type PageData = Page | Project
+export type PageData = Page | Project | Job
 export type MicrositeData = Microsite | MicrositePage
 
 export interface AltLayoutProps {
