@@ -14,6 +14,7 @@ import {
   SELECT_HYPHEN_BG,
 } from './consts'
 import type { EventListItem, EventsListProps } from './types'
+import { isMobile } from 'react-device-detect'
 
 export const EventsList = ({ events, error }: EventsListProps) => {
   const [selectedLocation, setSelectedLocation] = useState('all')
@@ -126,7 +127,7 @@ export const EventsList = ({ events, error }: EventsListProps) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-y md:gap-xdouble w-full">
-      <div className="flex flex-col gap-y w-full">
+      <div className="order-2 md:order-1 flex flex-col gap-y w-full">
         {error ? <p>{error}</p> : null}
 
         {!error && filteredEvents.length === 0 ? (
@@ -174,16 +175,16 @@ export const EventsList = ({ events, error }: EventsListProps) => {
         </div>
       </div>
 
-      <div className="hidden md:sticky md:flex flex-col gap-y md:gap-ydouble md:top-[90px] h-fit">
+      <div className="order-1 md:order-2 md:sticky md:flex flex-col gap-y md:gap-ydouble md:top-[90px] h-fit">
         <RoughNotation
           type="box"
-          show
+          show={isMobile ? false : true}
           animate={false}
           color="#A90736"
           iterations={6}
           strokeWidth={1.5}
         >
-          <div>
+          <div className="hidden md:block">
             <Calendar
               mode="single"
               selected={selectedDate}
@@ -242,12 +243,12 @@ export const EventsList = ({ events, error }: EventsListProps) => {
         </RoughNotation>
 
         <div className="flex flex-col gap-yhalf">
-          <h4 className="text-h4">Filters:</h4>
+          <h4 className="hidden md:inline-block text-h4">Filters:</h4>
 
           <div className="flex flex-col gap-yhalf">
             <label
               htmlFor="events-location-filter"
-              className="font-sans text-sm"
+              className="hidden md:inline-block font-sans text-sm"
             >
               Location
             </label>
