@@ -11,6 +11,7 @@ fieldset {
   outline: none;
 }
 
-label {
-  @apply normal-case;
+.select,
+select {
+  @apply appearance-none relative h-btn px-xhalf pt-[3px] sm:pt-0 font-sans text-base leading-none cursor-pointer text-black placeholder:text-black focus-visible:outline-none rounded-none;
 }

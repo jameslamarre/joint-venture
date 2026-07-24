@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.10",
+    "@itm-studio/partner-sdk": "^0.2.6",
     "@portabletext/react": "^3.2.4",
     "@portabletext/types": "^2.0.15",
     "@sanity/asset-utils": "^2.3.0",
@@ -28,6 +29,7 @@
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
     "cors": "^2.8.6",
+    "date-fns": "3.6.0",
     "focus-visible": "^5.2.1",
     "framer-motion": "^10.18.0",
     "groq": "^2.36.6",
@@ -35,6 +37,7 @@
     "next-sanity": "^8.5.5",
     "next-sanity-image": "^6.2.0",
     "react": "^18.3.1",
+    "react-day-picker": "8.10.1",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.3.1",
     "react-icons": "^5.6.0",

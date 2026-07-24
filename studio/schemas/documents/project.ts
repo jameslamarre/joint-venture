@@ -1,6 +1,5 @@
 import { MdPermMedia } from 'react-icons/md'
 import type { Rule } from 'sanity'
-import { group } from 'console'
 
 export default {
   name: 'project',
