@@ -1,11 +1,7 @@
+import slugify from 'slugify'
+
 export const monthFormatter = new Intl.DateTimeFormat('en-US', {
   month: 'long',
-})
-
-export const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
-  month: 'short',
-  day: 'numeric',
-  year: 'numeric',
 })
 
 export const SELECT_HYPHEN_BG =
@@ -32,4 +28,31 @@ export const dateKeyFromDate = (date: Date): string => {
 
 export const dateKeyFromISO = (isoDate: string): string => {
   return dateKeyFromDate(new Date(isoDate))
+}
+
+const EVENT_UID_DELIMITER = '--'
+
+export const getEventSlug = (title: string, uid: string): string => {
+  const readableTitle = slugify(title, {
+    lower: true,
+    strict: true,
+    trim: true,
+  })
+
+  return `${readableTitle || 'event'}${EVENT_UID_DELIMITER}${uid}`
+}
+
+export const getEventHref = (title: string, uid: string): string => {
+  return `/events/${getEventSlug(title, uid)}`
+}
+
+export const getUidFromEventSlug = (slug: string): string | null => {
+  const delimiterIndex = slug.lastIndexOf(EVENT_UID_DELIMITER)
+
+  if (delimiterIndex === -1) {
+    return slug || null
+  }
+
+  const uid = slug.slice(delimiterIndex + EVENT_UID_DELIMITER.length)
+  return uid || null
 }

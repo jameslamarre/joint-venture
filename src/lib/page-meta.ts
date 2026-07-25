@@ -42,6 +42,10 @@ export const getRoutePageMeta = (asPath: string): RoutePageMeta => {
     return { headerTitle: 'Jobs', flowSlug: null }
   }
 
+  if (pathname.startsWith('/events/')) {
+    return { headerTitle: 'events', flowSlug: null }
+  }
+
   if (pathname.startsWith('/film/')) {
     return { headerTitle: 'Films', flowSlug: null }
   }

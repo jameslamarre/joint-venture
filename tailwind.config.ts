@@ -60,7 +60,7 @@ export default {
         xs: ['var(--font-size-xs)', '1.3'],
         sm: ['var(--font-size-sm)', '1'],
         base: ['var(--font-size-base)', '1.3'],
-        baseSerif: ['var(--font-size-base--serif)', '0'],
+        baseSerif: ['var(--font-size-base--serif)', '1.33'],
         md: ['var(--font-size-md)', '1.25'],
         lg: ['var(--font-size-lg)', '1'],
         xl: ['var(--font-size-xl)', '1'],

@@ -8,13 +8,14 @@ import { Calendar } from '@components/ui/calendar'
 import {
   dateKeyFromDate,
   dateKeyFromISO,
-  dateTimeFormatter,
+  getEventHref,
   monthKeyFromISO,
   monthLabelFromISO,
   SELECT_HYPHEN_BG,
 } from './consts'
 import type { EventListItem, EventsListProps } from './types'
 import { isMobile } from 'react-device-detect'
+import { dateFormatter } from '@lib/util/date-formatters'
 
 export const EventsList = ({ events, error }: EventsListProps) => {
   const [selectedLocation, setSelectedLocation] = useState('all')
@@ -146,7 +147,7 @@ export const EventsList = ({ events, error }: EventsListProps) => {
                     {group.items.map(event => (
                       <li key={event.uid} id={`event-${event.uid}`}>
                         <Link
-                          href={`/events/${event.uid}`}
+                          href={getEventHref(event.title, event.uid)}
                           className="flex flex-col gap-3 group"
                         >
                           <div
@@ -159,7 +160,7 @@ export const EventsList = ({ events, error }: EventsListProps) => {
                             <div className="flex justify-between gap-x w-full pt-2 pb-[5px] px-4 group-hover:bg-white group-hover:text-textColorActionHover font-sans text-xs text-textColor">
                               <p>{event.location}</p>
                               <time dateTime={event.startDate}>
-                                {dateTimeFormatter.format(
+                                {dateFormatter.format(
                                   new Date(event.startDate)
                                 )}
                               </time>
