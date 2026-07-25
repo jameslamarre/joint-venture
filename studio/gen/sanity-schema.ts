@@ -503,6 +503,13 @@ export interface Project extends SanityDocument {
   featured?: boolean;
 
   /**
+   * Year — `string`
+   *
+   *
+   */
+  year?: string;
+
+  /**
    * Directed By — `string`
    *
    *

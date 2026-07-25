@@ -120,6 +120,11 @@ export default {
       initialValue: false,
     },
     {
+      name: 'year',
+      title: 'Year',
+      type: 'string',
+    },
+    {
       name: 'directedBy',
       title: 'Directed By',
       type: 'string',

@@ -344,8 +344,6 @@ export const Layout: FC<LayoutProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asPath])
 
-  console.log(page)
-
   return (
     <>
       <Head
@@ -419,7 +417,9 @@ export const Layout: FC<LayoutProps> = ({
               setShowContent={() => setShowContent(true)}
             />
 
-            {(page?._type === 'page' || routeMeta.flowSlug !== null) &&
+            {(page?._type === 'page' ||
+              page?._type === 'project' ||
+              routeMeta.flowSlug !== null) &&
               !asPath.includes('/jobs') && (
                 <LogoButton
                   color={page?.initialColor}
