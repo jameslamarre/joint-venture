@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
+import Script from 'next/script'
 import { Fragment } from 'react'
 
 import { dateTimeFormatter } from '@lib/util/date-formatters'
@@ -85,6 +86,35 @@ export const Event = ({ event }: EventProps) => {
                 <span className="text-baseSerif">{event.location}</span>
               </p>
             </div>
+
+            <div
+              id="itm-embed-container"
+              data-itm-ticket-button
+              data-itm-origin="https://jointventure.itm.studio"
+              data-itm-moment={event.uid}
+              data-itm-color="#FFFFFF"
+              data-itm-radius="0"
+              data-itm-text="Get Tickets"
+              data-itm-theme="dark"
+              className="highlight w-full md:w-[200px]"
+              style={{
+                maxWidth: '100%',
+                margin: 0,
+                padding: 0,
+                lineHeight: 0,
+                color: 'black',
+              }}
+            />
+
+            <style jsx global>{`
+              #itm-embed-container,
+              #itm-embed-container * {
+                color: #000 !important;
+                text-transform: uppercase !important;
+                font-family: 'Monument', sans-serif !important;
+                background: none !important;
+              }
+            `}</style>
           </div>
 
           {event.description && (
@@ -106,6 +136,11 @@ export const Event = ({ event }: EventProps) => {
           />
         ) : null}
       </div>
+
+      <Script
+        src="https://jointventure.itm.studio/embed/v1.js"
+        strategy="afterInteractive"
+      />
     </article>
   )
 }
