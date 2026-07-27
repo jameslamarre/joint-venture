@@ -14,6 +14,7 @@ import {
 import { AnimatePresence, motion } from 'framer-motion'
 import { isMobile, ViewProps } from 'react-device-detect'
 import { useView } from '@contexts/view'
+import IconEvents from '@components/icons/menu/IconEvents'
 
 export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
   customOpen = false,
@@ -32,6 +33,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
       { x: isMobile ? '55%' : '57.5%', y: isMobile ? 90 : 450 },
       { x: isMobile ? '20%' : '40%', y: isMobile ? 480 : 600 },
       { x: isMobile ? '30%' : '22.5%', y: isMobile ? 350 : 400 },
+      { x: isMobile ? '52%' : '43%', y: isMobile ? 260 : 330 },
     ],
     [
       { x: isMobile ? '35%' : '55%', y: isMobile ? 100 : 120 },
@@ -39,6 +41,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
       { x: isMobile ? '55%' : '50%', y: isMobile ? 310 : 480 },
       { x: isMobile ? '20%' : '35%', y: isMobile ? 480 : 700 },
       { x: isMobile ? '15%' : '20%', y: isMobile ? 390 : 480 },
+      { x: isMobile ? '48%' : '46%', y: isMobile ? 230 : 340 },
     ],
     [
       { x: isMobile ? '5%' : '25%', y: isMobile ? 90 : 100 },
@@ -46,6 +49,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
       { x: isMobile ? '10%' : '30%', y: isMobile ? 410 : 570 },
       { x: isMobile ? '45%' : '57.5%', y: isMobile ? 380 : 580 },
       { x: isMobile ? '20%' : '37.5%', y: isMobile ? 300 : 400 },
+      { x: isMobile ? '52%' : '65%', y: isMobile ? 250 : 410 },
     ],
     [
       { x: isMobile ? '5%' : '22%', y: isMobile ? 200 : 260 },
@@ -53,6 +57,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
       { x: isMobile ? '15%' : '30%', y: isMobile ? 320 : 455 },
       { x: isMobile ? '40%' : '57.5%', y: isMobile ? 440 : 570 },
       { x: isMobile ? '40%' : '45%', y: isMobile ? 250 : 320 },
+      { x: isMobile ? '55%' : '26%', y: isMobile ? 190 : 600 },
     ],
   ]
 
@@ -195,6 +200,30 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
                     className="group"
                   >
                     <IconFilms className="w-[117px] lg:w-[223px] h-auto group-hover:[&_.bg]:fill-blue" />
+                  </Link>
+                </motion.li>
+
+                <motion.li
+                  variants={itemVariants}
+                  className="absolute"
+                  style={{
+                    left: positions[position][5]?.x || 100,
+                    top: positions[position][5]?.y || 200,
+                  }}
+                >
+                  <Link
+                    href="/events"
+                    onClick={() => {
+                      setCustomOpen(false)
+                      updateView({
+                        ...view,
+                        previousPage: view?.page,
+                        nextPage: 'events',
+                      })
+                    }}
+                    className="group"
+                  >
+                    <IconEvents className="w-[117px] lg:w-[223px] h-auto group-hover:[&_.bg]:fill-white" />
                   </Link>
                 </motion.li>
 

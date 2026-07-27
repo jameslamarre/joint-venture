@@ -41,7 +41,7 @@ export const ProjectsBlock: FC<ProjectsBlockProps> = ({
       {carousel ? (
         <ProjectsCarousel projects={projects as unknown as Project[]} />
       ) : (
-        <div className="flex flex-col gap-y w-full lg:w-[1024px] mx-auto md:px-xhalf pb-page">
+        <div className="flex flex-col gap-y w-full xl:w-[1100px] mx-auto md:px-x xl:px-xhalf pb-page">
           {featuredProjects && (
             <div className="flex flex-col gap-y w-full">
               {featuredProjects.map((project: Project, index) => {

@@ -4,7 +4,11 @@ fieldset {
 }
 
 .input {
-  @apply px-xhalf border font-sans text-sm border-collapse;
+  @apply border-none px-xhalf font-sans text-sm;
+}
+
+.input--footer {
+  @apply border border-collapse;
 }
 
 .input:focus {

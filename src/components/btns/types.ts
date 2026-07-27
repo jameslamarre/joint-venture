@@ -21,6 +21,7 @@ export interface CtaProps extends HTMLAttributes<HTMLButtonElement> {
   innerRef?: Ref<Element>
   small?: boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
+  disabled?: boolean
 }
 
 export interface BtnCSSProperties extends CSS.Properties {
