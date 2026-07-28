@@ -16,6 +16,7 @@ type EventDetailPageProps = {
 
 type PartnerMoment = {
   uid: string
+  slug: string | null
   name: string | null
   description: string | null
   startDate: string | null
@@ -77,6 +78,7 @@ export const getServerSideProps: GetServerSideProps<
           },
           moments: {
             uid: true,
+            slug: true,
             name: true,
             description: true,
             startDate: true,
@@ -123,6 +125,7 @@ export const getServerSideProps: GetServerSideProps<
       props: {
         event: {
           uid: matchedMoment.uid,
+          momentSlug: matchedMoment.slug ?? null,
           title: matchedMoment.name ?? 'Untitled Event',
           startDate: matchedMoment.startDate,
           location:

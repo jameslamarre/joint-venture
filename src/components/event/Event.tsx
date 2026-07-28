@@ -55,6 +55,7 @@ const renderFormattedDescription = (description: string) => {
 
 export type EventContent = {
   uid: string
+  momentSlug: string | null
   title: string
   startDate: string
   location: string
@@ -91,18 +92,19 @@ export const Event = ({ event }: EventProps) => {
               id="itm-embed-container"
               data-itm-ticket-button
               data-itm-origin="https://jointventure.itm.studio"
-              data-itm-moment={event.uid}
+              data-itm-moment={event.momentSlug || event.uid}
               data-itm-color="#FFFFFF"
               data-itm-radius="0"
               data-itm-text="Get Tickets"
               data-itm-theme="dark"
-              className="highlight w-full md:w-[200px]"
+              className="highlight w-fit"
               style={{
                 maxWidth: '100%',
                 margin: 0,
                 padding: 0,
                 lineHeight: 0,
                 color: 'black',
+                fontSize: '16px',
               }}
             />
 
