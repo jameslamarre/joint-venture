@@ -18,21 +18,93 @@ import { isMobile } from 'react-device-detect'
 import { dateFormatter } from '@lib/util/date-formatters'
 
 export const EventsList = ({ events, error }: EventsListProps) => {
-  const [selectedLocation, setSelectedLocation] = useState('all')
+  const [selectedVenue, setSelectedVenue] = useState('all')
+  const [selectedCity, setSelectedCity] = useState('all')
 
-  const locations = useMemo(() => {
-    return Array.from(new Set(events.map(event => event.location))).sort(
-      (a, b) => a.localeCompare(b)
+  const getVenueValue = (event: EventListItem): string => {
+    return event.venue || 'Venue TBA'
+  }
+
+  const getCityValue = (event: EventListItem): string => {
+    return event.city || 'City TBA'
+  }
+
+  const cities = useMemo(() => {
+    return Array.from(new Set(events.map(getCityValue))).sort((a, b) =>
+      a.localeCompare(b)
     )
   }, [events])
 
-  const filteredEvents = useMemo(() => {
-    if (selectedLocation === 'all') {
-      return events
+  const venuesForSelectedCity = useMemo(() => {
+    if (selectedCity === 'all') {
+      return []
     }
 
-    return events.filter(event => event.location === selectedLocation)
-  }, [events, selectedLocation])
+    const cityEvents = events.filter(
+      event => getCityValue(event) === selectedCity
+    )
+
+    return Array.from(new Set(cityEvents.map(getVenueValue))).sort((a, b) =>
+      a.localeCompare(b)
+    )
+  }, [events, selectedCity])
+
+  const venueOptions = useMemo(() => {
+    return venuesForSelectedCity.map(venue => {
+      const venueCities = Array.from(
+        new Set(
+          events
+            .filter(
+              event =>
+                getVenueValue(event) === venue &&
+                getCityValue(event) === selectedCity
+            )
+            .map(getCityValue)
+            .filter(city => city !== 'City TBA')
+        )
+      )
+
+      return {
+        value: venue,
+        label:
+          venueCities.length > 0
+            ? `${venue}, ${venueCities.join(' / ')}`
+            : venue,
+      }
+    })
+  }, [events, selectedCity, venuesForSelectedCity])
+
+  const filteredEvents = useMemo(() => {
+    return events.filter(event => {
+      const matchesCity =
+        selectedCity === 'all' || getCityValue(event) === selectedCity
+      const matchesVenue =
+        selectedCity === 'all' ||
+        selectedVenue === 'all' ||
+        getVenueValue(event) === selectedVenue
+
+      return matchesVenue && matchesCity
+    })
+  }, [events, selectedVenue, selectedCity])
+
+  const getEventLocation = (event: EventListItem): string => {
+    const venue = getVenueValue(event)
+    const city = getCityValue(event)
+
+    if (venue === 'Venue TBA' && city === 'City TBA') {
+      return 'Location TBA'
+    }
+
+    if (venue === 'Venue TBA') {
+      return city
+    }
+
+    if (city === 'City TBA') {
+      return venue
+    }
+
+    return `${venue}, ${city}`
+  }
 
   const firstEventDateString = filteredEvents[0]?.startDate
 
@@ -154,11 +226,14 @@ export const EventsList = ({ events, error }: EventsListProps) => {
                             className="text-textColorTables"
                             style={{ border: `1px solid var(--theme-text)` }}
                           >
-                            <h3 className="w-full pt-2 pb-[5px] px-4 bg-white group-hover:bg-black group-hover:text-white border-bottom font-sans text-sm">
+                            <h3
+                              style={{ color: `var(--theme-text--tables)` }}
+                              className="w-full pt-2 pb-[5px] px-4 bg-white group-hover:bg-black group-hover:!text-white border-bottom font-sans text-sm"
+                            >
                               {event.title}
                             </h3>
-                            <div className="flex justify-between gap-x w-full pt-2 pb-[5px] px-4 group-hover:bg-white group-hover:text-textColorActionHover font-sans text-xs text-textColor">
-                              <p>{event.location}</p>
+                            <div className="flex justify-between gap-x w-full pt-2 pb-[5px] px-4 group-hover:bg-white group-hover:text-textColorActionHover font-serif text-base text-textColor">
+                              <p>{getEventLocation(event)}</p>
                               <time dateTime={event.startDate}>
                                 {dateFormatter.format(
                                   new Date(event.startDate)
@@ -180,10 +255,12 @@ export const EventsList = ({ events, error }: EventsListProps) => {
         <RoughNotation
           type="box"
           show={isMobile ? false : true}
-          animate={false}
+          animate={true}
+          animationDuration={1000}
           color="#A90736"
-          iterations={6}
-          strokeWidth={1.5}
+          padding={10}
+          iterations={2}
+          strokeWidth={2.5}
         >
           <div className="hidden md:block">
             <Calendar
@@ -244,20 +321,26 @@ export const EventsList = ({ events, error }: EventsListProps) => {
         </RoughNotation>
 
         <div className="flex flex-col gap-yhalf">
-          <h4 className="hidden md:inline-block text-h4">Filters:</h4>
+          <h4 className="hidden md:inline-block text-h4">
+            Filter by city and venue:
+          </h4>
 
           <div className="flex flex-col gap-yhalf">
             <label
-              htmlFor="events-location-filter"
+              htmlFor="events-city-filter"
               className="hidden md:inline-block font-sans text-sm"
             >
-              Location
+              City
             </label>
             <div className="relative">
               <select
-                id="events-location-filter"
-                value={selectedLocation}
-                onChange={event => setSelectedLocation(event.target.value)}
+                id="events-city-filter"
+                value={selectedCity}
+                onChange={event => {
+                  const nextCity = event.target.value
+                  setSelectedCity(nextCity)
+                  setSelectedVenue('all')
+                }}
                 className="select w-full text-center bg-transparent"
                 style={{
                   backgroundImage: SELECT_HYPHEN_BG,
@@ -267,10 +350,10 @@ export const EventsList = ({ events, error }: EventsListProps) => {
                   borderColor: 'transparent',
                 }}
               >
-                <option value="all">All locations</option>
-                {locations.map(location => (
-                  <option key={location} value={location}>
-                    {location}
+                <option value="all">All cities</option>
+                {cities.map(city => (
+                  <option key={city} value={city}>
+                    {city}
                   </option>
                 ))}
               </select>
@@ -281,6 +364,48 @@ export const EventsList = ({ events, error }: EventsListProps) => {
               />
             </div>
           </div>
+
+          {selectedCity !== 'all' ? (
+            <div className="flex flex-col gap-yhalf">
+              <label
+                htmlFor="events-venue-filter"
+                className="hidden md:inline-block font-sans text-sm"
+              >
+                Venue
+              </label>
+              <div className="relative">
+                <select
+                  id="events-venue-filter"
+                  value={selectedVenue}
+                  onChange={event => setSelectedVenue(event.target.value)}
+                  className="select w-full text-center bg-transparent"
+                  style={{
+                    backgroundImage: SELECT_HYPHEN_BG,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderColor: 'transparent',
+                  }}
+                >
+                  <option value="all">All venues</option>
+                  {venueOptions.map(venueOption => (
+                    <option key={venueOption.value} value={venueOption.value}>
+                      {venueOption.label}
+                    </option>
+                  ))}
+                </select>
+
+                <RxTriangleDown
+                  className="w-6 h-auto pointer-events-none absolute right-xhalf top-1/2 -translate-y-1/2 text-black"
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+          ) : (
+            <p className="mt-yhalf font-sans text-sm opacity-50">
+              Select a city to filter by venue.
+            </p>
+          )}
         </div>
       </div>
     </div>

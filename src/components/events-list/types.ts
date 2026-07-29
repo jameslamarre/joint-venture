@@ -1,7 +1,8 @@
 export type EventListItem = {
   uid: string
   title: string
-  location: string
+  venue: string
+  city: string
   startDate: string
 }
 

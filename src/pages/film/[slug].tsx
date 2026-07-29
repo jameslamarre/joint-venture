@@ -275,10 +275,10 @@ const Project: NextPage<PageProps> = (
                   {project.year && <p className="font-serif">{project.year}</p>}
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-xdouble gap-y-y">
+                <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-start gap-x-xdouble gap-y-y">
                   <div
                     className="flex flex-col gap-y w-full text-base"
-                    style={{ color: 'var(--theme-text--tables)' }}
+                    style={{ color: 'var(--theme-text)' }}
                   >
                     {project.directedBy && (
                       <div className="">
