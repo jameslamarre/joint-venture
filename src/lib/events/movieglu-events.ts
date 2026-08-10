@@ -97,6 +97,19 @@ const formatShowtimeLabel = (date: string, time: string): string => {
   return showtimeLabelFormatter.format(new Date(`${date}T${time}:00`))
 }
 
+const parseCoordinate = (value: number | string | undefined): number | null => {
+  if (typeof value === 'number' && Number.isFinite(value)) {
+    return value
+  }
+
+  if (typeof value === 'string') {
+    const parsed = Number(value)
+    return Number.isFinite(parsed) ? parsed : null
+  }
+
+  return null
+}
+
 const getMovieGluShowingTitle = (
   showing: Record<string, unknown>
 ): string | null => {
@@ -285,6 +298,8 @@ export const getMovieGluEvents = async (
           venue: cinema.cinema_name || 'Theater TBA',
           city: cinema.city || 'City TBA',
           state: cinema.state,
+          latitude: parseCoordinate(cinema.lat),
+          longitude: parseCoordinate(cinema.lng),
           startDate: `${showDate}T23:59:00`,
           source: 'movieglu',
           showtimes: [],

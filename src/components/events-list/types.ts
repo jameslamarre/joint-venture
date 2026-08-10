@@ -16,6 +16,8 @@ export type EventListItem = {
   venue: string
   city: string
   state?: string
+  latitude?: number | null
+  longitude?: number | null
   startDate: string
   href?: string
   source?: 'itm' | 'movieglu'

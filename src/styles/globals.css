@@ -214,3 +214,26 @@ body {
 .rich-text:has(> .cta-align) ol {
   @apply text-left;
 }
+
+.calendar-selected-rough {
+  position: relative;
+}
+
+.calendar-selected-rough::before,
+.calendar-selected-rough::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  pointer-events: none;
+  border: 2px solid #a90736;
+}
+
+.calendar-selected-rough::before {
+  transform: rotate(-1.2deg);
+}
+
+.calendar-selected-rough::after {
+  inset: 4px 3px 3px 4px;
+  opacity: 0.75;
+  transform: rotate(0.8deg);
+}
