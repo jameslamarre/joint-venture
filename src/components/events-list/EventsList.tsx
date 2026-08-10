@@ -1,4 +1,4 @@
-import Link from 'next/link'
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { RoughNotation } from 'react-rough-notation'
 import { RxTriangleDown } from 'react-icons/rx'
@@ -8,58 +8,214 @@ import { Calendar } from '@components/ui/calendar'
 import {
   dateKeyFromDate,
   dateKeyFromISO,
-  getEventHref,
+  getEventHref as getItmEventHref,
   monthKeyFromISO,
   monthLabelFromISO,
   SELECT_HYPHEN_BG,
 } from './consts'
-import type { EventListItem, EventsListProps } from './types'
+import { EventListItem as EventListItemRow } from './EventListItem'
+import type {
+  EventListItem as EventListItemType,
+  EventShowtimeLink,
+  EventsListProps,
+} from './types'
 import { isMobile } from 'react-device-detect'
-import { dateFormatter } from '@lib/util/date-formatters'
 
 export const EventsList = ({ events, error }: EventsListProps) => {
+  const movieFilmOptions = [
+    {
+      value: '391297',
+      label: 'Example film',
+    },
+  ]
   const [selectedVenue, setSelectedVenue] = useState('all')
   const [selectedCity, setSelectedCity] = useState('all')
+  const [selectedFilmId, setSelectedFilmId] = useState('')
+  const [pendingShowtimeKey, setPendingShowtimeKey] = useState<string | null>(
+    null
+  )
+  const [displayedEvents, setDisplayedEvents] =
+    useState<EventListItemType[]>(events)
+  const [isLoadingMovieGlu, setIsLoadingMovieGlu] = useState(false)
+  const [movieGluLoadError, setMovieGluLoadError] = useState<string | null>(
+    null
+  )
 
-  const getVenueValue = (event: EventListItem): string => {
+  const visibleEvents = useMemo(() => {
+    if (selectedFilmId) {
+      return displayedEvents
+    }
+
+    return displayedEvents.filter(event => event.source === 'movieglu')
+  }, [displayedEvents, selectedFilmId])
+
+  useEffect(() => {
+    setDisplayedEvents(events)
+  }, [events])
+
+  const loadMovieGluEvents = async (filmId: string) => {
+    setIsLoadingMovieGlu(true)
+    setMovieGluLoadError(null)
+
+    try {
+      const response = await fetch(
+        `/api/movieglu-events?filmId=${encodeURIComponent(filmId)}`
+      )
+
+      if (!response.ok) {
+        setMovieGluLoadError('Failed to load movie showtimes.')
+        return
+      }
+
+      const payload = (await response.json()) as {
+        events?: EventListItemType[]
+      }
+
+      const movieEvents = payload.events ?? []
+
+      setDisplayedEvents(previousEvents => {
+        const eventMap = new Map<string, EventListItemType>()
+
+        for (const event of [...previousEvents, ...movieEvents]) {
+          eventMap.set(event.uid, event)
+        }
+
+        return Array.from(eventMap.values()).sort(
+          (a, b) =>
+            new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+        )
+      })
+    } catch {
+      setMovieGluLoadError('Failed to load movie showtimes.')
+    } finally {
+      setIsLoadingMovieGlu(false)
+    }
+  }
+
+  const resolveMovieGluShowtimeUrl = async (
+    showtime: EventShowtimeLink
+  ): Promise<string | undefined> => {
+    if (!showtime.movieGluLookup) {
+      return showtime.href
+    }
+
+    try {
+      const response = await fetch('/api/movieglu-purchase-confirmation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(showtime.movieGluLookup),
+      })
+
+      if (!response.ok) {
+        return showtime.href
+      }
+
+      const payload = (await response.json()) as { url?: string | null }
+
+      return payload.url ?? showtime.href
+    } catch {
+      return showtime.href
+    }
+  }
+
+  const onMovieGluShowtimeClick = async (
+    showtime: EventShowtimeLink,
+    key: string
+  ) => {
+    const popup = window.open('', '_blank', 'noopener,noreferrer')
+
+    setPendingShowtimeKey(key)
+    const resolvedUrl = await resolveMovieGluShowtimeUrl(showtime)
+    setPendingShowtimeKey(null)
+
+    if (!resolvedUrl) {
+      popup?.close()
+      return
+    }
+
+    if (popup) {
+      popup.location.href = resolvedUrl
+      return
+    }
+
+    window.open(resolvedUrl, '_blank', 'noopener,noreferrer')
+  }
+
+  const getEventHref = (event: EventListItemType): string => {
+    if (event.source === 'movieglu' && event.href) {
+      return event.href
+    }
+
+    if (event.href) {
+      return event.href
+    }
+
+    return getItmEventHref(event.linkTitle ?? event.title, event.uid)
+  }
+
+  const isExternalHref = (href: string): boolean => {
+    return /^https?:\/\//i.test(href)
+  }
+
+  const getVenueValue = (event: EventListItemType): string => {
     return event.venue || 'Venue TBA'
   }
 
-  const getCityValue = (event: EventListItem): string => {
+  const getCityValue = (event: EventListItemType): string => {
     return event.city || 'City TBA'
   }
 
+  const getStateValue = (event: EventListItemType): string => {
+    return event.state?.trim() ?? ''
+  }
+
+  const getCityLabel = (event: EventListItemType): string => {
+    const city = getCityValue(event)
+    const state = getStateValue(event)
+
+    return state ? `${city}, ${state}` : city
+  }
+
+  const getVenueLocationLabel = (event: EventListItemType): string => {
+    const venue = getVenueValue(event)
+    const cityLabel = getCityLabel(event)
+
+    return `${venue}, ${cityLabel}`
+  }
+
   const cities = useMemo(() => {
-    return Array.from(new Set(events.map(getCityValue))).sort((a, b) =>
+    return Array.from(new Set(visibleEvents.map(getCityLabel))).sort((a, b) =>
       a.localeCompare(b)
     )
-  }, [events])
+  }, [visibleEvents])
 
   const venuesForSelectedCity = useMemo(() => {
     if (selectedCity === 'all') {
       return []
     }
 
-    const cityEvents = events.filter(
-      event => getCityValue(event) === selectedCity
+    const cityEvents = visibleEvents.filter(
+      event => getCityLabel(event) === selectedCity
     )
 
     return Array.from(new Set(cityEvents.map(getVenueValue))).sort((a, b) =>
       a.localeCompare(b)
     )
-  }, [events, selectedCity])
+  }, [visibleEvents, selectedCity])
 
   const venueOptions = useMemo(() => {
     return venuesForSelectedCity.map(venue => {
       const venueCities = Array.from(
         new Set(
-          events
+          visibleEvents
             .filter(
               event =>
                 getVenueValue(event) === venue &&
-                getCityValue(event) === selectedCity
+                getCityLabel(event) === selectedCity
             )
-            .map(getCityValue)
+            .map(getCityLabel)
             .filter(city => city !== 'City TBA')
         )
       )
@@ -72,12 +228,12 @@ export const EventsList = ({ events, error }: EventsListProps) => {
             : venue,
       }
     })
-  }, [events, selectedCity, venuesForSelectedCity])
+  }, [visibleEvents, selectedCity, venuesForSelectedCity])
 
   const filteredEvents = useMemo(() => {
-    return events.filter(event => {
+    return visibleEvents.filter(event => {
       const matchesCity =
-        selectedCity === 'all' || getCityValue(event) === selectedCity
+        selectedCity === 'all' || getCityLabel(event) === selectedCity
       const matchesVenue =
         selectedCity === 'all' ||
         selectedVenue === 'all' ||
@@ -85,26 +241,7 @@ export const EventsList = ({ events, error }: EventsListProps) => {
 
       return matchesVenue && matchesCity
     })
-  }, [events, selectedVenue, selectedCity])
-
-  const getEventLocation = (event: EventListItem): string => {
-    const venue = getVenueValue(event)
-    const city = getCityValue(event)
-
-    if (venue === 'Venue TBA' && city === 'City TBA') {
-      return 'Location TBA'
-    }
-
-    if (venue === 'Venue TBA') {
-      return city
-    }
-
-    if (city === 'City TBA') {
-      return venue
-    }
-
-    return `${venue}, ${city}`
-  }
+  }, [visibleEvents, selectedVenue, selectedCity])
 
   const firstEventDateString = filteredEvents[0]?.startDate
 
@@ -122,7 +259,7 @@ export const EventsList = ({ events, error }: EventsListProps) => {
   const [hasNavigatedToNextMonth, setHasNavigatedToNextMonth] = useState(false)
 
   const eventsByDate = useMemo(() => {
-    return filteredEvents.reduce<Record<string, EventListItem[]>>(
+    return filteredEvents.reduce<Record<string, EventListItemType[]>>(
       (acc, event) => {
         const dateKey = dateKeyFromISO(event.startDate)
 
@@ -178,7 +315,7 @@ export const EventsList = ({ events, error }: EventsListProps) => {
     Array<{
       monthKey: string
       monthLabel: string
-      items: EventListItem[]
+      items: EventListItemType[]
     }>
   >((groups, event) => {
     const monthKey = monthKeyFromISO(event.startDate)
@@ -203,9 +340,61 @@ export const EventsList = ({ events, error }: EventsListProps) => {
       <div className="order-2 md:order-1 flex flex-col gap-y w-full">
         {error ? <p>{error}</p> : null}
 
-        {!error && filteredEvents.length === 0 ? (
-          <p>No upcoming events found.</p>
-        ) : null}
+        <div className="flex flex-col gap-yhalf">
+          <label htmlFor="events-film-filter" className="font-sans text-sm">
+            Select a film:
+          </label>
+          <div className="relative w-full">
+            <select
+              id="events-film-filter"
+              value={selectedFilmId}
+              onChange={event => {
+                const filmId = event.target.value
+                setSelectedFilmId(filmId)
+
+                if (!filmId) {
+                  return
+                }
+
+                void loadMovieGluEvents(filmId)
+              }}
+              disabled={isLoadingMovieGlu}
+              className="select w-full text-center bg-transparent disabled:opacity-60"
+              style={{
+                backgroundImage: SELECT_HYPHEN_BG,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                borderColor: 'transparent',
+              }}
+            >
+              <option value="">Select a film</option>
+              {movieFilmOptions.map(film => (
+                <option key={film.value} value={film.value}>
+                  {film.label}
+                </option>
+              ))}
+            </select>
+
+            <RxTriangleDown
+              className="w-6 h-auto pointer-events-none absolute right-xhalf top-1/2 -translate-y-1/2 text-black"
+              aria-hidden="true"
+            />
+          </div>
+
+          {!error && filteredEvents.length === 0 && selectedFilmId ? (
+            <p>No upcoming events found.</p>
+          ) : null}
+
+          {isLoadingMovieGlu ? (
+            <span className="font-sans text-sm">
+              Loading movie showtimes...
+            </span>
+          ) : null}
+          {movieGluLoadError ? (
+            <span className="font-sans text-sm">{movieGluLoadError}</span>
+          ) : null}
+        </div>
 
         <div className="flex flex-col gap-y w-full">
           {!error
@@ -216,34 +405,19 @@ export const EventsList = ({ events, error }: EventsListProps) => {
                 >
                   <h2 className="text-h2">{group.monthLabel}</h2>
                   <ul className="flex flex-col gap-y">
-                    {group.items.map(event => (
-                      <li key={event.uid} id={`event-${event.uid}`}>
-                        <Link
-                          href={getEventHref(event.title, event.uid)}
-                          className="flex flex-col gap-3 group"
-                        >
-                          <div
-                            className="text-textColorTables"
-                            style={{ border: `1px solid var(--theme-text)` }}
-                          >
-                            <h3
-                              style={{ color: `var(--theme-text--tables)` }}
-                              className="w-full pt-2 pb-[5px] px-4 bg-white group-hover:bg-black group-hover:!text-white border-bottom font-sans text-sm"
-                            >
-                              {event.title}
-                            </h3>
-                            <div className="flex justify-between gap-x w-full pt-2 pb-[5px] px-4 group-hover:bg-white group-hover:text-textColorActionHover font-serif text-base text-textColor">
-                              <p>{getEventLocation(event)}</p>
-                              <time dateTime={event.startDate}>
-                                {dateFormatter.format(
-                                  new Date(event.startDate)
-                                )}
-                              </time>
-                            </div>
-                          </div>
-                        </Link>
-                      </li>
-                    ))}
+                    {group.items.map(event => {
+                      return (
+                        <EventListItemRow
+                          key={event.uid}
+                          event={event}
+                          eventHref={getEventHref(event)}
+                          venueLocationLabel={getVenueLocationLabel(event)}
+                          pendingShowtimeKey={pendingShowtimeKey}
+                          onMovieGluShowtimeClick={onMovieGluShowtimeClick}
+                          isExternalHref={isExternalHref}
+                        />
+                      )
+                    })}
                   </ul>
                 </section>
               ))
