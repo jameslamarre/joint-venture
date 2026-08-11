@@ -2,10 +2,10 @@ export type PartnerMoment = {
   uid: string
   name: string | null
   startDate: string | null
-  coverImage: {
+  coverImage?: {
     url: string | null
   } | null
-  venue: {
+  venue?: {
     name: string | null
     city: string | null
     country: string | null

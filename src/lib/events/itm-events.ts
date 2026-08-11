@@ -47,10 +47,10 @@ export const getItmEvents = async (token: string): Promise<EventListItem[]> => {
       const queryResult = await itm.query({
         getPartnerMomentsForBrand: {
           __args: {
+            take: 20,
             status,
             sortOrder: 'ASC',
-            take: 50,
-            ...(cursor ? { cursor } : {}),
+            filters: { includePrivate: true },
           },
           moments: {
             uid: true,
@@ -70,6 +70,8 @@ export const getItmEvents = async (token: string): Promise<EventListItem[]> => {
           nextCursor: true,
         },
       })
+
+      console.log('ITM query result:', queryResult)
 
       const momentsResponse =
         queryResult.getPartnerMomentsForBrand as PartnerMomentsForBrandResponse
@@ -99,6 +101,8 @@ export const getItmEvents = async (token: string): Promise<EventListItem[]> => {
   }
 
   const upcomingEvents = await fetchMomentsByStatus('UPCOMING')
+
+  console.log('ITM upcoming events:', upcomingEvents)
 
   if (upcomingEvents.length > 0) {
     return upcomingEvents

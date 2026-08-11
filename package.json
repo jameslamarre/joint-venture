@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.10",
-    "@itm-studio/partner-sdk": "^0.2.8",
+    "@itm-studio/partner-sdk": "^0.2.9",
     "@portabletext/react": "^3.2.4",
     "@portabletext/types": "^2.0.15",
     "@sanity/asset-utils": "^2.3.0",
