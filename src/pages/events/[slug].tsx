@@ -75,6 +75,7 @@ export const getServerSideProps: GetServerSideProps<
             sortOrder: 'ASC',
             take: 50,
             ...(cursor ? { cursor } : {}),
+            filters: { includePrivate: true },
           },
           moments: {
             uid: true,
