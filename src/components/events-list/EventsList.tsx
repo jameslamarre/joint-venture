@@ -660,15 +660,11 @@ export const EventsList = ({ events, error }: EventsListProps) => {
         ) : null}
 
         <div className="flex flex-col gap-yhalf">
-          <h4 className="hidden md:inline-block text-h4">
-            Find events near you
-          </h4>
-
           <label
             htmlFor="events-near-you-filter"
-            className="hidden md:inline-block font-sans text-sm"
+            className="hidden md:inline-block text-h4"
           >
-            Enter ZIP, city, or address
+            Find events near you
           </label>
 
           <input
@@ -676,7 +672,7 @@ export const EventsList = ({ events, error }: EventsListProps) => {
             type="text"
             value={nearYouInput}
             onChange={event => setNearYouInput(event.target.value)}
-            placeholder="10003 or New York, NY"
+            placeholder="Enter zipcode, i.e. 90210"
             className="w-full border px-3 py-2 font-sans text-sm"
             style={{
               borderColor: 'var(--theme-text)',
