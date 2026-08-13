@@ -67,7 +67,7 @@ export const EventListItem = ({
         <div className="flex-1 min-w-0">
           <h3
             style={{ color: `var(--theme-text--tables)` }}
-            className="w-full pt-2 pb-[5px] px-4 bg-white border-bottom font-sans text-sm"
+            className="w-full pt-2 pb-[5px] px-4 bg-white border-bottom font-sans text-base"
           >
             {event.title}
           </h3>
@@ -75,7 +75,9 @@ export const EventListItem = ({
             style={{ color: `var(--theme-text--tables)` }}
             className="w-full pt-2 pb-[5px] px-4 bg-white border-bottom font-sans text-sm flex items-center justify-between gap-x-3"
           >
-            <h4 className="min-w-0">{venueLocationLabel}</h4>
+            <h4 className="font-serif text-base min-w-0">
+              {venueLocationLabel}
+            </h4>
             {event.venueLogoUrl ? (
               <img
                 src={event.venueLogoUrl}
@@ -85,7 +87,7 @@ export const EventListItem = ({
               />
             ) : null}
           </div>
-          <div className="flex justify-between gap-x w-full pt-2 pb-[5px] px-4 font-serif text-base text-textColor">
+          <div className="flex justify-between gap-x w-full pt-2 pb-[5px] px-4 font-sans text-sm leading-tight ">
             <EventListItemActions
               showtimes={showtimes}
               pendingShowtimeKey={pendingShowtimeKey}
