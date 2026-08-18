@@ -641,7 +641,7 @@ export const EventsList = ({ events, error }: EventsListProps) => {
             value={nearYouInput}
             onChange={event => setNearYouInput(event.target.value)}
             placeholder="Enter zipcode, i.e. 90210"
-            className="w-full border px-3 py-2 font-sans text-sm"
+            className="input w-full border px-3 py-2 font-sans text-sm"
             style={{
               borderColor: 'var(--theme-text)',
             }}
