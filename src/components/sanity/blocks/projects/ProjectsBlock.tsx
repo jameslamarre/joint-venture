@@ -65,12 +65,13 @@ export const ProjectsBlock: FC<ProjectsBlockProps> = ({
                     className="flex flex-col gap-3 group"
                   >
                     <RoughNotation
-                      type="bracket"
-                      brackets={['left', 'right']}
+                      type="box"
                       show={hoveredProjectKey === projectKey}
-                      color="#CFE806"
-                      animationDuration={150}
-                      strokeWidth={3}
+                      color="#A90736"
+                      animationDuration={300}
+                      padding={10}
+                      iterations={2}
+                      strokeWidth={2.5}
                     >
                       <div className="flex flex-col gap-3">
                         {project.previewImage && (
@@ -115,12 +116,13 @@ export const ProjectsBlock: FC<ProjectsBlockProps> = ({
                     className="flex flex-col gap-3 group"
                   >
                     <RoughNotation
-                      type="bracket"
-                      brackets={['left', 'right']}
+                      type="box"
                       show={hoveredProjectKey === projectKey}
-                      color="#CFE806"
-                      animationDuration={200}
-                      strokeWidth={3}
+                      color="#A90736"
+                      animationDuration={300}
+                      padding={10}
+                      iterations={2}
+                      strokeWidth={2.5}
                     >
                       <div className="flex flex-col gap-3">
                         {project.previewImage && (

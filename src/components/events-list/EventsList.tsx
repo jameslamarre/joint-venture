@@ -360,14 +360,14 @@ export const EventsList = ({ events, error }: EventsListProps) => {
   }, [distanceByEventUid, isSortingByDistance, visibleEvents])
 
   const filteredEvents = useMemo(() => {
-    if (!isSortingByDistance || !distanceDateFilterKey) {
+    if (!distanceDateFilterKey) {
       return distanceSortedEvents
     }
 
     return distanceSortedEvents.filter(event => {
       return dateKeyFromISO(event.startDate) === distanceDateFilterKey
     })
-  }, [distanceDateFilterKey, distanceSortedEvents, isSortingByDistance])
+  }, [distanceDateFilterKey, distanceSortedEvents])
 
   const firstEventDateString = filteredEvents[0]?.startDate
 
@@ -407,28 +407,6 @@ export const EventsList = ({ events, error }: EventsListProps) => {
       setSelectedDate(firstEventDate)
     }
   }, [enabledDateSet, firstEventDate, selectedDate])
-
-  const scrollToDateEvent = useCallback(
-    (date: Date) => {
-      const dateKey = dateKeyFromDate(date)
-      const firstEvent = eventsByDate[dateKey]?.[0]
-
-      if (!firstEvent) {
-        return
-      }
-
-      const target = document.getElementById(`event-${firstEvent.uid}`)
-      if (!target) {
-        return
-      }
-
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      })
-    },
-    [eventsByDate]
-  )
 
   const groupedEvents = filteredEvents.reduce<
     Array<{
@@ -591,10 +569,7 @@ export const EventsList = ({ events, error }: EventsListProps) => {
               }}
               modifiersClassNames={{
                 hasEvent: 'underline underline-offset-4',
-                selected:
-                  isSortingByDistance && selectedDate
-                    ? 'calendar-selected-rough'
-                    : '',
+                selected: selectedDate ? 'calendar-selected-rough' : '',
               }}
               disabled={
                 isSortingByDistance
@@ -611,12 +586,7 @@ export const EventsList = ({ events, error }: EventsListProps) => {
 
                 setSelectedDate(date)
 
-                if (isSortingByDistance) {
-                  setDistanceDateFilterKey(dateKeyFromDate(date))
-                  return
-                }
-
-                scrollToDateEvent(date)
+                setDistanceDateFilterKey(dateKeyFromDate(date))
               }}
               onMonthChange={month => {
                 const now = new Date()
@@ -653,11 +623,9 @@ export const EventsList = ({ events, error }: EventsListProps) => {
           </div>
         </RoughNotation>
 
-        {isSortingByDistance && sortedByDistanceTo ? (
-          <p className="hidden md:block font-sans text-xs opacity-60">
-            Click a date in the calendar to filter by date.
-          </p>
-        ) : null}
+        <p className="hidden md:block font-sans text-xs opacity-60">
+          Click a date in the calendar to filter by date.
+        </p>
 
         <div className="flex flex-col gap-yhalf">
           <label
@@ -689,7 +657,7 @@ export const EventsList = ({ events, error }: EventsListProps) => {
               {isSortingByDistanceLoading ? 'Sorting...' : 'Sort by distance'}
             </button>
 
-            {isSortingByDistance ? (
+            {isSortingByDistance || distanceDateFilterKey ? (
               <button
                 type="button"
                 onClick={() => {
