@@ -623,7 +623,7 @@ export const EventsList = ({ events, error }: EventsListProps) => {
           </div>
         </RoughNotation>
 
-        <p className="hidden md:block font-sans text-xs opacity-60">
+        <p className="hidden md:block font-sans text-xs">
           Click a date in the calendar to filter by date.
         </p>
 
