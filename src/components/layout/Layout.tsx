@@ -229,7 +229,7 @@ export const Layout: FC<LayoutProps> = ({
         if (absAccumulator < 150) {
           setKeyHoldProgress(0)
         } else {
-          const progress = Math.min((absAccumulator - 50) / 700, 1) * 100 // 700px scroll distance for full progress
+          const progress = Math.min((absAccumulator - 50) / 2400, 1) * 100 // 2400px scroll distance for full progress
           setKeyHoldProgress(progress)
 
           // Trigger navigation when scroll threshold is reached
