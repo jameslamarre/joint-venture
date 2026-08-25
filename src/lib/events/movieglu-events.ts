@@ -290,7 +290,7 @@ export const getMovieGluEvents = async (
       const groupKey = `${showDate}-${cinema.cinema_id}`
 
       if (!groupedEvents.has(groupKey)) {
-        const eventUid = `movieglu-${showDate}-${cinema.cinema_id}`
+        const eventUid = `movieglu-${selectedFilmId}-${showDate}-${cinema.cinema_id}`
 
         groupedEvents.set(groupKey, {
           uid: eventUid,
@@ -398,4 +398,41 @@ export const getMovieGluEvents = async (
   })
 
   return eventsWithLogos
+}
+
+export const getMovieGluEventsForFilmIds = async (
+  filmIds: number[]
+): Promise<EventListItem[]> => {
+  const normalizedFilmIds = Array.from(
+    new Set(
+      filmIds.filter(
+        filmId =>
+          typeof filmId === 'number' && Number.isFinite(filmId) && filmId > 0
+      )
+    )
+  )
+
+  if (normalizedFilmIds.length === 0) {
+    return []
+  }
+
+  const filmResults = await Promise.allSettled(
+    normalizedFilmIds.map(filmId => getMovieGluEvents(filmId))
+  )
+
+  const eventMap = new Map<string, EventListItem>()
+
+  for (const result of filmResults) {
+    if (result.status !== 'fulfilled') {
+      continue
+    }
+
+    for (const event of result.value) {
+      eventMap.set(event.uid, event)
+    }
+  }
+
+  return Array.from(eventMap.values()).sort(
+    (a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+  )
 }

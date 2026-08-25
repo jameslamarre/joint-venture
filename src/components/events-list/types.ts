@@ -30,6 +30,7 @@ export type EventsPageProps = {
   events: EventListItem[]
   error: string | null
   movieGluDeferred?: boolean
+  movieGluFilmIds?: number[]
 }
 
 export type EventsListProps = EventsPageProps

@@ -1,7 +1,29 @@
 import type { EventsPageProps } from '@components/events-list'
+import { client } from '@studio/lib'
+import groq from 'groq'
 
 import { getItmEvents } from './itm-events'
-import { getMovieGluEvents } from './movieglu-events'
+import { getMovieGluEventsForFilmIds } from './movieglu-events'
+
+const PROJECT_MOVIE_GLU_IDS_QUERY = groq`
+  *[_type == "project" && defined(movieGluId)].movieGluId
+`
+
+const getProjectMovieGluIds = async (): Promise<number[]> => {
+  const rawIds = await client.fetch(PROJECT_MOVIE_GLU_IDS_QUERY)
+
+  if (!Array.isArray(rawIds)) {
+    return []
+  }
+
+  return Array.from(
+    new Set(
+      rawIds
+        .map(id => (typeof id === 'string' ? Number(id.trim()) : Number(id)))
+        .filter(id => Number.isFinite(id) && id > 0)
+    )
+  )
+}
 
 export const getEventsPageProps = async (): Promise<EventsPageProps> => {
   const token = process.env.ITM_PARTNER_TOKEN
@@ -9,11 +31,14 @@ export const getEventsPageProps = async (): Promise<EventsPageProps> => {
     process.env.MOVIEGLU_LOAD_ON_SERVER === 'true'
 
   try {
+    const movieGluFilmIds = await getProjectMovieGluIds()
     const loadErrors: string[] = []
 
     const [itmResult, movieGluResult] = await Promise.allSettled([
       token ? getItmEvents(token) : Promise.resolve([]),
-      shouldLoadMovieGluOnServer ? getMovieGluEvents() : Promise.resolve([]),
+      shouldLoadMovieGluOnServer && movieGluFilmIds.length > 0
+        ? getMovieGluEventsForFilmIds(movieGluFilmIds)
+        : Promise.resolve([]),
     ])
 
     const itmEvents = itmResult.status === 'fulfilled' ? itmResult.value : []
@@ -54,6 +79,7 @@ export const getEventsPageProps = async (): Promise<EventsPageProps> => {
     return {
       events,
       movieGluDeferred: !shouldLoadMovieGluOnServer,
+      movieGluFilmIds,
       error:
         events.length === 0 && loadErrors.length > 0
           ? loadErrors.join(' ')
@@ -66,6 +92,7 @@ export const getEventsPageProps = async (): Promise<EventsPageProps> => {
     return {
       events: [],
       movieGluDeferred: !shouldLoadMovieGluOnServer,
+      movieGluFilmIds: [],
       error: `Failed to load events: ${message}`,
     }
   }

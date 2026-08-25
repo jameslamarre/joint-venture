@@ -33,6 +33,11 @@ export default {
       },
     },
     {
+      name: 'movieGluId',
+      title: 'Movie Glu ID',
+      type: 'string',
+    },
+    {
       name: 'previewImage',
       title: 'Preview Image',
       type: 'image',

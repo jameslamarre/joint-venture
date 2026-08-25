@@ -17,13 +17,14 @@ export const getServerSideProps: GetServerSideProps<
 
 const EventsPage: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ events, error, movieGluDeferred }) => {
+> = ({ events, error, movieGluDeferred, movieGluFilmIds }) => {
   return (
     <div className="py-page px-x max-w-container mx-auto">
       <EventsList
         events={events}
         error={error}
         movieGluDeferred={movieGluDeferred}
+        movieGluFilmIds={movieGluFilmIds}
       />
     </div>
   )

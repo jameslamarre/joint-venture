@@ -1,7 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import type { EventListItem } from '@components/events-list/types'
-import { getMovieGluEvents } from '@lib/events/movieglu-events'
+import {
+  getMovieGluEvents,
+  getMovieGluEventsForFilmIds,
+} from '@lib/events/movieglu-events'
 
 type MovieGluEventsResponse = {
   events: EventListItem[]
@@ -17,6 +20,26 @@ export default async function handler(
   }
 
   try {
+    const requestedFilmIds = Array.isArray(req.query.filmIds)
+      ? req.query.filmIds[0]
+      : req.query.filmIds
+    const parsedFilmIds =
+      typeof requestedFilmIds === 'string'
+        ? requestedFilmIds
+            .split(',')
+            .map(value => Number(value.trim()))
+            .filter(value => Number.isFinite(value) && value > 0)
+        : []
+
+    if (typeof requestedFilmIds === 'string' && parsedFilmIds.length === 0) {
+      return res.status(200).json({ events: [] })
+    }
+
+    if (parsedFilmIds.length > 0) {
+      const events = await getMovieGluEventsForFilmIds(parsedFilmIds)
+      return res.status(200).json({ events })
+    }
+
     const requestedFilmId = Array.isArray(req.query.filmId)
       ? req.query.filmId[0]
       : req.query.filmId

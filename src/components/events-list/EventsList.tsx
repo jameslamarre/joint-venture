@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { RoughNotation } from 'react-rough-notation'
-import { RxTriangleDown } from 'react-icons/rx'
 
 import { Calendar } from '@components/ui/calendar'
 
@@ -11,7 +10,6 @@ import {
   getEventHref as getItmEventHref,
   monthKeyFromISO,
   monthLabelFromISO,
-  SELECT_HYPHEN_BG,
 } from './consts'
 import { EventListItem as EventListItemRow } from './EventListItem'
 import type {
@@ -58,14 +56,12 @@ const buildEventLocationQuery = (event: EventListItemType): string => {
   return [event.venue, event.city, event.state].filter(Boolean).join(', ')
 }
 
-export const EventsList = ({ events, error }: EventsListProps) => {
-  const movieFilmOptions = [
-    {
-      value: '391297',
-      label: 'Example film',
-    },
-  ]
-  const [selectedFilmId, setSelectedFilmId] = useState('')
+export const EventsList = ({
+  events,
+  error,
+  movieGluDeferred,
+  movieGluFilmIds,
+}: EventsListProps) => {
   const [nearYouInput, setNearYouInput] = useState('')
   const [sortedByDistanceTo, setSortedByDistanceTo] = useState('')
   const [distanceByEventUid, setDistanceByEventUid] = useState<
@@ -90,6 +86,8 @@ export const EventsList = ({ events, error }: EventsListProps) => {
   const [movieGluLoadError, setMovieGluLoadError] = useState<string | null>(
     null
   )
+  const [hasLoadedDeferredMovieGlu, setHasLoadedDeferredMovieGlu] =
+    useState(false)
   const geocodeCache = useRef<Map<string, Coordinates | null>>(new Map())
 
   const displayedEvents = useMemo(() => {
@@ -214,13 +212,13 @@ export const EventsList = ({ events, error }: EventsListProps) => {
     }
   }, [nearYouInput, resolveCoordinates, visibleEvents])
 
-  const loadMovieGluEvents = async (filmId: string) => {
+  const loadMovieGluEvents = async (filmIds: number[]) => {
     setIsLoadingMovieGlu(true)
     setMovieGluLoadError(null)
 
     try {
       const response = await fetch(
-        `/api/movieglu-events?filmId=${encodeURIComponent(filmId)}`
+        `/api/movieglu-events?filmIds=${encodeURIComponent(filmIds.join(','))}`
       )
 
       if (!response.ok) {
@@ -252,6 +250,29 @@ export const EventsList = ({ events, error }: EventsListProps) => {
       setIsLoadingMovieGlu(false)
     }
   }
+
+  useEffect(() => {
+    if (!movieGluDeferred || hasLoadedDeferredMovieGlu) {
+      return
+    }
+
+    const normalizedFilmIds = Array.from(
+      new Set(
+        (movieGluFilmIds ?? []).filter(
+          filmId =>
+            typeof filmId === 'number' && Number.isFinite(filmId) && filmId > 0
+        )
+      )
+    )
+
+    setHasLoadedDeferredMovieGlu(true)
+
+    if (normalizedFilmIds.length === 0) {
+      return
+    }
+
+    void loadMovieGluEvents(normalizedFilmIds)
+  }, [hasLoadedDeferredMovieGlu, movieGluDeferred, movieGluFilmIds])
 
   const resolveMovieGluShowtimeUrl = async (
     showtime: EventShowtimeLink
@@ -437,61 +458,22 @@ export const EventsList = ({ events, error }: EventsListProps) => {
       <div className="order-2 md:order-1 flex flex-col gap-y w-full">
         {error ? <p>{error}</p> : null}
 
-        <div className="flex flex-col gap-yhalf">
-          <label htmlFor="events-film-filter" className="font-sans text-sm">
-            Select a film:
-          </label>
-          <div className="relative w-full">
-            <select
-              id="events-film-filter"
-              value={selectedFilmId}
-              onChange={event => {
-                const filmId = event.target.value
-                setSelectedFilmId(filmId)
+        {((!error && filteredEvents.length === 0) || movieGluLoadError) && (
+          <div className="flex flex-col gap-yhalf">
+            {!error && filteredEvents.length === 0 ? (
+              <p>No upcoming events found.</p>
+            ) : null}
 
-                if (!filmId) {
-                  return
-                }
-
-                void loadMovieGluEvents(filmId)
-              }}
-              disabled={isLoadingMovieGlu}
-              className="select w-full text-center bg-transparent disabled:opacity-60"
-              style={{
-                backgroundImage: SELECT_HYPHEN_BG,
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                borderColor: 'transparent',
-              }}
-            >
-              <option value="">Select a film</option>
-              {movieFilmOptions.map(film => (
-                <option key={film.value} value={film.value}>
-                  {film.label}
-                </option>
-              ))}
-            </select>
-
-            <RxTriangleDown
-              className="w-6 h-auto pointer-events-none absolute right-xhalf top-1/2 -translate-y-1/2 text-black"
-              aria-hidden="true"
-            />
+            {isLoadingMovieGlu ? (
+              <span className="font-sans text-sm">
+                Loading movie showtimes...
+              </span>
+            ) : null}
+            {movieGluLoadError ? (
+              <span className="font-sans text-sm">{movieGluLoadError}</span>
+            ) : null}
           </div>
-
-          {!error && filteredEvents.length === 0 && selectedFilmId ? (
-            <p>No upcoming events found.</p>
-          ) : null}
-
-          {isLoadingMovieGlu ? (
-            <span className="font-sans text-sm">
-              Loading movie showtimes...
-            </span>
-          ) : null}
-          {movieGluLoadError ? (
-            <span className="font-sans text-sm">{movieGluLoadError}</span>
-          ) : null}
-        </div>
+        )}
 
         <div className="flex flex-col gap-y w-full">
           {isSortingByDistance && sortedByDistanceTo ? (
