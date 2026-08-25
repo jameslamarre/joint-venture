@@ -95,7 +95,10 @@ export const EventListItem = ({
               isExternalHref={isExternalHref}
               eventUid={event.uid}
             />
-            <time dateTime={event.startDate}>
+            <time
+              style={{ color: `var(--theme-text)` }}
+              dateTime={event.startDate}
+            >
               {dateFormatter.format(new Date(event.startDate))}
             </time>
           </div>
