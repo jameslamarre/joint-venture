@@ -57,7 +57,7 @@ export const HeaderMenu: FC<HeaderMenuProps & HTMLProps<HTMLDivElement>> = ({
       { x: isMobile ? '15%' : '30%', y: isMobile ? 320 : 455 },
       { x: isMobile ? '40%' : '57.5%', y: isMobile ? 440 : 570 },
       { x: isMobile ? '40%' : '45%', y: isMobile ? 250 : 320 },
-      { x: isMobile ? '55%' : '26%', y: isMobile ? 190 : 600 },
+      { x: isMobile ? '55%' : '26%', y: isMobile ? 190 : 640 },
     ],
   ]
 
