@@ -68,7 +68,7 @@ export const ProjectsBlock: FC<ProjectsBlockProps> = ({
                       type="box"
                       show={hoveredProjectKey === projectKey}
                       color="#A90736"
-                      animationDuration={300}
+                      animationDuration={500}
                       padding={10}
                       iterations={2}
                       strokeWidth={2.5}
@@ -119,7 +119,7 @@ export const ProjectsBlock: FC<ProjectsBlockProps> = ({
                       type="box"
                       show={hoveredProjectKey === projectKey}
                       color="#A90736"
-                      animationDuration={300}
+                      animationDuration={500}
                       padding={10}
                       iterations={2}
                       strokeWidth={2.5}

@@ -85,9 +85,20 @@ export const Header: FC<HeaderProps> = ({
           href="/events"
           className="flex items-center relative h-full -ml-3"
         >
-          <button className="flex items-center relative w-12 md:w-16 h-full">
-            <IconTicket stroke="var(--theme-text--menu)" />
-          </button>
+          <AnimatePresence mode="wait">
+            {!menuOpen && (
+              <motion.button
+                key="menu-ticket-key"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0 }}
+                transition={{ duration: 0.2, ease: 'easeInOut' }}
+                className="flex items-center relative w-12 md:w-16 h-full"
+              >
+                <IconTicket stroke="var(--theme-text--menu)" />
+              </motion.button>
+            )}
+          </AnimatePresence>
         </Link>
 
         <div className="relative mt-2 mr-8 uppercase z-above">
