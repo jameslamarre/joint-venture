@@ -1,16 +1,51 @@
 /* eslint-disable @next/next/no-img-element */
-import { dateFormatter } from '@lib/util/date-formatters'
-
 import { EventListItemActions } from './actions'
 import type {
   EventListItem as EventListItemType,
   EventShowtimeLink,
 } from './types'
 
-const eventTimeFormatter = new Intl.DateTimeFormat('en-US', {
-  hour: 'numeric',
-  minute: '2-digit',
-})
+const formatEventTime = (
+  startDate: string,
+  timezone?: string | null
+): string => {
+  const normalizedTimezone = timezone?.trim() || undefined
+
+  try {
+    return new Intl.DateTimeFormat('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      timeZone: normalizedTimezone,
+    }).format(new Date(startDate))
+  } catch {
+    return new Intl.DateTimeFormat('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+    }).format(new Date(startDate))
+  }
+}
+
+const formatEventDate = (
+  startDate: string,
+  timezone?: string | null
+): string => {
+  const normalizedTimezone = timezone?.trim() || undefined
+
+  try {
+    return new Intl.DateTimeFormat('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      timeZone: normalizedTimezone,
+    }).format(new Date(startDate))
+  } catch {
+    return new Intl.DateTimeFormat('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    }).format(new Date(startDate))
+  }
+}
 
 type EventListItemProps = {
   event: EventListItemType
@@ -36,7 +71,7 @@ export const EventListItem = ({
       ? event.showtimes ?? []
       : [
           {
-            label: eventTimeFormatter.format(new Date(event.startDate)),
+            label: formatEventTime(event.startDate, event.timezone),
             href: eventHref,
           },
         ]
@@ -99,7 +134,7 @@ export const EventListItem = ({
               style={{ color: `var(--theme-text)` }}
               dateTime={event.startDate}
             >
-              {dateFormatter.format(new Date(event.startDate))}
+              {formatEventDate(event.startDate, event.timezone)}
             </time>
           </div>
         </div>

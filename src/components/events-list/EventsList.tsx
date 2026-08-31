@@ -386,7 +386,10 @@ export const EventsList = ({
     }
 
     return distanceSortedEvents.filter(event => {
-      return dateKeyFromISO(event.startDate) === distanceDateFilterKey
+      return (
+        dateKeyFromISO(event.startDate, event.timezone) ===
+        distanceDateFilterKey
+      )
     })
   }, [distanceDateFilterKey, distanceSortedEvents])
 
@@ -406,7 +409,7 @@ export const EventsList = ({
   const eventsByDate = useMemo(() => {
     return filteredEvents.reduce<Record<string, EventListItemType[]>>(
       (acc, event) => {
-        const dateKey = dateKeyFromISO(event.startDate)
+        const dateKey = dateKeyFromISO(event.startDate, event.timezone)
 
         if (!acc[dateKey]) {
           acc[dateKey] = []
@@ -420,7 +423,11 @@ export const EventsList = ({
   }, [filteredEvents])
 
   const enabledDateSet = useMemo(() => {
-    return new Set(visibleEvents.map(event => dateKeyFromISO(event.startDate)))
+    return new Set(
+      visibleEvents.map(event =>
+        dateKeyFromISO(event.startDate, event.timezone)
+      )
+    )
   }, [visibleEvents])
 
   useEffect(() => {
@@ -436,7 +443,7 @@ export const EventsList = ({
       items: EventListItemType[]
     }>
   >((groups, event) => {
-    const monthKey = monthKeyFromISO(event.startDate)
+    const monthKey = monthKeyFromISO(event.startDate, event.timezone)
     const existing = groups.find(group => group.monthKey === monthKey)
 
     if (existing) {
@@ -446,7 +453,7 @@ export const EventsList = ({
 
     groups.push({
       monthKey,
-      monthLabel: monthLabelFromISO(event.startDate),
+      monthLabel: monthLabelFromISO(event.startDate, event.timezone),
       items: [event],
     })
 
@@ -609,7 +616,7 @@ export const EventsList = ({
           Click a date in the calendar to filter by date.
         </p>
 
-        <div className="flex flex-col gap-yhalf">
+        {/* <div className="flex flex-col gap-yhalf">
           <label
             htmlFor="events-near-you-filter"
             className="hidden md:inline-block text-h4"
@@ -661,7 +668,7 @@ export const EventsList = ({
           {distanceSortError ? (
             <p className="font-sans text-sm">{distanceSortError}</p>
           ) : null}
-        </div>
+        </div> */}
       </div>
     </div>
   )

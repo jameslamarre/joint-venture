@@ -3,9 +3,35 @@ import Link from 'next/link'
 import Script from 'next/script'
 import { Fragment } from 'react'
 
-import { dateTimeFormatter } from '@lib/util/date-formatters'
-
 const DESCRIPTION_TOKEN_REGEX = /(\*\*[^*]+\*\*|\*[^*]+\*)/g
+
+const formatEventDateTime = (
+  startDate: string,
+  timezone: string | null
+): string => {
+  const normalizedTimezone = timezone?.trim() || undefined
+
+  try {
+    return new Intl.DateTimeFormat('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      timeZone: normalizedTimezone,
+      timeZoneName: 'short',
+    }).format(new Date(startDate))
+  } catch {
+    return new Intl.DateTimeFormat('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      timeZoneName: 'short',
+    }).format(new Date(startDate))
+  }
+}
 
 const renderFormattedDescription = (description: string) => {
   const lines = description.split(/\r?\n/)
@@ -58,6 +84,7 @@ export type EventContent = {
   momentSlug: string | null
   title: string
   startDate: string
+  timezone: string | null
   location: string
   description: string
   imageUrl: string | null
@@ -79,7 +106,7 @@ export const Event = ({ event }: EventProps) => {
               <p>
                 <span className="font-sans">When: </span>
                 <time dateTime={event.startDate} className="text-baseSerif">
-                  {dateTimeFormatter.format(new Date(event.startDate))}
+                  {formatEventDateTime(event.startDate, event.timezone)}
                 </time>
               </p>
               <p>

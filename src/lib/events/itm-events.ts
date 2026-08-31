@@ -19,6 +19,7 @@ const getFallbackItmEvents = (): EventListItem[] => {
       latitude: 34.1119,
       longitude: -118.3371,
       startDate: new Date(Date.UTC(year, 7, 22, 19, 0, 0)).toISOString(),
+      timezone: 'America/Los_Angeles',
       source: 'itm',
     },
     {
@@ -29,6 +30,7 @@ const getFallbackItmEvents = (): EventListItem[] => {
       latitude: 40.7299,
       longitude: -73.9928,
       startDate: new Date(Date.UTC(year, 7, 26, 19, 0, 0)).toISOString(),
+      timezone: 'America/New_York',
       source: 'itm',
     },
   ]
@@ -56,6 +58,8 @@ export const getItmEvents = async (token: string): Promise<EventListItem[]> => {
             uid: true,
             name: true,
             startDate: true,
+            timezone: true,
+            externalUrl: true,
             coverImage: {
               url: true,
             },
@@ -87,6 +91,7 @@ export const getItmEvents = async (token: string): Promise<EventListItem[]> => {
           venue: moment.venue?.name ?? 'Venue TBA',
           city: moment.venue?.city ?? 'City TBA',
           startDate: moment.startDate,
+          timezone: moment.timezone ?? null,
           source: 'itm',
           itemImageUrl: moment.coverImage?.url ?? null,
         })

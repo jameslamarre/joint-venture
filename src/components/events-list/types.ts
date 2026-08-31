@@ -19,6 +19,7 @@ export type EventListItem = {
   latitude?: number | null
   longitude?: number | null
   startDate: string
+  timezone?: string | null
   href?: string
   source?: 'itm' | 'movieglu'
   itemImageUrl?: string | null

@@ -2,6 +2,7 @@ export type PartnerMoment = {
   uid: string
   name: string | null
   startDate: string | null
+  timezone?: string | null
   coverImage?: {
     url: string | null
   } | null

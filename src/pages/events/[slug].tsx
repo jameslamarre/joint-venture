@@ -20,6 +20,7 @@ type PartnerMoment = {
   name: string | null
   description: string | null
   startDate: string | null
+  timezone: string | null
   coverImage: {
     url: string | null
   } | null
@@ -83,6 +84,7 @@ export const getServerSideProps: GetServerSideProps<
             name: true,
             description: true,
             startDate: true,
+            timezone: true,
             coverImage: {
               url: true,
             },
@@ -129,6 +131,7 @@ export const getServerSideProps: GetServerSideProps<
           momentSlug: matchedMoment.slug ?? null,
           title: matchedMoment.name ?? 'Untitled Event',
           startDate: matchedMoment.startDate,
+          timezone: matchedMoment.timezone ?? null,
           location:
             locationParts.length > 0
               ? locationParts.join(', ')

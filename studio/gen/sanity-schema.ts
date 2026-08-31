@@ -408,6 +408,13 @@ export interface Project extends SanityDocument {
   slug?: { _type: "slug"; current: string };
 
   /**
+   * Movie Glu ID — `string`
+   *
+   *
+   */
+  movieGluId?: string;
+
+  /**
    * Preview Image — `image`
    *
    *
