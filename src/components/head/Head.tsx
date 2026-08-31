@@ -4,6 +4,25 @@ import type { HeadProps } from './types'
 import { useHeadTitle } from './use-title'
 import { useHeadImages } from './use-images'
 
+const capitalizeTitleIfNeeded = (value: string): string => {
+  const firstLetterIndex = value.search(/[a-zA-Z]/)
+
+  if (firstLetterIndex === -1) {
+    return value
+  }
+
+  const firstLetter = value[firstLetterIndex]
+
+  if (firstLetter === firstLetter.toUpperCase()) {
+    return value
+  }
+
+  return `${value.slice(
+    0,
+    firstLetterIndex
+  )}${firstLetter.toUpperCase()}${value.slice(firstLetterIndex + 1)}`
+}
+
 export const Head: FC<HeadProps> = props => {
   const title = useHeadTitle({
     seoTitle: props.seoTitle,
@@ -14,6 +33,7 @@ export const Head: FC<HeadProps> = props => {
     pageImage: props.pageImage,
     siteImage: props.siteImage,
   })
+  const normalizedTitle = capitalizeTitleIfNeeded(title || 'Joint Venture')
 
   const currentPageUrl =
     typeof window !== 'undefined'
@@ -22,7 +42,7 @@ export const Head: FC<HeadProps> = props => {
 
   return (
     <NextHead>
-      <title key="title">{title || 'Joint Venture'}</title>
+      <title key="title">{normalizedTitle}</title>
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1 maximum-scale=1"
@@ -40,7 +60,7 @@ export const Head: FC<HeadProps> = props => {
       {currentPageUrl && <link rel="canonical" href={currentPageUrl} />}
       {/* og */}
       <meta property="og:type" content="website" />
-      <meta name="og:title" property="og:title" content={title} />
+      <meta name="og:title" property="og:title" content={normalizedTitle} />
       <meta
         name="og:description"
         property="og:description"
@@ -50,7 +70,7 @@ export const Head: FC<HeadProps> = props => {
       {currentPageUrl && <meta property="og:url" content={currentPageUrl} />}
       <meta property="og:image" content={pageImage?.src || siteImage?.src} />
       <meta name="twitter:card" content="summary" />
-      <meta name="twitter:title" content={title} />
+      <meta name="twitter:title" content={normalizedTitle} />
       <meta
         name="twitter:description"
         content={props.pageDescription || props.siteDescription}
