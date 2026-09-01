@@ -30,8 +30,8 @@ import { useView, ViewProps } from '@contexts/view/ViewContext'
 import { Cta } from '@components/btns'
 import { SanityEmbed } from '@components/sanity/embed'
 import { TypedObject } from '@portabletext/types'
-import IconLogoFill from '@components/icons/IconLogoFill'
-import { isSafari } from 'react-device-detect'
+import { RoughNotation } from 'react-rough-notation'
+import Link from 'next/link'
 
 type PageRefType = React.ForwardedRef<HTMLDivElement>
 
@@ -55,7 +55,7 @@ const PROJECT_QUERY = groq`
     initialColor,
     previewImage,
     trailer, 
-    featured, 
+    year,
     directedBy,
     writtenBy,
     producedBy,
@@ -97,40 +97,6 @@ const Project: NextPage<PageProps> = (
   ]
 
   const [slideDirection, setSlideDirection] = useState<number | null>(null)
-
-  const moveToProject = (newPosition: number, direction: number) => {
-    if (newPosition >= 0 && newPosition < project.projectList.length) {
-      setSlideDirection(direction)
-      setShowWipe(true)
-
-      const targetSlug = project.projectList[newPosition].slug.current
-      updateView({
-        ...view,
-        nextPage: 'film',
-        previousPage: 'film',
-      })
-      setTimeout(() => {
-        router.push(`/film/${targetSlug}`)
-      }, 500)
-    }
-  }
-
-  const goToPrevious = () => {
-    view?.previousFilm !== undefined && moveToProject(view.previousFilm, -1)
-  }
-
-  const goToNext = () => {
-    view?.nextFilm !== undefined && moveToProject(view.nextFilm, 1)
-  }
-
-  let fieldLength = 1
-  if (project) {
-    if (project.directedBy) fieldLength++
-    if (project.writtenBy) fieldLength++
-    if (project.producedBy) fieldLength++
-    if (project.starring) fieldLength++
-    if (project.otherFields) fieldLength += project.otherFields.length
-  }
 
   const wipeVariants = {
     initial: {
@@ -204,8 +170,8 @@ const Project: NextPage<PageProps> = (
         )}
       </AnimatePresence>
 
-      <article className="max-w-container pt-header lg:px-xdouble 2xl:px-0 mx-auto">
-        <div className="flex flex-col gap-yhalf pt-yhalf md:pt-y pb-y px-2">
+      <article className="pt-page md:pt-0">
+        <div className="flex flex-col gap-yhalf pb-ydouble">
           <AnimatePresence custom={slideDirection} mode="wait">
             <motion.div
               key={router.query.slug as string}
@@ -222,7 +188,7 @@ const Project: NextPage<PageProps> = (
             >
               {project.previewImage && (
                 <div className="relative">
-                  <div className="relative w-full h-fit leading-[0] aspect-video bg-darkgray">
+                  <div className="relative w-full max-w-[1800px] h-fit 2xl:max-h-[93vh] leading-[0] aspect-video mx-auto bg-darkgray overflow-hidden">
                     <AnimatePresence mode="popLayout">
                       {!videoPlaying ? (
                         <motion.div
@@ -267,7 +233,9 @@ const Project: NextPage<PageProps> = (
                         <SanityLink {...(project.cta.link as SanityLinkType)}>
                           <Cta
                             className={classNames(
-                              project.trailer ? 'w-[148px] md:w-[178px]' : ''
+                              project.trailer
+                                ? 'w-[148px] md:w-[178px] pb-2'
+                                : ''
                             )}
                           >
                             {project.cta.text}
@@ -279,7 +247,7 @@ const Project: NextPage<PageProps> = (
                         (project.trailer.vimeo || project.trailer.youtube) &&
                         !videoPlaying && (
                           <Cta
-                            className="w-[148px] md:w-[178px]"
+                            className="w-[148px] md:w-[178px] pb-2"
                             onClick={() => setVideoPlaying(true)}
                           >
                             Play trailer
@@ -290,247 +258,110 @@ const Project: NextPage<PageProps> = (
                 </div>
               )}
 
-              <div
-                className={classNames(
-                  isSafari ? 'border-bottom mb-[-1px]' : '',
-                  'flex items-center gap-0 relative bg-white border-top border-left md:border-right'
-                )}
-              >
-                <div
-                  className={classNames(
-                    project.executiveProducedBy ? 'w-[294px]' : 'w-[188px]',
-                    'hidden md:block absolute h-full top-0 border-right pointer-events-none'
-                  )}
-                ></div>
-                <div
-                  className={classNames(
-                    isSafari
-                      ? 'h-auto'
-                      : 'h-[-webkit-fill-available] border-bottom',
-                    'hidden md:flex items-center justify-center order-2 w-[140px] md:w-[210px] px-xdouble xl:px-0'
-                  )}
-                >
-                  <div className="p-2 rounded-full z-above">
-                    <IconLogoFill
-                      className={classNames(
-                        fieldLength > 4 ? 'md:w-[130px]' : '',
-                        fieldLength === 4 ? 'md:w-[8em]' : '',
-                        fieldLength === 3 ? 'md:w-[6.4em]' : '',
-                        fieldLength === 2 ? 'md:w-[2.5em]' : '',
-                        fieldLength === 1 ? 'md:w-[1.25em]' : '',
-                        'h-auto'
-                      )}
-                    />
-                  </div>
+              <div className="flex flex-col items-start gap-y md:gap-ydouble relative max-w-[1024px] pt-y px-x xl:px-0 mx-auto">
+                <div className="flex flex-col gap-2">
+                  <RoughNotation
+                    type="underline"
+                    show={true}
+                    iterations={1}
+                    strokeWidth={2}
+                    color="var(--theme-highlight)"
+                    animationDuration={200}
+                    padding={-10}
+                  >
+                    <h1 className="text-h1">{project.title}</h1>
+                  </RoughNotation>
+
+                  {project.year && <p className="font-serif">{project.year}</p>}
                 </div>
-                <div
-                  className="flex flex-col gap-0 w-full text-baseSerif"
-                  style={{ color: 'var(--theme-text--tables)' }}
-                >
-                  {project.title && (
-                    <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
-                      <div
-                        className={classNames(
-                          project.executiveProducedBy
-                            ? 'w-full md:w-[294px]'
-                            : 'w-[180px]',
-                          'block md:inline-block h-max py-[2px] pr-2'
-                        )}
-                      >
-                        <h4 className="w-full md:w-auto text-h4 md:text-right">
-                          Title:
-                        </h4>
-                      </div>
-                      <p className="inline w-full md:w-[calc(100%-280px)]">
-                        {project.title}
-                      </p>
-                    </div>
-                  )}
-                  {project.directedBy && (
-                    <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
-                      <div
-                        className={classNames(
-                          project.executiveProducedBy
-                            ? 'w-full md:w-[294px]'
-                            : 'w-[180px]',
-                          'block md:inline-block h-max py-[2px] pr-2'
-                        )}
-                      >
-                        <h4 className="w-full text-h4 md:text-right">
-                          Directed by:
-                        </h4>
-                      </div>
-                      <p className="inline w-full md:w-[calc(100%-280px)]">
-                        {project.directedBy}
-                      </p>
-                    </div>
-                  )}
-                  {project.writtenBy && (
-                    <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
-                      <div
-                        className={classNames(
-                          project.executiveProducedBy
-                            ? 'w-full md:w-[294px]'
-                            : 'w-[180px]',
-                          'block md:inline-block h-max py-[2px] pr-2'
-                        )}
-                      >
-                        <h4 className="w-full text-h4 md:text-right">
-                          Written by:
-                        </h4>
-                      </div>
-                      <p className="inline w-full md:w-[calc(100%-280px)]">
-                        {project.writtenBy}
-                      </p>
-                    </div>
-                  )}
-                  {project.producedBy && (
-                    <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
-                      <div
-                        className={classNames(
-                          project.executiveProducedBy
-                            ? 'w-full md:w-[294px]'
-                            : 'w-[180px]',
-                          'block md:inline-block h-max py-[2px] pr-2'
-                        )}
-                      >
-                        <h4 className="w-full text-h4 md:text-right">
-                          Produced by:
-                        </h4>
-                      </div>
-                      <p className="inline w-full md:w-[calc(100%-280px)]">
-                        {project.producedBy}
-                      </p>
-                    </div>
-                  )}
 
-                  {project.executiveProducedBy && (
-                    <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
-                      <div
-                        className={classNames(
-                          project.executiveProducedBy
-                            ? 'w-full md:w-[294px]'
-                            : 'w-[180px]',
-                          'block md:inline-block h-max py-[2px] pr-2'
-                        )}
-                      >
-                        <h4 className="w-full text-h4 md:text-right">
-                          Executive produced by:
-                        </h4>
+                <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-start gap-x-xdouble gap-y-y">
+                  <div
+                    className="flex flex-col gap-y w-full text-base"
+                    style={{ color: 'var(--theme-text)' }}
+                  >
+                    {project.directedBy && (
+                      <div className="">
+                        <div className="block md:inline-block h-max py-[2px]">
+                          <h4 className="w-full text-h4">Directed by: </h4>
+                        </div>
+                        <p className="inline"> {project.directedBy}</p>
                       </div>
-                      <p className="inline w-full md:w-[calc(100%-280px)]">
-                        {project.executiveProducedBy}
-                      </p>
-                    </div>
-                  )}
-
-                  {project.starring && (
-                    <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
-                      <div
-                        className={classNames(
-                          project.executiveProducedBy
-                            ? 'w-full md:w-[294px]'
-                            : 'w-[180px]',
-                          'block md:inline-block h-max py-[2px] pr-2'
-                        )}
-                      >
-                        <h4 className="w-full text-h4 md:text-right">
-                          Starring:
-                        </h4>
+                    )}
+                    {project.writtenBy && (
+                      <div className="">
+                        <div className="block md:inline-block h-max py-[2px]">
+                          <h4 className="w-full text-h4">Written by: </h4>
+                        </div>
+                        <p className="inline"> {project.writtenBy}</p>
                       </div>
-                      <p className="inline w-full md:w-[calc(100%-280px)]">
-                        {project.starring}
-                      </p>
-                    </div>
-                  )}
+                    )}
+                    {project.producedBy && (
+                      <div className="">
+                        <div className="block md:inline-block h-max py-[2px]">
+                          <h4 className="w-full text-h4">Produced by: </h4>
+                        </div>
+                        <p className="inline"> {project.producedBy}</p>
+                      </div>
+                    )}
 
-                  {project.otherFields &&
-                    project.otherFields.map(other => (
-                      <div
-                        key={other._key}
-                        className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines"
-                      >
-                        <div
-                          className={classNames(
-                            project.executiveProducedBy
-                              ? 'w-full md:w-[294px]'
-                              : 'w-[180px]',
-                            'block md:inline-block h-max py-[2px] pr-2'
-                          )}
-                        >
-                          <h4 className="w-full text-h4 md:text-right">
-                            {other.title}:
+                    {project.executiveProducedBy && (
+                      <div className="">
+                        <div className="block md:inline-block h-max py-[2px]">
+                          <h4 className="w-full text-h4">
+                            Executive produced by:
                           </h4>
                         </div>
-                        <p className="inline w-full md:w-[calc(100%-280px)]">
-                          {other.value}
-                        </p>
+                        <p className="inline"> {project.executiveProducedBy}</p>
                       </div>
-                    ))}
+                    )}
+
+                    {project.starring && (
+                      <div className="">
+                        <div className="block md:inline-block h-max py-[2px]">
+                          <h4 className="w-full text-h4">Starring: </h4>
+                        </div>
+                        <p className="inline"> {project.starring}</p>
+                      </div>
+                    )}
+
+                    {project.otherFields &&
+                      project.otherFields.map(other => (
+                        <div key={other._key} className="">
+                          <div className="block md:inline-block h-max py-[2px]">
+                            <h4 className="w-full text-h4">{other.title}: </h4>
+                          </div>
+                          <p className="inline"> {other.value}</p>
+                        </div>
+                      ))}
+                  </div>
+
+                  <div className="hidden md:flex items-center justify-center self-stretch">
+                    <RoughNotation
+                      type="bracket"
+                      brackets={['right']}
+                      show={true}
+                      iterations={1}
+                      strokeWidth={2}
+                      color="var(--theme-highlight)"
+                      animationDuration={200}
+                      padding={0}
+                    >
+                      <span className="block h-[120px] w-px" />
+                    </RoughNotation>
+                  </div>
 
                   {project.synopsis && (
-                    <div className="flex flex-col md:flex-row md:gap-2 px-2 border-right ruled-lines">
-                      <div
-                        className={classNames(
-                          project.executiveProducedBy
-                            ? 'w-full md:w-[294px]'
-                            : 'w-[180px]',
-                          'block md:inline-block h-max py-[2px] pr-2'
-                        )}
-                      >
-                        <h4 className="w-full text-h4 md:text-right">
-                          Synopsis:
-                        </h4>
-                      </div>
-
-                      <RichText
-                        blocks={project.synopsis as TypedObject | TypedObject[]}
-                        className="inline w-full md:w-[calc(100%-280px)] small"
-                      />
-                    </div>
+                    <RichText
+                      blocks={project.synopsis as TypedObject | TypedObject[]}
+                      className="inline w-full small"
+                    />
                   )}
                 </div>
-              </div>
 
-              {/* Navigation Controls */}
-              <div
-                className="flex justify-between items-center w-full mt-y mb-y"
-                style={{
-                  borderTop: '1px solid var(--theme-text)',
-                  borderBottom: '1px solid var(--theme-text)',
-                  borderRight: '1px solid var(--theme-text)',
-                }}
-              >
-                <button
-                  onClick={goToPrevious}
-                  disabled={view?.film === 0}
-                  className="w-full px-2 disabled:pointer-events-none hover:bg-white hover:text-textColorTables text-left"
-                  style={{
-                    borderLeft: '1px solid var(--theme-text)',
-                    borderRight: '1px solid var(--theme-text)',
-                  }}
-                >
-                  <span
-                    className={classNames(
-                      view?.film === 0 ? 'opacity-20' : '',
-                      'inline-block py-1 leading-none uppercase font-sans'
-                    )}
-                  >
-                    Previous
-                  </span>
-                </button>
-
-                <button
-                  onClick={goToNext}
-                  disabled={
-                    (view?.film as number) >= project.projectList.length - 1
-                  }
-                  className="w-full px-2 disabled:opacity-20 hover:bg-white hover:text-textColorTables text-right"
-                >
-                  <span className="inline-block py-1 leading-none uppercase font-sans">
-                    Next
-                  </span>
-                </button>
+                <div className="relative block w-full">
+                  <Link href="/films">← Back to all films</Link>
+                </div>
               </div>
             </motion.div>
           </AnimatePresence>

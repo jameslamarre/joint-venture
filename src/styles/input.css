@@ -4,13 +4,18 @@ fieldset {
 }
 
 .input {
-  @apply px-xhalf border font-sans text-sm border-collapse;
+  @apply border-none px-xhalf font-sans text-sm;
+}
+
+.input--footer {
+  @apply border border-collapse;
 }
 
 .input:focus {
   outline: none;
 }
 
-label {
-  @apply normal-case;
+.select,
+select {
+  @apply appearance-none relative h-btn px-xhalf pt-[3px] sm:pt-0 font-sans text-base leading-none cursor-pointer text-black placeholder:text-black focus-visible:outline-none rounded-none;
 }

@@ -16,6 +16,7 @@ import { TransitionIndicator } from '@components/transition-indicator'
 import { LayoutProps, PageData } from './types'
 import THEME_CSS_VARS from './consts'
 import { FaRotateLeft } from 'react-icons/fa6'
+import { getRoutePageMeta } from '@lib/page-meta'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -30,6 +31,7 @@ export const Layout: FC<LayoutProps> = ({
 
   const { asPath, push } = useRouter()
   const page: PageData = filterDataToSingleItem(data)
+  const routeMeta = getRoutePageMeta(asPath)
   const [view, updateView, { setNavigating, canNavigate }] =
     useNavigation() as any
 
@@ -57,9 +59,10 @@ export const Layout: FC<LayoutProps> = ({
     (page as any)?.previewImage || (page as any)?.image || undefined
 
   const getCurrentPageIndex = useCallback(() => {
-    const currentSlug = asPath.substring(1) as '' | 'about' | 'films' | 'join'
-    return PAGE_ORDER.indexOf(currentSlug)
-  }, [asPath])
+    return routeMeta.flowSlug === null
+      ? -1
+      : PAGE_ORDER.indexOf(routeMeta.flowSlug)
+  }, [routeMeta.flowSlug])
 
   const resetScrollProgress = useCallback(() => {
     scrollAccumulator.current = 0
@@ -71,9 +74,8 @@ export const Layout: FC<LayoutProps> = ({
     }
   }, [])
 
-  const currentIndex = PAGE_ORDER.indexOf(
-    asPath.substring(1) as '' | 'about' | 'films' | 'join'
-  )
+  const currentIndex =
+    routeMeta.flowSlug === null ? -1 : PAGE_ORDER.indexOf(routeMeta.flowSlug)
 
   const wipeVariants = {
     initial: {
@@ -163,7 +165,7 @@ export const Layout: FC<LayoutProps> = ({
       // Only handle on pages, not projects or intro, and not during navigation
       if (
         showIntro ||
-        page?._type !== 'page' ||
+        routeMeta.flowSlug === null ||
         view?.isNavigating ||
         isNavigationInProgress ||
         (typeof window !== 'undefined' &&
@@ -227,7 +229,7 @@ export const Layout: FC<LayoutProps> = ({
         if (absAccumulator < 150) {
           setKeyHoldProgress(0)
         } else {
-          const progress = Math.min((absAccumulator - 50) / 700, 1) * 100 // 700px scroll distance for full progress
+          const progress = Math.min((absAccumulator - 50) / 2400, 1) * 100 // 2400px scroll distance for full progress
           setKeyHoldProgress(progress)
 
           // Trigger navigation when scroll threshold is reached
@@ -249,7 +251,7 @@ export const Layout: FC<LayoutProps> = ({
     [
       getCurrentPageIndex,
       showIntro,
-      page?._type,
+      routeMeta.flowSlug,
       resetScrollProgress,
       view?.isNavigating,
       canNavigate,
@@ -282,21 +284,16 @@ export const Layout: FC<LayoutProps> = ({
 
   // Update view context when page changes
   useEffect(() => {
-    const currentIndex = getCurrentPageIndex()
-    const currentPageSlug = PAGE_ORDER[currentIndex] as
-      | ''
-      | 'about'
-      | 'films'
-      | 'join'
+    const currentPageSlug = routeMeta.flowSlug
 
     updateView({
       ...view,
-      page: page?._type === 'project' ? 'film' : currentPageSlug,
+      page: page?._type === 'project' ? 'film' : currentPageSlug ?? undefined,
       isNavigating: false,
       lastNavigationTime: view?.lastNavigationTime,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [asPath, getCurrentPageIndex, view?.lastNavigationTime])
+  }, [asPath, routeMeta.flowSlug, view?.lastNavigationTime])
 
   // Remove keyboard handlers and add wheel handler
   useEffect(() => {
@@ -354,9 +351,9 @@ export const Layout: FC<LayoutProps> = ({
         siteDescription={siteSettings?.description}
         siteImage={siteSettings?.image}
         siteKeywords={siteSettings?.siteKeywords}
-        seoTitle={page?.seo?.title}
+        seoTitle={page?.seo?.title || routeMeta.headerTitle}
         pageType={page?._type}
-        pageTitle={page?.title}
+        pageTitle={page?.title || routeMeta.headerTitle}
         pageDescription={page?.seo?.description}
         pageKeywords={page?.seo?.keywords}
         pageImage={seoImage}
@@ -393,12 +390,14 @@ export const Layout: FC<LayoutProps> = ({
 
         {/* Page Navigation Indicator with Progress */}
         <AnimatePresence>
-          {showIndicator && page?._type === 'page' && !view?.isNavigating && (
-            <TransitionIndicator
-              direction={direction as 'up' | 'down'}
-              keyHoldProgress={keyHoldProgress}
-            />
-          )}
+          {showIndicator &&
+            routeMeta.flowSlug !== null &&
+            !view?.isNavigating && (
+              <TransitionIndicator
+                direction={direction as 'up' | 'down'}
+                keyHoldProgress={keyHoldProgress}
+              />
+            )}
         </AnimatePresence>
 
         {showIntro ? (
@@ -412,19 +411,22 @@ export const Layout: FC<LayoutProps> = ({
                   ? 'Films'
                   : page?._type === 'job'
                   ? 'Jobs'
-                  : page?.title
+                  : page?.title || routeMeta.headerTitle
               }
               showContent={showContent}
               setShowContent={() => setShowContent(true)}
             />
 
-            {page?._type === 'page' && !asPath.includes('/jobs') && (
-              <LogoButton
-                color={page?.initialColor}
-                asPath={asPath}
-                cycleTheme={cycleTheme}
-              />
-            )}
+            {(page?._type === 'page' ||
+              page?._type === 'project' ||
+              routeMeta.flowSlug !== null) &&
+              !asPath.includes('/jobs') && (
+                <LogoButton
+                  color={page?.initialColor}
+                  asPath={asPath}
+                  cycleTheme={cycleTheme}
+                />
+              )}
           </>
         )}
 

@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState, type FC } from 'react'
 import classNames from 'classnames'
 import type { HeaderProps } from './types'
 import HeaderMenu from './HeaderMenu'
-import { IconHyphen } from '@components/icons'
+import { IconHyphen, IconTicket } from '@components/icons'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { isMobile, isTablet } from 'react-device-detect'
@@ -80,8 +80,26 @@ export const Header: FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* color swap */}
-        <button className="w-6 h-6 rounded-full z-above"></button>
+        {/* ticket link */}
+        <Link
+          href="/events"
+          className="flex items-center relative h-full -ml-3"
+        >
+          <AnimatePresence mode="wait">
+            {!menuOpen && (
+              <motion.button
+                key="menu-ticket-key"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0 }}
+                transition={{ duration: 0.2, ease: 'easeInOut' }}
+                className="flex items-center relative w-12 md:w-16 h-full"
+              >
+                <IconTicket stroke="var(--theme-text--menu)" />
+              </motion.button>
+            )}
+          </AnimatePresence>
+        </Link>
 
         <div className="relative mt-2 mr-8 uppercase z-above">
           <AnimatePresence mode="wait">

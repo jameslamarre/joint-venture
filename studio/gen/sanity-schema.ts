@@ -408,11 +408,30 @@ export interface Project extends SanityDocument {
   slug?: { _type: "slug"; current: string };
 
   /**
+   * Movie Glu ID — `string`
+   *
+   *
+   */
+  movieGluId?: string;
+
+  /**
    * Preview Image — `image`
    *
    *
    */
   previewImage?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Poster Image — `image`
+   *
+   *
+   */
+  posterImage?: {
     _type: "image";
     asset: SanityReference<SanityImageAsset>;
     crop?: SanityImageCrop;
@@ -489,6 +508,13 @@ export interface Project extends SanityDocument {
    *
    */
   featured?: boolean;
+
+  /**
+   * Year — `string`
+   *
+   *
+   */
+  year?: string;
 
   /**
    * Directed By — `string`

@@ -1,3 +1,4 @@
+import { Cta } from '@components/btns'
 import { RichText } from '@components/sanity'
 import { TypedObject } from '@portabletext/types'
 import { RichText as RichTextType } from '@studio/gen/sanity-schema'
@@ -7,12 +8,14 @@ import { useState, type FC } from 'react'
 type NewsletterFormProps = {
   newsletterId: string
   className?: string
+  footer?: boolean
   successMessage?: RichTextType
 }
 
 export const NewsletterForm: FC<NewsletterFormProps> = ({
   newsletterId,
   successMessage,
+  footer = true,
   className,
 }) => {
   const [email, setEmail] = useState('')
@@ -68,31 +71,54 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col">
+        <div
+          className={classNames(
+            footer ? '' : 'justify-center items-center gap-y',
+            'flex flex-col'
+          )}
+        >
           <input
             type="email"
             value={email}
             name="email"
             onChange={e => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className={classNames(className, 'input w-full h-[32px]')}
+            className={classNames(
+              className,
+              footer ? 'input--footer h-[32px]' : 'h-[35px]',
+              'input w-full'
+            )}
             required
           />
 
-          <button
-            style={{
-              color: 'var(--theme-text)',
-              backgroundColor: 'var(--theme-bg)',
-            }}
-            className={classNames(
-              className,
-              'w-full h-[30px] px-xhalf hover:!bg-black hover:!text-white border-left border-right border-bottom font-sans text-sm uppercase'
-            )}
-            type="submit"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'Submitting...' : 'Submit'}
-          </button>
+          {footer ? (
+            <button
+              style={{
+                color: 'var(--theme-text)',
+                backgroundColor: 'var(--theme-bg)',
+              }}
+              className={classNames(
+                className,
+                'w-full h-[30px] px-xhalf hover:!bg-black hover:!text-white border-left border-right border-bottom font-sans text-sm uppercase'
+              )}
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Submitting...' : 'Submit'}
+            </button>
+          ) : (
+            <Cta
+              style={{
+                color: 'var(--theme-text)',
+                backgroundColor: 'var(--theme-highlight)',
+              }}
+              className={classNames(className, 'w-fit h-btn pr-xhalf')}
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Submitting...' : 'Submit'}
+            </Cta>
+          )}
         </div>
       </form>
 

@@ -1,6 +1,5 @@
 import { MdPermMedia } from 'react-icons/md'
 import type { Rule } from 'sanity'
-import { group } from 'console'
 
 export default {
   name: 'project',
@@ -34,8 +33,22 @@ export default {
       },
     },
     {
+      name: 'movieGluId',
+      title: 'Movie Glu ID',
+      type: 'string',
+    },
+    {
       name: 'previewImage',
       title: 'Preview Image',
+      type: 'image',
+      group: 'metadata',
+      options: {
+        hotspot: false,
+      },
+    },
+    {
+      name: 'posterImage',
+      title: 'Poster Image',
       type: 'image',
       group: 'metadata',
       options: {
@@ -110,6 +123,11 @@ export default {
       title: 'Featured',
       type: 'boolean',
       initialValue: false,
+    },
+    {
+      name: 'year',
+      title: 'Year',
+      type: 'string',
     },
     {
       name: 'directedBy',

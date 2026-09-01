@@ -32,6 +32,7 @@ export const NewsletterBlock: FC<NewsletterBlockProps> = ({
         <NewsletterForm
           newsletterId={audienceId as string}
           successMessage={successMessage}
+          footer={false}
           className="text-center"
         />
 
