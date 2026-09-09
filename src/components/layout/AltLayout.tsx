@@ -68,7 +68,7 @@ export const AltLayout: FC<AltLayoutProps> = ({
           mainMenu: (page as Microsite)?.mainMenu,
           footerMenu: (page as Microsite)?.footerMenu,
           instagramLink: (page as Microsite)?.instagramLink,
-          youtubeLink: (page as Microsite)?.instagramLink,
+          youtubeLink: (page as Microsite)?.youtubeLink,
           tiktokLink: (page as Microsite)?.tiktokLink,
           facebookLink: (page as Microsite)?.facebookLink,
         }
@@ -84,7 +84,7 @@ export const AltLayout: FC<AltLayoutProps> = ({
           mainMenu: (page?.microsite as any)?.mainMenu as SanityMenu,
           footerMenu: (page?.microsite as any)?.footerMenu as SanityMenu,
           instagramLink: (page?.microsite as any)?.instagramLink,
-          youtubeLink: (page?.microsite as any)?.instagramLink,
+          youtubeLink: (page?.microsite as any)?.youtubeLink,
           tiktokLink: (page?.microsite as any)?.tiktokLink,
           facebookLink: (page?.microsite as any)?.facebookLink,
         }

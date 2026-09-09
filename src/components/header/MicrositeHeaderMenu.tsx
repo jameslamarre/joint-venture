@@ -269,10 +269,10 @@ export const MicrositeHeaderMenu: FC<
                           animationDelay={100}
                           animationDuration={600}
                         >
-                          Buy Tickets
+                          Tickets
                         </RoughNotation>
                       ) : (
-                        <span>Buy Tickets</span>
+                        <span>Tickets</span>
                       )}
                     </Link>
                   </li>
