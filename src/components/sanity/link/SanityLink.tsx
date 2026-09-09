@@ -6,6 +6,76 @@ import { Link } from '@components/links'
 import { Cta } from '@components/btns'
 import classNames from 'classnames'
 
+const isDynamicRouteToken = (value?: string): boolean => {
+  if (typeof value !== 'string') {
+    return false
+  }
+
+  const trimmedValue = value.trim()
+
+  if (/^\[[^\]]+\]$/.test(trimmedValue)) {
+    return true
+  }
+
+  const decodedValue = (() => {
+    try {
+      return decodeURIComponent(trimmedValue)
+    } catch {
+      return trimmedValue
+    }
+  })()
+
+  return /^\[[^\]]+\]$/.test(decodedValue) || /%5B[^%]+%5D/i.test(trimmedValue)
+}
+
+const getMicrositeKeyFromCurrentLocation = (): string | undefined => {
+  if (typeof window === 'undefined') {
+    return undefined
+  }
+
+  const hostMatch = window.location.hostname.match(
+    /^([^.]+)\.ajointventure\.com$/
+  )
+
+  if (hostMatch?.[1] && !isDynamicRouteToken(hostMatch[1])) {
+    return hostMatch[1]
+  }
+
+  const pathMatch = window.location.pathname.match(/^\/microsite\/([^/]+)/)
+
+  if (pathMatch?.[1] && !isDynamicRouteToken(pathMatch[1])) {
+    return pathMatch[1]
+  }
+
+  return undefined
+}
+
+const normalizeDynamicMicrositeHref = (href: string): string => {
+  const trimmedHref = href.trim()
+
+  if (!trimmedHref.startsWith('/')) {
+    return trimmedHref
+  }
+
+  const micrositeKey = getMicrositeKeyFromCurrentLocation()
+
+  if (!micrositeKey) {
+    return trimmedHref
+  }
+
+  const withMicrosite = trimmedHref.replace(
+    /\[(microsite)\]|%5Bmicrosite%5D/gi,
+    micrositeKey
+  )
+  const withoutSlugToken = withMicrosite.replace(
+    /\/\[(slug)\]|\/%5Bslug%5D/gi,
+    ''
+  )
+  const normalized = withoutSlugToken.replace(/\/+/g, '/')
+
+  return normalized || '/'
+}
+
 type SanityLinkProps = SanityLinkType &
   Omit<LinkProps, 'href'> & {
     text?: string
@@ -26,32 +96,52 @@ export const SanityLink: FC<SanityLinkProps> = ({
 }) => {
   const buildHref = (): string => {
     // Prefer explicit external link if present
-    if (externalLink) return externalLink
+    if (externalLink) return normalizeDynamicMicrositeHref(externalLink)
 
     const il: any = internalLink as any
 
     // microsite page: /microsite/[microsite]/[slug]
     if (il?._type === 'micrositePage') {
-      const ms =
+      const rawMicrosite =
+        il?.micrositeSlug ||
         il?.microsite?.slug?.current ||
         il?.microsite?.slug || // in case it's already flattened
         il?.micrositeSlug
-      const ps = il?.slug?.current || il?.slug
+      const rawPageSlug = il?.slug?.current || il?.slug
+      const ms =
+        rawMicrosite && !isDynamicRouteToken(rawMicrosite)
+          ? rawMicrosite
+          : getMicrositeKeyFromCurrentLocation()
+      const ps =
+        rawPageSlug && !isDynamicRouteToken(rawPageSlug)
+          ? rawPageSlug
+          : undefined
+      const isMicrositeHome = il?.isMicrositeHome === true
+
+      if (ms && isMicrositeHome) {
+        return normalizeDynamicMicrositeHref(`/microsite/${ms}`)
+      }
 
       if (ms && ps) {
-        return `/microsite/${ms}/${ps}`
-      } else {
-        return `/microsite/${ms}`
+        return normalizeDynamicMicrositeHref(`/microsite/${ms}/${ps}`)
       }
+
+      if (ms) {
+        return normalizeDynamicMicrositeHref(`/microsite/${ms}`)
+      }
+
+      return '/'
     }
 
     // Fallback to shared resolver for other types
-    return getHrefBySanityLink({
-      internalLink,
-      externalLink,
-      anchor,
-      query,
-    } as SanityLinkType)
+    return normalizeDynamicMicrositeHref(
+      getHrefBySanityLink({
+        internalLink,
+        externalLink,
+        anchor,
+        query,
+      } as SanityLinkType)
+    )
   }
 
   const withQueryAndAnchor = (base: string): string => {

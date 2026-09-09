@@ -92,9 +92,10 @@ export type EventContent = {
 
 type EventProps = {
   event: EventContent
+  backHref?: string
 }
 
-export const Event = ({ event }: EventProps) => {
+export const Event = ({ event, backHref = '/events' }: EventProps) => {
   return (
     <article className="py-page px-x">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y md:gap-xdouble w-full">
@@ -153,7 +154,7 @@ export const Event = ({ event }: EventProps) => {
           )}
 
           <div className="relative block w-full">
-            <Link href="/events">← Back to all events</Link>
+            <Link href={backHref}>← Back to all events</Link>
           </div>
         </div>
 

@@ -2,20 +2,16 @@
 import { useCallback, useEffect, useState, type FC } from 'react'
 import classNames from 'classnames'
 import type { HeaderProps } from './types'
-import { IconLogoLine, IconMicroHyphen } from '@components/icons'
 import { motion } from 'framer-motion'
 import MicrositeHeaderMenu from './MicrositeHeaderMenu'
 import { Btn } from '@components/btns'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 export const MicrositeHeader: FC<HeaderProps> = ({
   mainMenu,
+  movieGluId,
   socials,
   className,
 }) => {
-  const { asPath } = useRouter()
-
   const onOpen = useCallback((open: boolean) => setMenuOpen(open), [])
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -79,6 +75,7 @@ export const MicrositeHeader: FC<HeaderProps> = ({
 
         <MicrositeHeaderMenu
           mainMenu={mainMenu}
+          movieGluId={movieGluId}
           socials={socials}
           customOpen={menuOpen}
           setCustomOpen={setMenuOpen}

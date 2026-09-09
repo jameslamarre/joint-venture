@@ -6,6 +6,7 @@ export interface HeaderProps
   currentPage?: string
   pageBackground?: string
   mainMenu?: SanityMenu
+  movieGluId?: string | number | null
   socials?: {
     instagram?: string
     youtube?: string

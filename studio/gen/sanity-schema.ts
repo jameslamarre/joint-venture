@@ -184,6 +184,13 @@ export interface Microsite extends SanityDocument {
   newsletterId?: string;
 
   /**
+   * MovieGLU ID — `string`
+   *
+   * Film ID used to load MovieGLU showtimes for this microsite events page.
+   */
+  movieGluId?: string;
+
+  /**
    * Site Description — `text`
    *
    *

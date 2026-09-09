@@ -60,6 +60,14 @@ export default {
       group: 'global',
     },
     {
+      name: 'movieGluId',
+      title: 'MovieGLU ID',
+      type: 'string',
+      group: 'global',
+      description:
+        'Film ID used to load MovieGLU showtimes for this microsite events page.',
+    },
+    {
       name: 'description',
       title: 'Site Description',
       type: 'text',
