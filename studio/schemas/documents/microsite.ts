@@ -65,7 +65,7 @@ export default {
       type: 'string',
       group: 'global',
       description:
-        'Film ID used to load MovieGLU showtimes for this microsite events page.',
+        'Film ID used to load MovieGLU showtimes for this microsite events page, adding this ID will show the "Tickets" link in the header.',
     },
     {
       name: 'description',
