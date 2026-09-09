@@ -287,17 +287,29 @@ export const getMovieGluEvents = async (
     }
 
     for (const cinema of payload.cinemas ?? []) {
+      // eslint-disable-next-line no-console
+      console.info('[movieglu:getMovieGluEvents] Cinema payload', {
+        filmId: selectedFilmId,
+        showDate,
+        cinema,
+        showings: cinema.showings,
+      })
+
       const groupKey = `${showDate}-${cinema.cinema_id}`
 
       if (!groupedEvents.has(groupKey)) {
         const eventUid = `movieglu-${selectedFilmId}-${showDate}-${cinema.cinema_id}`
+        const normalizedState =
+          typeof cinema.state === 'string' && cinema.state.trim().length > 0
+            ? cinema.state
+            : undefined
 
         groupedEvents.set(groupKey, {
           uid: eventUid,
           title: 'Film TBA',
           venue: cinema.cinema_name || 'Theater TBA',
           city: cinema.city || 'City TBA',
-          state: cinema.state,
+          ...(normalizedState ? { state: normalizedState } : {}),
           latitude: parseCoordinate(cinema.lat),
           longitude: parseCoordinate(cinema.lng),
           startDate: `${showDate}T23:59:00`,
@@ -338,7 +350,7 @@ export const getMovieGluEvents = async (
 
           groupedEvent.showtimes?.push({
             label: formatShowtimeLabel(showDate, showingTime.start_time),
-            href: cinema.url,
+            ...(cinema.url ? { href: cinema.url } : {}),
             movieGluLookup: {
               cinemaId: cinema.cinema_id,
               filmId: showing.film_id,

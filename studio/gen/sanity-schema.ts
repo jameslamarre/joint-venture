@@ -186,7 +186,7 @@ export interface Microsite extends SanityDocument {
   /**
    * MovieGLU ID — `string`
    *
-   * Film ID used to load MovieGLU showtimes for this microsite events page.
+   * Film ID used to load MovieGLU showtimes for this microsite events page, adding this ID will show the "Tickets" link in the header.
    */
   movieGluId?: string;
 

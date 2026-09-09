@@ -92,7 +92,9 @@ export const AltLayout: FC<AltLayoutProps> = ({
   return (
     <>
       <Head
-        siteTitle={`${page?.title} | 'Joint Venture'`}
+        siteTitle={`${
+          page?._type === 'microsite' ? (page as Microsite)?.title : page?.title
+        } | 'Joint Venture'`}
         siteDescription={siteSettings?.description}
         siteImage={siteSettings?.image}
         siteKeywords={siteSettings?.siteKeywords}

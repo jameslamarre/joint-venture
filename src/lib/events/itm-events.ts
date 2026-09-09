@@ -75,7 +75,7 @@ export const getItmEvents = async (token: string): Promise<EventListItem[]> => {
         },
       })
 
-      console.log('ITM query result:', queryResult)
+      // console.log('ITM query result:', queryResult)
 
       const momentsResponse =
         queryResult.getPartnerMomentsForBrand as PartnerMomentsForBrandResponse
@@ -107,7 +107,7 @@ export const getItmEvents = async (token: string): Promise<EventListItem[]> => {
 
   const upcomingEvents = await fetchMomentsByStatus('UPCOMING')
 
-  console.log('ITM upcoming events:', upcomingEvents)
+  // console.log('ITM upcoming events:', upcomingEvents)
 
   if (upcomingEvents.length > 0) {
     return upcomingEvents
