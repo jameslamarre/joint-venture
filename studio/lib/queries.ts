@@ -22,7 +22,12 @@ export const LINK_QUERY = `
     slug,
     // Include parent microsite for microsite pages
     _type == "micrositePage" => {
-      "microsite": microsite->{ slug }
+      "microsite": microsite->{ slug },
+      "micrositeSlug": microsite->slug.current,
+      "isMicrositeHome":
+        _id == coalesce(microsite->homePage._ref, "") ||
+        _id == "drafts." + coalesce(microsite->homePage._ref, "") ||
+        "drafts." + _id == coalesce(microsite->homePage._ref, "")
     }
   },
   "anchor": internalLink.anchor,
@@ -36,7 +41,12 @@ export const LINK_MARKDEFS_QUERY = `
       slug,
       // Include parent microsite for microsite pages
       _type == "micrositePage" => {
-        "microsite": microsite->{ slug }
+        "microsite": microsite->{ slug },
+        "micrositeSlug": microsite->slug.current,
+        "isMicrositeHome":
+          _id == coalesce(microsite->homePage._ref, "") ||
+          _id == "drafts." + coalesce(microsite->homePage._ref, "") ||
+          "drafts." + _id == coalesce(microsite->homePage._ref, "")
       }
     },
     "anchor": @.internalLink.anchor,

@@ -62,6 +62,7 @@ export const AltLayout: FC<AltLayoutProps> = ({
           title: (page as Microsite)?.title,
           description: (page as Microsite)?.description,
           newsletterId: (page as Microsite)?.newsletterId,
+          movieGluId: (page as Microsite)?.movieGluId,
           image: (page as Microsite)?.image,
           siteKeywords: (page as Microsite)?.siteKeywords,
           mainMenu: (page as Microsite)?.mainMenu,
@@ -77,6 +78,7 @@ export const AltLayout: FC<AltLayoutProps> = ({
           title: page?.title as string,
           description: (page?.microsite as any)?.description as string,
           newsletterId: (page?.microsite as any)?.newsletterId,
+          movieGluId: (page?.microsite as any)?.movieGluId,
           image: (page?.microsite as any)?.image as any,
           siteKeywords: (page?.microsite as any)?.siteKeywords as any,
           mainMenu: (page?.microsite as any)?.mainMenu as SanityMenu,
@@ -106,6 +108,7 @@ export const AltLayout: FC<AltLayoutProps> = ({
         style={{ backgroundColor: 'var(--theme-bg)' }}
       >
         <MicrositeHeader
+          movieGluId={siteSettings?.movieGluId}
           mainMenu={siteSettings?.mainMenu as SanityMenu}
           socials={{
             instagram: siteSettings?.instagramLink,

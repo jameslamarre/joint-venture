@@ -35,6 +35,7 @@ const PAGE_QUERY = groq`
       image,
       slug,
       newsletterId,
+      movieGluId,
       theme,
       mainMenu->{
         items[]{

@@ -31,6 +31,7 @@ const HOME_QUERY = groq`
     title,
     slug,
     newsletterId,
+    movieGluId,
     description, 
     image,
     theme,

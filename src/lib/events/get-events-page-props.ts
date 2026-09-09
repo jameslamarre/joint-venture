@@ -9,13 +9,13 @@ const PROJECT_MOVIE_GLU_IDS_QUERY = groq`
   *[_type == "project" && defined(movieGluId)].movieGluId
 `
 
-const getProjectMovieGluIds = async (): Promise<number[]> => {
-  const rawIds = await client.fetch(PROJECT_MOVIE_GLU_IDS_QUERY)
+type GetEventsPagePropsOptions = {
+  movieGluFilmIds?: Array<number | string | null | undefined>
+}
 
-  if (!Array.isArray(rawIds)) {
-    return []
-  }
-
+const normalizeMovieGluFilmIds = (
+  rawIds: Array<number | string | null | undefined>
+): number[] => {
   return Array.from(
     new Set(
       rawIds
@@ -25,13 +25,27 @@ const getProjectMovieGluIds = async (): Promise<number[]> => {
   )
 }
 
-export const getEventsPageProps = async (): Promise<EventsPageProps> => {
+const getProjectMovieGluIds = async (): Promise<number[]> => {
+  const rawIds = await client.fetch(PROJECT_MOVIE_GLU_IDS_QUERY)
+
+  if (!Array.isArray(rawIds)) {
+    return []
+  }
+
+  return normalizeMovieGluFilmIds(rawIds)
+}
+
+export const getEventsPageProps = async (
+  options: GetEventsPagePropsOptions = {}
+): Promise<EventsPageProps> => {
   const token = process.env.ITM_PARTNER_TOKEN
   const shouldLoadMovieGluOnServer =
     process.env.MOVIEGLU_LOAD_ON_SERVER === 'true'
 
   try {
-    const movieGluFilmIds = await getProjectMovieGluIds()
+    const movieGluFilmIds = options.movieGluFilmIds
+      ? normalizeMovieGluFilmIds(options.movieGluFilmIds)
+      : await getProjectMovieGluIds()
     const loadErrors: string[] = []
 
     const [itmResult, movieGluResult] = await Promise.allSettled([
