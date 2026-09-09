@@ -11,20 +11,11 @@ export default async function handler(
 
   const { email, audienceId, firstName, lastName } = req.body
 
-  console.log('Subscribe API called with:', {
-    email,
-    audienceId,
-    hasFirstName: !!firstName,
-    hasLastName: !!lastName,
-  })
-
   if (!email || !email.length) {
-    console.log('Missing email')
     return res.status(400).json({ error: 'Email is required' })
   }
 
   if (!audienceId) {
-    console.log('Missing audienceId')
     return res.status(400).json({ error: 'Audience ID is required' })
   }
 
@@ -47,8 +38,6 @@ export default async function handler(
         .json({ error: 'Server configuration error: Invalid API key format' })
     }
 
-    console.log('Using datacenter:', DATACENTER)
-
     const data = {
       email_address: email,
       status: 'subscribed',
@@ -59,7 +48,6 @@ export default async function handler(
     }
 
     const url = `https://${DATACENTER}.api.mailchimp.com/3.0/lists/${audienceId}/members`
-    console.log('Making request to:', url)
 
     // Add timeout and error handling for the fetch
     const controller = new AbortController()
@@ -105,7 +93,6 @@ export default async function handler(
       }
 
       const responseData = await response.json()
-      console.log('Success! Subscriber ID:', responseData.id)
 
       return res.status(201).json({ error: null, message: 'Success' })
     } catch (fetchError: any) {
