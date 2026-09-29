@@ -119,5 +119,6 @@ export const getItmEvents = async (token: string): Promise<EventListItem[]> => {
     return liveEvents
   }
 
-  return getFallbackItmEvents()
+  // return getFallbackItmEvents()
+  return []
 }

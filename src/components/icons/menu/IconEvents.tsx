@@ -9,7 +9,7 @@ export const IconEventsComponent = (props: SVGProps<SVGSVGElement>) => {
       viewBox="0 0 325 299"
       {...props}
     >
-      <g clip-path="url(#aasdfsh)">
+      <g clipPath="url(#aasdfsh)">
         <path
           fill="#92d1d9"
           className="bg"
@@ -31,9 +31,9 @@ export const IconEventsComponent = (props: SVGProps<SVGSVGElement>) => {
         />
         <path
           stroke="#000"
-          stroke-linecap="round"
-          stroke-miterlimit="10"
-          stroke-width="3"
+          strokeLinecap="round"
+          strokeMiterlimit="10"
+          strokeWidth="3"
           d="m214.849 58.269-2.314-1.336m8.484 4.898-1.543-.89m7.713 4.453-1.542-.891m8.483 4.898-2.314-1.336m-4.03-12.604a5.344 5.344 0 0 1-2.146-6.938.44.44 0 0 0-.18-.575l-6.186-3.577a.446.446 0 0 0-.608.163l-5.692 9.859c-.21.363-.332.77-.357 1.19s-.147.829-.356 1.193c-.21.365-.502.676-.853.908-.35.232-.643.541-.853.905l-14.598 25.278a.443.443 0 0 0 .163.608l6.185 3.57a.443.443 0 0 0 .588-.13 5.344 5.344 0 0 1 9.228 5.327.44.44 0 0 0 .18.575l6.185 3.57a.443.443 0 0 0 .608-.162l14.598-25.283a2.7 2.7 0 0 0 .357-1.191 2.7 2.7 0 0 1 1.208-2.101c.351-.231.642-.541.852-.905l5.692-9.858a.443.443 0 0 0-.163-.608l-6.185-3.571a.443.443 0 0 0-.588.131 5.34 5.34 0 0 1-7.079 1.622Z"
         />
       </g>
