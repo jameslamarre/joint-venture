@@ -100,7 +100,7 @@ export const getItmEvents = async (token: string): Promise<EventListItem[]> => {
           continue
         }
 
-        console.log('Processing moment:', moment)
+        // console.log('Processing moment:', moment)
 
         mappedEvents.push({
           uid: moment.uid,
