@@ -68,6 +68,21 @@ export const getItmEvents = async (token: string): Promise<EventListItem[]> => {
               city: true,
               country: true,
             },
+            momentTags: {
+              __args: {
+                sources: ['MANUAL'], // omit to include MANUAL and AUTO
+                pagination: { take: 50 },
+              },
+              assignments: {
+                tag: { uid: true, name: true },
+                source: true,
+                isPublic: true,
+                confidence: true,
+              },
+              totalCount: true,
+              hasNextPage: true,
+              nextCursor: true,
+            },
           },
           totalCount: true,
           hasNextPage: true,
@@ -84,6 +99,8 @@ export const getItmEvents = async (token: string): Promise<EventListItem[]> => {
         if (!moment.startDate) {
           continue
         }
+
+        console.log('Processing moment:', moment)
 
         mappedEvents.push({
           uid: moment.uid,
