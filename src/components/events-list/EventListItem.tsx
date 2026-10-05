@@ -79,30 +79,29 @@ export const EventListItem = ({
   return (
     <li key={event.uid} id={`event-${event.uid}`}>
       <div
-        className="flex text-textColorTables"
+        className="relative flex items-stretch text-textColorTables"
         style={{ border: `1px solid var(--theme-text)` }}
       >
         {shouldRenderItmImage ? (
           <div
-            className="relative shrink-0 w-[72px] bg-gray-300"
-            style={{ aspectRatio: '4 / 5' }}
+            className="relative shrink-0 overflow-hidden bg-gray-300 w-[120px]"
             aria-hidden={event.itemImageUrl ? undefined : true}
           >
             {event.itemImageUrl ? (
               <img
                 src={event.itemImageUrl}
                 alt={`${event.title} event image`}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="relative block h-full w-auto max-w-full object-cover aspect-[4/5]"
                 loading="lazy"
               />
             ) : null}
           </div>
         ) : null}
 
-        <div className="flex-1 min-w-0">
+        <div className="min-w-0 flex-1 basis-0">
           <h3
             style={{ color: `var(--theme-text--tables)` }}
-            className="w-full pt-2 pb-[5px] px-4 bg-white border-bottom font-sans text-base"
+            className="w-full pt-2 pb-[3px] px-4 bg-white border-bottom font-sans text-base line-clamp-2"
           >
             {event.title}
           </h3>
@@ -110,7 +109,7 @@ export const EventListItem = ({
             style={{ color: `var(--theme-text--tables)` }}
             className="w-full pt-2 pb-[5px] px-4 bg-white border-bottom font-sans text-sm flex items-center justify-between gap-x-3"
           >
-            <h4 className="font-serif text-base min-w-0">
+            <h4 className="font-serif text-base min-w-0 line-clamp-2">
               {venueLocationLabel}
             </h4>
             {event.venueLogoUrl ? (
