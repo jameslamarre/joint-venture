@@ -26,7 +26,10 @@ export const EventListItemActions = ({
 
         if (!hasHref) {
           return (
-            <span key={showtimeKey} className="font-sans text-sm opacity-75">
+            <span
+              key={showtimeKey}
+              className="font-sans text-[11px] md:text-sm opacity-75"
+            >
               {showtime.label}
             </span>
           )
@@ -39,7 +42,7 @@ export const EventListItemActions = ({
               type="button"
               onClick={() => onMovieGluShowtimeClick(showtime, showtimeKey)}
               disabled={isPending}
-              className="px-2 py-1 font-sans text-sm disabled:opacity-60 bg-[var(--theme-text)] hover:bg-[var(--theme-highlight)] text-[var(--theme-bg)] hover:text-[var(--theme-text)]"
+              className="px-2 py-1 font-sans text-[11px] md:text-sm disabled:opacity-60 bg-[var(--theme-text)] hover:bg-[var(--theme-highlight)] text-[var(--theme-bg)] hover:text-[var(--theme-text)]"
             >
               {isPending ? 'Loading...' : showtime.label}
             </button>
@@ -56,7 +59,7 @@ export const EventListItemActions = ({
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-2 py-1 font-sans text-sm bg-[var(--theme-text)] hover:bg-[var(--theme-highlight)] text-[var(--theme-bg)] hover:text-[var(--theme-text)]"
+              className="px-2 py-1 font-sans text-[11px] md:text-sm bg-[var(--theme-text)] hover:bg-[var(--theme-highlight)] text-[var(--theme-bg)] hover:text-[var(--theme-text)]"
             >
               {showtime.label}
             </a>
@@ -67,7 +70,7 @@ export const EventListItemActions = ({
           <Link
             key={showtimeKey}
             href={href}
-            className="px-2 py-1 font-sans text-sm bg-[var(--theme-text)] hover:bg-[var(--theme-highlight)] text-[var(--theme-bg)] hover:text-[var(--theme-text)]"
+            className="px-2 py-1 font-sans text-[11px] md:text-sm bg-[var(--theme-text)] hover:bg-[var(--theme-highlight)] text-[var(--theme-bg)] hover:text-[var(--theme-text)]"
           >
             {showtime.label}
           </Link>

@@ -84,7 +84,7 @@ export const EventListItem = ({
       >
         {shouldRenderItmImage ? (
           <div
-            className="relative shrink-0 overflow-hidden bg-gray-300 w-[120px]"
+            className="relative shrink-0 overflow-hidden bg-gray-300 w-[112px] md:w-[106px]"
             aria-hidden={event.itemImageUrl ? undefined : true}
           >
             {event.itemImageUrl ? (
@@ -121,7 +121,7 @@ export const EventListItem = ({
               />
             ) : null}
           </div>
-          <div className="flex justify-between gap-x w-full pt-2 pb-[5px] px-4 font-sans text-sm leading-tight ">
+          <div className="flex justify-between gap-1 md:gap-x w-full pt-2 pb-[5px] px-4 font-sans text-sm leading-tight ">
             <EventListItemActions
               showtimes={showtimes}
               pendingShowtimeKey={pendingShowtimeKey}
@@ -132,6 +132,7 @@ export const EventListItem = ({
             <time
               style={{ color: `var(--theme-text)` }}
               dateTime={event.startDate}
+              className="text-[11px] md:text-sm !leading-[1.75]"
             >
               {formatEventDate(event.startDate, event.timezone)}
             </time>
