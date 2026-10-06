@@ -19,7 +19,7 @@ const EventsPage: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ events, error, movieGluDeferred, movieGluFilmIds }) => {
   return (
-    <div className="py-page px-x max-w-container mx-auto">
+    <div className="py-page px-1.5 xs:px-xhalf md:px-x max-w-container mx-auto">
       <EventsList
         events={events}
         error={error}

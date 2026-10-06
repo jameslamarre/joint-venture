@@ -101,7 +101,7 @@ export const EventListItem = ({
         <div className="min-w-0 flex-1 basis-0">
           <h3
             style={{ color: `var(--theme-text--tables)` }}
-            className="w-full pt-2 pb-[3px] px-4 bg-white border-bottom font-sans text-base line-clamp-2"
+            className="w-full pt-2 pb-[3px] px-4 bg-white border-bottom font-sans text-sm md:text-base line-clamp-2"
           >
             {event.title}
           </h3>
@@ -121,7 +121,7 @@ export const EventListItem = ({
               />
             ) : null}
           </div>
-          <div className="flex justify-between gap-1 md:gap-x w-full pt-2 pb-[5px] px-4 font-sans text-sm leading-tight ">
+          <div className="flex justify-between items-center gap-1 md:gap-x w-full pt-2 pb-[5px] px-4 font-sans text-sm leading-tight ">
             <EventListItemActions
               showtimes={showtimes}
               pendingShowtimeKey={pendingShowtimeKey}
@@ -132,7 +132,7 @@ export const EventListItem = ({
             <time
               style={{ color: `var(--theme-text)` }}
               dateTime={event.startDate}
-              className="text-[11px] md:text-sm !leading-[1.75]"
+              className="relative text-[11px] md:text-sm !leading-[0] top-[1px] md:top-0"
             >
               {formatEventDate(event.startDate, event.timezone)}
             </time>

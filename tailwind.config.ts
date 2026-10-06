@@ -58,7 +58,7 @@ export default {
       },
       fontSize: {
         xs: ['var(--font-size-xs)', '1.3'],
-        sm: ['var(--font-size-sm)', '1'],
+        sm: ['var(--font-size-sm)', '1.4'],
         base: ['var(--font-size-base)', '1.4'],
         baseSerif: ['var(--font-size-base--serif)', '1.33'],
         md: ['var(--font-size-md)', '1.33'],
@@ -211,6 +211,7 @@ export default {
           fontFamily: theme('fontFamily.sans'),
           letterSpacing: '0.05em',
           textTransform: 'uppercase',
+          lineHeight: '1.1',
         },
         '.text-h3': {
           fontSize: theme('fontSize.lg'),
