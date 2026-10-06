@@ -461,8 +461,8 @@ export const EventsList = ({
   }, [])
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-y md:gap-xdouble w-full">
-      <div className="order-2 md:order-1 flex flex-col gap-y w-full">
+    <div className="grid grid-cols-1 md:grid-cols-5 gap-y md:gap-xdouble w-full">
+      <div className="order-2 md:order-1 md:col-span-3 flex flex-col gap-y w-full">
         {error ? <p>{error}</p> : null}
 
         {((!error && filteredEvents.length === 0) || movieGluLoadError) && (
@@ -537,7 +537,7 @@ export const EventsList = ({
         </div>
       </div>
 
-      <div className="order-1 md:order-2 md:sticky md:flex flex-col gap-y md:gap-y md:top-[90px] h-fit">
+      <div className="order-1 md:order-2 md:col-span-2 md:sticky md:flex flex-col gap-y md:gap-y md:top-[90px] h-fit">
         <RoughNotation
           type="box"
           show={isMobile ? false : true}
