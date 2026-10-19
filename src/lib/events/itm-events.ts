@@ -16,6 +16,7 @@ const getFallbackItmEvents = (): EventListItem[] => {
       title: 'ITM Fallback Example',
       venue: 'Arclight Theater',
       city: 'Los Angeles, CA',
+      postalCode: '90036',
       latitude: 34.1119,
       longitude: -118.3371,
       startDate: new Date(Date.UTC(year, 7, 22, 19, 0, 0)).toISOString(),
@@ -27,6 +28,7 @@ const getFallbackItmEvents = (): EventListItem[] => {
       title: 'ITM Fallback Example 2',
       venue: 'Angelika Film Center',
       city: 'New York, NY',
+      postalCode: '10012',
       latitude: 40.7299,
       longitude: -73.9928,
       startDate: new Date(Date.UTC(year, 7, 26, 19, 0, 0)).toISOString(),
@@ -66,7 +68,7 @@ export const getItmEvents = async (token: string): Promise<EventListItem[]> => {
             venue: {
               name: true,
               city: true,
-              country: true,
+              postalCode: true,
             },
             momentTags: {
               __args: {
@@ -107,6 +109,7 @@ export const getItmEvents = async (token: string): Promise<EventListItem[]> => {
           title: moment.name ?? 'Untitled Event',
           venue: moment.venue?.name ?? 'Venue TBA',
           city: moment.venue?.city ?? 'City TBA',
+          postalCode: moment.venue?.postalCode ?? 'Postal Code TBA',
           startDate: moment.startDate,
           timezone: moment.timezone ?? null,
           source: 'itm',

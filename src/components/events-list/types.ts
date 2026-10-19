@@ -16,6 +16,7 @@ export type EventListItem = {
   venue: string
   city: string
   state?: string
+  postalCode?: string | null
   latitude?: number | null
   longitude?: number | null
   startDate: string

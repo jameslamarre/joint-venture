@@ -9,7 +9,7 @@ export type PartnerMoment = {
   venue?: {
     name: string | null
     city: string | null
-    country: string | null
+    postalCode: string | null
   } | null
 }
 
