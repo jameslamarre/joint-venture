@@ -306,19 +306,11 @@ export const EventsList = ({
     showtime: EventShowtimeLink,
     key: string
   ) => {
-    const popup = window.open('', '_blank', 'noopener,noreferrer')
-
     setPendingShowtimeKey(key)
     const resolvedUrl = await resolveMovieGluShowtimeUrl(showtime)
     setPendingShowtimeKey(null)
 
     if (!resolvedUrl) {
-      popup?.close()
-      return
-    }
-
-    if (popup) {
-      popup.location.href = resolvedUrl
       return
     }
 

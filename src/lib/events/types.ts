@@ -40,6 +40,7 @@ export type MovieGluCinema = {
   lat?: number | string
   lng?: number | string
   url?: string
+  cinema_url?: string
   showings: Record<string, MovieGluShowingVariant>
 }
 

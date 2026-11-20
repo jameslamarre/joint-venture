@@ -350,7 +350,9 @@ export const getMovieGluEvents = async (
 
           groupedEvent.showtimes?.push({
             label: formatShowtimeLabel(showDate, showingTime.start_time),
-            ...(cinema.url ? { href: cinema.url } : {}),
+            ...(cinema.url || cinema.cinema_url
+              ? { href: cinema.url || cinema.cinema_url }
+              : {}),
             movieGluLookup: {
               cinemaId: cinema.cinema_id,
               filmId: showing.film_id,
