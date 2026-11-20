@@ -28,7 +28,7 @@ export const EventListItemActions = ({
           return (
             <span
               key={showtimeKey}
-              className="font-sans text-[11px] md:text-sm opacity-75"
+              className="font-sans text-[11px] text-[var(--theme-text)] md:text-sm opacity-75"
             >
               {showtime.label}
             </span>
