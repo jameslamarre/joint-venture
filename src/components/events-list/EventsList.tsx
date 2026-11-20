@@ -251,28 +251,28 @@ export const EventsList = ({
     }
   }
 
-  // useEffect(() => {
-  //   if (!movieGluDeferred || hasLoadedDeferredMovieGlu) {
-  //     return
-  //   }
+  useEffect(() => {
+    if (!movieGluDeferred || hasLoadedDeferredMovieGlu) {
+      return
+    }
 
-  //   const normalizedFilmIds = Array.from(
-  //     new Set(
-  //       (movieGluFilmIds ?? []).filter(
-  //         filmId =>
-  //           typeof filmId === 'number' && Number.isFinite(filmId) && filmId > 0
-  //       )
-  //     )
-  //   )
+    const normalizedFilmIds = Array.from(
+      new Set(
+        (movieGluFilmIds ?? []).filter(
+          filmId =>
+            typeof filmId === 'number' && Number.isFinite(filmId) && filmId > 0
+        )
+      )
+    )
 
-  //   setHasLoadedDeferredMovieGlu(true)
+    setHasLoadedDeferredMovieGlu(true)
 
-  //   if (normalizedFilmIds.length === 0) {
-  //     return
-  //   }
+    if (normalizedFilmIds.length === 0) {
+      return
+    }
 
-  //   void loadMovieGluEvents(normalizedFilmIds)
-  // }, [hasLoadedDeferredMovieGlu, movieGluDeferred, movieGluFilmIds])
+    void loadMovieGluEvents(normalizedFilmIds)
+  }, [hasLoadedDeferredMovieGlu, movieGluDeferred, movieGluFilmIds])
 
   const resolveMovieGluShowtimeUrl = async (
     showtime: EventShowtimeLink
@@ -468,7 +468,7 @@ export const EventsList = ({
 
         {((!error && filteredEvents.length === 0) || movieGluLoadError) && (
           <div className="flex flex-col gap-yhalf">
-            {!error && filteredEvents.length === 0 ? (
+            {!error && filteredEvents.length === 0 && !isLoadingMovieGlu ? (
               <p>No upcoming events found.</p>
             ) : null}
 
@@ -617,7 +617,7 @@ export const EventsList = ({
           Click a date in the calendar to filter by date.
         </p>
 
-        <div className="flex flex-col gap-yhalf">
+        {/* <div className="flex flex-col gap-yhalf">
           <label
             htmlFor="events-near-you-filter"
             className="hidden md:inline-block text-h4"
@@ -669,7 +669,7 @@ export const EventsList = ({
           {distanceSortError ? (
             <p className="font-sans text-sm">{distanceSortError}</p>
           ) : null}
-        </div>
+        </div> */}
       </div>
     </div>
   )
